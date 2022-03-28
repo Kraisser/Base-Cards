@@ -1,0 +1,59 @@
+.formWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 30px;
+}
+.formHeader {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+.formHeader h2 {
+	margin: 0;
+}
+.formWrapper form {
+	padding: 10px;
+	background-color: darkgray;
+	display: flex;
+	flex-direction: column;
+}
+.formWrapper h3 {
+	margin: 0 0 15px;
+	text-align: center;
+}
+.formInputLabel {
+	text-align: center;
+	margin-bottom: 5px;
+}
+.formInput {
+	margin-bottom: 10px;
+}
+.exForm {
+	min-width: 600px;
+}
+.programForm {
+	min-width: 350px;
+}
+.errorForm {
+	color: #ff5757;
+	margin-bottom: 3px;
+}
+.exDescriptionInput {
+	margin-bottom: 10px;
+	width: 100%;
+	height: 150px;
+	resize: none;
+}
+
+/* Media */
+@media only all and (max-width: 750px) {
+	.exForm {
+		min-width: 80%;
+	}
+}
+@media only all and (max-width: 500px) {
+	.exForm {
+		min-width: 95%;
+	}
+}

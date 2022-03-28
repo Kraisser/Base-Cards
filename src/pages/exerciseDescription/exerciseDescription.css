@@ -1,0 +1,48 @@
+.exerciseDescriptionWrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	background: radial-gradient(
+			circle farthest-corner,
+			rgba(255, 255, 255, 0) 50%,
+			rgba(200, 200, 200, 1)
+		),
+		radial-gradient(
+			circle,
+			rgba(255, 255, 255, 0.35),
+			rgba(255, 255, 255, 0) 20%,
+			rgba(255, 255, 255, 0) 21%
+		),
+		radial-gradient(circle farthest-corner, #f0f0f0, #c0c0c0);
+	padding: 15px;
+	margin: 5px 0;
+}
+.exerciseDescriptionWrapper p {
+	margin: 0;
+}
+.exerciseDescriptionImg {
+	width: 70%;
+	align-self: center;
+}
+.exerciseDescriptionHeader {
+	text-align: center;
+}
+.exerciseHeader {
+	margin: 0;
+}
+.exDescButWrapper {
+	display: flex;
+	justify-content: center;
+}
+.onMainBut {
+	align-self: center;
+	width: 200px;
+	margin: 10px 0;
+	font-size: 20px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.onMainBut a {
+	color: black;
+	text-decoration: none;
+}

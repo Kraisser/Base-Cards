@@ -1,0 +1,21 @@
+.programItem {
+	background-color: #facbcb;
+	margin: 0 5px 5px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px;
+	border-radius: 4px;
+	transition: box-shadow 0.3s ease;
+}
+.programItem:hover {
+	box-shadow: 0 0 4px #fff;
+}
+.delIcon {
+	width: 30px;
+	transition: transform 0.3s ease;
+}
+.delIcon:hover {
+	transform: scale(1.05);
+}

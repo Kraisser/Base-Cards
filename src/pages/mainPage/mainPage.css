@@ -1,0 +1,65 @@
+.mainWrapper {
+	display: grid;
+	grid-template-columns: 1000px 400px;
+	grid-gap: 10px;
+	padding: 10px;
+}
+.exerciseListWrapper {
+	background: radial-gradient(
+			circle farthest-corner,
+			rgba(255, 255, 255, 0) 50%,
+			rgba(200, 200, 200, 1)
+		),
+		radial-gradient(
+			circle,
+			rgba(255, 255, 255, 0.35),
+			rgba(255, 255, 255, 0) 20%,
+			rgba(255, 255, 255, 0) 21%
+		),
+		radial-gradient(circle farthest-corner, #f0f0f0, #c0c0c0);
+	padding: 10px;
+	border-radius: 4px;
+}
+.exerciseListHeader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+	margin-bottom: 10px;
+}
+.exerciseListHeader h2 {
+	margin: 0;
+}
+.formLinkButWrapper {
+	display: flex;
+	justify-content: center;
+}
+.formLinkBut a {
+	font-size: 20px;
+	color: #000;
+	text-decoration: none;
+}
+
+/* Media */
+
+@media only all and (max-width: 1430px) {
+	.mainWrapper {
+		grid-template-columns: 2fr 1fr;
+	}
+}
+@media only all and (max-width: 750px) {
+	.mainWrapper {
+		grid-template-columns: 1fr;
+		padding: 5px;
+	}
+	.leftContent {
+		order: 1;
+	}
+	.rightContent {
+		order: -1;
+	}
+}
+/* @media only all and (max-width: 500px) {
+	.mainWrapper {
+	}
+} */

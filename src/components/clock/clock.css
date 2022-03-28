@@ -1,0 +1,22 @@
+.dateWrapper {
+	width: 200px;
+	height: 70px;
+	display: flex;
+	padding: 5px;
+	justify-content: space-between;
+	background-color: #3b3a38;
+	border: solid 4px #676566;
+	border-radius: 4px;
+	font-size: 20px;
+	color: #05f5f1;
+}
+.date div:first-of-type {
+	margin-bottom: 5px;
+}
+.day {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 700;
+}

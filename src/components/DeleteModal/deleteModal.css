@@ -1,0 +1,32 @@
+.modalOverlay {
+	width: 100%;
+	background-color: rgba(128, 128, 128, 0.4);
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.modalWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	padding: 15px;
+	max-width: 350px;
+	background-color: rgb(253, 152, 152);
+	border-radius: 5px;
+}
+.modalButWrapper {
+	display: flex;
+}
+.modalBut {
+	width: 70px;
+	cursor: pointer;
+}
+.greenBut {
+	background-color: #5fcc5f;
+	margin-right: 15px;
+}
