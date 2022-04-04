@@ -1,28 +1,28 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-	exerciseList: {},
-	exerciseListStatus: 'loading',
+	chapList: {},
+	chapListStatus: 'loading',
 };
 
-const exerciseSlice = createSlice({
-	name: 'exercise',
+const chapSlice = createSlice({
+	name: 'chapList',
 	initialState,
 	reducers: {
 		exListLoading: (state) => {
-			state.exerciseListStatus = 'loading';
+			state.chapListStatus = 'loading';
 		},
 		exListError: (state) => {
-			state.exerciseListStatus = 'error';
+			state.chapListStatus = 'error';
 		},
 		exListSuccess: (state, action) => {
-			state.exerciseListStatus = 'idle';
-			state.exerciseList = action.payload;
+			state.chapListStatus = 'idle';
+			state.chapList = action.payload;
 		},
 	},
 });
 
-const {actions, reducer} = exerciseSlice;
+const {actions, reducer} = chapSlice;
 
 export default reducer;
 export const {exListLoading, exListError, exListSuccess} = actions;

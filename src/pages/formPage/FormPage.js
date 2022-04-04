@@ -12,8 +12,8 @@ import * as yup from 'yup';
 import PageHeader from '../../components/pageHeader/PageHeader';
 
 export default function FormPage() {
-	const {updatePrograms} = useUpdate();
-	const {uploadNewPrograms, uploadNewExercise} = useUpload();
+	const {updateChapters} = useUpdate();
+	const {uploadNewChapter, uploadNewChapItem} = useUpload();
 
 	const status = useSelector((state) => state.program.programListStatus);
 	const programList = useSelector((state) => state.program.programList);
@@ -22,68 +22,71 @@ export default function FormPage() {
 	const validSchema = yup.object().shape({
 		programName: yup.string('Введите строку').required('Обязательное поле*'),
 		programPath: yup.string('Введите строку').required('Обязательное поле*'),
-		exName: yup.string('Введите строку').required('Обязательное поле*'),
+		exName: yup
+			.string('Введите строку')
+			.max(55, 'Максимум 55 символов')
+			.required('Обязательное поле*'),
 		exProgram: yup.string('Выберите программу*').required('Обязательное поле*'),
-		exMuscles: yup.string('Укажите целевые мышцы*').required('Обязательное поле*'),
+		exLink: yup.string('Укажите ссылку*').required('Обязательное поле*'),
 	});
 
 	useEffect(() => {
 		if (status !== 'idle') {
-			updatePrograms();
+			updateChapters();
 		}
 		// eslint-disable-next-line
 	}, []);
 
 	const [programName, setProgramName] = useState('');
 	const [programNameErr, setProgramNameErr] = useState(null);
-	const [programPath, setProgramPath] = useState('');
-	const [programPathErr, setProgramPathErr] = useState(null);
 
 	const [exName, setExName] = useState('');
 	const [exNameErr, setExNameErr] = useState(null);
 	const [exProgram, setExProgram] = useState('');
 	const [exProgramErr, setExProgramErr] = useState(null);
-	const [exMuscles, setExMuscles] = useState('');
-	const [exMusclesErr, setExMusclesErr] = useState(null);
-	const [exImg, setExImg] = useState('');
+	const [exLink, setExLink] = useState('');
+	const [exLinkErr, setExLinkErr] = useState(null);
 	const [exDescription, setExDescription] = useState('');
 
 	const onProgramSubmit = (e) => {
 		e.preventDefault();
 
-		if (programNameErr !== true || programPathErr !== true) {
+		if (programNameErr !== true) {
 			return;
 		}
 
-		const newProgramItem = {name: programName, path: programPath, id: uuid()};
+		const id = uuid();
+
+		const newProgramItem = {name: programName, id};
 		const newPrograms = [...programList, newProgramItem];
 
 		const newObj = {
-			[programPath]: {
+			[id]: {
 				description: programName,
-				exerciseList: [],
+				chapContent: [],
 			},
 		};
 
-		uploadNewPrograms(newProgramItem, newPrograms, newObj);
+		uploadNewChapter(newProgramItem, newPrograms, newObj);
 	};
+
+	const fieldExCheck = (field, set) => {};
 
 	const onExSubmit = (e) => {
 		e.preventDefault();
 
-		if (exNameErr !== true || exProgramErr !== true || exMusclesErr !== true) {
+		if (exNameErr !== true || exProgramErr !== true || exLinkErr !== true) {
 			return;
 		}
 
 		const newExercise = {
 			id: uuid(),
 			name: exName,
-			muscles: exMuscles,
-			img: exImg,
+			link: exLink,
 			description: exDescription,
 		};
 
-		uploadNewExercise(newExercise, exProgram, activeProgram);
+		uploadNewChapItem(newExercise, exProgram, activeProgram);
 	};
 
 	const onChange = (e, setState, setErr) => {
@@ -100,18 +103,9 @@ export default function FormPage() {
 			.pick([id])
 			.validate({[id]: value})
 			.then(() => setErr(true))
-			.then(() => (id === 'programPath' ? checkUniqPath(value) : null))
 			.catch((err) => {
 				setErr(err.message);
 			});
-	};
-
-	const checkUniqPath = (path) => {
-		const res = programList.find((item) => item.path === path);
-
-		if (res) {
-			throw new Error('Идентификатор не является уникальным');
-		}
 	};
 
 	const showError = (errState) => {
@@ -129,10 +123,10 @@ export default function FormPage() {
 				</div>
 				<div className='formWrapper'>
 					<form onSubmit={onProgramSubmit} className='programForm'>
-						<h3>Добавление программы</h3>
+						<h3>Добавление раздела</h3>
 
 						<label htmlFor='programName' className='formInputLabel'>
-							Название программы*
+							Название раздела*
 						</label>
 						<div className='errorForm'>{showError(programNameErr)}</div>
 						<input
@@ -143,28 +137,16 @@ export default function FormPage() {
 							className='formInput'
 						/>
 
-						<label htmlFor='programPath' className='formInputLabel'>
-							Уникальный путь программы*
-						</label>
-						<div className='errorForm'>{showError(programPathErr)}</div>
-						<input
-							type='text'
-							id='programPath'
-							onChange={(e) => onChange(e, setProgramPath, setProgramPathErr)}
-							value={programPath}
-							className='formInput'
-						/>
-
 						<button type='submit'>Отправить</button>
 					</form>
 				</div>
 
 				<div className='formWrapper'>
 					<form className='exForm' onSubmit={onExSubmit}>
-						<h3>Добавление упражнения</h3>
+						<h3>Добавление пункта</h3>
 
 						<label htmlFor='exName' className='formInputLabel'>
-							Название упражнения*
+							Название пункта*
 						</label>
 						<div className='errorForm'>{showError(exNameErr)}</div>
 						<input
@@ -176,7 +158,7 @@ export default function FormPage() {
 						/>
 
 						<label htmlFor='exProgram' className='formInputLabel'>
-							Выберите программу*
+							Выберите раздел*
 						</label>
 						<div className='errorForm'>{showError(exProgramErr)}</div>
 						<select
@@ -193,31 +175,20 @@ export default function FormPage() {
 							))}
 						</select>
 
-						<label htmlFor='exImg' className='formInputLabel'>
-							Картинка*
+						<label htmlFor='exLink' className='formInputLabel'>
+							Укажите ссылку*
 						</label>
+						<div className='errorForm'>{showError(exLinkErr)}</div>
 						<input
 							type='text'
-							id='exImg'
-							onChange={(e) => setExImg(e.target.value)}
-							value={exImg}
-							className='formInput'
-						/>
-
-						<label htmlFor='exMuscles' className='formInputLabel'>
-							Целевые мышцы*
-						</label>
-						<div className='errorForm'>{showError(exMusclesErr)}</div>
-						<input
-							type='text'
-							id='exMuscles'
-							onChange={(e) => onChange(e, setExMuscles, setExMusclesErr)}
-							value={exMuscles}
+							id='exLink'
+							onChange={(e) => onChange(e, setExLink, setExLinkErr)}
+							value={exLink}
 							className='formInput'
 						/>
 
 						<label htmlFor='exDescription' className='formInputLabel'>
-							Техника выполнения
+							Дополнительное описание
 						</label>
 						<textarea
 							name='exDescription'

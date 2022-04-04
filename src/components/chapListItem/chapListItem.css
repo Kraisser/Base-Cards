@@ -1,0 +1,101 @@
+.exerciseItemWrapper {
+	position: relative;
+	background-color: #dcdcdc;
+	padding: 10px 50px 10px 10px;
+	min-height: 120px;
+	border-radius: 4px;
+	box-shadow: 0px 0px 2px #000;
+}
+.exerciseItemHeader {
+	margin: 0;
+	overflow: hidden;
+}
+.exerciseItemDescriptionWrapper {
+	max-width: 260px;
+	display: grid;
+	grid-template: 45px 50px / 260px;
+	grid-row-gap: 10px;
+}
+.exerciseItemDescriptionWrapper p {
+	position: relative;
+	margin: 0;
+	overflow: hidden;
+}
+.exerciseItemDescriptionWrapper p::after {
+	content: '';
+	height: 0.75em;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	background: linear-gradient(180deg, transparent, #dcdcdc);
+}
+.exerciseItemImgWrapper {
+	flex-basis: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.exerciseItemImg {
+	width: 100%;
+}
+.exButWrapper {
+	display: flex;
+}
+.descriptionBut {
+	margin-right: 15px;
+}
+.linkBut {
+	background-color: #7fffd4;
+}
+.delIcon-chapItem {
+	cursor: pointer;
+	height: 30px;
+}
+.browserIcon:hover {
+	transform: scale(1.05);
+}
+.controlWrapper {
+	padding: 3px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	background-color: #a9a9a9;
+	position: absolute;
+	top: 5px;
+	bottom: 5px;
+	right: 0;
+	width: 40px;
+	min-height: 110px;
+	border: solid transparent 1px;
+	border-radius: 20% 0 0 20%;
+}
+.controlContainer {
+	width: 30px;
+	height: 30px;
+}
+/* Media */
+
+@media only all and (max-width: 1430px) {
+	.exerciseItemWrapper {
+		padding: 10px;
+	}
+	.exerciseItemImgWrapper {
+		flex-basis: 150px;
+	}
+	.descriptionBut {
+		margin-right: 5px;
+	}
+}
+@media only all and (max-width: 1000px) {
+	.exerciseItemWrapper div {
+		flex-grow: 1;
+	}
+	.descriptionBut {
+		margin-right: 10px;
+	}
+	.exButWrapper {
+		justify-content: end;
+	}
+}

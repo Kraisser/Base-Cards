@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import ProgramList from '../../components/programList/ProgramList';
-import ExerciseList from '../../components/exerciseList/ExerciseList';
+import ChapList from '../../components/chapList/ChapList';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
 
@@ -18,13 +18,13 @@ export default function MainPage() {
 			<PageHeader />
 			<main className='mainWrapper'>
 				<div className='leftContent'>
-					<ExerciseList />
+					<ChapList />
 				</div>
 				<div className='rightContent'>
 					<ProgramList />
 					<div className='formLinkButWrapper'>
 						<button className='formLinkBut but redBut'>
-							<Link to='/addForm'>Форма редактирования</Link>
+							<Link to='/addForm'>Добавить</Link>
 						</button>
 					</div>
 				</div>

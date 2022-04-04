@@ -7,13 +7,13 @@ import useUpload from '../../services/useUpload';
 
 export default function DeleteModal() {
 	const dispatch = useDispatch();
-	const {deleteExercise} = useUpload();
+	const {deleteChapItem} = useUpload();
 
 	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
 	const activeProgram = useSelector((state) => state.program.activeProgram);
 
 	const onDeleteEx = () => {
-		deleteExercise(delModalStatus, activeProgram);
+		deleteChapItem(delModalStatus, activeProgram);
 		dispatch(delModalClose());
 	};
 
@@ -21,7 +21,7 @@ export default function DeleteModal() {
 		<>
 			<div className='modalOverlay'>
 				<div className='modalWrapper'>
-					<div className='modalDescription'>Вы действительно хотите удалить это упражнение</div>
+					<div className='modalDescription'>Вы действительно хотите удалить этот пункт</div>
 					<div className='modalButWrapper'>
 						<button className='modalBut greenBut but' onClick={onDeleteEx}>
 							Да

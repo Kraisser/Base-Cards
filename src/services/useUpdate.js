@@ -1,34 +1,35 @@
 import {useDispatch, useSelector} from 'react-redux';
 
 import useRequests from './useRequests';
-import {exListError, exListSuccess, exListLoading} from '../store/exerciseSlice.js';
+import {exListError, exListSuccess, exListLoading} from '../store/chapSlice.js';
 import {programListSuccess, programListError, setActiveProgram} from '../store/programSlice';
 
 export default function useUpdate() {
 	const dispatch = useDispatch();
-	const {getExercises, getProgramList} = useRequests();
+	const {getChapList, getChapters} = useRequests();
 
 	const activeProgram = useSelector((state) => state.program.activeProgram);
 
-	const updateExercises = (path = activeProgram) => {
+	const updateChapList = (id = activeProgram) => {
+		console.log(id);
 		dispatch(exListLoading());
-		dispatch(setActiveProgram(path));
+		dispatch(setActiveProgram(id));
 
-		getExercises()
+		getChapList()
 			.then((res) => {
-				if (!res[path]) {
+				if (!res[id]) {
 					return;
 				}
-				dispatch(exListSuccess(res[path]));
+				dispatch(exListSuccess(res[id]));
 			})
 			.catch((e) => dispatch(exListError()));
 	};
 
-	const updatePrograms = () => {
-		getProgramList()
+	const updateChapters = () => {
+		getChapters()
 			.then((res) => dispatch(programListSuccess(res)))
 			.catch((e) => dispatch(programListError()));
 	};
 
-	return {updateExercises, updatePrograms};
+	return {updateChapList, updateChapters};
 }

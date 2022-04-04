@@ -3,37 +3,36 @@ import {useDispatch} from 'react-redux';
 import useRequests from './useRequests';
 import useUpdate from './useUpdate';
 
-import {exListError, exListSuccess, exListLoading} from '../store/exerciseSlice.js';
+import {exListError, exListSuccess, exListLoading} from '../store/chapSlice.js';
 import {programListSuccess, programListError, setActiveProgram} from '../store/programSlice';
 
 export default function useUpload() {
 	const dispatch = useDispatch();
-	const {getExercises, postProgramList, postProgramInExNamedList, deleteProgramFromProgramList} =
-		useRequests();
-	const {updatePrograms, updateExercises} = useUpdate();
+	const {getChapList, postChapters, postInChapList, deleteProgramFromChapters} = useRequests();
+	const {updateChapters, updateChapList} = useUpdate();
 
-	const uploadNewPrograms = (programItem, programs, programsNamed) => {
-		postProgramList(programItem)
+	const uploadNewChapter = (programItem, programs, programsNamed) => {
+		postChapters(programItem)
 			.then(() => dispatch(programListSuccess(programs)))
 			.catch((e) => dispatch(programListError()));
 
-		getExercises()
+		getChapList()
 			.then((res) => {
 				const newObj = {
 					...programsNamed,
 					...res,
 				};
 
-				postProgramInExNamedList(newObj).catch((e) => console.log(e));
+				postInChapList(newObj).catch((e) => console.log(e));
 			})
 			.catch((e) => console.log(e));
 	};
 
-	const uploadNewExercise = (newExercise, programValue, activeProgram) => {
-		getExercises()
+	const uploadNewChapItem = (newExercise, programValue, activeProgram) => {
+		getChapList()
 			.then((res) => {
 				const newExList = res[programValue];
-				newExList.exerciseList.push(newExercise);
+				newExList.chapContent.push(newExercise);
 
 				if (programValue === activeProgram) {
 					dispatch(exListSuccess(newExList));
@@ -44,41 +43,41 @@ export default function useUpload() {
 					...res,
 				};
 
-				postProgramInExNamedList(newData).catch((e) => console.log(e));
+				postInChapList(newData).catch((e) => console.log(e));
 			})
 			.catch((e) => console.log(e));
 	};
 
-	const deleteProgram = (id, path, nextPath) => {
-		deleteProgramFromProgramList(id)
-			.then(() => updatePrograms())
+	const deleteChapter = (id, nextPath) => {
+		deleteProgramFromChapters(id)
+			.then(() => updateChapters())
 			.then(async () => {
-				const data = await getExercises();
-				delete data[path];
-				postProgramInExNamedList(data);
+				const data = await getChapList();
+				delete data[id];
+				postInChapList(data);
 			})
 			.then(() => dispatch(setActiveProgram(nextPath)))
-			.then(() => updateExercises(nextPath))
+			.then(() => updateChapList(nextPath))
 			.catch((e) => console.log(e));
 	};
 
-	const deleteExercise = (delModalStatus, activeProgram) => {
-		getExercises()
+	const deleteChapItem = (delModalStatus, activeProgram) => {
+		getChapList()
 			.then((res) => {
 				const newObj = res;
 
-				const filteredExList = res[activeProgram].exerciseList.filter(
+				const filteredExList = res[activeProgram].chapContent.filter(
 					(item) => item.id !== delModalStatus
 				);
 
-				newObj[activeProgram].exerciseList = filteredExList;
+				newObj[activeProgram].chapContent = filteredExList;
 
-				postProgramInExNamedList(newObj)
+				postInChapList(newObj)
 					.then(() => dispatch(exListSuccess(newObj[activeProgram])))
 					.catch((e) => console.log(e));
 			})
 			.catch((e) => console.log(e));
 	};
 
-	return {uploadNewPrograms, uploadNewExercise, deleteProgram, deleteExercise};
+	return {uploadNewChapter, uploadNewChapItem, deleteChapter, deleteChapItem};
 }

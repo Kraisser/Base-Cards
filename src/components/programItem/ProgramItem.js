@@ -1,6 +1,6 @@
 import './programItem.css';
 
-import delIcon from './delete-icon.png';
+import delIcon from '../../assets/icons/delete-icon.png';
 
 export default function ProgramItem({name, onClick, onDelete}) {
 	const clickDelegation = (e) => {

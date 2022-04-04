@@ -5,41 +5,41 @@ export default function useRequests() {
 
 	const request = useHttp();
 
-	const getExercises = async () => {
-		const data = await request(`${base}exerciseNamedList`);
+	const getChapList = async () => {
+		const data = await request(`${base}chapList`);
 
 		return data;
 	};
 
-	const getProgramList = async () => {
-		const data = await request(`${base}programList`);
+	const getChapters = async () => {
+		const data = await request(`${base}chapters`);
 
 		return data;
 	};
 
-	const postProgramList = async (newProgram) => {
-		const data = request(`${base}programList`, 'POST', JSON.stringify(newProgram));
+	const postChapters = async (newChap) => {
+		const data = request(`${base}chapters`, 'POST', JSON.stringify(newChap));
 
 		return data;
 	};
 
-	const postProgramInExNamedList = async (newData) => {
-		const data = request(`${base}exerciseNamedList`, 'POST', JSON.stringify(newData));
+	const postInChapList = async (newData) => {
+		const data = request(`${base}chapList`, 'POST', JSON.stringify(newData));
 
 		return data;
 	};
 
-	const deleteProgramFromProgramList = async (id) => {
-		const data = request(`${base}programList/${id}`, 'DELETE');
+	const deleteProgramFromChapters = async (id) => {
+		const data = request(`${base}chapters/${id}`, 'DELETE');
 
 		return data;
 	};
 
 	return {
-		getExercises,
-		getProgramList,
-		postProgramList,
-		postProgramInExNamedList,
-		deleteProgramFromProgramList,
+		getChapList,
+		getChapters,
+		postChapters,
+		postInChapList,
+		deleteProgramFromChapters,
 	};
 }

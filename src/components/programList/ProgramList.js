@@ -12,14 +12,14 @@ import setContent from '../../utils/setContent';
 import useUpload from '../../services/useUpload';
 
 export default function ProgramList() {
-	const {updatePrograms} = useUpdate();
+	const {updateChapters} = useUpdate();
 
 	const programList = useSelector((state) => state.program.programList);
 	const status = useSelector((state) => state.program.programListStatus);
 
 	useEffect(() => {
 		if (status !== 'idle') {
-			updatePrograms();
+			updateChapters();
 		}
 		// eslint-disable-next-line
 	}, []);
@@ -27,7 +27,7 @@ export default function ProgramList() {
 	return (
 		<div className='programList'>
 			<div className='programHeader'>
-				<h2>Список програм</h2>
+				<h2>Разделы</h2>
 			</div>
 
 			{setContent(status, View, programList)}
@@ -36,19 +36,19 @@ export default function ProgramList() {
 }
 
 function View({data}) {
-	const {updateExercises} = useUpdate();
-	const {deleteProgram} = useUpload();
+	const {updateChapList} = useUpdate();
+	const {deleteChapter} = useUpload();
 
 	const items = data.map((item, index) => {
 		const prevPath =
-			index === 0 ? (data[index + 1] ? data[index + 1].path : null) : data[index - 1].path;
+			index === 0 ? (data[index + 1] ? data[index + 1].id : null) : data[index - 1].id;
 
 		return (
 			<ProgramItem
 				name={item.name}
 				path={item.path}
-				onClick={() => updateExercises(item.path)}
-				onDelete={() => deleteProgram(item.id, item.path, prevPath)}
+				onClick={() => updateChapList(item.id)}
+				onDelete={() => deleteChapter(item.id, prevPath)}
 				key={uuid()}
 			/>
 		);
