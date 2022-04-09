@@ -30,31 +30,16 @@
 	left: 0px;
 	background: linear-gradient(180deg, transparent, #dcdcdc);
 }
-.exerciseItemImgWrapper {
-	flex-basis: 250px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.exerciseItemImg {
-	width: 100%;
-}
-.exButWrapper {
-	display: flex;
-}
-.descriptionBut {
-	margin-right: 15px;
-}
-.linkBut {
-	background-color: #7fffd4;
-}
+
 .delIcon-chapItem {
 	cursor: pointer;
 	height: 30px;
 }
-.browserIcon:hover {
+.browserIcon:hover,
+.infoIcon:hover {
 	transform: scale(1.05);
 }
+
 .controlWrapper {
 	padding: 3px 0;
 	display: flex;

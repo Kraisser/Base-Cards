@@ -11,7 +11,6 @@ export default function useUpdate() {
 	const activeProgram = useSelector((state) => state.program.activeProgram);
 
 	const updateChapList = (id = activeProgram) => {
-		console.log(id);
 		dispatch(exListLoading());
 		dispatch(setActiveProgram(id));
 

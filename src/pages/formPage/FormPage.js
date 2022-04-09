@@ -37,8 +37,8 @@ export default function FormPage() {
 		// eslint-disable-next-line
 	}, []);
 
-	const [programName, setProgramName] = useState('');
-	const [programNameErr, setProgramNameErr] = useState(null);
+	// const [programName, setProgramName] = useState('');
+	// const [programNameErr, setProgramNameErr] = useState(null);
 
 	const [exName, setExName] = useState('');
 	const [exNameErr, setExNameErr] = useState(null);
@@ -48,29 +48,27 @@ export default function FormPage() {
 	const [exLinkErr, setExLinkErr] = useState(null);
 	const [exDescription, setExDescription] = useState('');
 
-	const onProgramSubmit = (e) => {
-		e.preventDefault();
+	// const onProgramSubmit = (e) => {
+	// 	e.preventDefault();
 
-		if (programNameErr !== true) {
-			return;
-		}
+	// 	if (programNameErr !== true) {
+	// 		return;
+	// 	}
 
-		const id = uuid();
+	// 	const id = uuid();
 
-		const newProgramItem = {name: programName, id};
-		const newPrograms = [...programList, newProgramItem];
+	// 	const newProgramItem = {name: programName, id};
+	// 	const newPrograms = [...programList, newProgramItem];
 
-		const newObj = {
-			[id]: {
-				description: programName,
-				chapContent: [],
-			},
-		};
+	// 	const newObj = {
+	// 		[id]: {
+	// 			description: programName,
+	// 			chapContent: [],
+	// 		},
+	// 	};
 
-		uploadNewChapter(newProgramItem, newPrograms, newObj);
-	};
-
-	const fieldExCheck = (field, set) => {};
+	// 	uploadNewChapter(newProgramItem, newPrograms, newObj);
+	// };
 
 	const onExSubmit = (e) => {
 		e.preventDefault();
@@ -121,7 +119,7 @@ export default function FormPage() {
 				<div className='formHeader'>
 					<h2>Форма редактирования</h2>
 				</div>
-				<div className='formWrapper'>
+				{/* <div className='formWrapper'>
 					<form onSubmit={onProgramSubmit} className='programForm'>
 						<h3>Добавление раздела</h3>
 
@@ -139,7 +137,7 @@ export default function FormPage() {
 
 						<button type='submit'>Отправить</button>
 					</form>
-				</div>
+				</div> */}
 
 				<div className='formWrapper'>
 					<form className='exForm' onSubmit={onExSubmit}>
@@ -169,7 +167,7 @@ export default function FormPage() {
 							onChange={(e) => onChange(e, setExProgram, setExProgramErr)}>
 							<option value=''>Выберите программу</option>
 							{programList.map((item) => (
-								<option value={item.path} key={uuid()}>
+								<option value={item.id} key={uuid()}>
 									{item.name}
 								</option>
 							))}

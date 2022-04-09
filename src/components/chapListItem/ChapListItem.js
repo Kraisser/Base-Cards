@@ -38,7 +38,7 @@ export default function ChapListItem({content}) {
 				</div>
 				<div className='controlContainer'>
 					<Link to={`/exerciseDescription/${activeProgram}/${id}`}>
-						<img src={infoIcon} alt='info' />
+						<img src={infoIcon} className='infoIcon' alt='info' />
 					</Link>
 				</div>
 			</div>

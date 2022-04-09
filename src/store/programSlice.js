@@ -4,6 +4,7 @@ const initialState = {
 	activeProgram: '',
 	programList: {},
 	programListStatus: 'loading',
+	programFiltered: {},
 };
 
 const programSlice = createSlice({
@@ -13,6 +14,9 @@ const programSlice = createSlice({
 		setActiveProgram: (state, action) => {
 			state.activeProgram = action.payload;
 		},
+		setProgramFilter: (state, action) => {
+			state.programFiltered = action.payload;
+		},
 		programListLoading: (state) => {
 			state.programListStatus = 'loading';
 		},
@@ -21,6 +25,7 @@ const programSlice = createSlice({
 		},
 		programListSuccess: (state, action) => {
 			state.programListStatus = 'idle';
+			state.programFiltered = action.payload;
 			state.programList = action.payload;
 		},
 	},
@@ -29,4 +34,10 @@ const programSlice = createSlice({
 const {actions, reducer} = programSlice;
 
 export default reducer;
-export const {setActiveProgram, programListLoading, programListError, programListSuccess} = actions;
+export const {
+	setActiveProgram,
+	setProgramFilter,
+	programListLoading,
+	programListError,
+	programListSuccess,
+} = actions;

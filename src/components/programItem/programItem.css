@@ -1,6 +1,6 @@
 .programItem {
 	background-color: #facbcb;
-	margin: 0 5px 5px;
+	margin-bottom: 5px;
 	cursor: pointer;
 	display: flex;
 	justify-content: space-between;

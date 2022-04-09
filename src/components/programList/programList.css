@@ -1,6 +1,6 @@
 .programList {
 	width: 100%;
-	padding: 10px 5px 5px;
+	padding: 10px 10px 5px;
 	background-color: #a9a9a9;
 	margin-bottom: 30px;
 	border-radius: 4px;
@@ -15,6 +15,22 @@
 .programHeader h2 {
 	margin: 0;
 	text-align: center;
+}
+/* addChapter */
+.addChapterWrapper {
+	margin-bottom: 10px;
+	position: relative;
+}
+
+/* Search */
+.searchChapterWrapper {
+	margin: 0 10% 10px;
+	position: relative;
+}
+.chapterNotFound {
+	text-align: center;
+	font-weight: 600;
+	margin-bottom: 10px;
 }
 
 /* Media */

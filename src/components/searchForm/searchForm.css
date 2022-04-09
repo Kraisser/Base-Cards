@@ -1,0 +1,21 @@
+.searchForm {
+	width: 100%;
+	height: 30px;
+	padding: 1px 2px 1px 30px;
+	border-radius: 4px;
+	border: 0;
+}
+.searchForm:focus-visible {
+	outline: 0;
+	box-shadow: 0 0 4px #000;
+}
+.searchForm::placeholder {
+	text-align: center;
+}
+.searchIcon {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 20px;
+	height: 20px;
+}
