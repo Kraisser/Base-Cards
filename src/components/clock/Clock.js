@@ -18,11 +18,9 @@ export default function Clock() {
 
 	return (
 		<div className='dateWrapper'>
+			<div className='timeWrapper'>{time}</div>
 			<div className='date'>
 				<div>{newDate.toLocaleString('ru').split(', ')[0]}</div>
-				<div>{time}</div>
-			</div>
-			<div className='day'>
 				<div>{daysArr[day]}</div>
 			</div>
 		</div>

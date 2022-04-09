@@ -27,7 +27,7 @@ export default function ChapList() {
 			<div className='exerciseListHeader'>
 				<h2>{chapList.description ? chapList.description : 'Выберите раздел'}</h2>
 			</div>
-
+			
 			{setContent(chapListStatus, View, chapList)}
 		</div>
 	);
