@@ -24,7 +24,7 @@ export default function MainPage() {
 					<ProgramList />
 					<div className='formLinkButWrapper'>
 						<button className='formLinkBut but redBut'>
-							<Link to='/addForm'>Добавить</Link>
+							<Link to='/addForm'>Добавить пункт</Link>
 						</button>
 					</div>
 				</div>

@@ -27,18 +27,22 @@ export default function ChapList() {
 			<div className='exerciseListHeader'>
 				<h2>{chapList.description ? chapList.description : 'Выберите раздел'}</h2>
 			</div>
-			
+
 			{setContent(chapListStatus, View, chapList)}
 		</div>
 	);
 }
 
 function View({data}) {
-	return (
-		<div className='exerciseListContainer'>
-			{data.chapContent.map((item) => (
-				<ChapListItem content={item} key={uuid()} />
-			))}
+	const content = data.chapContent.map((item) => <ChapListItem content={item} key={uuid()} />);
+	const emptyContent = (
+		<div className='emptyChapList'>
+			<h3>В этом разделе пока пусто.</h3>
 		</div>
+	);
+	return (
+		<>
+			{content.length === 0 ? emptyContent : <div className='exerciseListContainer'>{content}</div>}
+		</>
 	);
 }

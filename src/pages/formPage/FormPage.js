@@ -13,7 +13,7 @@ import PageHeader from '../../components/pageHeader/PageHeader';
 
 export default function FormPage() {
 	const {updateChapters} = useUpdate();
-	const {uploadNewChapter, uploadNewChapItem} = useUpload();
+	const {uploadNewChapItem} = useUpload();
 
 	const status = useSelector((state) => state.program.programListStatus);
 	const programList = useSelector((state) => state.program.programList);
@@ -37,9 +37,6 @@ export default function FormPage() {
 		// eslint-disable-next-line
 	}, []);
 
-	// const [programName, setProgramName] = useState('');
-	// const [programNameErr, setProgramNameErr] = useState(null);
-
 	const [exName, setExName] = useState('');
 	const [exNameErr, setExNameErr] = useState(null);
 	const [exProgram, setExProgram] = useState('');
@@ -47,28 +44,6 @@ export default function FormPage() {
 	const [exLink, setExLink] = useState('');
 	const [exLinkErr, setExLinkErr] = useState(null);
 	const [exDescription, setExDescription] = useState('');
-
-	// const onProgramSubmit = (e) => {
-	// 	e.preventDefault();
-
-	// 	if (programNameErr !== true) {
-	// 		return;
-	// 	}
-
-	// 	const id = uuid();
-
-	// 	const newProgramItem = {name: programName, id};
-	// 	const newPrograms = [...programList, newProgramItem];
-
-	// 	const newObj = {
-	// 		[id]: {
-	// 			description: programName,
-	// 			chapContent: [],
-	// 		},
-	// 	};
-
-	// 	uploadNewChapter(newProgramItem, newPrograms, newObj);
-	// };
 
 	const onExSubmit = (e) => {
 		e.preventDefault();
@@ -81,6 +56,7 @@ export default function FormPage() {
 			id: uuid(),
 			name: exName,
 			link: exLink,
+			timeStamp: Date.now(),
 			description: exDescription,
 		};
 
@@ -119,25 +95,6 @@ export default function FormPage() {
 				<div className='formHeader'>
 					<h2>Форма редактирования</h2>
 				</div>
-				{/* <div className='formWrapper'>
-					<form onSubmit={onProgramSubmit} className='programForm'>
-						<h3>Добавление раздела</h3>
-
-						<label htmlFor='programName' className='formInputLabel'>
-							Название раздела*
-						</label>
-						<div className='errorForm'>{showError(programNameErr)}</div>
-						<input
-							type='text'
-							id='programName'
-							onChange={(e) => onChange(e, setProgramName, setProgramNameErr)}
-							value={programName}
-							className='formInput'
-						/>
-
-						<button type='submit'>Отправить</button>
-					</form>
-				</div> */}
 
 				<div className='formWrapper'>
 					<form className='exForm' onSubmit={onExSubmit}>

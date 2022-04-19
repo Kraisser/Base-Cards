@@ -20,6 +20,12 @@
 	background-color: rgb(253, 152, 152);
 	border-radius: 5px;
 }
+.modalDescription p:first-of-type {
+	margin-top: 0;
+}
+.modalDescription p:last-of-type {
+	margin: 0;
+}
 .modalButWrapper {
 	display: flex;
 }

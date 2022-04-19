@@ -56,7 +56,10 @@ export default function useUpload() {
 				delete data[id];
 				postInChapList(data);
 			})
-			.then(() => dispatch(setActiveProgram(nextPath)))
+			.then(() => {
+				console.log(nextPath);
+				dispatch(setActiveProgram(nextPath));
+			})
 			.then(() => updateChapList(nextPath))
 			.catch((e) => console.log(e));
 	};

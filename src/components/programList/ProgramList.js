@@ -2,7 +2,7 @@ import './programList.css';
 
 import useUpdate from '../../services/useUpdate';
 
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
@@ -11,9 +11,9 @@ import ProgramItem from '../programItem/ProgramItem';
 import SearchForm from '../searchForm/SearchForm';
 
 import {setProgramFilter} from '../../store/programSlice';
+import {delModalOpen, delModalSetPrevChapter} from '../../store/modalSlice';
 
 import setContent from '../../utils/setContent';
-import useUpload from '../../services/useUpload';
 import AddChapter from '../addChapter/AddChapter';
 
 export default function ProgramList() {
@@ -53,23 +53,28 @@ export default function ProgramList() {
 }
 
 function View({data}) {
+	const dispatch = useDispatch();
+
 	const {updateChapList} = useUpdate();
-	const {deleteChapter} = useUpload();
+
+	const onDeleteChapter = (id, prevChapter) => {
+		dispatch(delModalOpen(id));
+		dispatch(delModalSetPrevChapter(prevChapter));
+	};
 
 	if (data.length === 0) {
-		return <div className='chapterNotFound'>Раздел не найден</div>;
+		return <div className='chapterNotFound'>Разделы не найдены</div>;
 	}
 
 	const items = data.map((item, index) => {
-		const prevPath =
+		const prevChapter =
 			index === 0 ? (data[index + 1] ? data[index + 1].id : null) : data[index - 1].id;
 
 		return (
 			<ProgramItem
 				name={item.name}
-				path={item.path}
 				onClick={() => updateChapList(item.id)}
-				onDelete={() => deleteChapter(item.id, prevPath)}
+				onDelete={() => onDeleteChapter(item.id, prevChapter)}
 				key={uuid()}
 			/>
 		);

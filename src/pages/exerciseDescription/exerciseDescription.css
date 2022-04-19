@@ -24,6 +24,28 @@
 	width: 70%;
 	align-self: center;
 }
+.exerciseDescriptionHeaderWrapper {
+	position: relative;
+}
+.descriptionDateWrapper {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 18px;
+	font-weight: 500;
+	border: solid grey 1px;
+	border-radius: 4px;
+	padding: 5px;
+	cursor: default;
+}
+.descrTimeWrapper,
+.descrDateWrapper {
+	text-align: center;
+}
+.dateDescr {
+	font-size: 14px;
+	font-weight: normal;
+}
 .exerciseDescriptionHeader {
 	text-align: center;
 }

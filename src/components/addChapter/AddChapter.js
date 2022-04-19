@@ -21,7 +21,7 @@ export default function AddChapter() {
 			return;
 		}
 
-		const id = uuid();
+		const id = `${uuid()}+chapter`;
 
 		const newChapterItem = {name: newChapter, id};
 		const newChapters = [...programList, newChapterItem];

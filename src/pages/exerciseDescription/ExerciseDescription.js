@@ -39,11 +39,38 @@ export default function ExerciseDescription() {
 
 function View({data, id}) {
 	const content = data.chapContent.find((item) => item.id === id);
-	const {name, link, description} = content;
+	const {name, link, timeStamp, description} = content;
+	const date = new Date(timeStamp);
+	// 	.toLocaleString('ru', {
+	// 	weekday: 'long',
+	// 	year: 'numeric',
+	// 	month: 'long',
+	// 	day: 'numeric',
+	// });
+	const hour = date.getHours();
+	const minute = date.getMinutes();
+	const day = date.getDate();
+	const month = date.getMonth();
+
+	const curHour = hour < 10 ? `0${hour}` : hour;
+	const curMinute = minute < 10 ? `0${minute}` : minute;
+	const curDay = day < 10 ? `0${day}` : day;
+	const curMonth = month < 10 ? `0${month}` : month;
+	const curYear = date.getFullYear();
+
+	const time = `${curHour}:${curMinute}`;
+	const curDate = `${curDay}.${curMonth}.${curYear}`;
 
 	return (
 		<div className='exerciseDescriptionWrapper'>
-			<h1 className='exerciseDescriptionHeader'>{name}</h1>
+			<div className='exerciseDescriptionHeaderWrapper'>
+				<div className='descriptionDateWrapper'>
+					<div className='dateDescr'>Дата создания</div>
+					<div className='descrTimeWrapper'>{time}</div>
+					<div className='descrDateWrapper'>{curDate}</div>
+				</div>
+				<h1 className='exerciseDescriptionHeader'>{name}</h1>
+			</div>
 			<h3 className=''>Ссылка</h3>
 			<p>{link}</p>
 			<h3>Описание:</h3>
