@@ -8,6 +8,11 @@
 	max-height: calc(100vh - 120px);
 	display: flex;
 }
+.leftContent {
+	max-height: calc(100vh - 120px);
+	display: flex;
+	flex-direction: column;
+}
 
 /* Media */
 
