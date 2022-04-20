@@ -4,15 +4,9 @@
 	grid-gap: 10px;
 	padding: 0 10px;
 }
-
-.formLinkButWrapper {
+.rightContent {
+	max-height: calc(100vh - 120px);
 	display: flex;
-	justify-content: center;
-}
-.formLinkBut a {
-	font-size: 20px;
-	color: #000;
-	text-decoration: none;
 }
 
 /* Media */
@@ -34,7 +28,3 @@
 		order: -1;
 	}
 }
-/* @media only all and (max-width: 500px) {
-	.mainWrapper {
-	}
-} */

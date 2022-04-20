@@ -12,6 +12,9 @@
 	cursor: pointer;
 	transition: box-shadow 0.3s ease;
 }
+.greenBut {
+	background-color: #70d334;
+}
 .redBut {
 	background-color: #ff5757;
 }

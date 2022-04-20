@@ -2,8 +2,9 @@
 	width: 100%;
 	padding: 10px 10px 5px;
 	background-color: #a9a9a9;
-	margin-bottom: 30px;
 	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
 }
 .programHeader {
 	height: 40px;
@@ -15,6 +16,21 @@
 .programHeader h2 {
 	margin: 0;
 	text-align: center;
+}
+.programListContent {
+	max-height: 100%;
+	overflow-y: auto;
+}
+.programListContent::-webkit-scrollbar {
+	width: 5px; /* ширина для вертикального скролла */
+	height: 10px;
+	background-color: transparent;
+}
+.programListContent::-webkit-scrollbar-thumb {
+	background-color: #646464a4;
+	border-radius: 4px;
+	/* box-shadow: inset 1px 1px 10px #f3faf7; */
+	cursor: pointer;
 }
 /* addChapter */
 .addChapterWrapper {
@@ -35,8 +51,8 @@
 
 /* Media */
 
-@media only all and (max-width: 7500px) {
+/* @media only all and (max-width: 7500px) {
 	.programList {
 		margin-bottom: 10px;
 	}
-}
+} */

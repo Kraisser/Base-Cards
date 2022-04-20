@@ -47,7 +47,7 @@ export default function ProgramList() {
 			<div className='searchChapterWrapper'>
 				<SearchForm filterPrograms={filterPrograms} />
 			</div>
-			{setContent(status, View, filteredPrograms)}
+			<div className='programListContent'>{setContent(status, View, filteredPrograms)}</div>
 		</div>
 	);
 }

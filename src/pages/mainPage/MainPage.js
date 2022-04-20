@@ -1,7 +1,6 @@
 import './mainPage.css';
 
 import {useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
 
 import ProgramList from '../../components/programList/ProgramList';
 import ChapList from '../../components/chapList/ChapList';
@@ -22,11 +21,6 @@ export default function MainPage() {
 				</div>
 				<div className='rightContent'>
 					<ProgramList />
-					<div className='formLinkButWrapper'>
-						<button className='formLinkBut but redBut'>
-							<Link to='/addForm'>Добавить пункт</Link>
-						</button>
-					</div>
 				</div>
 			</main>
 			{delModal}
