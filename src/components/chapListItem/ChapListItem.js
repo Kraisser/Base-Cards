@@ -32,7 +32,7 @@ export default function ChapListItem({content}) {
 					<img src={delIcon} alt='Del' onClick={onDeleteEx} className='delIcon delIcon-chapItem' />
 				</div>
 				<div className='controlContainer'>
-					<a href={`http://${link}`} target='_blank' title={link} rel='noopener noreferrer'>
+					<a href={link} target='_blank' title={link} rel='noopener noreferrer'>
 						<img className='browserIcon' src={browserIcon} alt='browserIcon' />
 					</a>
 				</div>
