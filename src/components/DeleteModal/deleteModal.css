@@ -17,8 +17,8 @@
 	gap: 20px;
 	padding: 15px;
 	max-width: 350px;
-	background-color: rgb(253, 152, 152);
-	border-radius: 5px;
+	background-color: #7dbdff;
+	border-radius: 2px;
 }
 .modalDescription p:first-of-type {
 	margin-top: 0;
@@ -33,7 +33,6 @@
 	width: 70px;
 	cursor: pointer;
 }
-.greenBut {
-	background-color: #5fcc5f;
+.modalGreenBut {
 	margin-right: 15px;
 }

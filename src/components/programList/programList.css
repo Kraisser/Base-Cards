@@ -1,7 +1,6 @@
 .programList {
 	width: 100%;
-	padding: 10px 10px 5px;
-
+	padding: 10px 5px 10px 10px;
 	background-color: #4da4ff;
 	display: flex;
 	flex-direction: column;

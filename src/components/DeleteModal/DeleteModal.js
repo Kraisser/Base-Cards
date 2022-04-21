@@ -44,7 +44,7 @@ export default function DeleteModal() {
 					<div className='modalDescription'>{descrText}</div>
 					<div className='modalButWrapper'>
 						<button
-							className='modalBut greenBut but'
+							className='modalBut modalGreenBut greenBut but'
 							onClick={targetChapter ? onDeleteChapter : onDeleteChapItem}>
 							Да
 						</button>

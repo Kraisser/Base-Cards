@@ -28,7 +28,7 @@ export default function ChapList() {
 			<div className='exerciseListHeader'>
 				<h2>{chapList.description ? chapList.description : 'Выберите раздел'}</h2>
 				<div className='formLinkButWrapper'>
-					<button className='formLinkBut but'>
+					<button className='formLinkBut but greenBut'>
 						<Link to='/addForm'>Добавить пункт</Link>
 					</button>
 				</div>

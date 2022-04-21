@@ -9,7 +9,7 @@ export default function PageHeader() {
 		<header className='header'>
 			<Link to='/'>
 				<div className='mainHeader'>
-					<h1>База Знаний</h1>
+					<h1>Информация</h1>
 				</div>
 			</Link>
 			<div className='clockWrapper'>

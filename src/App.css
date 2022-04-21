@@ -12,17 +12,21 @@
 }
 .but {
 	border: 0;
-	border-radius: 3px;
+	border-radius: 2px;
 	padding: 3px 6px;
 	cursor: pointer;
-	transition: box-shadow 0.3s ease;
+	transition: all 0.3s ease;
+	border: solid 1px transparent;
 }
 .greenBut {
-	background-color: #70d334;
+	background-color: #39e24d;
+}
+.greenBut:hover {
+	border-color: #008110;
 }
 .redBut {
 	background-color: #ff5757;
 }
-.but:hover {
-	box-shadow: 0px 3px 7px 5px #ffcccc;
+.redBut:hover {
+	border-color: #a60800;
 }
