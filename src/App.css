@@ -1,8 +1,13 @@
 * {
 	box-sizing: border-box;
 }
+#root {
+	background-color: #dcdcdc;
+	height: 100vh;
+}
 .content {
 	margin: 0 auto;
+	background-color: #7dbdff;
 	max-width: 1430px;
 }
 .but {

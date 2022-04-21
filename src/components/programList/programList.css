@@ -1,8 +1,8 @@
 .programList {
 	width: 100%;
 	padding: 10px 10px 5px;
-	background-color: #a9a9a9;
-	border-radius: 4px;
+
+	background-color: #4da4ff;
 	display: flex;
 	flex-direction: column;
 }
@@ -22,14 +22,13 @@
 	overflow-y: auto;
 }
 .programListContent::-webkit-scrollbar {
-	width: 5px; /* ширина для вертикального скролла */
-	height: 10px;
+	padding-left: 5px;
+	width: 5px;
 	background-color: transparent;
 }
 .programListContent::-webkit-scrollbar-thumb {
-	background-color: #646464a4;
-	border-radius: 4px;
-	/* box-shadow: inset 1px 1px 10px #f3faf7; */
+	background-color: #0654a6;
+	border-radius: 2px;
 	cursor: pointer;
 }
 /* addChapter */

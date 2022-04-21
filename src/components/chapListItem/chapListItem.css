@@ -1,11 +1,9 @@
 .exerciseItemWrapper {
 	position: relative;
-	background-color: #dcdcdc;
+	background-color: #fff;
 	padding: 10px 50px 10px 10px;
 	min-height: 120px;
-	border-radius: 4px;
-	/* box-shadow: 0px 0px 2px #000; */
-	border: rgb(163, 163, 163) solid 1px;
+	border-radius: 2px;
 }
 .exerciseItemHeader {
 	margin: 0;
@@ -29,7 +27,7 @@
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
-	background: linear-gradient(180deg, transparent, #dcdcdc);
+	background: linear-gradient(180deg, transparent, #fff);
 }
 
 .delIcon-chapItem {
@@ -47,15 +45,12 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
-	background-color: #a9a9a9;
+	background-color: #ededed;
 	position: absolute;
-	top: 5px;
-	bottom: 5px;
+	top: 0;
 	right: 0;
 	width: 40px;
-	min-height: 110px;
-	border: solid transparent 1px;
-	border-radius: 20% 0 0 20%;
+	height: 100%;
 }
 .controlContainer {
 	width: 30px;

@@ -1,18 +1,5 @@
 .exerciseListWrapper {
-	background: radial-gradient(
-			circle farthest-corner,
-			rgba(255, 255, 255, 0) 50%,
-			rgba(200, 200, 200, 1)
-		),
-		radial-gradient(
-			circle,
-			rgba(255, 255, 255, 0.35),
-			rgba(255, 255, 255, 0) 20%,
-			rgba(255, 255, 255, 0) 21%
-		),
-		radial-gradient(circle farthest-corner, #f0f0f0, #c0c0c0);
 	padding: 10px;
-	border-radius: 4px;
 	display: grid;
 	grid-template-rows: 40px 1fr;
 	grid-row-gap: 10px;
@@ -41,14 +28,13 @@
 	text-align: center;
 }
 .exerciseListContainer::-webkit-scrollbar {
-	width: 5px; /* ширина для вертикального скролла */
+	max-width: 5px;
 	height: 10px;
 	background-color: transparent;
 }
 .exerciseListContainer::-webkit-scrollbar-thumb {
-	background-color: #646464a4;
-	border-radius: 4px;
-	/* box-shadow: inset 1px 1px 10px #f3faf7; */
+	background-color: #0654a6;
+	border-radius: 2px;
 	cursor: pointer;
 }
 
