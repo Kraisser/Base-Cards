@@ -14,7 +14,6 @@ import {setProgramFilter} from '../../store/programSlice';
 import {delModalOpen, delModalSetPrevChapter} from '../../store/modalSlice';
 
 import setContent from '../../utils/setContent';
-import AddChapter from '../addChapter/AddChapter';
 
 export default function ProgramList() {
 	const {updateChapters} = useUpdate();
@@ -41,9 +40,7 @@ export default function ProgramList() {
 			<div className='programHeader'>
 				<h2>Разделы</h2>
 			</div>
-			<div className='addChapterWrapper'>
-				<AddChapter />
-			</div>
+
 			<div className='searchChapterWrapper'>
 				<SearchForm filterPrograms={filterPrograms} />
 			</div>

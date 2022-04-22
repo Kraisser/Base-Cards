@@ -3,7 +3,6 @@ import './chapList.css';
 import {useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import {v4 as uuid} from 'uuid';
-import {Link} from 'react-router-dom';
 
 import ChapListItem from '../chapListItem/ChapListItem';
 
@@ -26,12 +25,8 @@ export default function ChapList() {
 	return (
 		<div className='exerciseListWrapper'>
 			<div className='exerciseListHeader'>
-				<h2>{chapList.description ? chapList.description : 'Выберите раздел'}</h2>
-				<div className='formLinkButWrapper'>
-					<button className='formLinkBut but greenBut'>
-						<Link to='/addForm'>Добавить пункт</Link>
-					</button>
-				</div>
+				<h2>{chapList.description ? `Раздел: "${chapList.description}"` : 'Выберите раздел'}</h2>
+				<div className='formLinkButWrapper'></div>
 			</div>
 
 			{setContent(chapListStatus, View, chapList)}

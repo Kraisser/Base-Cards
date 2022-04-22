@@ -40,15 +40,17 @@ export default function AddChapter() {
 
 	return (
 		<>
-			<input
-				type='text'
-				id='addChapter'
-				className='addChapterInput'
-				value={newChapter}
-				onChange={(e) => setNewChapter(e.target.value)}
-				placeholder='Новый раздел'
-			/>
-			<img src={addIcon} alt='add-icon' onClick={onProgramSubmit} className='addChapterIcon' />
+			<div className='addChapterContainer'>
+				<input
+					type='text'
+					id='addChapter'
+					className='addChapterInput'
+					value={newChapter}
+					onChange={(e) => setNewChapter(e.target.value)}
+					placeholder='Новый раздел'
+				/>
+				<img src={addIcon} alt='add-icon' onClick={onProgramSubmit} className='addChapterIcon' />
+			</div>
 		</>
 	);
 }

@@ -2,11 +2,10 @@
 	width: 100%;
 	padding: 10px 5px 10px 10px;
 	background-color: #4da4ff;
-	display: flex;
-	flex-direction: column;
+	max-height: calc(100% - 180px);
 }
 .programHeader {
-	height: 40px;
+	height: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -17,28 +16,24 @@
 	text-align: center;
 }
 .programListContent {
-	max-height: 100%;
+	max-height: calc(100% - 80px);
 	overflow-y: auto;
 }
 .programListContent::-webkit-scrollbar {
 	padding-left: 5px;
 	width: 5px;
 	background-color: transparent;
+	cursor: pointer;
 }
 .programListContent::-webkit-scrollbar-thumb {
 	background-color: #0654a6;
 	border-radius: 2px;
 	cursor: pointer;
 }
-/* addChapter */
-.addChapterWrapper {
-	margin-bottom: 10px;
-	position: relative;
-}
 
 /* Search */
 .searchChapterWrapper {
-	margin: 0 10% 10px;
+	margin: 0 5% 10px;
 	position: relative;
 }
 .chapterNotFound {
