@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import useRequests from './useRequests';
 import {exListError, exListSuccess, exListLoading} from '../store/chapSlice.js';
@@ -6,22 +6,19 @@ import {programListSuccess, programListError, setActiveProgram} from '../store/p
 
 export default function useUpdate() {
 	const dispatch = useDispatch();
-	const {getChapList, getChapters} = useRequests();
+	const {getCardList, getChapters} = useRequests();
 
-	const activeProgram = useSelector((state) => state.program.activeProgram);
-
-	const updateChapList = (id = activeProgram) => {
+	const updateChapList = (id) => {
 		dispatch(exListLoading());
 		dispatch(setActiveProgram(id));
 
-		getChapList()
-			.then((res) => {
-				if (!res[id]) {
-					return;
-				}
-				dispatch(exListSuccess(res[id]));
-			})
-			.catch((e) => dispatch(exListError()));
+		if (id) {
+			getCardList(id)
+				.then((res) => {
+					dispatch(exListSuccess(res));
+				})
+				.catch((e) => dispatch(exListError()));
+		}
 	};
 
 	const updateChapters = () => {

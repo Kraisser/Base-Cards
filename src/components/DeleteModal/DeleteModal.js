@@ -7,7 +7,7 @@ import useUpload from '../../services/useUpload';
 
 export default function DeleteModal() {
 	const dispatch = useDispatch();
-	const {deleteChapItem, deleteChapter} = useUpload();
+	const {onDeleteCard, deleteChapter} = useUpload();
 
 	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
 	const prevChapter = useSelector((state) => state.modal.prevChapter);
@@ -27,8 +27,8 @@ export default function DeleteModal() {
 		`Вы действительно хотите удалить этот пункт? Это действие необратимо.`
 	);
 
-	const onDeleteChapItem = () => {
-		deleteChapItem(delModalStatus, activeProgram);
+	const onDeleteCardItem = () => {
+		onDeleteCard(delModalStatus, activeProgram);
 		dispatch(delModalClose());
 	};
 
@@ -45,7 +45,7 @@ export default function DeleteModal() {
 					<div className='modalButWrapper'>
 						<button
 							className='modalBut modalGreenBut greenBut but'
-							onClick={targetChapter ? onDeleteChapter : onDeleteChapItem}>
+							onClick={targetChapter ? onDeleteChapter : onDeleteCardItem}>
 							Да
 						</button>
 						<button className='modalBut redBut but' onClick={() => dispatch(delModalClose())}>

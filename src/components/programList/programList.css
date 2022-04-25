@@ -37,9 +37,11 @@
 	position: relative;
 }
 .chapterNotFound {
-	text-align: center;
+	display: flex;
+	align-items: center;
+	height: 40px;
+	justify-content: center;
 	font-weight: 600;
-	margin-bottom: 10px;
 }
 
 /* Media */

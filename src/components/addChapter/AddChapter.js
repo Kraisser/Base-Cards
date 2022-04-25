@@ -26,16 +26,16 @@ export default function AddChapter() {
 		const newChapterItem = {name: newChapter, id};
 		const newChapters = [...programList, newChapterItem];
 
-		const newObj = {
-			[id]: {
-				description: newChapter,
-				chapContent: [],
-			},
-		};
+		// const newObj = {
+		// 	[id]: {
+		// 		description: newChapter,
+		// 		chapContent: [],
+		// 	},
+		// };
 
-		uploadNewChapter(newChapterItem, newChapters, newObj);
+		// uploadNewChapter(newChapterItem, newChapters, newObj);
+		uploadNewChapter(id, newChapter, newChapters);
 		setNewChapter('');
-		// console.log(newChapterItem, newChapters, newObj);
 	};
 
 	return (

@@ -13,7 +13,7 @@ import PageHeader from '../../components/pageHeader/PageHeader';
 
 export default function FormPage() {
 	const {updateChapters} = useUpdate();
-	const {uploadNewChapItem} = useUpload();
+	const {uploadNewCard} = useUpload();
 
 	const status = useSelector((state) => state.program.programListStatus);
 	const programList = useSelector((state) => state.program.programList);
@@ -39,7 +39,7 @@ export default function FormPage() {
 
 	const [exName, setExName] = useState('');
 	const [exNameErr, setExNameErr] = useState(null);
-	const [exProgram, setExProgram] = useState('');
+	const [exProgramId, setExProgramId] = useState('');
 	const [exProgramErr, setExProgramErr] = useState(null);
 	const [exLink, setExLink] = useState('');
 	const [exLinkErr, setExLinkErr] = useState(null);
@@ -60,7 +60,7 @@ export default function FormPage() {
 			description: exDescription,
 		};
 
-		uploadNewChapItem(newExercise, exProgram, activeProgram);
+		uploadNewCard(newExercise, exProgramId, activeProgram);
 	};
 
 	const onChange = (e, setState, setErr) => {
@@ -119,9 +119,9 @@ export default function FormPage() {
 						<select
 							name='exProgram'
 							id='exProgram'
-							value={exProgram}
+							value={exProgramId}
 							className='formInputLabel'
-							onChange={(e) => onChange(e, setExProgram, setExProgramErr)}>
+							onChange={(e) => onChange(e, setExProgramId, setExProgramErr)}>
 							<option value=''>Выберите программу</option>
 							{programList.map((item) => (
 								<option value={item.id} key={uuid()}>

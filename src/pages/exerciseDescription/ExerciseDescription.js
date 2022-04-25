@@ -18,7 +18,7 @@ export default function ExerciseDescription() {
 	const chapListStatus = useSelector((state) => state.chapList.chapListStatus);
 
 	useEffect(() => {
-		if (chapList !== 'idle') {
+		if (chapListStatus !== 'idle') {
 			updateChapList();
 		}
 		// eslint-disable-next-line
@@ -38,19 +38,14 @@ export default function ExerciseDescription() {
 }
 
 function View({data, id}) {
-	const content = data.chapContent.find((item) => item.id === id);
+	const content = data.data.find((item) => item.id === id);
 	const {name, link, timeStamp, description} = content;
 	const date = new Date(timeStamp);
-	// 	.toLocaleString('ru', {
-	// 	weekday: 'long',
-	// 	year: 'numeric',
-	// 	month: 'long',
-	// 	day: 'numeric',
-	// });
+
 	const hour = date.getHours();
 	const minute = date.getMinutes();
 	const day = date.getDate();
-	const month = date.getMonth();
+	const month = date.getMonth() + 1;
 
 	const curHour = hour < 10 ? `0${hour}` : hour;
 	const curMinute = minute < 10 ? `0${minute}` : minute;
@@ -71,7 +66,7 @@ function View({data, id}) {
 				</div>
 				<h1 className='exerciseDescriptionHeader'>{name}</h1>
 			</div>
-			<h3 className=''>Ссылка</h3>
+			<h3 className=''>Ссылка:</h3>
 			<p>{link}</p>
 			<h3>Описание:</h3>
 			<p className='exerciseDescription'>{description ? description : 'Описание отсутствует'}</p>

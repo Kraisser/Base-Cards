@@ -1,45 +1,75 @@
 import useHttp from '../hooks/useHttp';
 
+import db from './fireBase';
+import {
+	collection,
+	doc,
+	getDoc,
+	updateDoc,
+	getDocs,
+	setDoc,
+	deleteDoc,
+	deleteField,
+} from 'firebase/firestore';
+
 export default function useRequests() {
-	const base = 'http://localhost:3001/';
+	const chaptersListDocsRef = collection(db, 'chaptersList');
 
-	const request = useHttp();
+	const getCardList = async (id) => {
+		const res = (await getDoc(doc(db, 'cardList', id))).data();
 
-	const getChapList = async () => {
-		const data = await request(`${base}chapList`);
+		const keys = Object.keys(res).filter((item) => item !== 'name');
 
-		return data;
+		const data = keys.map((item) => res[item]);
+
+		return {
+			description: res.name,
+			data,
+		};
 	};
 
 	const getChapters = async () => {
-		const data = await request(`${base}chapters`);
+		const chapSnap = await getDocs(chaptersListDocsRef);
+		const chapters = chapSnap.docs.map((doc) => ({id: doc.id, name: doc.data().name}));
 
-		return data;
+		return chapters;
 	};
 
-	const postChapters = async (newChap) => {
-		const data = request(`${base}chapters`, 'POST', JSON.stringify(newChap));
+	const postChapter = async (id, name) => {
+		await setDoc(doc(db, 'chaptersList', id), {
+			name,
+		});
 
-		return data;
+		await setDoc(doc(db, 'cardList', id), {
+			name: name,
+		});
 	};
 
-	const postInChapList = async (newData) => {
-		const data = request(`${base}chapList`, 'POST', JSON.stringify(newData));
+	const postCard = async (newCard, chapterId) => {
+		await updateDoc(doc(db, 'cardList', chapterId), {
+			[newCard.id]: newCard,
+		});
+	};
 
-		return data;
+	const deleteCard = async (id, activeProgram) => {
+		const docRef = doc(db, 'cardList', activeProgram);
+
+		await updateDoc(docRef, {
+			[id]: deleteField(),
+		});
 	};
 
 	const deleteProgramFromChapters = async (id) => {
-		const data = request(`${base}chapters/${id}`, 'DELETE');
-
-		return data;
+		await deleteDoc(doc(db, 'cardList', id));
+		await deleteDoc(doc(db, 'chaptersList', id));
 	};
 
 	return {
-		getChapList,
+		getCardList,
 		getChapters,
-		postChapters,
-		postInChapList,
+		postChapter,
+		postCard,
+		deleteCard,
 		deleteProgramFromChapters,
 	};
 }

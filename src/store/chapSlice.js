@@ -11,6 +11,7 @@ const chapSlice = createSlice({
 	reducers: {
 		exListLoading: (state) => {
 			state.chapListStatus = 'loading';
+			state.chapList = {};
 		},
 		exListError: (state) => {
 			state.chapListStatus = 'error';
