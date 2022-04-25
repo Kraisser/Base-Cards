@@ -39,7 +39,6 @@ export default function useUpload() {
 				if (nextPath === null) {
 					dispatch(exListLoading());
 				}
-				console.log(nextPath);
 				dispatch(setActiveProgram(nextPath));
 			})
 			.then(() => updateChapList(nextPath))

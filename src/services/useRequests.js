@@ -1,5 +1,3 @@
-import useHttp from '../hooks/useHttp';
-
 import db from './fireBase';
 import {
 	collection,
@@ -10,6 +8,8 @@ import {
 	setDoc,
 	deleteDoc,
 	deleteField,
+	query,
+	orderBy,
 } from 'firebase/firestore';
 
 export default function useRequests() {
@@ -20,7 +20,9 @@ export default function useRequests() {
 
 		const keys = Object.keys(res).filter((item) => item !== 'name');
 
-		const data = keys.map((item) => res[item]);
+		const data = keys
+			.map((item) => res[item])
+			.sort((prevItem, item) => item.timeStamp - prevItem.timeStamp);
 
 		return {
 			description: res.name,
@@ -30,7 +32,12 @@ export default function useRequests() {
 
 	const getChapters = async () => {
 		const chapSnap = await getDocs(chaptersListDocsRef);
-		const chapters = chapSnap.docs.map((doc) => ({id: doc.id, name: doc.data().name}));
+		const chapters = chapSnap.docs
+			.map((doc) => ({id: doc.id, name: doc.data().name}))
+			.sort((prevItem, item) => {
+				const sort = item.name.localeCompare(prevItem.name, 'ru', {ignorePunctuation: true});
+				console.log('sort: ', sort);
+			});
 
 		return chapters;
 	};
