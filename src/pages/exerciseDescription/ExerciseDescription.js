@@ -1,16 +1,18 @@
 import './exerciseDescription.css';
 
 import {useEffect} from 'react';
-import {useParams, Link} from 'react-router-dom';
+import {useParams, Link, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 import setContent from '../../utils/setContent';
 import useUpdate from '../../services/useUpdate';
 
 import PageHeader from '../../components/pageHeader/PageHeader';
+import Page404 from '../404/404';
 
 export default function ExerciseDescription() {
 	const {updateChapList} = useUpdate();
+	const navigate = useNavigate();
 
 	const {id, activeProgram} = useParams();
 
@@ -24,10 +26,19 @@ export default function ExerciseDescription() {
 		// eslint-disable-next-line
 	}, []);
 
+	if (!chapList.data) {
+		return <></>;
+	}
+	const currentCard = chapList.data.find((item) => item.id === id);
+	if (!currentCard) {
+		// navigate('*');
+		return <Page404 />;
+	}
+
 	return (
 		<>
 			<PageHeader />
-			{setContent(chapListStatus, View, chapList, {id})}
+			{setContent(chapListStatus, View, currentCard, {id})}
 			<div className='exDescButWrapper'>
 				<button className='onMainBut but redBut'>
 					<Link to='/'>на главную</Link>
@@ -37,9 +48,11 @@ export default function ExerciseDescription() {
 	);
 }
 
-function View({data, id}) {
-	const content = data.data.find((item) => item.id === id);
-	const {name, link, timeStamp, description} = content;
+function View({data}) {
+	console.log(data);
+	// const content = data.find((item) => item.id === id);
+	// console.log(content);
+	const {name, link, timeStamp, description} = data;
 	const date = new Date(timeStamp);
 
 	const hour = date.getHours();
