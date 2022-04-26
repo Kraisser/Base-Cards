@@ -1,0 +1,20 @@
+.main404 {
+	height: calc(100vh - 100px);
+	padding: 30px 0;
+	max-width: 600px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-rows: 100px 50px 50px;
+}
+.header404 h2 {
+	margin: 0;
+	font-size: 50px;
+	text-align: center;
+}
+.message404 {
+	text-align: center;
+}
+.but404 {
+	display: flex;
+	justify-content: center;
+}

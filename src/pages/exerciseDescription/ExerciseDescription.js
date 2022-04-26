@@ -12,14 +12,14 @@ import PageHeader from '../../components/pageHeader/PageHeader';
 export default function ExerciseDescription() {
 	const {updateChapList} = useUpdate();
 
-	const id = useParams().id;
+	const {id, activeProgram} = useParams();
 
 	const chapList = useSelector((state) => state.chapList.chapList);
 	const chapListStatus = useSelector((state) => state.chapList.chapListStatus);
 
 	useEffect(() => {
-		if (chapListStatus !== 'idle') {
-			updateChapList();
+		if (chapListStatus !== 'idle' && activeProgram && id) {
+			updateChapList(activeProgram);
 		}
 		// eslint-disable-next-line
 	}, []);

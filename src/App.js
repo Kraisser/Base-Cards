@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import MainPage from './pages/mainPage/MainPage';
 import ExerciseDescription from './pages/exerciseDescription/ExerciseDescription';
 import FormPage from './pages/formPage/FormPage';
+import Page404 from './pages/404/404';
 
 function App() {
 	return (
@@ -15,6 +16,7 @@ function App() {
 					<Route path='/' element={<MainPage />} />
 					<Route path='/addForm' element={<FormPage />} />
 					<Route path='/exerciseDescription/:activeProgram/:id' element={<ExerciseDescription />} />
+					<Route path='*' element={<Page404 />} />
 				</Routes>
 			</Router>
 		</div>
