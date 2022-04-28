@@ -1,0 +1,22 @@
+body {
+	--main-color: #2787d6;
+	--main-second-color: #4899db;
+	--main-third-color: #fff;
+	--button-color: #ff9601;
+	--button-border-color: #d47f00;
+	--icon-active-color: #fefffe;
+	--icon-color: #a5caef;
+	--inactive-color: #a2ccee;
+	--green-color: #139749;
+	--red-color: #971713;
+	--text-description-color: #cdcdce;
+	--header-color: #dbffff;
+
+	/* border */
+	--border-radius: 14px;
+	--border-mini-radius: 7px;
+
+	/* Spinner */
+	--spinner-color: #fff;
+	--spinner-line-width: 4px;
+}

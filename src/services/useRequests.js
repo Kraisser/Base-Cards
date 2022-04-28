@@ -35,8 +35,7 @@ export default function useRequests() {
 		const chapters = chapSnap.docs
 			.map((doc) => ({id: doc.id, name: doc.data().name}))
 			.sort((prevItem, item) => {
-				const sort = item.name.localeCompare(prevItem.name, 'ru', {ignorePunctuation: true});
-				console.log('sort: ', sort);
+				return prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true});
 			});
 
 		return chapters;

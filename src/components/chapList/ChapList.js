@@ -14,7 +14,7 @@ export default function ChapList() {
 	return (
 		<div className='exerciseListWrapper'>
 			<div className='exerciseListHeader'>
-				<h2>{chapList.description ? `Раздел: "${chapList.description}"` : 'Выберите раздел'}</h2>
+				<h2>{chapList.description ? chapList.description : 'Выберите раздел'}</h2>
 				<div className='formLinkButWrapper'></div>
 			</div>
 

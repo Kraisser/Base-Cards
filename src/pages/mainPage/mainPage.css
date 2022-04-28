@@ -3,14 +3,12 @@
 	grid-template-columns: minmax(1020px, auto) minmax(380px, auto);
 }
 .rightContent {
-	max-height: calc(100vh - 100px);
+	max-height: calc(100vh - 90px);
 	display: flex;
 	flex-direction: column;
-	/* display: grid;
-	grid-template-rows: 180px auto; */
 }
 .leftContent {
-	max-height: calc(100vh - 100px);
+	max-height: calc(100vh - 90px);
 	display: flex;
 	flex-direction: column;
 }

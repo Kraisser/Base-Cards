@@ -1,3 +1,5 @@
+@import '../../css/variables.css';
+
 .exerciseListWrapper {
 	padding: 10px 5px 10px 10px;
 	display: grid;
@@ -13,6 +15,7 @@
 }
 .exerciseListHeader h2 {
 	margin: 0;
+	color: var(--header-color);
 }
 .exerciseListContainer {
 	display: grid;
@@ -24,8 +27,8 @@
 	scrollbar-width: thin;
 }
 .emptyChapList {
-	max-height: calc(100vh - 190px);
 	text-align: center;
+	color: var(--header-color);
 }
 .exerciseListContainer::-webkit-scrollbar {
 	max-width: 5px;

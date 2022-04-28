@@ -1,9 +1,11 @@
+@import '../../css/variables.css';
+
 .exerciseItemWrapper {
 	position: relative;
-	background-color: #fff;
+	background-color: var(--main-third-color);
 	padding: 10px 50px 10px 10px;
 	min-height: 120px;
-	border-radius: 2px;
+	border-radius: var(--border-radius);
 }
 .exerciseItemHeader {
 	margin: 0;
@@ -27,13 +29,14 @@
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
-	background: linear-gradient(180deg, transparent, #fff);
+	background: linear-gradient(180deg, transparent, var(--main-third-color));
 }
 
 .delIcon-chapItem {
 	cursor: pointer;
 	height: 30px;
 }
+.delIcon-chapItem:hover,
 .browserIcon:hover,
 .infoIcon:hover {
 	transform: scale(1.05);
@@ -45,12 +48,13 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
-	background-color: #ededed;
+	background-color: var(--inactive-color);
 	position: absolute;
 	top: 0;
 	right: 0;
 	width: 40px;
 	height: 100%;
+	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 .controlContainer {
 	width: 30px;

@@ -1,43 +1,65 @@
+@import '../../css/variables.css';
+
 .formWrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 30px;
+	padding: 30px 0;
 }
-.formHeader {
+/* .formHeader {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 20px;
+	padding: 10px 0;
 }
 .formHeader h2 {
 	margin: 0;
-}
+	color: var(--header-color);
+} */
 .formWrapper form {
 	padding: 10px;
-	background-color: darkgray;
+	background-color: var(--main-color);
 	display: flex;
 	flex-direction: column;
 }
 .formWrapper h3 {
 	margin: 0 0 15px;
+	color: var(--header-color);
 	text-align: center;
 }
 .formInputLabel {
 	text-align: center;
 	margin-bottom: 5px;
+	color: var(--header-color);
 }
+.formInputLabel option {
+	color: #000;
+}
+.exSelectInput,
 .formInput {
 	margin-bottom: 10px;
+	height: 30px;
+	transition: box-shadow 0.1s ease-in;
+	border-radius: var(--border-mini-radius);
 }
 .exForm {
 	min-width: 600px;
 	border-radius: 4px;
 }
-.exForm button,
 .formInputLabel,
 .formInput {
 	border-radius: 4px;
 	border-width: 1px;
+}
+.exSelectInput:hover,
+.exDescriptionInput:hover,
+.formInput:hover {
+	box-shadow: 0 0 3px rgb(68, 68, 68);
+}
+.exSelectInput:focus-visible,
+.exDescriptionInput:focus-visible,
+.formInput:focus-visible {
+	outline: 0;
+	box-shadow: 0 0 6px rgb(68, 68, 68);
 }
 .programForm {
 	min-width: 350px;
@@ -47,12 +69,27 @@
 	margin-bottom: 3px;
 }
 .exDescriptionInput {
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	width: 100%;
 	height: 150px;
 	resize: none;
-	border-radius: 4px;
+	border-radius: var(--border-mini-radius);
 	border-width: 1px;
+	transition: box-shadow 0.1s ease-in;
+}
+/* Button */
+.formBut {
+	background-color: var(--button-color);
+	width: 50%;
+	padding: 15px 40px;
+	border-radius: var(--border-mini-radius);
+	color: var(--header-color);
+	font-size: 18px;
+	font-weight: 600;
+}
+.formButWrapper {
+	display: flex;
+	justify-content: center;
 }
 
 /* Media */

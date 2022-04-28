@@ -1,3 +1,5 @@
+@import './css/variables.css';
+
 * {
 	box-sizing: border-box;
 }
@@ -7,26 +9,28 @@
 }
 .content {
 	margin: 0 auto;
-	background-color: #7dbdff;
+	background-color: var(--main-second-color);
 	max-width: 1430px;
 }
 .but {
-	border: 0;
-	border-radius: 2px;
-	padding: 3px 6px;
+	border-radius: var(--border-mini-radius);
 	cursor: pointer;
 	transition: all 0.3s ease;
-	border: solid 1px transparent;
+	border: solid 2px transparent;
 }
-.greenBut {
+/* .greenBut {
 	background-color: #39e24d;
 }
 .greenBut:hover {
 	border-color: #008110;
 }
+
 .redBut {
 	background-color: #ff5757;
 }
 .redBut:hover {
 	border-color: #a60800;
+} */
+.but:hover {
+	border-color: var(--button-border-color);
 }

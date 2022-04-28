@@ -92,9 +92,9 @@ export default function FormPage() {
 		<>
 			<PageHeader />
 			<main>
-				<div className='formHeader'>
+				{/* <div className='formHeader'>
 					<h2>Форма редактирования</h2>
-				</div>
+				</div> */}
 
 				<div className='formWrapper'>
 					<form className='exForm' onSubmit={onExSubmit}>
@@ -120,7 +120,7 @@ export default function FormPage() {
 							name='exProgram'
 							id='exProgram'
 							value={exProgramId}
-							className='formInputLabel'
+							className='exSelectInput'
 							onChange={(e) => onChange(e, setExProgramId, setExProgramErr)}>
 							<option value=''>Выберите программу</option>
 							{programList.map((item) => (
@@ -151,7 +151,11 @@ export default function FormPage() {
 							onChange={(e) => setExDescription(e.target.value)}
 							value={exDescription}
 							className='exDescriptionInput'></textarea>
-						<button type='submit'>Отправить</button>
+						<div className='formButWrapper'>
+							<button type='submit' className='formBut but'>
+								Отправить
+							</button>
+						</div>
 					</form>
 				</div>
 			</main>

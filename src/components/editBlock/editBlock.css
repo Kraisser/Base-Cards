@@ -1,8 +1,10 @@
+@import '../../css/variables.css';
+
 /* edit */
 .editWrapper {
 	height: 180px;
 	padding: 10px;
-	background-color: #0d72dd;
+	background-color: var(--main-color);
 }
 .editContainer {
 	display: grid;
@@ -15,11 +17,11 @@
 .editHeader {
 	margin-bottom: 10px;
 	height: 30px;
-	background-color: #0d72dd;
 }
 .editHeader h2 {
 	margin: 0;
 	text-align: center;
+	color: var(--header-color);
 }
 
 .addChapterWrapper {

@@ -22,18 +22,11 @@ export default function AddChapter() {
 		}
 
 		const id = `${uuid()}+chapter`;
+		const name = newChapter.charAt(0).toUpperCase() + newChapter.slice(1);
 
-		const newChapterItem = {name: newChapter, id};
+		const newChapterItem = {name, id};
 		const newChapters = [...programList, newChapterItem];
 
-		// const newObj = {
-		// 	[id]: {
-		// 		description: newChapter,
-		// 		chapContent: [],
-		// 	},
-		// };
-
-		// uploadNewChapter(newChapterItem, newChapters, newObj);
 		uploadNewChapter(id, newChapter, newChapters);
 		setNewChapter('');
 	};

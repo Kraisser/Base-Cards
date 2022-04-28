@@ -1,7 +1,7 @@
 import './exerciseDescription.css';
 
 import {useEffect} from 'react';
-import {useParams, Link, useNavigate} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 import setContent from '../../utils/setContent';
@@ -12,7 +12,6 @@ import Page404 from '../404/404';
 
 export default function ExerciseDescription() {
 	const {updateChapList} = useUpdate();
-	const navigate = useNavigate();
 
 	const {id, activeProgram} = useParams();
 
@@ -31,27 +30,26 @@ export default function ExerciseDescription() {
 	}
 	const currentCard = chapList.data.find((item) => item.id === id);
 	if (!currentCard) {
-		// navigate('*');
 		return <Page404 />;
 	}
 
 	return (
 		<>
 			<PageHeader />
-			{setContent(chapListStatus, View, currentCard, {id})}
-			<div className='exDescButWrapper'>
-				<button className='onMainBut but redBut'>
-					<Link to='/'>на главную</Link>
-				</button>
+
+			<div className='exerciseDescriptionWrapper'>
+				{setContent(chapListStatus, View, currentCard, {id})}
+				<div className='exDescButWrapper'>
+					<button className='onMainBut but'>
+						<Link to='/'>на главную</Link>
+					</button>
+				</div>
 			</div>
 		</>
 	);
 }
 
 function View({data}) {
-	console.log(data);
-	// const content = data.find((item) => item.id === id);
-	// console.log(content);
 	const {name, link, timeStamp, description} = data;
 	const date = new Date(timeStamp);
 
@@ -70,7 +68,7 @@ function View({data}) {
 	const curDate = `${curDay}.${curMonth}.${curYear}`;
 
 	return (
-		<div className='exerciseDescriptionWrapper'>
+		<div className='cardDescrWrapper'>
 			<div className='exerciseDescriptionHeaderWrapper'>
 				<div className='descriptionDateWrapper'>
 					<div className='dateDescr'>Дата создания</div>

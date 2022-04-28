@@ -4,7 +4,7 @@ import delIcon from '../../assets/icons/delete-icon.png';
 
 export default function ProgramItem({name, onClick, onDelete}) {
 	const clickDelegation = (e) => {
-		if (e.target.classList.contains('delIcon')) {
+		if (e.target.classList.contains('chapterDelIcon')) {
 			onDelete();
 		} else {
 			onClick();
@@ -14,7 +14,7 @@ export default function ProgramItem({name, onClick, onDelete}) {
 	return (
 		<div className='programItem' onClick={clickDelegation}>
 			{name}
-			<img src={delIcon} alt='name' className='delIcon' />
+			<img src={delIcon} alt='name' className='chapterDelIcon' />
 		</div>
 	);
 }

@@ -1,12 +1,14 @@
+@import '../../css/variables.css';
+
 .header {
 	display: grid;
 	grid-template-columns: 1020px 380px;
 	grid-gap: 10px;
 	padding: 10px;
-	background-color: #1287ff;
+	background-color: var(--main-color);
 }
 .header a {
-	color: #000;
+	color: var(--header-color);
 	text-decoration: none;
 }
 .mainHeader {
@@ -14,7 +16,7 @@
 	align-items: center;
 	justify-content: center;
 	margin: 0px auto;
-	height: 70px;
+	height: 60px;
 }
 .mainHeader h1 {
 	margin: 0;

@@ -1,18 +1,21 @@
+@import '../../css/variables.css';
+
 .dateWrapper {
-	width: 180px;
-	height: 70px;
+	width: 140px;
+	height: 60px;
 	padding: 5px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: #b8dbff;
-	border-radius: 2px;
-	font-size: 28px;
+	background-color: var(--main-third-color);
+	color: var(--main-color);
+	border-radius: var(--border-mini-radius);
+	font-size: 24px;
 }
 .date {
 	display: flex;
 	justify-content: space-between;
-	font-size: 22px;
+	font-size: 20px;
 }
 .timeWrapper {
 	text-align: center;

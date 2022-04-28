@@ -1,7 +1,9 @@
+@import '../../css/variables.css';
+
 .programList {
 	width: 100%;
-	padding: 10px 5px 10px 10px;
-	background-color: #4da4ff;
+	padding: 0 5px 10px 10px;
+	background-color: var(--main-color);
 	max-height: calc(100% - 180px);
 }
 .programHeader {
@@ -14,6 +16,7 @@
 .programHeader h2 {
 	margin: 0;
 	text-align: center;
+	color: var(--header-color);
 }
 .programListContent {
 	max-height: calc(100% - 80px);

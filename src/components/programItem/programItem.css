@@ -1,22 +1,25 @@
+@import '../../css/variables.css';
+
 .programItem {
-	background-color: #fff;
+	background-color: var(--main-third-color);
 	margin-bottom: 5px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 5px;
-	border-radius: 2px;
+	border-radius: var(--border-mini-radius);
 	cursor: pointer;
 	font-weight: 500;
 	transition: all 0.3s ease;
 }
-.programItem:hover {
+/* .programItem:hover {
 	transform: scale(0.99);
-}
-.delIcon {
+} */
+.chapterDelIcon {
 	width: 30px;
-	transition: transform 0.3s ease;
+	transform: scale(0);
+	transition: transform 0.2s ease;
 }
-.delIcon:hover {
+.programItem:hover .chapterDelIcon {
 	transform: scale(1.05);
 }
