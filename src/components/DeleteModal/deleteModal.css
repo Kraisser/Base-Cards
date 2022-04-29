@@ -1,3 +1,5 @@
+@import '../../css/variables.css';
+
 .modalOverlay {
 	background-color: rgba(128, 128, 128, 0.4);
 	position: absolute;
@@ -17,8 +19,8 @@
 	gap: 20px;
 	padding: 15px;
 	max-width: 350px;
-	background-color: #7dbdff;
-	border-radius: 2px;
+	background-color: var(--main-color);
+	border-radius: var(--border-radius);
 }
 .modalDescription p:first-of-type {
 	margin-top: 0;
@@ -35,4 +37,8 @@
 }
 .modalGreenBut {
 	margin-right: 15px;
+	background-color: var(--green-color);
+}
+.modalRedBut {
+	background-color: var(--red-color);
 }

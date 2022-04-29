@@ -24,7 +24,7 @@ export default function DeleteModal() {
 			</p>
 		</>
 	) : (
-		`Вы действительно хотите удалить этот пункт? Это действие необратимо.`
+		`Вы действительно хотите удалить этоу карточку? Это действие необратимо.`
 	);
 
 	const onDeleteCardItem = () => {
@@ -48,7 +48,9 @@ export default function DeleteModal() {
 							onClick={targetChapter ? onDeleteChapter : onDeleteCardItem}>
 							Да
 						</button>
-						<button className='modalBut redBut but' onClick={() => dispatch(delModalClose())}>
+						<button
+							className='modalBut modalRedBut redBut but'
+							onClick={() => dispatch(delModalClose())}>
 							Нет
 						</button>
 					</div>

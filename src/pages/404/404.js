@@ -16,16 +16,16 @@ export default function Page404({cardMissed}) {
 		? `Карточка была удалена или отсутствует.`
 		: `Страница '${page}' не найдена.`;
 
-	useEffect(() => {
-		if (redirectTimer === 0) {
-			navigate('/');
-			return;
-		}
-		setTimeout(() => {
-			setRedirectTimer(redirectTimer - 1);
-		}, 1000);
-		// eslint-disable-next-line
-	}, [redirectTimer]);
+	// useEffect(() => {
+	// 	if (redirectTimer === 0) {
+	// 		navigate('/');
+	// 		return;
+	// 	}
+	// 	setTimeout(() => {
+	// 		setRedirectTimer(redirectTimer - 1);
+	// 	}, 1000);
+	// 	// eslint-disable-next-line
+	// }, [redirectTimer]);
 
 	return (
 		<>
@@ -36,7 +36,7 @@ export default function Page404({cardMissed}) {
 				</div>
 				<div className='message404'>{`${message} Вы будете автоматически перенаправлены на главную страницу через ${redirectTimer}`}</div>
 				<div className='but404'>
-					<button className='onMainBut but redBut'>
+					<button className='onMainBut but'>
 						<Link to='/'>на главную</Link>
 					</button>
 				</div>

@@ -20,14 +20,13 @@ export default function FormPage() {
 	const activeProgram = useSelector((state) => state.program.activeProgram);
 
 	const validSchema = yup.object().shape({
-		programName: yup.string('Введите строку').required('Обязательное поле*'),
-		programPath: yup.string('Введите строку').required('Обязательное поле*'),
-		exName: yup
+		cardName: yup
 			.string('Введите строку')
+			.min(2, 'Минимум 2 символа')
 			.max(55, 'Максимум 55 символов')
 			.required('Обязательное поле*'),
-		exProgram: yup.string('Выберите программу*').required('Обязательное поле*'),
-		exLink: yup.string('Укажите ссылку*').required('Обязательное поле*'),
+		chapter: yup.string('Выберите программу*').required('Обязательное поле*'),
+		cardLink: yup.string('Укажите ссылку*').required('Обязательное поле*'),
 	});
 
 	useEffect(() => {
@@ -37,40 +36,13 @@ export default function FormPage() {
 		// eslint-disable-next-line
 	}, []);
 
-	const [exName, setExName] = useState('');
-	const [exNameErr, setExNameErr] = useState(null);
-	const [exProgramId, setExProgramId] = useState('');
-	const [exProgramErr, setExProgramErr] = useState(null);
-	const [exLink, setExLink] = useState('');
-	const [exLinkErr, setExLinkErr] = useState(null);
-	const [exDescription, setExDescription] = useState('');
-
-	const onExSubmit = (e) => {
-		e.preventDefault();
-
-		if (exNameErr !== true || exProgramErr !== true || exLinkErr !== true) {
-			return;
-		}
-
-		const newExercise = {
-			id: uuid(),
-			name: exName,
-			link: exLink,
-			timeStamp: Date.now(),
-			description: exDescription,
-		};
-
-		uploadNewCard(newExercise, exProgramId, activeProgram);
-	};
-
-	const onChange = (e, setState, setErr) => {
-		const value = e.target.value;
-		const id = e.target.id;
-
-		setState(value);
-
-		validateField(id, value, setErr);
-	};
+	const [cardName, setCardName] = useState('');
+	const [cardNameErr, setCardNameErr] = useState(null);
+	const [chapter, setChapter] = useState('');
+	const [chapterErr, setChapterErr] = useState(null);
+	const [cardLink, setCardLink] = useState('');
+	const [cardLinkErr, setCardLinkErr] = useState(null);
+	const [cardDescription, setCardDescription] = useState('');
 
 	const validateField = (id, value, setErr) => {
 		validSchema
@@ -80,6 +52,48 @@ export default function FormPage() {
 			.catch((err) => {
 				setErr(err.message);
 			});
+	};
+
+	const validateFunc = {
+		cardName: (value = cardName) => validateField(`cardName`, value, setCardNameErr),
+		chapter: (value = chapter) => validateField(`chapter`, value, setChapterErr),
+		cardLink: (value = cardLink) => validateField(`cardLink`, value, setCardLinkErr),
+	};
+
+	const validateAll = () => {
+		for (const id in validateFunc) {
+			if (Object.hasOwnProperty.call(validateFunc, id)) {
+				validateFunc[id]();
+			}
+		}
+	};
+
+	const onExSubmit = (e) => {
+		e.preventDefault();
+
+		if (cardNameErr !== true || chapterErr !== true || cardLinkErr !== true) {
+			validateAll();
+			return;
+		}
+
+		const newCard = {
+			id: uuid(),
+			name: cardName,
+			link: cardLink,
+			timeStamp: Date.now(),
+			description: cardDescription,
+		};
+
+		uploadNewCard(newCard, chapter, activeProgram);
+	};
+
+	const onChange = (e, setState) => {
+		const value = e.target.value;
+		const id = e.target.id;
+
+		setState(value);
+
+		validateFunc[id](value);
 	};
 
 	const showError = (errState) => {
@@ -92,36 +106,32 @@ export default function FormPage() {
 		<>
 			<PageHeader />
 			<main>
-				{/* <div className='formHeader'>
-					<h2>Форма редактирования</h2>
-				</div> */}
-
 				<div className='formWrapper'>
 					<form className='exForm' onSubmit={onExSubmit}>
-						<h3>Добавление пункта</h3>
+						<h3>Добавление карточки</h3>
 
-						<label htmlFor='exName' className='formInputLabel'>
-							Название пункта*
+						<label htmlFor='cardName' className='formInputLabel'>
+							Название карточки*
 						</label>
-						<div className='errorForm'>{showError(exNameErr)}</div>
+						<div className='errorForm'>{showError(cardNameErr)}</div>
 						<input
 							type='text'
-							id='exName'
-							onChange={(e) => onChange(e, setExName, setExNameErr)}
-							value={exName}
+							id='cardName'
+							onChange={(e) => onChange(e, setCardName)}
+							value={cardName}
 							className='formInput'
 						/>
 
-						<label htmlFor='exProgram' className='formInputLabel'>
+						<label htmlFor='chapter' className='formInputLabel'>
 							Выберите раздел*
 						</label>
-						<div className='errorForm'>{showError(exProgramErr)}</div>
+						<div className='errorForm'>{showError(chapterErr)}</div>
 						<select
-							name='exProgram'
-							id='exProgram'
-							value={exProgramId}
+							name='chapter'
+							id='chapter'
+							value={chapter}
 							className='exSelectInput'
-							onChange={(e) => onChange(e, setExProgramId, setExProgramErr)}>
+							onChange={(e) => onChange(e, setChapter)}>
 							<option value=''>Выберите программу</option>
 							{programList.map((item) => (
 								<option value={item.id} key={uuid()}>
@@ -130,26 +140,26 @@ export default function FormPage() {
 							))}
 						</select>
 
-						<label htmlFor='exLink' className='formInputLabel'>
+						<label htmlFor='cardLink' className='formInputLabel'>
 							Укажите ссылку*
 						</label>
-						<div className='errorForm'>{showError(exLinkErr)}</div>
+						<div className='errorForm'>{showError(cardLinkErr)}</div>
 						<input
 							type='text'
-							id='exLink'
-							onChange={(e) => onChange(e, setExLink, setExLinkErr)}
-							value={exLink}
+							id='cardLink'
+							onChange={(e) => onChange(e, setCardLink)}
+							value={cardLink}
 							className='formInput'
 						/>
 
-						<label htmlFor='exDescription' className='formInputLabel'>
+						<label htmlFor='cardDescription' className='formInputLabel'>
 							Дополнительное описание
 						</label>
 						<textarea
-							name='exDescription'
-							id='exDescription'
-							onChange={(e) => setExDescription(e.target.value)}
-							value={exDescription}
+							name='cardDescription'
+							id='cardDescription'
+							onChange={(e) => setCardDescription(e.target.value)}
+							value={cardDescription}
 							className='exDescriptionInput'></textarea>
 						<div className='formButWrapper'>
 							<button type='submit' className='formBut but'>
