@@ -7,7 +7,10 @@
 }
 .searchForm:focus-visible {
 	outline: 0;
-	box-shadow: 0 0 4px #000;
+	box-shadow: 0 0 6px #000;
+}
+.searchForm:hover {
+	box-shadow: 0 0 3px #000;
 }
 .searchForm::placeholder {
 	text-align: center;

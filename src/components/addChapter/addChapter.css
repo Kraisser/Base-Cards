@@ -11,14 +11,18 @@
 }
 .addChapterInput:focus-visible {
 	outline: 0;
-	box-shadow: 0 0 4px #000;
+	box-shadow: 0 0 6px #000;
+}
+.addChapterInput:hover {
+	outline: 0;
+	box-shadow: 0 0 3px #000;
 }
 .addChapterIcon {
 	position: absolute;
 	top: 3px;
 	right: 5px;
 	cursor: pointer;
-	transition: transform 0.3s ease;
+	transition: all 0.3s ease;
 }
 .addChapterIcon:hover {
 	transform: scale(1.05);
