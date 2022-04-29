@@ -16,16 +16,16 @@ export default function Page404({cardMissed}) {
 		? `Карточка была удалена или отсутствует.`
 		: `Страница '${page}' не найдена.`;
 
-	// useEffect(() => {
-	// 	if (redirectTimer === 0) {
-	// 		navigate('/');
-	// 		return;
-	// 	}
-	// 	setTimeout(() => {
-	// 		setRedirectTimer(redirectTimer - 1);
-	// 	}, 1000);
-	// 	// eslint-disable-next-line
-	// }, [redirectTimer]);
+	useEffect(() => {
+		if (redirectTimer === 0) {
+			navigate('/');
+			return;
+		}
+		setTimeout(() => {
+			setRedirectTimer(redirectTimer - 1);
+		}, 1000);
+		// eslint-disable-next-line
+	}, [redirectTimer]);
 
 	return (
 		<>
