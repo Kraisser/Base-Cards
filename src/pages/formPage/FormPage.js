@@ -68,6 +68,12 @@ export default function FormPage() {
 		}
 	};
 
+	const clearFields = () => {
+		setCardName('');
+		setCardLink('');
+		setCardDescription('');
+	};
+
 	const onExSubmit = (e) => {
 		e.preventDefault();
 
@@ -83,6 +89,8 @@ export default function FormPage() {
 			timeStamp: Date.now(),
 			description: cardDescription,
 		};
+
+		clearFields();
 
 		uploadNewCard(newCard, chapter, activeProgram);
 	};

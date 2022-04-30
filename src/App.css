@@ -15,7 +15,7 @@
 .but {
 	border-radius: var(--border-mini-radius);
 	cursor: pointer;
-	transition: all 0.3s ease;
+	transition: all 0.2s ease;
 	border: solid 2px transparent;
 }
 /* .greenBut {
@@ -33,4 +33,7 @@
 } */
 .but:hover {
 	border-color: var(--button-border-color);
+}
+.but:active {
+	transform: scale(0.95);
 }

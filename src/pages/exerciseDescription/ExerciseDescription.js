@@ -10,6 +10,8 @@ import useUpdate from '../../services/useUpdate';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import Page404 from '../404/404';
 
+import editIcon from '../../assets/icons/edit-icon.png';
+
 export default function ExerciseDescription() {
 	const {updateChapList} = useUpdate();
 
@@ -38,7 +40,10 @@ export default function ExerciseDescription() {
 			<PageHeader />
 
 			<div className='exerciseDescriptionWrapper'>
-				{setContent(chapListStatus, View, currentCard, {id})}
+				<div className='cardDescrWrapper'>
+					<img src={editIcon} alt='Edit icon' className='editIcon' />
+					{setContent(chapListStatus, View, currentCard, {id})}
+				</div>
 				<div className='exDescButWrapper'>
 					<button className='onMainBut but'>
 						<Link to='/'>на главную</Link>
@@ -68,7 +73,7 @@ function View({data}) {
 	const curDate = `${curDay}.${curMonth}.${curYear}`;
 
 	return (
-		<div className='cardDescrWrapper'>
+		<>
 			<div className='exerciseDescriptionHeaderWrapper'>
 				<div className='descriptionDateWrapper'>
 					<div className='dateDescr'>Дата создания</div>
@@ -81,6 +86,6 @@ function View({data}) {
 			<p>{link}</p>
 			<h3>Описание:</h3>
 			<p className='exerciseDescription'>{description ? description : 'Описание отсутствует'}</p>
-		</div>
+		</>
 	);
 }

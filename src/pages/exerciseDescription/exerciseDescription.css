@@ -20,9 +20,15 @@
 .exerciseDescriptionWrapper p {
 	margin: 0;
 }
-.exerciseDescriptionImg {
-	width: 70%;
-	align-self: center;
+.editIcon {
+	width: 50px;
+	position: absolute;
+	cursor: pointer;
+	z-index: 5;
+	transition: all 0.3s ease;
+}
+.editIcon:hover {
+	filter: drop-shadow(0px 0px 1px var(--button-color));
 }
 .exerciseDescriptionHeaderWrapper {
 	position: relative;

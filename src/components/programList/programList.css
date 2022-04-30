@@ -4,7 +4,7 @@
 	width: 100%;
 	padding: 0 5px 10px 10px;
 	background-color: var(--main-color);
-	max-height: calc(100% - 180px);
+	height: 100%;
 }
 .programHeader {
 	height: 30px;
