@@ -83,7 +83,9 @@ function View({data}) {
 				<h1 className='exerciseDescriptionHeader'>{name}</h1>
 			</div>
 			<h3 className=''>Ссылка:</h3>
-			<p>{link}</p>
+			<a href={link} target='_blank' rel='noopener noreferrer'>
+				{link}
+			</a>
 			<h3>Описание:</h3>
 			<p className='exerciseDescription'>{description ? description : 'Описание отсутствует'}</p>
 		</>

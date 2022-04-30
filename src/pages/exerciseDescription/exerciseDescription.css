@@ -14,11 +14,15 @@
 	display: flex;
 	flex-direction: column;
 	width: 600px;
+	min-height: 350px;
 	background-color: var(--main-color);
 	padding: 15px;
 }
 .exerciseDescriptionWrapper p {
 	margin: 0;
+}
+.exerciseDescriptionWrapper a {
+	color: var(--header-color);
 }
 .editIcon {
 	width: 50px;
