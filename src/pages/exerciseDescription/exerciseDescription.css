@@ -16,6 +16,7 @@
 	width: 600px;
 	min-height: 350px;
 	background-color: var(--main-color);
+	border-radius: var(--border-radius);
 	padding: 15px;
 }
 .exerciseDescriptionWrapper p {
@@ -29,10 +30,13 @@
 	position: absolute;
 	cursor: pointer;
 	z-index: 5;
-	transition: all 0.3s ease;
+	transition: all 0.2s ease;
 }
 .editIcon:hover {
 	filter: drop-shadow(0px 0px 1px var(--button-color));
+}
+.editIcon:active {
+	transform: scale(0.95);
 }
 .exerciseDescriptionHeaderWrapper {
 	position: relative;
