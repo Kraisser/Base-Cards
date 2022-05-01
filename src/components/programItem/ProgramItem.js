@@ -13,7 +13,9 @@ export default function ProgramItem({name, onClick, onDelete}) {
 
 	return (
 		<div className='programItem' onClick={clickDelegation}>
-			{name}
+			<div className='programItemContent'>
+				<span>{name}</span>
+			</div>
 			<img src={delIcon} alt='name' className='chapterDelIcon' />
 		</div>
 	);

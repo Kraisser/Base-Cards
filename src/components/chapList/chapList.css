@@ -12,6 +12,7 @@
 	align-items: center;
 	justify-content: center;
 	position: relative;
+	overflow: hidden;
 }
 .exerciseListHeader h2 {
 	margin: 0;
