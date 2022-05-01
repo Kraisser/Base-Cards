@@ -14,7 +14,7 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path='/' element={<MainPage />} />
-					<Route path='/addForm' element={<FormPage />} />
+					<Route path='/editForm' element={<FormPage />} />
 					<Route path='/exerciseDescription/:activeProgram/:id' element={<ExerciseDescription />} />
 					<Route path='*' element={<Page404 />} />
 				</Routes>

@@ -1,8 +1,8 @@
 import './exerciseDescription.css';
 
 import {useEffect} from 'react';
-import {useParams, Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useParams, Link, useNavigate} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
 
 import setContent from '../../utils/setContent';
 import useUpdate from '../../services/useUpdate';
@@ -10,9 +10,14 @@ import useUpdate from '../../services/useUpdate';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import Page404 from '../404/404';
 
+import {setCard} from '../../store/editSlice';
+
 import editIcon from '../../assets/icons/edit-icon.png';
 
 export default function ExerciseDescription() {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const {updateChapList} = useUpdate();
 
 	const {id, activeProgram} = useParams();
@@ -35,13 +40,18 @@ export default function ExerciseDescription() {
 		return <Page404 />;
 	}
 
+	const onEditCard = () => {
+		dispatch(setCard({activeProgram, currentCard}));
+		navigate('/editForm');
+	};
+
 	return (
 		<>
 			<PageHeader />
 
 			<div className='exerciseDescriptionWrapper'>
 				<div className='cardDescrWrapper'>
-					<img src={editIcon} alt='Edit icon' className='editIcon' />
+					<img src={editIcon} alt='Edit icon' className='editIcon' onClick={onEditCard} />
 					{setContent(chapListStatus, View, currentCard, {id})}
 				</div>
 				<div className='exDescButWrapper'>

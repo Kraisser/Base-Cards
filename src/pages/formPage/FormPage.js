@@ -1,6 +1,6 @@
 import './formPage.css';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useState, useEffect} from 'react';
 
 import useUpdate from '../../services/useUpdate';
@@ -11,13 +11,18 @@ import * as yup from 'yup';
 
 import PageHeader from '../../components/pageHeader/PageHeader';
 
+import {clearEdit} from '../../store/editSlice';
+
 export default function FormPage() {
+	const dispatch = useDispatch();
+
 	const {updateChapters} = useUpdate();
-	const {uploadNewCard} = useUpload();
+	const {uploadNewCard, onDeleteCard} = useUpload();
 
 	const status = useSelector((state) => state.program.programListStatus);
 	const programList = useSelector((state) => state.program.programList);
 	const activeProgram = useSelector((state) => state.program.activeProgram);
+	const editCard = useSelector((state) => state.editSlice.card);
 
 	const validSchema = yup.object().shape({
 		cardName: yup
@@ -36,13 +41,13 @@ export default function FormPage() {
 		// eslint-disable-next-line
 	}, []);
 
-	const [cardName, setCardName] = useState('');
-	const [cardNameErr, setCardNameErr] = useState(null);
-	const [chapter, setChapter] = useState('');
-	const [chapterErr, setChapterErr] = useState(null);
-	const [cardLink, setCardLink] = useState('');
-	const [cardLinkErr, setCardLinkErr] = useState(null);
-	const [cardDescription, setCardDescription] = useState('');
+	const [cardName, setCardName] = useState(editCard ? editCard.name : '');
+	const [cardNameErr, setCardNameErr] = useState(editCard ? true : null);
+	const [chapter, setChapter] = useState(editCard ? activeProgram : '');
+	const [chapterErr, setChapterErr] = useState(editCard ? true : null);
+	const [cardLink, setCardLink] = useState(editCard ? editCard.link : '');
+	const [cardLinkErr, setCardLinkErr] = useState(editCard ? true : null);
+	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
 
 	const validateField = (id, value, setErr) => {
 		validSchema
@@ -74,16 +79,28 @@ export default function FormPage() {
 		setCardDescription('');
 	};
 
-	const onExSubmit = (e) => {
+	const compareCards = (oldCard, newCard) => {
+		const props = ['name', 'link', 'description'];
+
+		for (let i = 0; i < props.length; i++) {
+			if (oldCard[props[i]] !== newCard[props[i]]) {
+				return false;
+			}
+		}
+
+		return true;
+	};
+
+	const onExSubmit = (e, id) => {
 		e.preventDefault();
+		validateAll();
 
 		if (cardNameErr !== true || chapterErr !== true || cardLinkErr !== true) {
-			validateAll();
 			return;
 		}
 
 		const newCard = {
-			id: uuid(),
+			id: id ? id : uuid(),
 			name: cardName,
 			link: cardLink,
 			timeStamp: Date.now(),
@@ -92,7 +109,22 @@ export default function FormPage() {
 
 		clearFields();
 
-		uploadNewCard(newCard, chapter, activeProgram);
+		if (id) {
+			dispatch(clearEdit());
+
+			if (compareCards(editCard, newCard) && chapter === activeProgram) {
+				console.log('sameCards');
+				return;
+			}
+
+			if (chapter !== activeProgram) {
+				console.log(`deleteCard`);
+				console.log(chapter, activeProgram);
+				onDeleteCard(id, activeProgram);
+			}
+		}
+
+		uploadNewCard(newCard, chapter, activeProgram, id);
 	};
 
 	const onChange = (e, setState) => {
@@ -115,8 +147,8 @@ export default function FormPage() {
 			<PageHeader />
 			<main>
 				<div className='formWrapper'>
-					<form className='exForm' onSubmit={onExSubmit}>
-						<h3>Добавление карточки</h3>
+					<form className='exForm' onSubmit={(e) => onExSubmit(e, editCard ? editCard.id : null)}>
+						<h3>{editCard ? `Изменение карточки` : `Добавление карточки`}</h3>
 
 						<label htmlFor='cardName' className='formInputLabel'>
 							Название карточки*

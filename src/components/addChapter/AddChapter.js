@@ -25,9 +25,9 @@ export default function AddChapter() {
 		const name = newChapter.charAt(0).toUpperCase() + newChapter.slice(1);
 
 		const newChapterItem = {name, id};
-		const newChapters = [...programList, newChapterItem];
+		const newChapters = [newChapterItem, ...programList];
 
-		uploadNewChapter(id, newChapter, newChapters);
+		uploadNewChapter(id, name, newChapters);
 		setNewChapter('');
 	};
 

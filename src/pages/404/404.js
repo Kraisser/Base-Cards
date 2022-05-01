@@ -10,7 +10,7 @@ export default function Page404() {
 	const page = useParams()['*'];
 	const navigate = useNavigate();
 
-	const [redirectTimer, setRedirectTimer] = useState(200);
+	const [redirectTimer, setRedirectTimer] = useState(5);
 
 	const messages = {
 		page: `Страница '${page}' не найдена.`,
@@ -24,9 +24,11 @@ export default function Page404() {
 			navigate('/');
 			return;
 		}
+
 		const timerIdValue = setTimeout(() => {
 			setRedirectTimer(redirectTimer - 1);
 		}, 1000);
+
 		return () => clearTimeout(timerIdValue);
 		// eslint-disable-next-line
 	}, [redirectTimer]);

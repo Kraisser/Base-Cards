@@ -19,11 +19,12 @@ export default function useUpload() {
 			.catch((e) => dispatch(programListError()));
 	};
 
-	const uploadNewCard = (newCard, programId, activeProgram) => {
+	const uploadNewCard = (newCard, programId, activeProgram, id) => {
 		postCard(newCard, programId)
 			.then(() => {
 				if (programId === activeProgram) {
-					const newCardListArr = [...cardList.data, newCard];
+					const prevData = cardList.data.filter((item) => item.id !== id);
+					const newCardListArr = [newCard, ...prevData];
 					const newCardList = {description: cardList.description, data: newCardListArr};
 
 					dispatch(exListSuccess(newCardList));

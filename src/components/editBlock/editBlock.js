@@ -16,7 +16,7 @@ export default function EditBlock() {
 				</div>
 				<div>
 					<button className='formLinkBut but greenBut'>
-						<Link to='/addForm'>Добавить карточку</Link>
+						<Link to='/editForm'>Добавить карточку</Link>
 					</button>
 				</div>
 			</div>
