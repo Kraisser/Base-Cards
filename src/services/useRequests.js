@@ -8,8 +8,6 @@ import {
 	setDoc,
 	deleteDoc,
 	deleteField,
-	query,
-	orderBy,
 } from 'firebase/firestore';
 
 export default function useRequests() {
@@ -70,6 +68,15 @@ export default function useRequests() {
 		await deleteDoc(doc(db, 'chaptersList', id));
 	};
 
+	const editChapter = async (id, name) => {
+		await updateDoc(db, 'chaptersList', id, {
+			name,
+		});
+		await updateDoc(db, 'cardList', id, {
+			name,
+		});
+	};
+
 	return {
 		getCardList,
 		getChapters,
@@ -77,5 +84,6 @@ export default function useRequests() {
 		postCard,
 		deleteCard,
 		deleteProgramFromChapters,
+		editChapter,
 	};
 }

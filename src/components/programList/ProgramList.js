@@ -10,16 +10,13 @@ import {v4 as uuid} from 'uuid';
 import ProgramItem from '../programItem/ProgramItem';
 import SearchForm from '../searchForm/SearchForm';
 
-import {setProgramFilter} from '../../store/programSlice';
 import {delModalOpen, delModalSetPrevChapter} from '../../store/modalSlice';
 
 import setContent from '../../utils/setContent';
 
 export default function ProgramList() {
 	const {updateChapters} = useUpdate();
-	const dispatch = useDispatch();
-
-	const programList = useSelector((state) => state.program.programList);
+	
 	const filteredPrograms = useSelector((state) => state.program.programFiltered);
 	const status = useSelector((state) => state.program.programListStatus);
 
@@ -28,12 +25,7 @@ export default function ProgramList() {
 			updateChapters();
 		}
 		// eslint-disable-next-line
-	}, []);
-
-	const filterPrograms = (filter) => {
-		const filtered = programList.filter((item) => item.name.includes(filter));
-		dispatch(setProgramFilter(filtered));
-	};
+	}, []);	
 
 	return (
 		<div className='programList'>
@@ -42,7 +34,7 @@ export default function ProgramList() {
 			</div>
 
 			<div className='searchChapterWrapper'>
-				<SearchForm filterPrograms={filterPrograms} />
+				<SearchForm />
 			</div>
 			<div className='programListContent'>{setContent(status, View, filteredPrograms)}</div>
 		</div>
