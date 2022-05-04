@@ -2,7 +2,6 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
 	delModalStatus: false,
-	prevChapter: '',
 };
 
 const modalSlice = createSlice({
@@ -12,12 +11,8 @@ const modalSlice = createSlice({
 		delModalOpen: (state, action) => {
 			state.delModalStatus = action.payload;
 		},
-		delModalSetPrevChapter: (state, action) => {
-			state.prevChapter = action.payload;
-		},
 		delModalClose: (state) => {
 			state.delModalStatus = false;
-			state.prevChapter = '';
 		},
 	},
 });
@@ -25,4 +20,4 @@ const modalSlice = createSlice({
 const {actions, reducer} = modalSlice;
 
 export default reducer;
-export const {delModalOpen, delModalClose, delModalSetPrevChapter} = actions;
+export const {delModalOpen, delModalClose} = actions;

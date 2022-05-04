@@ -10,13 +10,19 @@ import {v4 as uuid} from 'uuid';
 import ProgramItem from '../programItem/ProgramItem';
 import SearchForm from '../searchForm/SearchForm';
 
-import {delModalOpen, delModalSetPrevChapter} from '../../store/modalSlice';
+import {delModalOpen} from '../../store/modalSlice';
 
 import setContent from '../../utils/setContent';
 
 export default function ProgramList() {
-	const {updateChapters} = useUpdate();
-	
+	const dispatch = useDispatch();
+
+	const {updateChapters, updateChapList} = useUpdate();
+
+	const onDeleteChapter = (id) => {
+		dispatch(delModalOpen(id));
+	};
+
 	const filteredPrograms = useSelector((state) => state.program.programFiltered);
 	const status = useSelector((state) => state.program.programListStatus);
 
@@ -25,7 +31,22 @@ export default function ProgramList() {
 			updateChapters();
 		}
 		// eslint-disable-next-line
-	}, []);	
+	}, []);
+
+	const setChapList = () => {
+		if (filteredPrograms.length > 0) {
+			const arr = filteredPrograms.map((item) => (
+				<ProgramItem
+					name={item.name}
+					onClick={() => updateChapList(item.id)}
+					onDelete={() => onDeleteChapter(item.id)}
+					key={uuid()}
+				/>
+			));
+			return arr;
+		}
+		return null;
+	};
 
 	return (
 		<div className='programList'>
@@ -36,38 +57,15 @@ export default function ProgramList() {
 			<div className='searchChapterWrapper'>
 				<SearchForm />
 			</div>
-			<div className='programListContent'>{setContent(status, View, filteredPrograms)}</div>
+			<div className='programListContent'>{setContent(status, View, setChapList())}</div>
 		</div>
 	);
 }
 
 function View({data}) {
-	const dispatch = useDispatch();
-
-	const {updateChapList} = useUpdate();
-
-	const onDeleteChapter = (id, prevChapter) => {
-		dispatch(delModalOpen(id));
-		dispatch(delModalSetPrevChapter(prevChapter));
-	};
-
 	if (data.length === 0) {
 		return <div className='chapterNotFound'>Разделы не найдены</div>;
 	}
 
-	const items = data.map((item, index) => {
-		const prevChapter =
-			index === 0 ? (data[index + 1] ? data[index + 1].id : null) : data[index - 1].id;
-
-		return (
-			<ProgramItem
-				name={item.name}
-				onClick={() => updateChapList(item.id)}
-				onDelete={() => onDeleteChapter(item.id, prevChapter)}
-				key={uuid()}
-			/>
-		);
-	});
-
-	return items;
+	return data;
 }

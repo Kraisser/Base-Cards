@@ -2,6 +2,8 @@ import './programItem.css';
 
 import {useState} from 'react';
 
+import {editChapter} from '../../services/useRequests';
+
 import delIcon from '../../assets/icons/delete-icon.png';
 import slideIcon from '../../assets/icons/pngwing.com 1 (4).png';
 import editChapterIcon from '../../assets/icons/edit-30-icon.png';
