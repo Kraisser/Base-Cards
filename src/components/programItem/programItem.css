@@ -14,26 +14,92 @@
 	background-color: var(--main-third-color);
 	border-radius: var(--border-mini-radius);
 	display: flex;
-	padding: 5px;
+	padding: 5px 35px 5px 5px;
 	overflow: hidden;
 	align-items: center;
 	width: 100%;
 	height: 100%;
 }
+.programItemContent::after {
+	content: '';
+	position: absolute;
+	right: 30px;
+	height: 100%;
+	width: 80px;
+	background: linear-gradient(90deg, transparent, var(--main-third-color));
+}
 .programItemContent span {
 	width: 100%;
 	overflow: hidden;
 }
-.programItemContent:active {
+.editChapterInputWrapper {
+	position: relative;
+	width: 100%;
+	z-index: 2;
+}
+.editChapterInputWrapper img {
+	position: absolute;
+	right: 0;
+}
+.chapEditInput {
+	width: 100%;
+	height: 30px;
+	padding: 1px 33px 1px 3px;
+	box-shadow: 0 0 3px #000;
+	border: 0;
+	border-radius: var(--border-mini-radius);
+}
+.chapEditInput:focus-visible {
+	outline: 0;
+	box-shadow: 0 0 6px #000;
+}
+.programItemContent:active,
+.programItemContent:active + .chapterItemMenu {
 	transform: scale(0.97);
 }
-.chapterDelIcon {
+
+/* chapterMenu */
+.chapterItemMenu {
 	position: absolute;
-	right: 5px;
+	right: 0;
+	height: 100%;
 	width: 30px;
-	transform: scale(0);
-	transition: transform 0.2s ease;
+	padding-right: 5px;
+	display: grid;
+	grid-template-columns: 30px 30px 30px;
+	grid-gap: 5px;
+	align-items: center;
+	overflow: hidden;
+	background-color: var(--inactive-color);
+	border-radius: 0 var(--border-mini-radius) var(--border-mini-radius) 0;
+	transition: width 0.3s ease-in;
+	z-index: 3;
 }
-.programItem:hover .chapterDelIcon {
-	transform: scale(1.05);
+.chapterSlideIcon {
+	transition: transform 0.2s ease-in-out;
+}
+.chapterItemMenu img {
+	width: 30px;
+	height: 30px;
+}
+.chapterSlideIcon:hover,
+.chapterEditIcon:hover {
+	filter: drop-shadow(0 0 2px var(--button-color));
+}
+.chapterDelIcon:hover {
+	filter: drop-shadow(0 0 6px #ff4940);
+}
+.chapterItemMenu img:active {
+	transform: scale(0.95);
+}
+.chapterMenuActive {
+	width: 105px;
+}
+.chapterItemMenu.chapterMenuActive .chapterSlideIcon {
+	transform: rotate(-180deg);
+}
+
+/* MenuIcons */
+.chapterDelIcon {
+	transition: transform 0.2s ease;
 }
