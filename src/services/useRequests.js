@@ -30,11 +30,7 @@ export default function useRequests() {
 
 	const getChapters = async () => {
 		const chapSnap = await getDocs(chaptersListDocsRef);
-		const chapters = chapSnap.docs
-			.map((doc) => ({id: doc.id, name: doc.data().name}))
-			.sort((prevItem, item) => {
-				return prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true});
-			});
+		const chapters = chapSnap.docs.map((doc) => ({id: doc.id, name: doc.data().name}));
 
 		return chapters;
 	};

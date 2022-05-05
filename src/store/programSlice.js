@@ -4,7 +4,7 @@ const initialState = {
 	activeProgram: '',
 	programList: [],
 	programListStatus: 'loading',
-	programFiltered: {},
+	programFiltered: [],
 };
 
 const programSlice = createSlice({

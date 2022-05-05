@@ -35,15 +35,20 @@ export default function ProgramList() {
 
 	const setChapList = () => {
 		if (filteredPrograms.length > 0) {
-			const arr = filteredPrograms.map((item) => (
-				<ProgramItem
-					name={item.name}
-					id={item.id}
-					onClick={() => updateChapList(item.id)}
-					onDelete={() => onDeleteChapter(item.id)}
-					key={uuid()}
-				/>
-			));
+			console.log(filteredPrograms);
+			const arr = [...filteredPrograms]
+				.sort((prevItem, item) =>
+					prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})
+				)
+				.map((item) => (
+					<ProgramItem
+						name={item.name}
+						id={item.id}
+						onClick={() => updateChapList(item.id)}
+						onDelete={() => onDeleteChapter(item.id)}
+						key={uuid()}
+					/>
+				));
 			return arr;
 		}
 		return null;
@@ -64,7 +69,7 @@ export default function ProgramList() {
 }
 
 function View({data}) {
-	if (data.length === 0) {
+	if (!data || data.length === 0) {
 		return <div className='chapterNotFound'>Разделы не найдены</div>;
 	}
 
