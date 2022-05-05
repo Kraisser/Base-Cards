@@ -2,27 +2,35 @@ import './programItem.css';
 
 import {useState} from 'react';
 
-import {editChapter} from '../../services/useRequests';
+import useUpload from '../../services/useUpload';
 
 import delIcon from '../../assets/icons/delete-icon.png';
 import slideIcon from '../../assets/icons/pngwing.com 1 (4).png';
 import editChapterIcon from '../../assets/icons/edit-30-icon.png';
 import addIcon from '../../assets/icons/add-icon.png';
 
-export default function ProgramItem({name, onClick, onDelete}) {
+export default function ProgramItem({name, id, onClick, onDelete}) {
+	const {updateChapterName} = useUpload();
+
 	const [menu, setMenu] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [chapName, setChapName] = useState(name);
 
 	const clickDelegation = (e) => {
-		if (e.target.classList.contains('chapterDelIcon')) {
+		const targetClassList = e.target.classList;
+
+		if (targetClassList.contains('chapterDelIcon')) {
 			onDelete();
 		} else if (
-			e.target.classList.contains('chapterItemMenu') ||
-			e.target.classList.contains('chapterSlideIcon')
+			targetClassList.contains('chapterItemMenu') ||
+			targetClassList.contains('chapterSlideIcon')
 		) {
 			onToggleMenu();
-		} else if (e.target.classList.contains('chapterEditIcon')) {
+		} else if (targetClassList.contains('chapterEditIcon')) {
+			onToggleEdit();
+		} else if (targetClassList.contains('chapEditInput')) {
+			return;
+		} else if (targetClassList.contains('enterEditIcon')) {
 			onEnterEdit();
 		} else {
 			onClick();
@@ -40,19 +48,25 @@ export default function ProgramItem({name, onClick, onDelete}) {
 	};
 
 	const onToggleEdit = () => {
-		// setEdit(!edit);
+		setEdit(!edit);
 		setMenu(false);
 	};
 
 	const onEnterEdit = () => {
-		// setEdit(false);
+		setEdit(false);
+
+		if (name === chapName) {
+			return;
+		}
+
+		updateChapterName(id, chapName);
 	};
 
 	const openMenu = menu ? 'chapterMenuActive' : '';
 	const content = edit ? (
 		<div className='editChapterInputWrapper'>
 			<input type='text' value={chapName} className='chapEditInput' onChange={onChangeName} />
-			<img src={addIcon} alt='add' />
+			<img src={addIcon} alt='enter edit' className='enterEditIcon' />
 		</div>
 	) : (
 		<span>{name}</span>

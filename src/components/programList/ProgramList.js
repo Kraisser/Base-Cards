@@ -38,6 +38,7 @@ export default function ProgramList() {
 			const arr = filteredPrograms.map((item) => (
 				<ProgramItem
 					name={item.name}
+					id={item.id}
 					onClick={() => updateChapList(item.id)}
 					onDelete={() => onDeleteChapter(item.id)}
 					key={uuid()}

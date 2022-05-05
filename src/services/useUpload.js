@@ -8,9 +8,10 @@ import {programListSuccess, programListError, setActiveProgram} from '../store/p
 
 export default function useUpload() {
 	const cardList = useSelector((state) => state.chapList.chapList);
+	const programList = useSelector((state) => state.program.programList);
 
 	const dispatch = useDispatch();
-	const {postChapter, postCard, deleteProgramFromChapters, deleteCard} = useRequests();
+	const {postChapter, postCard, deleteProgramFromChapters, deleteCard, editChapter} = useRequests();
 	const {updateChapters, updateChapList} = useUpdate();
 
 	const uploadNewChapter = (id, name, programs) => {
@@ -55,5 +56,21 @@ export default function useUpload() {
 		});
 	};
 
-	return {uploadNewChapter, uploadNewCard, deleteChapter, onDeleteCard};
+	const updateChapterName = (id, name) => {
+		editChapter(id, name);
+
+		const newChapters = programList.map((item) => {
+			if (item.id === id) {
+				return {id, name: name};
+			}
+			return item;
+		});
+		dispatch(programListSuccess(newChapters));
+
+		// const newCards = {data: cardList.data, description: name};
+
+		// dispatch
+	};
+
+	return {uploadNewChapter, uploadNewCard, deleteChapter, onDeleteCard, updateChapterName};
 }

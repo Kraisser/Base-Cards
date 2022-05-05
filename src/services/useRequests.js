@@ -69,10 +69,10 @@ export default function useRequests() {
 	};
 
 	const editChapter = async (id, name) => {
-		await updateDoc(db, 'chaptersList', id, {
+		await updateDoc(doc(db, 'chaptersList', id), {
 			name,
 		});
-		await updateDoc(db, 'cardList', id, {
+		await updateDoc(doc(db, 'cardList', id), {
 			name,
 		});
 	};
