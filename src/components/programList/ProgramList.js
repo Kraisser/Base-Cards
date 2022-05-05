@@ -35,7 +35,6 @@ export default function ProgramList() {
 
 	const setChapList = () => {
 		if (filteredPrograms.length > 0) {
-			console.log(filteredPrograms);
 			const arr = [...filteredPrograms]
 				.sort((prevItem, item) =>
 					prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})

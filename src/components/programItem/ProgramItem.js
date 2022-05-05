@@ -71,6 +71,12 @@ export default function ProgramItem({name, id, onClick, onDelete}) {
 	) : (
 		<span>{name}</span>
 	);
+	const nameWrapper =
+		name.length > 30 ? (
+			<>
+				<div className='nameHoverWrapper'>{name}</div>
+			</>
+		) : null;
 
 	return (
 		<div className='programItem' onClick={clickDelegation}>
@@ -86,6 +92,7 @@ export default function ProgramItem({name, id, onClick, onDelete}) {
 				/>
 				<img src={delIcon} alt='name' className='chapterDelIcon' />
 			</div>
+			{nameWrapper}
 		</div>
 	);
 }

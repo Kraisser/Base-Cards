@@ -21,6 +21,7 @@
 .programListContent {
 	max-height: calc(100% - 80px);
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 .programListContent::-webkit-scrollbar {
 	padding-left: 5px;
