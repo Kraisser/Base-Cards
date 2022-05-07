@@ -5,7 +5,7 @@ import {useState} from 'react';
 import useUpload from '../../services/useUpload';
 
 import delIcon from '../../assets/icons/delete-icon.png';
-import slideIcon from '../../assets/icons/pngwing.com 1 (4).png';
+import slideIcon from '../../assets/icons/menu-slide.png';
 import editChapterIcon from '../../assets/icons/edit-30-icon.png';
 import addIcon from '../../assets/icons/add-icon.png';
 
@@ -74,7 +74,9 @@ export default function ProgramItem({name, id, onClick, onDelete}) {
 	const nameWrapper =
 		name.length > 30 ? (
 			<>
-				<div className='nameHoverWrapper'>{name}</div>
+				<div className='nameHoverWrapper'>
+					<div className='nameHoverContainer'>{name}</div>
+				</div>
 			</>
 		) : null;
 

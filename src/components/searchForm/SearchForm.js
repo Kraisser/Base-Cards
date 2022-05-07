@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import {setProgramFilter} from '../../store/programSlice';
 
-import searchIcon from '../../assets/icons/search-icon.png';
+import searchIcon from '../../assets/icons/search.png';
 
 export default function SearchForm() {
 	const dispatch = useDispatch();

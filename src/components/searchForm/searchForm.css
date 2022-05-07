@@ -5,7 +5,8 @@
 	border-radius: 4px;
 	border: 0;
 }
-.searchForm:focus-visible {
+.searchForm:focus-visible,
+.searchForm:focus-visible:hover {
 	outline: 0;
 	box-shadow: 0 0 6px #000;
 }
