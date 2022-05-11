@@ -113,13 +113,10 @@ export default function FormPage() {
 			dispatch(clearEdit());
 
 			if (compareCards(editCard, newCard) && chapter === activeProgram) {
-				console.log('sameCards');
 				return;
 			}
 
 			if (chapter !== activeProgram) {
-				console.log(`deleteCard`);
-				console.log(chapter, activeProgram);
 				onDeleteCard(id, activeProgram);
 			}
 		}

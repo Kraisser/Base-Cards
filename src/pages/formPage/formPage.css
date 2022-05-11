@@ -54,6 +54,7 @@
 .exDescriptionInput:hover,
 .formInput:hover {
 	box-shadow: 0 0 3px rgb(68, 68, 68);
+	
 }
 .exSelectInput:focus-visible,
 .exDescriptionInput:focus-visible,

@@ -41,7 +41,7 @@ export default function Page404() {
 					<h2>Ошибка 404</h2>
 				</div>
 				<div className='message404'>
-					{`${message} Вы будете автоматически перенаправлены на главную страницу через ${redirectTimer}`}
+					{`${message} Вы будете автоматически перенаправлены на главную страницу. Если этого не произошло нажмите на кнопку ниже.`}
 				</div>
 				<div className='but404'>
 					<button className='onMainBut but'>
