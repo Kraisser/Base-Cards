@@ -24,6 +24,7 @@
 }
 .modalDescription {
 	color: var(--header-color);
+	font-size: 18px;
 }
 .modalDescription p:first-of-type {
 	margin-top: 0;
@@ -35,8 +36,10 @@
 	display: flex;
 }
 .modalBut {
-	width: 70px;
-	cursor: pointer;
+	font-size: 20px;
+	color: var(--header-color);
+	width: 100px;
+	height: 30px;
 }
 .modalGreenBut {
 	margin-right: 15px;

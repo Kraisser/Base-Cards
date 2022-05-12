@@ -50,6 +50,10 @@ export default function FormPage() {
 	const [cardLinkErr, setCardLinkErr] = useState(editCard ? true : null);
 	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
 
+	const nameErrInpStyle = cardNameErr === true || cardNameErr === null ? null : 'errorInput';
+	const chapErrInpStyle = chapterErr === true || chapterErr === null ? null : 'errorInput';
+	const linkErrInpStyle = cardLinkErr === true || cardLinkErr === null ? null : 'errorInput';
+
 	const validateField = (id, value, setErr) => {
 		validSchema
 			.pick([id])
@@ -157,7 +161,7 @@ export default function FormPage() {
 							id='cardName'
 							onChange={(e) => onChange(e, setCardName)}
 							value={cardName}
-							className='formInput'
+							className={`formInput ${nameErrInpStyle}`}
 						/>
 
 						<label htmlFor='chapter' className='formInputLabel'>
@@ -168,7 +172,7 @@ export default function FormPage() {
 							name='chapter'
 							id='chapter'
 							value={chapter}
-							className='exSelectInput'
+							className={`exSelectInput ${chapErrInpStyle}`}
 							onChange={(e) => onChange(e, setChapter)}>
 							<option value=''>Выберите программу</option>
 							{programList.map((item) => (
@@ -187,7 +191,7 @@ export default function FormPage() {
 							id='cardLink'
 							onChange={(e) => onChange(e, setCardLink)}
 							value={cardLink}
-							className='formInput'
+							className={`formInput ${linkErrInpStyle}`}
 						/>
 
 						<label htmlFor='cardDescription' className='formInputLabel'>
