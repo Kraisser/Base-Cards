@@ -2,9 +2,8 @@
 
 .header {
 	display: grid;
-	grid-template-columns: 1020px 380px;
-	grid-gap: 10px;
-	padding: 5px 10px;
+	grid-template-columns: 1030px 400px;
+	padding: 5px 0;
 	background-color: var(--main-color);
 }
 .header a {
@@ -16,6 +15,7 @@
 	align-items: center;
 	justify-content: center;
 	margin: 0px auto;
+	padding: 0 10px;
 	height: 60px;
 }
 .mainHeader h1 {
@@ -24,6 +24,7 @@
 .clockWrapper {
 	display: flex;
 	justify-content: center;
+	padding: 0 10px;
 }
 
 /* Media */

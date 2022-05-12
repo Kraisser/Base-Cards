@@ -5,7 +5,7 @@
 }
 #root {
 	background-color: #dcdcdc;
-	height: 100vh;
+	min-height: 100vh;
 }
 .content {
 	margin: 0 auto;

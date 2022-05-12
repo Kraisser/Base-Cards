@@ -1,14 +1,16 @@
 .mainWrapper {
 	display: grid;
-	grid-template-columns: minmax(1020px, auto) minmax(380px, auto);
+	grid-template-columns: 1030px 400px;
+	height: calc(100vh - 80px);
+	overflow: hidden;
 }
 .rightContent {
-	height: calc(100vh - 90px);
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-rows: 180px calc(100% - 180px);
+	grid-template-columns: 400px;
 }
 .leftContent {
-	height: calc(100vh - 90px);
+	/* height: calc(100vh - 90px); */
 	display: flex;
 	flex-direction: column;
 }

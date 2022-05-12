@@ -14,7 +14,7 @@ export default function EditBlock() {
 				<div className='addChapterWrapper'>
 					<AddChapter />
 				</div>
-				<div>
+				<div className='formLinkButWrapper'>
 					<button className='formLinkBut but greenBut'>
 						<Link to='/editForm'>Добавить карточку</Link>
 					</button>

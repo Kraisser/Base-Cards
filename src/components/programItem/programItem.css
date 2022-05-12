@@ -49,13 +49,13 @@
 	width: 100%;
 	height: 30px;
 	padding: 1px 33px 1px 3px;
-	box-shadow: 0 0 3px #000;
+	box-shadow: 0 0 4px var(--hover-color);
 	border: 0;
 	border-radius: var(--border-mini-radius);
 }
 .chapEditInput:focus-visible {
 	outline: 0;
-	box-shadow: 0 0 6px #000;
+	box-shadow: 0 0 8px var(--hover-color);
 }
 .programItemContent:active,
 .programItemContent:active + .chapterItemMenu {

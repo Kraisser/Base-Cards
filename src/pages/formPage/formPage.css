@@ -53,14 +53,13 @@
 .exSelectInput:hover,
 .exDescriptionInput:hover,
 .formInput:hover {
-	box-shadow: 0 0 3px rgb(68, 68, 68);
-	
+	box-shadow: 0 0 4px var(--hover-color);
 }
 .exSelectInput:focus-visible,
 .exDescriptionInput:focus-visible,
 .formInput:focus-visible {
 	outline: 0;
-	box-shadow: 0 0 6px rgb(68, 68, 68);
+	box-shadow: 0 0 8px var(--hover-color);
 }
 .programForm {
 	min-width: 350px;
