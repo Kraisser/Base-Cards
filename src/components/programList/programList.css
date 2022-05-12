@@ -3,7 +3,7 @@
 .programList {
 	position: relative;
 	width: 100%;
-	padding: 0 5px 10px 10px;
+	padding: 0 5px 10px;
 	background-color: var(--main-color);
 	height: calc(100vh - 180px - 70px - 10px);
 	display: flex;
@@ -25,16 +25,31 @@
 	max-height: calc(100% - 80px);
 	overflow-y: auto;
 	overflow-x: hidden;
+	padding: 0 5px;
 }
 .programListContent::-webkit-scrollbar {
-	padding-left: 5px;
-	width: 5px;
+	width: 10px;
 	background-color: transparent;
 	cursor: pointer;
 }
+.programListContent::-webkit-scrollbar-button:vertical:start:decrement {
+	background: linear-gradient(120deg, var(--main-color) 30%, transparent 35%),
+		linear-gradient(240deg, var(--main-color) 30%, transparent 35%),
+		linear-gradient(0deg, var(--main-color) 10%, transparent 20%);
+	background-color: var(--scroll-color);
+	cursor: pointer;
+}
+
+.programListContent::-webkit-scrollbar-button:vertical:end:increment {
+	background: linear-gradient(300deg, var(--main-color) 30%, transparent 35%),
+		linear-gradient(60deg, var(--main-color) 30%, transparent 35%),
+		linear-gradient(180deg, var(--main-color) 10%, transparent 20%);
+	background-color: var(--scroll-color);
+	cursor: pointer;
+}
 .programListContent::-webkit-scrollbar-thumb {
-	background-color: #0654a6;
-	border-radius: 2px;
+	background-color: var(--scroll-color);
+	border-radius: var(--border-mini-radius);
 	cursor: pointer;
 }
 
