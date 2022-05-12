@@ -16,6 +16,8 @@
 }
 .exerciseListHeader h2 {
 	margin: 0;
+	max-height: 1em;
+	text-overflow: ellipsis;
 	color: var(--header-color);
 }
 .exerciseListContainer {

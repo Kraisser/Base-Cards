@@ -11,10 +11,12 @@ export default function ChapList() {
 	const chapList = useSelector((state) => state.chapList.chapList);
 	const chapListStatus = useSelector((state) => state.chapList.chapListStatus);
 
+	const chapHeader = chapList.description ? chapList.description : 'Выберите раздел';
+
 	return (
 		<div className='exerciseListWrapper'>
 			<div className='exerciseListHeader'>
-				<h2>{chapList.description ? chapList.description : 'Выберите раздел'}</h2>
+				<h2 title={chapHeader}>{chapHeader}</h2>
 				<div className='formLinkButWrapper'></div>
 			</div>
 
