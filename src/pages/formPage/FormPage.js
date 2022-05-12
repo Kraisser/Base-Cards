@@ -11,6 +11,7 @@ import * as yup from 'yup';
 import {Link} from 'react-router-dom';
 
 import PageHeader from '../../components/pageHeader/PageHeader';
+import ChapterContent from '../../components/chapterContent/ChapterContent';
 
 import {clearEdit} from '../../store/editSlice';
 
@@ -21,7 +22,6 @@ export default function FormPage() {
 	const {uploadNewCard, onDeleteCard} = useUpload();
 
 	const status = useSelector((state) => state.program.programListStatus);
-	const programList = useSelector((state) => state.program.programList);
 	const activeProgram = useSelector((state) => state.program.activeProgram);
 	const editCard = useSelector((state) => state.editSlice.card);
 
@@ -42,6 +42,8 @@ export default function FormPage() {
 		// eslint-disable-next-line
 	}, []);
 
+	const [newChap, setNewChap] = useState(false);
+
 	const [cardName, setCardName] = useState(editCard ? editCard.name : '');
 	const [cardNameErr, setCardNameErr] = useState(editCard ? true : null);
 	const [chapter, setChapter] = useState(editCard ? activeProgram : '');
@@ -51,7 +53,6 @@ export default function FormPage() {
 	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
 
 	const nameErrInpStyle = cardNameErr === true || cardNameErr === null ? null : 'errorInput';
-	const chapErrInpStyle = chapterErr === true || chapterErr === null ? null : 'errorInput';
 	const linkErrInpStyle = cardLinkErr === true || cardLinkErr === null ? null : 'errorInput';
 
 	const validateField = (id, value, setErr) => {
@@ -151,58 +152,86 @@ export default function FormPage() {
 				<div className='formWrapper'>
 					<form className='exForm' onSubmit={(e) => onExSubmit(e, editCard ? editCard.id : null)}>
 						<h3>{editCard ? `Изменение карточки` : `Добавление карточки`}</h3>
+						<div className='fieldWrapper'>
+							<label htmlFor='cardName' className='formInputLabel'>
+								Название карточки*
+							</label>
+							<div className='errorForm'>{showError(cardNameErr)}</div>
+							<input
+								type='text'
+								id='cardName'
+								onChange={(e) => onChange(e, setCardName)}
+								value={cardName}
+								className={`formInput ${nameErrInpStyle}`}
+							/>
+						</div>
 
-						<label htmlFor='cardName' className='formInputLabel'>
-							Название карточки*
-						</label>
-						<div className='errorForm'>{showError(cardNameErr)}</div>
-						<input
-							type='text'
-							id='cardName'
-							onChange={(e) => onChange(e, setCardName)}
-							value={cardName}
-							className={`formInput ${nameErrInpStyle}`}
-						/>
+						<div className='fieldWrapper chapSelectButWrapper'>
+							<button
+								type='button'
+								onClick={() => setNewChap(false)}
+								className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
+								Существующий раздел
+							</button>
+							<button
+								type='button'
+								onClick={() => setNewChap(true)}
+								className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
+								Новый раздел
+							</button>
+						</div>
 
-						<label htmlFor='chapter' className='formInputLabel'>
-							Выберите раздел*
-						</label>
-						<div className='errorForm'>{showError(chapterErr)}</div>
-						<select
-							name='chapter'
-							id='chapter'
-							value={chapter}
-							className={`exSelectInput ${chapErrInpStyle}`}
-							onChange={(e) => onChange(e, setChapter)}>
-							<option value=''>Выберите программу</option>
-							{programList.map((item) => (
-								<option value={item.id} key={uuid()}>
-									{item.name}
-								</option>
-							))}
-						</select>
+						<div className='fieldWrapper'>
+							{/* <label htmlFor='chapter' className='formInputLabel'>
+								Выберите раздел*
+							</label>
+							<div className='errorForm'>{showError(chapterErr)}</div>
+							<select
+								name='chapter'
+								id='chapter'
+								value={chapter}
+								className={`exSelectInput ${chapErrInpStyle}`}
+								onChange={(e) => onChange(e, setChapter)}>
+								<option value=''>Выберите программу</option>
+								{programList.map((item) => (
+									<option value={item.id} key={uuid()}>
+										{item.name}
+									</option>
+								))}
+							</select> */}
+							<ChapterContent
+								newChap={newChap}
+								chapState={{chapter, setChapter}}
+								onChange={onChange}
+								chapError={chapterErr}
+							/>
+						</div>
 
-						<label htmlFor='cardLink' className='formInputLabel'>
-							Укажите ссылку*
-						</label>
-						<div className='errorForm'>{showError(cardLinkErr)}</div>
-						<input
-							type='text'
-							id='cardLink'
-							onChange={(e) => onChange(e, setCardLink)}
-							value={cardLink}
-							className={`formInput ${linkErrInpStyle}`}
-						/>
+						<div className='fieldWrapper'>
+							<label htmlFor='cardLink' className='formInputLabel'>
+								Укажите ссылку*
+							</label>
+							<div className='errorForm'>{showError(cardLinkErr)}</div>
+							<input
+								type='text'
+								id='cardLink'
+								onChange={(e) => onChange(e, setCardLink)}
+								value={cardLink}
+								className={`formInput ${linkErrInpStyle}`}
+							/>
+						</div>
 
-						<label htmlFor='cardDescription' className='formInputLabel'>
-							Дополнительное описание
-						</label>
-						<textarea
-							name='cardDescription'
-							id='cardDescription'
-							onChange={(e) => setCardDescription(e.target.value)}
-							value={cardDescription}
-							className='exDescriptionInput'></textarea>
+						<div className='fieldWrapper fieldDescriptionWrapper'>
+							<label htmlFor='cardDescription' className='formInputLabel'>
+								Дополнительное описание
+							</label>
+							<textarea
+								name='cardDescription'
+								id='cardDescription'
+								onChange={(e) => setCardDescription(e.target.value)}
+								value={cardDescription}
+								className='exDescriptionInput'></textarea>
+						</div>
 						<div className='formButWrapper'>
 							<button type='submit' className='formBut but'>
 								Отправить
