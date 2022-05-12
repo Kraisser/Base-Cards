@@ -70,19 +70,3 @@
 .exDescButWrapper {
 	padding: 15px 0;
 }
-.onMainBut {
-	width: 250px;
-	height: 50px;
-	padding: 0;
-	font-size: 20px;
-	text-transform: uppercase;
-	cursor: pointer;
-	background-color: var(--button-color);
-}
-.onMainBut a {
-	color: var(--header-color);
-	text-decoration: none;
-}
-.onMainBut:hover {
-	border-color: var(--button-border-color);
-}

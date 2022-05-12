@@ -6,7 +6,7 @@
 	max-width: 600px;
 	margin: 0 auto;
 	display: grid;
-	grid-template-rows: 100px 50px 100px;
+	grid-template-rows: 100px 100px 100px;
 	color: var(--header-color);
 }
 .header404 h2 {
@@ -21,6 +21,5 @@
 .but404 {
 	display: flex;
 	justify-content: center;
-	height: 60px;
 	align-self: center;
 }

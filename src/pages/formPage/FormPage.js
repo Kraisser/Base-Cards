@@ -8,6 +8,7 @@ import useUpload from '../../services/useUpload';
 
 import {v4 as uuid} from 'uuid';
 import * as yup from 'yup';
+import {Link} from 'react-router-dom';
 
 import PageHeader from '../../components/pageHeader/PageHeader';
 
@@ -204,6 +205,11 @@ export default function FormPage() {
 							</button>
 						</div>
 					</form>
+					<div>
+						<button className='onMainBut but'>
+							<Link to='/'>на главную</Link>
+						</button>
+					</div>
 				</div>
 			</main>
 		</>

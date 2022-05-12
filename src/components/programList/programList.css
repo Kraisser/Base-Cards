@@ -5,7 +5,7 @@
 	width: 100%;
 	padding: 0 5px 10px;
 	background-color: var(--main-color);
-	height: calc(100vh - 180px - 70px - 10px);
+	height: calc(100vh - 160px - 70px - 10px);
 	display: flex;
 	flex-direction: column;
 }
@@ -22,7 +22,6 @@
 	color: var(--header-color);
 }
 .programListContent {
-	max-height: calc(100% - 80px);
 	overflow-y: auto;
 	overflow-x: hidden;
 	padding: 0 5px;

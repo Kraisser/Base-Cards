@@ -7,15 +7,6 @@
 	align-items: center;
 	padding: 30px 0;
 }
-/* .formHeader {
-	display: flex;
-	justify-content: center;
-	padding: 10px 0;
-}
-.formHeader h2 {
-	margin: 0;
-	color: var(--header-color);
-} */
 .formWrapper form {
 	padding: 10px;
 	background-color: var(--main-color);
@@ -45,7 +36,8 @@
 }
 .exForm {
 	min-width: 600px;
-	border-radius: 4px;
+	border-radius: var(--border-radius);
+	margin-bottom: 40px;
 }
 .formInput {
 	border-width: 0;
@@ -81,8 +73,8 @@
 /* Button */
 .formBut {
 	background-color: var(--button-color);
-	width: 50%;
-	padding: 15px 40px;
+	width: 300px;
+	height: 50px;
 	border-radius: var(--border-mini-radius);
 	color: var(--header-color);
 	font-size: 18px;

@@ -1,0 +1,11 @@
+.onMainBut {
+	width: 300px;
+	height: 50px;
+	font-size: 20px;
+	text-transform: uppercase;
+	background-color: var(--button-color);
+}
+.onMainBut a {
+	color: var(--header-color);
+	text-decoration: none;
+}
