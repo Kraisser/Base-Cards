@@ -12,8 +12,6 @@ import addIcon from '../../assets/icons/add-icon.png';
 export default function AddChapter() {
 	const {uploadNewChapter} = useUpload();
 
-	const programList = useSelector((state) => state.program.programList);
-
 	const [newChapter, setNewChapter] = useState('');
 
 	const onProgramSubmit = () => {
@@ -24,10 +22,7 @@ export default function AddChapter() {
 		const id = `${uuid()}+chapter`;
 		const name = newChapter.charAt(0).toUpperCase() + newChapter.slice(1);
 
-		const newChapterItem = {name, id};
-		const newChapters = [newChapterItem, ...programList];
-
-		uploadNewChapter(id, name, newChapters);
+		uploadNewChapter(id, name);
 		setNewChapter('');
 	};
 

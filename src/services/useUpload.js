@@ -14,10 +14,20 @@ export default function useUpload() {
 	const {postChapter, postCard, deleteProgramFromChapters, deleteCard, editChapter} = useRequests();
 	const {updateChapters, updateChapList} = useUpdate();
 
-	const uploadNewChapter = (id, name, programs) => {
-		postChapter(id, name)
-			.then(() => dispatch(programListSuccess(programs)))
-			.catch((e) => dispatch(programListError()));
+	const uploadNewChapter = async (id, name) => {
+		try {
+			const chapters = [...programList, {id, name}];
+			await postChapter(id, name);
+
+			dispatch(programListSuccess(chapters));
+		} catch (e) {
+			dispatch(programListError());
+		}
+		// const chapters = [...programList, {id, name}];
+
+		// postChapter(id, name)
+		// 	.then(() => dispatch(programListSuccess(chapters)))
+		// 	.catch((e) => dispatch(programListError()));
 	};
 
 	const uploadNewCard = (newCard, programId, activeProgram, id) => {
@@ -25,7 +35,7 @@ export default function useUpload() {
 			.then(() => {
 				if (programId === activeProgram) {
 					const prevData = cardList.data.filter((item) => item.id !== id);
-					const newCardListArr = [newCard, ...prevData];
+					const newCardListArr = [...prevData, newCard];
 					const newCardList = {description: cardList.description, data: newCardListArr};
 
 					dispatch(exListSuccess(newCardList));
@@ -66,10 +76,6 @@ export default function useUpload() {
 			return item;
 		});
 		dispatch(programListSuccess(newChapters));
-
-		// const newCards = {data: cardList.data, description: name};
-
-		// dispatch
 	};
 
 	return {uploadNewChapter, uploadNewCard, deleteChapter, onDeleteCard, updateChapterName};

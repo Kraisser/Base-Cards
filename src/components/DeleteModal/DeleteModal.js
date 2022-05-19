@@ -36,14 +36,14 @@ export default function DeleteModal() {
 		const chapIndex = programList.findIndex((item) => delModalStatus === item.id);
 
 		const chapterOrder = {
-			first: programList[chapIndex - 1],
-			second: programList[chapIndex + 1],
+			prev: programList[chapIndex - 1],
+			next: programList[chapIndex + 1],
 		};
 
-		const prevChapter = chapterOrder.first
-			? chapterOrder.first.id
-			: chapterOrder.second
-			? chapterOrder.second.id
+		const prevChapter = chapterOrder.prev
+			? chapterOrder.prev.id
+			: chapterOrder.next
+			? chapterOrder.next.id
 			: null;
 
 		deleteChapter(delModalStatus, prevChapter);

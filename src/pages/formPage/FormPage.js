@@ -19,21 +19,12 @@ export default function FormPage() {
 	const dispatch = useDispatch();
 
 	const {updateChapters} = useUpdate();
-	const {uploadNewCard, onDeleteCard} = useUpload();
+	const {uploadNewCard, onDeleteCard, uploadNewChapter} = useUpload();
 
 	const status = useSelector((state) => state.program.programListStatus);
 	const activeProgram = useSelector((state) => state.program.activeProgram);
+	// const chapterList = useSelector((state) => state.program.programList);
 	const editCard = useSelector((state) => state.editSlice.card);
-
-	const validSchema = yup.object().shape({
-		cardName: yup
-			.string('Введите строку')
-			.min(2, 'Минимум 2 символа')
-			.max(55, 'Максимум 55 символов')
-			.required('Обязательное поле*'),
-		chapter: yup.string('Выберите программу*').required('Обязательное поле*'),
-		cardLink: yup.string('Укажите ссылку*').required('Обязательное поле*'),
-	});
 
 	useEffect(() => {
 		if (status !== 'idle') {
@@ -42,15 +33,26 @@ export default function FormPage() {
 		// eslint-disable-next-line
 	}, []);
 
+	const validSchema = yup.object().shape({
+		cardName: yup
+			.string('Введите строку')
+			.min(2, 'Минимум 2 символа')
+			.max(55, 'Максимум 55 символов')
+			.required('Обязательное поле*'),
+		chapter: yup.string('Выберите раздел*').required('Обязательное поле*'),
+		cardLink: yup.string('Укажите ссылку*').required('Обязательное поле*'),
+	});
+
 	const [newChap, setNewChap] = useState(false);
 
 	const [cardName, setCardName] = useState(editCard ? editCard.name : '');
-	const [cardNameErr, setCardNameErr] = useState(editCard ? true : null);
 	const [chapter, setChapter] = useState(editCard ? activeProgram : '');
-	const [chapterErr, setChapterErr] = useState(editCard ? true : null);
 	const [cardLink, setCardLink] = useState(editCard ? editCard.link : '');
-	const [cardLinkErr, setCardLinkErr] = useState(editCard ? true : null);
 	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
+
+	const [cardNameErr, setCardNameErr] = useState(editCard ? true : null);
+	const [chapterErr, setChapterErr] = useState(null);
+	const [cardLinkErr, setCardLinkErr] = useState(editCard ? true : null);
 
 	const nameErrInpStyle = cardNameErr === true || cardNameErr === null ? null : 'errorInput';
 	const linkErrInpStyle = cardLinkErr === true || cardLinkErr === null ? null : 'errorInput';
@@ -73,6 +75,9 @@ export default function FormPage() {
 
 	const validateAll = () => {
 		for (const id in validateFunc) {
+			if (chapterErr === 'Такой раздел уже существует') {
+				continue;
+			}
 			if (Object.hasOwnProperty.call(validateFunc, id)) {
 				validateFunc[id]();
 			}
@@ -97,8 +102,16 @@ export default function FormPage() {
 		return true;
 	};
 
-	const onExSubmit = (e, id) => {
+	const createNewChapter = async () => {
+		const id = uuid() + '+chapter';
+		await uploadNewChapter(id, chapter);
+
+		return id;
+	};
+
+	const onExSubmit = async (e, id) => {
 		e.preventDefault();
+
 		validateAll();
 
 		if (cardNameErr !== true || chapterErr !== true || cardLinkErr !== true) {
@@ -127,16 +140,33 @@ export default function FormPage() {
 			}
 		}
 
+		if (newChap) {
+			const newChapId = await createNewChapter();
+
+			uploadNewCard(newCard, newChapId, activeProgram, id);
+			return;
+		}
+
 		uploadNewCard(newCard, chapter, activeProgram, id);
 	};
 
-	const onChange = (e, setState) => {
+	const onChange = (e, setState, chapErr) => {
 		const value = e.target.value;
 		const id = e.target.id;
 
 		setState(value);
 
+		if (chapErr) {
+			setChapterErr(chapErr);
+			return;
+		}
 		validateFunc[id](value);
+	};
+
+	const onChangeChapCondtition = (newChapCond) => {
+		setNewChap(newChapCond);
+		setChapterErr(null);
+		setChapter('');
 	};
 
 	const showError = (errState) => {
@@ -169,13 +199,13 @@ export default function FormPage() {
 						<div className='fieldWrapper chapSelectButWrapper'>
 							<button
 								type='button'
-								onClick={() => setNewChap(false)}
+								onClick={() => onChangeChapCondtition(false)}
 								className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
 								Существующий раздел
 							</button>
 							<button
 								type='button'
-								onClick={() => setNewChap(true)}
+								onClick={() => onChangeChapCondtition(true)}
 								className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
 								Новый раздел
 							</button>
@@ -203,7 +233,7 @@ export default function FormPage() {
 								newChap={newChap}
 								chapState={{chapter, setChapter}}
 								onChange={onChange}
-								chapError={chapterErr}
+								chapErrState={{chapterErr, setChapterErr}}
 							/>
 						</div>
 
