@@ -1,28 +1,28 @@
 @import '../../css/variables.css';
 
-.exerciseItemWrapper {
+.cardItemWrapper {
 	position: relative;
 	background-color: var(--main-third-color);
 	padding: 10px 50px 10px 10px;
 	min-height: 120px;
 	border-radius: var(--border-radius);
 }
-.exerciseItemHeader {
+.cardItemHeader {
 	margin: 0;
 	overflow: hidden;
 }
-.exerciseItemDescriptionWrapper {
+.cardItemDescriptionWrapper {
 	max-width: 260px;
 	display: grid;
 	grid-template: 45px 50px / 260px;
 	grid-row-gap: 10px;
 }
-.exerciseItemDescriptionWrapper p {
+.cardItemDescriptionWrapper p {
 	position: relative;
 	margin: 0;
 	overflow: hidden;
 }
-.exerciseItemDescriptionWrapper p::after {
+.cardItemDescriptionWrapper p::after {
 	content: '';
 	height: 0.75em;
 	width: 100%;
@@ -63,10 +63,10 @@
 /* Media */
 
 @media only all and (max-width: 1430px) {
-	.exerciseItemWrapper {
+	.cardItemWrapper {
 		padding: 10px;
 	}
-	.exerciseItemImgWrapper {
+	.cardItemImgWrapper {
 		flex-basis: 150px;
 	}
 	.descriptionBut {
@@ -74,7 +74,7 @@
 	}
 }
 @media only all and (max-width: 1000px) {
-	.exerciseItemWrapper div {
+	.cardItemWrapper div {
 		flex-grow: 1;
 	}
 	.descriptionBut {

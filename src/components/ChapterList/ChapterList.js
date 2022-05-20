@@ -1,4 +1,4 @@
-import './programList.css';
+import './chapterList.css';
 
 import useUpdate from '../../services/useUpdate';
 
@@ -7,8 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
 
-import ProgramItem from '../programItem/ProgramItem';
-import SearchForm from '../searchForm/SearchForm';
+import ProgramItem from '../ChapterItem/ChapterItem';
+import SearchForm from '../ChapSearch/ChapSearch';
 
 import {delModalOpen} from '../../store/modalSlice';
 
@@ -17,14 +17,14 @@ import setContent from '../../utils/setContent';
 export default function ProgramList() {
 	const dispatch = useDispatch();
 
-	const {updateChapters, updateChapList} = useUpdate();
+	const {updateChapters, updateCardList} = useUpdate();
 
 	const onDeleteChapter = (id) => {
 		dispatch(delModalOpen(id));
 	};
 
-	const filteredPrograms = useSelector((state) => state.program.programFiltered);
-	const status = useSelector((state) => state.program.programListStatus);
+	const filteredPrograms = useSelector((state) => state.chapter.chapterFiltered);
+	const status = useSelector((state) => state.chapter.chapterListStatus);
 
 	useEffect(() => {
 		if (status !== 'idle') {
@@ -43,7 +43,7 @@ export default function ProgramList() {
 					<ProgramItem
 						name={item.name}
 						id={item.id}
-						onClick={() => updateChapList(item.id)}
+						onClick={() => updateCardList(item.id)}
 						onDelete={() => onDeleteChapter(item.id)}
 						key={uuid()}
 					/>
@@ -54,15 +54,15 @@ export default function ProgramList() {
 	};
 
 	return (
-		<div className='programList'>
-			<div className='programHeader'>
+		<div className='chapterList'>
+			<div className='chapterHeader'>
 				<h2>Разделы</h2>
 			</div>
 
 			<div className='searchChapterWrapper'>
 				<SearchForm />
 			</div>
-			<div className='programListContent'>{setContent(status, View, setChapList())}</div>
+			<div className='chapterListContent'>{setContent(status, View, setChapList())}</div>
 		</div>
 	);
 }

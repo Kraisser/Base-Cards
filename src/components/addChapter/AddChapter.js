@@ -14,7 +14,7 @@ export default function AddChapter() {
 
 	const [newChapter, setNewChapter] = useState('');
 
-	const onProgramSubmit = () => {
+	const onChapterSubmit = () => {
 		if (newChapter.length < 2) {
 			return;
 		}
@@ -37,7 +37,7 @@ export default function AddChapter() {
 					onChange={(e) => setNewChapter(e.target.value)}
 					placeholder='Новый раздел'
 				/>
-				<img src={addIcon} alt='add-icon' onClick={onProgramSubmit} className='addChapterIcon' />
+				<img src={addIcon} alt='add-icon' onClick={onChapterSubmit} className='addChapterIcon' />
 			</div>
 		</>
 	);

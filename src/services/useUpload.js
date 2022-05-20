@@ -3,80 +3,81 @@ import {useDispatch, useSelector} from 'react-redux';
 import useRequests from './useRequests';
 import useUpdate from './useUpdate';
 
-import {exListError, exListSuccess, exListLoading} from '../store/chapSlice.js';
-import {programListSuccess, programListError, setActiveProgram} from '../store/programSlice';
+import {cardListError, cardListSuccess, cardListLoading} from '../store/cardSlice.js';
+import {chapterListSuccess, chapterListError, setActiveChapter} from '../store/chapterSlice';
 
 export default function useUpload() {
-	const cardList = useSelector((state) => state.chapList.chapList);
-	const programList = useSelector((state) => state.program.programList);
+	const cardList = useSelector((state) => state.cardList.cardList);
+	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const dispatch = useDispatch();
-	const {postChapter, postCard, deleteProgramFromChapters, deleteCard, editChapter} = useRequests();
-	const {updateChapters, updateChapList} = useUpdate();
+	const {postChapter, postCard, deleteChapter, deleteCard, editChapter} = useRequests();
+	const {updateChapters, updateCardList} = useUpdate();
 
 	const uploadNewChapter = async (id, name) => {
 		try {
-			const chapters = [...programList, {id, name}];
+			const chapters = [...chapterList, {id, name}];
 			await postChapter(id, name);
 
-			dispatch(programListSuccess(chapters));
+			dispatch(chapterListSuccess(chapters));
 		} catch (e) {
-			dispatch(programListError());
+			dispatch(chapterListError());
 		}
-		// const chapters = [...programList, {id, name}];
-
-		// postChapter(id, name)
-		// 	.then(() => dispatch(programListSuccess(chapters)))
-		// 	.catch((e) => dispatch(programListError()));
 	};
 
-	const uploadNewCard = (newCard, programId, activeProgram, id) => {
+	const uploadNewCard = (newCard, programId, activeChapter, id) => {
 		postCard(newCard, programId)
 			.then(() => {
-				if (programId === activeProgram) {
+				if (programId === activeChapter) {
 					const prevData = cardList.data.filter((item) => item.id !== id);
 					const newCardListArr = [...prevData, newCard];
 					const newCardList = {description: cardList.description, data: newCardListArr};
 
-					dispatch(exListSuccess(newCardList));
+					dispatch(cardListSuccess(newCardList));
 				}
 			})
 			.catch((e) => console.log(e));
 	};
 
-	const deleteChapter = (id, nextPath) => {
-		deleteProgramFromChapters(id)
+	const deleteChapterFromList = (id, nextPath) => {
+		deleteChapter(id)
 			.then(() => updateChapters())
 			.then(() => {
 				if (nextPath === null) {
-					dispatch(exListLoading());
+					dispatch(cardListLoading());
 				}
-				dispatch(setActiveProgram(nextPath));
+				dispatch(setActiveChapter(nextPath));
 			})
-			.then(() => updateChapList(nextPath))
+			.then(() => updateCardList(nextPath))
 			.catch((e) => console.log(e));
 	};
 
-	const onDeleteCard = (cardId, activeProgram) => {
-		deleteCard(cardId, activeProgram).then(() => {
+	const onDeleteCard = (cardId, activeChapter) => {
+		deleteCard(cardId, activeChapter).then(() => {
 			const newCardListArr = cardList.data.filter((item) => cardId !== item.id);
 			const newCardList = {description: cardList.description, data: newCardListArr};
 
-			dispatch(exListSuccess(newCardList));
+			dispatch(cardListSuccess(newCardList));
 		});
 	};
 
 	const updateChapterName = (id, name) => {
 		editChapter(id, name);
 
-		const newChapters = programList.map((item) => {
+		const newChapters = chapterList.map((item) => {
 			if (item.id === id) {
 				return {id, name: name};
 			}
 			return item;
 		});
-		dispatch(programListSuccess(newChapters));
+		dispatch(chapterListSuccess(newChapters));
 	};
 
-	return {uploadNewChapter, uploadNewCard, deleteChapter, onDeleteCard, updateChapterName};
+	return {
+		uploadNewChapter,
+		uploadNewCard,
+		deleteChapterFromList,
+		onDeleteCard,
+		updateChapterName,
+	};
 }

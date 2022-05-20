@@ -1,9 +1,9 @@
-import './searchForm.css';
+import './chapSearch.css';
 
 import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
-import {setProgramFilter} from '../../store/programSlice';
+import {setChapterFilter} from '../../store/chapterSlice';
 
 import searchIcon from '../../assets/icons/search.png';
 
@@ -11,15 +11,15 @@ export default function SearchForm() {
 	const dispatch = useDispatch();
 	const [searchValue, setSearchValue] = useState('');
 
-	const programList = useSelector((state) => state.program.programList);
+	const chapterList = useSelector((state) => state.chapter.chapterList);
 
-	const onFilterPrograms = (filter) => {
+	const onFilterChapter = (filter) => {
 		setSearchValue(filter);
 
-		const filtered = programList.filter((item) =>
+		const filtered = chapterList.filter((item) =>
 			item.name.toLowerCase().includes(filter.toLowerCase())
 		);
-		dispatch(setProgramFilter(filtered));
+		dispatch(setChapterFilter(filtered));
 	};
 
 	return (
@@ -30,7 +30,7 @@ export default function SearchForm() {
 				className='searchForm'
 				placeholder='Нажмите для поиска'
 				value={searchValue}
-				onChange={(e) => onFilterPrograms(e.target.value)}
+				onChange={(e) => onFilterChapter(e.target.value)}
 			/>
 		</>
 	);

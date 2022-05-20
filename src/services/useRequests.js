@@ -59,7 +59,7 @@ export default function useRequests() {
 		});
 	};
 
-	const deleteProgramFromChapters = async (id) => {
+	const deleteChapter = async (id) => {
 		await deleteDoc(doc(db, 'cardList', id));
 		await deleteDoc(doc(db, 'chaptersList', id));
 	};
@@ -79,7 +79,7 @@ export default function useRequests() {
 		postChapter,
 		postCard,
 		deleteCard,
-		deleteProgramFromChapters,
+		deleteChapter,
 		editChapter,
 	};
 }

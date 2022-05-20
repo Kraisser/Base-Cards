@@ -1,31 +1,31 @@
 import {useDispatch} from 'react-redux';
 
 import useRequests from './useRequests';
-import {exListError, exListSuccess, exListLoading} from '../store/chapSlice.js';
-import {programListSuccess, programListError, setActiveProgram} from '../store/programSlice';
+import {cardListError, cardListSuccess, cardListLoading} from '../store/cardSlice.js';
+import {chapterListSuccess, chapterListError, setActiveChapter} from '../store/chapterSlice';
 
 export default function useUpdate() {
 	const dispatch = useDispatch();
 	const {getCardList, getChapters} = useRequests();
 
-	const updateChapList = (id) => {
-		dispatch(exListLoading());
-		dispatch(setActiveProgram(id));
+	const updateCardList = (id) => {
+		dispatch(cardListLoading());
+		dispatch(setActiveChapter(id));
 
 		if (id) {
 			getCardList(id)
 				.then((res) => {
-					dispatch(exListSuccess(res));
+					dispatch(cardListSuccess(res));
 				})
-				.catch((e) => dispatch(exListError()));
+				.catch((e) => dispatch(cardListError()));
 		}
 	};
 
 	const updateChapters = () => {
 		getChapters()
-			.then((res) => dispatch(programListSuccess(res)))
-			.catch((e) => dispatch(programListError()));
+			.then((res) => dispatch(chapterListSuccess(res)))
+			.catch((e) => dispatch(chapterListError()));
 	};
 
-	return {updateChapList, updateChapters};
+	return {updateCardList, updateChapters};
 }

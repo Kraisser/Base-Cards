@@ -10,8 +10,8 @@ import {v4 as uuid} from 'uuid';
 import * as yup from 'yup';
 import {Link} from 'react-router-dom';
 
-import PageHeader from '../../components/pageHeader/PageHeader';
-import ChapterContent from '../../components/chapterContent/ChapterContent';
+import PageHeader from '../../components/PageHeader/PageHeader';
+import ChapterInput from '../../components/ChapterInput/ChapterInput';
 
 import {clearEdit} from '../../store/editSlice';
 
@@ -21,13 +21,12 @@ export default function FormPage() {
 	const {updateChapters} = useUpdate();
 	const {uploadNewCard, onDeleteCard, uploadNewChapter} = useUpload();
 
-	const status = useSelector((state) => state.program.programListStatus);
-	const activeProgram = useSelector((state) => state.program.activeProgram);
-	// const chapterList = useSelector((state) => state.program.programList);
+	const chapterListStatus = useSelector((state) => state.chapter.chapterListStatus);
+	const activeChapter = useSelector((state) => state.chapter.activeChapter);
 	const editCard = useSelector((state) => state.editSlice.card);
 
 	useEffect(() => {
-		if (status !== 'idle') {
+		if (chapterListStatus !== 'idle') {
 			updateChapters();
 		}
 		// eslint-disable-next-line
@@ -46,7 +45,7 @@ export default function FormPage() {
 	const [newChap, setNewChap] = useState(false);
 
 	const [cardName, setCardName] = useState(editCard ? editCard.name : '');
-	const [chapter, setChapter] = useState(editCard ? activeProgram : '');
+	const [chapter, setChapter] = useState(editCard ? activeChapter : '');
 	const [cardLink, setCardLink] = useState(editCard ? editCard.link : '');
 	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
 
@@ -131,23 +130,23 @@ export default function FormPage() {
 		if (id) {
 			dispatch(clearEdit());
 
-			if (compareCards(editCard, newCard) && chapter === activeProgram) {
+			if (compareCards(editCard, newCard) && chapter === activeChapter) {
 				return;
 			}
 
-			if (chapter !== activeProgram) {
-				onDeleteCard(id, activeProgram);
+			if (chapter !== activeChapter) {
+				onDeleteCard(id, activeChapter);
 			}
 		}
 
 		if (newChap) {
 			const newChapId = await createNewChapter();
 
-			uploadNewCard(newCard, newChapId, activeProgram, id);
+			uploadNewCard(newCard, newChapId, activeChapter, id);
 			return;
 		}
 
-		uploadNewCard(newCard, chapter, activeProgram, id);
+		uploadNewCard(newCard, chapter, activeChapter, id);
 	};
 
 	const onChange = (e, setState, chapErr) => {
@@ -212,7 +211,7 @@ export default function FormPage() {
 						</div>
 
 						<div className='fieldWrapper'>
-							<ChapterContent
+							<ChapterInput
 								newChap={newChap}
 								chapState={{chapter, setChapter}}
 								onChange={onChange}

@@ -1,6 +1,6 @@
 @import '../../css/variables.css';
 
-.exerciseDescriptionWrapper {
+.cardDescriptionWrapper {
 	width: 100%;
 	height: calc(100vh - 90px);
 	display: flex;
@@ -19,10 +19,10 @@
 	border-radius: var(--border-radius);
 	padding: 15px;
 }
-.exerciseDescriptionWrapper p {
+.cardDescriptionWrapper p {
 	margin: 0;
 }
-.exerciseDescriptionWrapper a {
+.cardDescriptionWrapper a {
 	color: var(--header-color);
 }
 .editIcon {
@@ -38,7 +38,7 @@
 .editIcon:active {
 	transform: scale(0.95);
 }
-.exerciseDescriptionHeaderWrapper {
+.cardDescriptionHeaderWrapper {
 	position: relative;
 }
 .descriptionDateWrapper {
@@ -61,12 +61,12 @@
 	font-size: 14px;
 	font-weight: normal;
 }
-.exerciseDescriptionHeader {
+.cardDescriptionHeader {
 	text-align: center;
 }
-.exerciseHeader {
+.cardHeader {
 	margin: 0;
 }
-.exDescButWrapper {
+.cardDescButWrapper {
 	padding: 15px 0;
 }

@@ -2,11 +2,10 @@ import './mainPage.css';
 
 import {useSelector} from 'react-redux';
 
-import ProgramList from '../../components/programList/ProgramList';
-
-import EditBlock from '../../components/editBlock/editBlock';
-import ChapList from '../../components/chapList/ChapList';
-import PageHeader from '../../components/pageHeader/PageHeader';
+import ChapterList from '../../components/ChapterList/ChapterList';
+import EditBlock from '../../components/EditBlock/EditBlock';
+import CardList from '../../components/CardList/CardList';
+import PageHeader from '../../components/PageHeader/PageHeader';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
 
 export default function MainPage() {
@@ -19,11 +18,11 @@ export default function MainPage() {
 			<PageHeader />
 			<main className='mainWrapper'>
 				<div className='leftContent'>
-					<ChapList />
+					<CardList />
 				</div>
 				<div className='rightContent'>
 					<EditBlock />
-					<ProgramList />
+					<ChapterList />
 				</div>
 			</main>
 			{delModal}

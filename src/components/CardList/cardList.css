@@ -1,26 +1,26 @@
 @import '../../css/variables.css';
 
-.exerciseListWrapper {
+.cardListWrapper {
 	padding: 10px 5px 10px 10px;
 	display: grid;
 	grid-template-rows: 30px 1fr;
 	grid-row-gap: 10px;
 	max-height: 100%;
 }
-.exerciseListHeader {
+.cardListHeader {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	overflow: hidden;
 }
-.exerciseListHeader h2 {
+.cardListHeader h2 {
 	margin: 0;
 	max-height: 1em;
 	text-overflow: ellipsis;
 	color: var(--header-color);
 }
-.exerciseListContainer {
+.cardListContainer {
 	display: grid;
 	grid-template: 120px / 1fr 1fr 1fr;
 	grid-gap: 10px 10px;
@@ -34,16 +34,16 @@
 	text-align: center;
 	color: var(--header-color);
 }
-.exerciseListContainer::-webkit-scrollbar {
+.cardListContainer::-webkit-scrollbar {
 	width: 10px;
 	background-color: transparent;
 }
-.exerciseListContainer::-webkit-scrollbar-thumb {
+.cardListContainer::-webkit-scrollbar-thumb {
 	background-color: var(--scroll-color);
 	border-radius: var(--border-mini-radius);
 	cursor: pointer;
 }
-.exerciseListContainer::-webkit-scrollbar-button:vertical:start:decrement {
+.cardListContainer::-webkit-scrollbar-button:vertical:start:decrement {
 	background: linear-gradient(120deg, var(--main-second-color) 30%, transparent 35%),
 		linear-gradient(240deg, var(--main-second-color) 30%, transparent 35%),
 		linear-gradient(0deg, var(--main-second-color) 10%, transparent 20%);
@@ -51,7 +51,7 @@
 	cursor: pointer;
 }
 
-.exerciseListContainer::-webkit-scrollbar-button:vertical:end:increment {
+.cardListContainer::-webkit-scrollbar-button:vertical:end:increment {
 	background: linear-gradient(300deg, var(--main-second-color) 30%, transparent 35%),
 		linear-gradient(60deg, var(--main-second-color) 30%, transparent 35%),
 		linear-gradient(180deg, var(--main-second-color) 10%, transparent 20%);
@@ -61,7 +61,7 @@
 
 /* Media */
 @media only all and (max-width: 1000px) {
-	.exerciseListContainer {
+	.cardListContainer {
 		grid-template: auto / 1fr;
 	}
 }

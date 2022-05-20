@@ -2,8 +2,8 @@ import {useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
 
-export default function ChapterContent({newChap, chapState, onChange, chapErrState}) {
-	const programList = useSelector((state) => state.program.programList);
+export default function ChapterInput({newChap, chapState, onChange, chapErrState}) {
+	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const {chapter, setChapter} = chapState;
 	const {chapterErr, setChapterErr} = chapErrState;
@@ -11,7 +11,7 @@ export default function ChapterContent({newChap, chapState, onChange, chapErrSta
 	const chapErrStyle = chapterErr === true || chapterErr === null ? null : 'errorInput';
 
 	const validateChapterName = (value) => {
-		const sameName = programList.find((item) => item.name.toLowerCase() === value.toLowerCase());
+		const sameName = chapterList.find((item) => item.name.toLowerCase() === value.toLowerCase());
 
 		if (sameName) {
 			return 'Такой раздел уже существует';
@@ -58,7 +58,7 @@ export default function ChapterContent({newChap, chapState, onChange, chapErrSta
 				<option value='' disabled>
 					Из списка
 				</option>
-				{programList.map((item) => (
+				{chapterList.map((item) => (
 					<option value={item.id} key={uuid()}>
 						{item.name}
 					</option>

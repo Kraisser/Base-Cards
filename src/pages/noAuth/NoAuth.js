@@ -1,5 +1,5 @@
 import './noAuth.css';
-import PageHeader from '../../components/pageHeader/PageHeader';
+import PageHeader from '../../components/PageHeader/PageHeader';
 
 import {useState, useEffect} from 'react';
 

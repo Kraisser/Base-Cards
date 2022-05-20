@@ -2,7 +2,7 @@ import './editBlock.css';
 
 import {Link} from 'react-router-dom';
 
-import AddChapter from '../addChapter/AddChapter';
+import AddChapter from '../AddChapter/AddChapter';
 
 export default function EditBlock() {
 	return (

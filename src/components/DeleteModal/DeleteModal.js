@@ -7,11 +7,11 @@ import useUpload from '../../services/useUpload';
 
 export default function DeleteModal() {
 	const dispatch = useDispatch();
-	const {onDeleteCard, deleteChapter} = useUpload();
+	const {onDeleteCard, deleteChapterFromList} = useUpload();
 
 	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
-	const activeProgram = useSelector((state) => state.program.activeProgram);
-	const programList = useSelector((state) => state.program.programList);
+	const activeChapter = useSelector((state) => state.chapter.activeChapter);
+	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const targetChapter = delModalStatus.split('+')[1] === 'chapter';
 
@@ -28,16 +28,16 @@ export default function DeleteModal() {
 	);
 
 	const onDeleteCardItem = () => {
-		onDeleteCard(delModalStatus, activeProgram);
+		onDeleteCard(delModalStatus, activeChapter);
 		dispatch(delModalClose());
 	};
 
 	const onDeleteChapter = () => {
-		const chapIndex = programList.findIndex((item) => delModalStatus === item.id);
+		const chapIndex = chapterList.findIndex((item) => delModalStatus === item.id);
 
 		const chapterOrder = {
-			prev: programList[chapIndex - 1],
-			next: programList[chapIndex + 1],
+			prev: chapterList[chapIndex - 1],
+			next: chapterList[chapIndex + 1],
 		};
 
 		const prevChapter = chapterOrder.prev
@@ -46,7 +46,7 @@ export default function DeleteModal() {
 			? chapterOrder.next.id
 			: null;
 
-		deleteChapter(delModalStatus, prevChapter);
+		deleteChapterFromList(delModalStatus, prevChapter);
 		dispatch(delModalClose());
 	};
 

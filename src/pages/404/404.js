@@ -1,7 +1,7 @@
 import './404.css';
 import '../../css/common.css';
 
-import PageHeader from '../../components/pageHeader/PageHeader';
+import PageHeader from '../../components/PageHeader/PageHeader';
 
 import {useState, useEffect} from 'react';
 
@@ -12,7 +12,7 @@ export default function Page404() {
 	const page = useParams()['*'];
 	const navigate = useNavigate();
 
-	const [redirectTimer, setRedirectTimer] = useState(100);
+	const [redirectTimer, setRedirectTimer] = useState(5);
 
 	const messages = {
 		page: `Страница '${page}' не найдена.`,

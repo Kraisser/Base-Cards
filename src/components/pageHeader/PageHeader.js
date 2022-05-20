@@ -2,7 +2,7 @@ import './pageHeader.css';
 
 import {Link} from 'react-router-dom';
 
-import Clock from '../../components/clock/Clock';
+import Clock from '../Clock/Clock';
 
 export default function PageHeader() {
 	return (

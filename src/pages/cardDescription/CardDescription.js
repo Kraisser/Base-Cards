@@ -1,4 +1,4 @@
-import './exerciseDescription.css';
+import './cardDescription.css';
 import '../../css/common.css';
 
 import {useEffect} from 'react';
@@ -8,41 +8,42 @@ import {useSelector, useDispatch} from 'react-redux';
 import setContent from '../../utils/setContent';
 import useUpdate from '../../services/useUpdate';
 
-import PageHeader from '../../components/pageHeader/PageHeader';
+import PageHeader from '../../components/PageHeader/PageHeader';
 import Page404 from '../404/404';
 
 import {setCard} from '../../store/editSlice';
 
 import editIcon from '../../assets/icons/edit-icon.png';
 
-export default function ExerciseDescription() {
+export default function CardDescription() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const {updateChapList} = useUpdate();
+	const {updateCardList} = useUpdate();
 
-	const {id, activeProgram} = useParams();
+	const {id, activeChapter} = useParams();
 
-	const chapList = useSelector((state) => state.chapList.chapList);
-	const chapListStatus = useSelector((state) => state.chapList.chapListStatus);
+	const cardList = useSelector((state) => state.cardList.cardList);
+	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
 
 	useEffect(() => {
-		if (chapListStatus !== 'idle' && activeProgram && id) {
-			updateChapList(activeProgram);
+		if (cardListStatus !== 'idle' && activeChapter && id) {
+			updateCardList(activeChapter);
 		}
 		// eslint-disable-next-line
 	}, []);
 
-	if (!chapList.data) {
+	if (!cardList.data) {
 		return <></>;
 	}
-	const currentCard = chapList.data.find((item) => item.id === id);
+
+	const currentCard = cardList.data.find((item) => item.id === id);
 	if (!currentCard) {
 		return <Page404 />;
 	}
 
 	const onEditCard = () => {
-		dispatch(setCard({activeProgram, currentCard}));
+		dispatch(setCard({activeChapter, currentCard}));
 		navigate('/editForm');
 	};
 
@@ -50,12 +51,12 @@ export default function ExerciseDescription() {
 		<>
 			<PageHeader />
 
-			<div className='exerciseDescriptionWrapper'>
+			<div className='cardDescriptionWrapper'>
 				<div className='cardDescrWrapper'>
 					<img src={editIcon} alt='Edit icon' className='editIcon' onClick={onEditCard} />
-					{setContent(chapListStatus, View, currentCard, {id})}
+					{setContent(cardListStatus, View, currentCard, {id})}
 				</div>
-				<div className='exDescButWrapper'>
+				<div className='cardDescButWrapper'>
 					<button className='onMainBut but'>
 						<Link to='/'>на главную</Link>
 					</button>
@@ -85,20 +86,20 @@ function View({data}) {
 
 	return (
 		<>
-			<div className='exerciseDescriptionHeaderWrapper'>
+			<div className='cardDescriptionHeaderWrapper'>
 				<div className='descriptionDateWrapper'>
 					<div className='dateDescr'>Дата создания</div>
 					<div className='descrTimeWrapper'>{time}</div>
 					<div className='descrDateWrapper'>{curDate}</div>
 				</div>
-				<h1 className='exerciseDescriptionHeader'>{name}</h1>
+				<h1 className='cardDescriptionHeader'>{name}</h1>
 			</div>
 			<h3 className=''>Ссылка:</h3>
 			<a href={link} target='_blank' rel='noopener noreferrer'>
 				{link}
 			</a>
 			<h3>Описание:</h3>
-			<p className='exerciseDescription'>{description ? description : 'Описание отсутствует'}</p>
+			<p className='cardDescription'>{description ? description : 'Описание отсутствует'}</p>
 		</>
 	);
 }

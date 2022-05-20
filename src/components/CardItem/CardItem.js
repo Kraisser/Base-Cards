@@ -1,5 +1,5 @@
 import '../../index.css';
-import './chapListItem.css';
+import './cardItem.css';
 
 import {Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
@@ -9,10 +9,10 @@ import delIcon from '../../assets/icons/delete-icon.png';
 import browserIcon from '../../assets/icons/browser.png';
 import infoIcon from '../../assets/icons/info.png';
 
-export default function ChapListItem({content}) {
+export default function CardItem({content}) {
 	const dispatch = useDispatch();
 
-	const activeProgram = useSelector((state) => state.program.activeProgram);
+	const activeChapter = useSelector((state) => state.chapter.activeChapter);
 
 	const {name, description, link, id} = content;
 
@@ -21,9 +21,9 @@ export default function ChapListItem({content}) {
 	};
 
 	return (
-		<div className='exerciseItemWrapper'>
-			<div className='exerciseItemDescriptionWrapper'>
-				<h3 className='exerciseItemHeader'>{name}</h3>
+		<div className='cardItemWrapper'>
+			<div className='cardItemDescriptionWrapper'>
+				<h3 className='cardItemHeader'>{name}</h3>
 				<p className=''>{description}</p>
 			</div>
 
@@ -37,7 +37,7 @@ export default function ChapListItem({content}) {
 					</a>
 				</div>
 				<div className='controlContainer'>
-					<Link to={`/exerciseDescription/${activeProgram}/${id}`}>
+					<Link to={`/cardDescription/${activeChapter}/${id}`}>
 						<img src={infoIcon} className='infoIcon' alt='info' />
 					</Link>
 				</div>

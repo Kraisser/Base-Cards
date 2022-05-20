@@ -1,4 +1,4 @@
-import './programItem.css';
+import './chapterItem.css';
 
 import {useState} from 'react';
 
@@ -9,7 +9,7 @@ import slideIcon from '../../assets/icons/menu-slide.png';
 import editChapterIcon from '../../assets/icons/edit-30-icon.png';
 import addIcon from '../../assets/icons/add-icon.png';
 
-export default function ProgramItem({name, id, onClick, onDelete}) {
+export default function ChapterItem({name, id, onClick, onDelete}) {
 	const {updateChapterName} = useUpload();
 
 	const [menu, setMenu] = useState(false);
@@ -81,8 +81,8 @@ export default function ProgramItem({name, id, onClick, onDelete}) {
 		) : null;
 
 	return (
-		<div className='programItem' onClick={clickDelegation}>
-			<div className='programItemContent'>{content}</div>
+		<div className='chapterItem' onClick={clickDelegation}>
+			<div className='chapterItemContent'>{content}</div>
 
 			<div className={`chapterItemMenu ${openMenu}`}>
 				<img src={slideIcon} alt='chapter menu' className='chapterSlideIcon' />
