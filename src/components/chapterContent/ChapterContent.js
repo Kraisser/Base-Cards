@@ -1,5 +1,4 @@
 import {useSelector} from 'react-redux';
-import {useState} from 'react';
 
 import {v4 as uuid} from 'uuid';
 
@@ -56,7 +55,9 @@ export default function ChapterContent({newChap, chapState, onChange, chapErrSta
 				value={chapter}
 				className={`exSelectInput ${chapErrStyle}`}
 				onChange={(e) => onChange(e, setChapter)}>
-				<option value=''>Выберите раздел</option>
+				<option value='' disabled>
+					Из списка
+				</option>
 				{programList.map((item) => (
 					<option value={item.id} key={uuid()}>
 						{item.name}

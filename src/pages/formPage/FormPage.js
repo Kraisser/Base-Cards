@@ -104,7 +104,7 @@ export default function FormPage() {
 
 	const createNewChapter = async () => {
 		const id = uuid() + '+chapter';
-		await uploadNewChapter(id, chapter);
+		await uploadNewChapter(id, chapter.charAt(0).toUpperCase() + chapter.slice(1));
 
 		return id;
 	};
@@ -212,23 +212,6 @@ export default function FormPage() {
 						</div>
 
 						<div className='fieldWrapper'>
-							{/* <label htmlFor='chapter' className='formInputLabel'>
-								Выберите раздел*
-							</label>
-							<div className='errorForm'>{showError(chapterErr)}</div>
-							<select
-								name='chapter'
-								id='chapter'
-								value={chapter}
-								className={`exSelectInput ${chapErrInpStyle}`}
-								onChange={(e) => onChange(e, setChapter)}>
-								<option value=''>Выберите программу</option>
-								{programList.map((item) => (
-									<option value={item.id} key={uuid()}>
-										{item.name}
-									</option>
-								))}
-							</select> */}
 							<ChapterContent
 								newChap={newChap}
 								chapState={{chapter, setChapter}}
