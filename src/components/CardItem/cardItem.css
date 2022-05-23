@@ -62,7 +62,7 @@
 }
 /* Media */
 
-@media only all and (max-width: 1430px) {
+/* @media only all and (max-width: 1430px) {
 	.cardItemWrapper {
 		padding: 10px;
 	}
@@ -80,7 +80,4 @@
 	.descriptionBut {
 		margin-right: 10px;
 	}
-	.exButWrapper {
-		justify-content: end;
-	}
-}
+} */

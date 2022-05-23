@@ -30,7 +30,7 @@
 	scrollbar-width: thin;
 	padding-right: 5px;
 }
-.emptyChapList {
+.emptyCardList {
 	text-align: center;
 	color: var(--header-color);
 }

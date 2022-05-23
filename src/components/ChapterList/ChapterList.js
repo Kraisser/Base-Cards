@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {v4 as uuid} from 'uuid';
 
 import ProgramItem from '../ChapterItem/ChapterItem';
-import SearchForm from '../ChapSearch/ChapSearch';
+import SearchForm from '../SearchForm/SearchForm';
 
 import {delModalOpen} from '../../store/modalSlice';
 

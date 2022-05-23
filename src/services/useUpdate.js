@@ -17,14 +17,20 @@ export default function useUpdate() {
 				.then((res) => {
 					dispatch(cardListSuccess(res));
 				})
-				.catch((e) => dispatch(cardListError()));
+				.catch((e) => {
+					console.log(e);
+					dispatch(cardListError());
+				});
 		}
 	};
 
 	const updateChapters = () => {
 		getChapters()
 			.then((res) => dispatch(chapterListSuccess(res)))
-			.catch((e) => dispatch(chapterListError()));
+			.catch((e) => {
+				console.log(e);
+				dispatch(chapterListError());
+			});
 	};
 
 	return {updateCardList, updateChapters};
