@@ -2,7 +2,7 @@ import './chapterList.css';
 
 import useUpdate from '../../services/useUpdate';
 
-import {useEffect} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
@@ -12,6 +12,8 @@ import SearchForm from '../SearchForm/SearchForm';
 
 import {delModalOpen} from '../../store/modalSlice';
 
+import debounce from '../../services/debounce';
+
 import setContent from '../../utils/setContent';
 
 export default function ProgramList() {
@@ -19,23 +21,47 @@ export default function ProgramList() {
 
 	const {updateChapters, updateCardList} = useUpdate();
 
-	const onDeleteChapter = (id) => {
-		dispatch(delModalOpen(id));
-	};
+	const chapWrapperRef = useRef();
 
-	const filteredPrograms = useSelector((state) => state.chapter.chapterFiltered);
-	const status = useSelector((state) => state.chapter.chapterListStatus);
+	const filteredChapters = useSelector((state) => state.chapter.chapterFiltered);
+	const chapterStatus = useSelector((state) => state.chapter.chapterListStatus);
+
+	const [scrollClass, setScrollClass] = useState('');
 
 	useEffect(() => {
-		if (status !== 'idle') {
+		if (chapterStatus !== 'idle') {
 			updateChapters();
 		}
 		// eslint-disable-next-line
 	}, []);
 
+	const onScrollWrapper = debounce((e) => {
+		const scrollPos = e.target.scrollTop;
+		const scrollHeight = e.target.scrollHeight;
+		const curHeight = e.target.offsetHeight;
+
+		// console.log('currentHeight: ', curHeight);
+		// console.log('scrollHeight: ', scrollHeight);
+		// console.log(e.target.scrollTop);
+		// console.log(e);
+		if (scrollPos > 0 && scrollPos < scrollHeight - curHeight) {
+			setScrollClass('topOverflow botOverflow');
+		} else if (curHeight < scrollHeight && scrollPos !== scrollHeight - curHeight) {
+			setScrollClass('botOverflow');
+		} else if (scrollPos > 0) {
+			setScrollClass('topOverflow');
+		} else {
+			setScrollClass('');
+		}
+	}, 50);
+
+	const onDeleteChapter = (id) => {
+		dispatch(delModalOpen(id));
+	};
+
 	const setChapList = () => {
-		if (filteredPrograms.length > 0) {
-			const arr = [...filteredPrograms]
+		if (filteredChapters.length > 0) {
+			const arr = [...filteredChapters]
 				.sort((prevItem, item) =>
 					prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})
 				)
@@ -62,7 +88,12 @@ export default function ProgramList() {
 			<div className='searchChapterWrapper'>
 				<SearchForm />
 			</div>
-			<div className='chapterListContent'>{setContent(status, View, setChapList())}</div>
+			<div
+				className={'chapterListContent ' + scrollClass}
+				ref={chapWrapperRef}
+				onScroll={onScrollWrapper}>
+				{setContent(chapterStatus, View, setChapList())}
+			</div>
 		</div>
 	);
 }

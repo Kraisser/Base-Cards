@@ -26,8 +26,32 @@
 	overflow-x: hidden;
 	padding: 0 5px;
 }
+/* .chapterListContent::before,
+.chapterListContent::after {
+	content: '';
+	transition: height 1s ease-in;
+} */
+.chapterListContent.topOverflow::before {
+	content: '';
+	position: absolute;
+	left: 10px;
+	right: 20px;
+	height: 7px;
+	z-index: 5;
+	background: linear-gradient(var(--main-color), transparent);
+}
+.chapterListContent.botOverflow::after {
+	content: '';
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	right: 20px;
+	height: 7px;
+	z-index: 5;
+	background: linear-gradient(transparent, var(--main-color));
+}
 .chapterListContent::-webkit-scrollbar {
-	width: 10px;
+	width: var(--scroll-width);
 	background-color: transparent;
 	cursor: pointer;
 }

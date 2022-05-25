@@ -21,4 +21,7 @@ body {
 	/* Spinner */
 	--spinner-color: #fff;
 	--spinner-line-width: 4px;
+
+	/* Scroll */
+	--scroll-width: 10px;
 }
