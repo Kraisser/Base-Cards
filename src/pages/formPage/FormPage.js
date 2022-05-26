@@ -179,8 +179,10 @@ export default function FormPage() {
 			<PageHeader />
 			<main>
 				<div className='formWrapper'>
-					<form className='exForm' onSubmit={(e) => onExSubmit(e, editCard ? editCard.id : null)}>
-						<h3>{editCard ? `Изменение карточки` : `Добавление карточки`}</h3>
+					<form className='cardForm' onSubmit={(e) => onExSubmit(e, editCard ? editCard.id : null)}>
+						<h3 className='formHeader'>
+							{editCard ? `Изменение карточки` : `Добавление карточки`}
+						</h3>
 						<div className='fieldWrapper'>
 							<label htmlFor='cardName' className='formInputLabel'>
 								Название карточки*

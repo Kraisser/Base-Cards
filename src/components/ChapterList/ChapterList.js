@@ -40,10 +40,6 @@ export default function ProgramList() {
 		const scrollHeight = e.target.scrollHeight;
 		const curHeight = e.target.offsetHeight;
 
-		// console.log('currentHeight: ', curHeight);
-		// console.log('scrollHeight: ', scrollHeight);
-		// console.log(e.target.scrollTop);
-		// console.log(e);
 		if (scrollPos > 0 && scrollPos < scrollHeight - curHeight) {
 			setScrollClass('topOverflow botOverflow');
 		} else if (curHeight < scrollHeight && scrollPos !== scrollHeight - curHeight) {

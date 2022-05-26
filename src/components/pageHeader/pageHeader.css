@@ -1,6 +1,7 @@
 @import '../../css/variables.css';
 
 .header {
+	position: relative;
 	display: grid;
 	grid-template-columns: 1030px 400px;
 	padding: 5px 0;
@@ -25,6 +26,16 @@
 	display: flex;
 	justify-content: center;
 	padding: 0 10px;
+}
+.userAuthIconWrapper {
+	position: absolute;
+	right: 5px;
+	width: 70px;
+	padding: 5px;
+	cursor: pointer;
+}
+.userAuthIconWrapper img {
+	width: 100%;
 }
 
 /* Media */

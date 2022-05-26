@@ -7,13 +7,16 @@
 	align-items: center;
 	padding: 30px 0;
 }
-.formWrapper form {
+.cardForm {
 	padding: 10px;
 	background-color: var(--main-color);
 	display: flex;
 	flex-direction: column;
+	min-width: 600px;
+	border-radius: var(--border-radius);
+	margin-bottom: 40px;
 }
-.formWrapper h3 {
+.formHeader {
 	margin: 0 0 15px;
 	color: var(--header-color);
 	text-align: center;
@@ -25,7 +28,6 @@
 }
 .chapSelectButWrapper {
 	grid-template-columns: 1fr 1fr;
-	grid-gap: 10px;
 	justify-items: center;
 }
 .chapSelectBut {
@@ -55,11 +57,6 @@
 	padding: 0 5px;
 	transition: box-shadow 0.1s ease-in;
 	border-radius: var(--border-mini-radius);
-}
-.exForm {
-	min-width: 600px;
-	border-radius: var(--border-radius);
-	margin-bottom: 40px;
 }
 .formInput {
 	border-width: 0;

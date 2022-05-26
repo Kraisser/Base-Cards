@@ -1,10 +1,14 @@
 import './pageHeader.css';
 
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 import Clock from '../Clock/Clock';
 
+import userIcon from '../../assets/icons/user-icon.png';
+
 export default function PageHeader() {
+	const navigate = useNavigate();
+
 	return (
 		<header className='header'>
 			<Link to='/'>
@@ -14,6 +18,9 @@ export default function PageHeader() {
 			</Link>
 			<div className='clockWrapper'>
 				<Clock />
+			</div>
+			<div className='userAuthIconWrapper' onClick={() => navigate('/auth')}>
+				<img src={userIcon} alt='user' />
 			</div>
 		</header>
 	);
