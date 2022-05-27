@@ -14,16 +14,10 @@ import {useSelector} from 'react-redux';
 export default function useRequests() {
 	const uid = useSelector((state) => state.auth.uid);
 
-	// const uid = localStorage.getItem('userId');
-	// console.log('uid: ', uid);
-	// const baseDoc = collection(db, uid);
-	// const baseDoc = doc(db, baseCollection, 'data');
-
-	const chaptersListDocsRef = collection(db, uid + '/data/chaptersList');
+	const chaptersRef = collection(db, uid + '/data/chaptersList');
 
 	const setBaseDoc = async (uid) => {
 		try {
-			console.log(uid);
 			await setDoc(doc(db, uid, 'data'), {}, {merge: true});
 		} catch (error) {
 			console.log(error);
@@ -46,7 +40,7 @@ export default function useRequests() {
 	};
 
 	const getChapters = async () => {
-		const chapSnap = await getDocs(chaptersListDocsRef);
+		const chapSnap = await getDocs(chaptersRef);
 		const chapters = chapSnap.docs.map((doc) => ({id: doc.id, name: doc.data().name}));
 
 		return chapters;

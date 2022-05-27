@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
@@ -14,6 +14,7 @@ import Page404 from './pages/404/404';
 
 import Auth from './pages/auth/Auth';
 import NoAuth from './pages/noAuth/NoAuth';
+import AuthLoading from './pages/authLoading/AuthLoading';
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,12 +26,8 @@ function App() {
 	onAuthStateChanged(auth, (user) => {
 		if (user) {
 			dispatch(authSuccess({uid: user.uid, userName: user.displayName}));
-			// localStorage.setItem('userId', user.uid);
-			// localStorage.setItem('userName', user.displayName || user.email);
 		} else {
 			dispatch(authError());
-			// localStorage.setItem('userId', false);
-			// localStorage.setItem('userName', false);
 		}
 	});
 
@@ -39,7 +36,7 @@ function App() {
 			<div className='content'>
 				<Router>
 					<Routes>
-						<Route path='/' element={<Auth />} />
+						<Route path='/' element={<AuthLoading />} />
 						<Route path='/auth' element={<Auth />} />
 						<Route path='*' element={<NoAuth />} />
 					</Routes>

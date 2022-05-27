@@ -1,8 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-	uid: false,
-	userName: false,
+	uid: null,
+	userName: null,
 };
 
 const authSlice = createSlice({
@@ -11,12 +11,12 @@ const authSlice = createSlice({
 	reducers: {
 		authSuccess: (state, action) => {
 			state.uid = action.payload.uid;
-      state.userName = action.payload.userName;
+			state.userName = action.payload.userName;
 		},
-    authError: (state) => {
-      state.uid = false;
-      state.userName = false;
-    }
+		authError: (state) => {
+			state.uid = false;
+			state.userName = false;
+		},
 	},
 });
 

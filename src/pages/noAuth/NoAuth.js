@@ -9,7 +9,7 @@ import React from 'react';
 export default function NoAuth() {
 	const navigate = useNavigate();
 
-	const [redirectTimer, setRedirectTimer] = useState(5);
+	const [redirectTimer, setRedirectTimer] = useState(700);
 
 	useEffect(() => {
 		if (redirectTimer === 0) {
