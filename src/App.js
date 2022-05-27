@@ -1,8 +1,11 @@
 import './App.css';
 
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
+
+import {authSuccess, authError} from './store/authSlice';
 
 import MainPage from './pages/mainPage/MainPage';
 import CardDescription from './pages/cardDescription/CardDescription';
@@ -13,24 +16,25 @@ import Auth from './pages/auth/Auth';
 import NoAuth from './pages/noAuth/NoAuth';
 
 function App() {
+	const dispatch = useDispatch();
+
 	const auth = getAuth();
 
-	const [authState, setAuthState] = useState(false);
+	const uid = useSelector((state) => state.auth.uid);
 
 	onAuthStateChanged(auth, (user) => {
 		if (user) {
-			console.log(user);
-			setAuthState(user.uid);
-			localStorage.setItem('userId', user.uid);
-			localStorage.setItem('userName', user.displayName || user.email);
+			dispatch(authSuccess({uid: user.uid, userName: user.displayName}));
+			// localStorage.setItem('userId', user.uid);
+			// localStorage.setItem('userName', user.displayName || user.email);
 		} else {
-			setAuthState(false);
-			localStorage.setItem('userId', false);
-			localStorage.setItem('userName', false);
+			dispatch(authError());
+			// localStorage.setItem('userId', false);
+			// localStorage.setItem('userName', false);
 		}
 	});
 
-	if (!authState) {
+	if (!uid) {
 		return (
 			<div className='content'>
 				<Router>

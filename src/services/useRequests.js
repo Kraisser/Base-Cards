@@ -9,12 +9,29 @@ import {
 	deleteDoc,
 	deleteField,
 } from 'firebase/firestore';
+import {useSelector} from 'react-redux';
 
 export default function useRequests() {
-	const chaptersListDocsRef = collection(db, 'chaptersList');
+	const uid = useSelector((state) => state.auth.uid);
+
+	// const uid = localStorage.getItem('userId');
+	// console.log('uid: ', uid);
+	// const baseDoc = collection(db, uid);
+	// const baseDoc = doc(db, baseCollection, 'data');
+
+	const chaptersListDocsRef = collection(db, uid + '/data/chaptersList');
+
+	const setBaseDoc = async (uid) => {
+		try {
+			console.log(uid);
+			await setDoc(doc(db, uid, 'data'), {}, {merge: true});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const getCardList = async (id) => {
-		const res = (await getDoc(doc(db, 'cardList', id))).data();
+		const res = (await getDoc(doc(db, uid + '/data/cardList', id))).data();
 
 		const keys = Object.keys(res).filter((item) => item !== 'name');
 
@@ -36,23 +53,23 @@ export default function useRequests() {
 	};
 
 	const postChapter = async (id, name) => {
-		await setDoc(doc(db, 'chaptersList', id), {
+		await setDoc(doc(db, uid + '/data/chaptersList', id), {
 			name,
 		});
 
-		await setDoc(doc(db, 'cardList', id), {
+		await setDoc(doc(db, uid + '/data/cardList', id), {
 			name: name,
 		});
 	};
 
 	const postCard = async (newCard, chapterId) => {
-		await updateDoc(doc(db, 'cardList', chapterId), {
+		await updateDoc(doc(db, uid + '/data/cardList', chapterId), {
 			[newCard.id]: newCard,
 		});
 	};
 
 	const deleteCard = async (id, activeProgram) => {
-		const docRef = doc(db, 'cardList', activeProgram);
+		const docRef = doc(db, uid + '/data/cardList', activeProgram);
 
 		await updateDoc(docRef, {
 			[id]: deleteField(),
@@ -60,15 +77,15 @@ export default function useRequests() {
 	};
 
 	const deleteChapter = async (id) => {
-		await deleteDoc(doc(db, 'cardList', id));
-		await deleteDoc(doc(db, 'chaptersList', id));
+		await deleteDoc(doc(db, uid + '/data/cardList', id));
+		await deleteDoc(doc(db, uid + '/data/chaptersList', id));
 	};
 
 	const editChapter = async (id, name) => {
-		await updateDoc(doc(db, 'chaptersList', id), {
+		await updateDoc(doc(db, uid + '/data/chaptersList', id), {
 			name,
 		});
-		await updateDoc(doc(db, 'cardList', id), {
+		await updateDoc(doc(db, uid + '/data/cardList', id), {
 			name,
 		});
 	};
@@ -81,5 +98,6 @@ export default function useRequests() {
 		deleteCard,
 		deleteChapter,
 		editChapter,
+		setBaseDoc,
 	};
 }

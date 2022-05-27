@@ -13,11 +13,14 @@ import {
 } from 'firebase/auth';
 import {auth} from '../../services/fireBase';
 
+import useRequests from '../../services/useRequests';
+
 import PageHeader from '../../components/PageHeader/PageHeader';
 
 import googleIcon from '../../assets/icons/google-icon.png';
 
 export default function Auth() {
+	const {setBaseDoc} = useRequests();
 	const navigate = useNavigate();
 
 	const providerGoogle = new GoogleAuthProvider();
@@ -101,8 +104,12 @@ export default function Auth() {
 
 	const onGoogle = () => {
 		signInWithPopup(auth, providerGoogle)
-			.then((res) => {
+			.then((userCredential) => {
+				const uid = userCredential.user.uid;
+
 				clearErrors();
+				setBaseDoc(uid);
+
 				redirectToMain();
 			})
 			.catch((error) => {
@@ -118,19 +125,23 @@ export default function Auth() {
 
 		signInWithEmailAndPassword(auth, email, pass)
 			.then((userCredential) => {
+				const uid = userCredential.user.uid;
+
 				clearErrors();
 				clearFields();
 				setSuccessAuth('Авторизация прошла успешно. Перенаправление...');
+				setBaseDoc(uid);
+
 				redirectToMain();
 			})
 			.catch((error) => {
 				errorCustom(error);
 			});
 	};
-	const onRegister = async (e) => {
+	const onRegister = (e) => {
 		e.preventDefault();
 
-		await validateAll();
+		validateAll();
 
 		if (emailError !== true || passError !== true) {
 			return;
@@ -138,9 +149,13 @@ export default function Auth() {
 
 		createUserWithEmailAndPassword(auth, email, pass)
 			.then((userCredential) => {
+				const uid = userCredential.user.uid;
+
 				clearFields();
 				setSuccessAuth('Аккаунт успешно создан. Вы уже авторизованы.');
 				clearErrors();
+				setBaseDoc(uid);
+
 				redirectToMain();
 			})
 			.catch((error) => {

@@ -4,6 +4,7 @@ import {default as cardList} from './cardSlice';
 import {default as chapter} from './chapterSlice';
 import {default as modal} from './modalSlice';
 import {default as editSlice} from './editSlice';
+import {default as auth} from './authSlice';
 
 const stringMiddleware = () => (dispatch) => (action) => {
 	if (typeof action === 'string') {
@@ -15,7 +16,7 @@ const stringMiddleware = () => (dispatch) => (action) => {
 };
 
 const store = configureStore({
-	reducer: {cardList, chapter, modal, editSlice},
+	reducer: {cardList, chapter, modal, editSlice, auth},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(stringMiddleware),
 	devTools: process.env.NODE_ENV !== 'production',
 });
