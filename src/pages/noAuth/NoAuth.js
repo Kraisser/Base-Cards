@@ -9,7 +9,7 @@ import React from 'react';
 export default function NoAuth() {
 	const navigate = useNavigate();
 
-	const [redirectTimer, setRedirectTimer] = useState(700);
+	const [redirectTimer, setRedirectTimer] = useState(5);
 
 	useEffect(() => {
 		if (redirectTimer === 0) {
@@ -28,7 +28,7 @@ export default function NoAuth() {
 	return (
 		<>
 			<PageHeader />
-			<div className='noAuthWrapper'>
+			<div className='pageContentWrapper'>
 				<div className='noAuthHeader'>
 					<h2>Ошибка авторизации</h2>
 				</div>

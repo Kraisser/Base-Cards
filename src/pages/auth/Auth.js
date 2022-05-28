@@ -4,26 +4,16 @@ import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
 
-import {
-	signInWithPopup,
-	signOut,
-	GoogleAuthProvider,
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-} from 'firebase/auth';
-import {auth} from '../../services/fireBase';
-
-import useRequests from '../../services/useRequests';
+import useAuth from '../../services/useAuth';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 
 import googleIcon from '../../assets/icons/google-icon.png';
 
 export default function Auth() {
-	const {setBaseDoc} = useRequests();
-	const navigate = useNavigate();
+	const {signInGoogle, signInEmail, registerEmail, signOutAuth} = useAuth();
 
-	const providerGoogle = new GoogleAuthProvider();
+	const navigate = useNavigate();
 
 	const [email, setEmail] = useState('');
 	const [pass, setPass] = useState('');
@@ -103,34 +93,22 @@ export default function Auth() {
 	};
 
 	const onGoogle = () => {
-		signInWithPopup(auth, providerGoogle)
-			.then((userCredential) => {
-				const uid = userCredential.user.uid;
-
+		signInGoogle()
+			.then(() => {
 				clearErrors();
-				setBaseDoc(uid);
-
 				redirectToMain();
 			})
-			.catch((error) => {
-				errorCustom(error);
-				setErrorAuth(error.code, error.message);
-			});
+			.catch((error) => errorCustom(error));
 	};
 
 	const onSignIn = (e) => {
 		e.preventDefault();
 
-		validateAll();
-
-		signInWithEmailAndPassword(auth, email, pass)
-			.then((userCredential) => {
-				const uid = userCredential.user.uid;
-
+		signInEmail(email, pass)
+			.then(() => {
 				clearErrors();
 				clearFields();
 				setSuccessAuth('Авторизация прошла успешно. Перенаправление...');
-				setBaseDoc(uid);
 
 				redirectToMain();
 			})
@@ -147,35 +125,31 @@ export default function Auth() {
 			return;
 		}
 
-		createUserWithEmailAndPassword(auth, email, pass)
-			.then((userCredential) => {
-				const uid = userCredential.user.uid;
-
+		registerEmail(email, pass)
+			.then(() => {
 				clearFields();
 				setSuccessAuth('Аккаунт успешно создан. Вы уже авторизованы.');
 				clearErrors();
-				setBaseDoc(uid);
 
 				redirectToMain();
 			})
 			.catch((error) => {
-				console.log('request');
 				errorCustom(error);
 			});
 	};
 
-	const onExit = (e) => {
-		e.preventDefault();
-		signOut(auth)
-			.then(() => {
-				clearFields();
-				setSuccessAuth('Вы успешно вышли. Чтобы продолжить необходимо войти в аккаунт.');
-				clearErrors();
-			})
-			.catch((error) => {
-				errorCustom(error);
-			});
-	};
+	// const onExit = (e) => {
+	// 	e.preventDefault();
+	// 	signOutAuth()
+	// 		.then(() => {
+	// 			clearFields();
+	// 			setSuccessAuth('Вы успешно вышли. Чтобы продолжить необходимо войти в аккаунт.');
+	// 			clearErrors();
+	// 		})
+	// 		.catch((error) => {
+	// 			errorCustom(error);
+	// 		});
+	// };
 
 	return (
 		<>
@@ -225,11 +199,6 @@ export default function Auth() {
 						<div className='authIconsContainer' onClick={onGoogle}>
 							<img src={googleIcon} alt='Зайти с помощью Google' />
 						</div>
-					</div>
-					<div className='formButWrapper'>
-						<button type='button' className='formBut but' onClick={onExit}>
-							Выйти из учетной записи
-						</button>
 					</div>
 				</form>
 			</div>

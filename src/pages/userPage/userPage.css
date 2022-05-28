@@ -1,0 +1,25 @@
+.noAuthHeader h2 {
+	margin: 0;
+	font-size: 30px;
+	text-align: center;
+}
+.noAuthMessage {
+	text-align: center;
+	margin-bottom: 30px;
+}
+.onMainButWrapper {
+	display: flex;
+	justify-content: center;
+}
+.userPageContainer img {
+	width: 100px;
+	border-radius: var(--border-mini-radius);
+}
+.userPageElement {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+.userPageName {
+	font-size: 20px;
+}

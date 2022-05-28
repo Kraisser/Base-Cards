@@ -21,6 +21,7 @@
 }
 .mainHeader h1 {
 	margin: 0;
+	font-size: 40px;
 }
 .clockWrapper {
 	display: flex;
@@ -30,14 +31,22 @@
 .userAuthIconWrapper {
 	position: absolute;
 	right: 5px;
-	width: 70px;
+	height: 70px;
+	/* width: 50px; */
 	padding: 5px;
 	cursor: pointer;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .userAuthIconWrapper img {
-	width: 100%;
+	height: 40px;
+	margin: 0 auto;
 }
-
+.userAuthIconWrapper div {
+	color: var(--header-color);
+}
 /* Media */
 
 @media only all and (max-width: 1430px) {

@@ -19,6 +19,7 @@
 .formHeader {
 	margin: 0 0 15px;
 	color: var(--header-color);
+	font-size: 30px;
 	text-align: center;
 }
 .fieldWrapper {

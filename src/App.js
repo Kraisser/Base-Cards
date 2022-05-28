@@ -15,6 +15,7 @@ import Page404 from './pages/404/404';
 import Auth from './pages/auth/Auth';
 import NoAuth from './pages/noAuth/NoAuth';
 import AuthLoading from './pages/authLoading/AuthLoading';
+import UserPage from './pages/userPage/UserPage';
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,7 +26,14 @@ function App() {
 
 	onAuthStateChanged(auth, (user) => {
 		if (user) {
-			dispatch(authSuccess({uid: user.uid, userName: user.displayName}));
+			// console.log('user: ', user);
+			dispatch(
+				authSuccess({
+					uid: user.uid,
+					userName: user.displayName ? user.displayName : user.email,
+					userImage: user.photoURL,
+				})
+			);
 		} else {
 			dispatch(authError());
 		}
@@ -51,6 +59,7 @@ function App() {
 				<Routes>
 					<Route path='/' element={<MainPage />} />
 					<Route path='/auth' element={<Auth />} />
+					<Route path='/userPage' element={<UserPage />} />
 					<Route path='/editForm' element={<FormPage />} />
 					<Route path='/cardDescription/:activeChapter/:id' element={<CardDescription />} />
 					<Route path='*' element={<Page404 />} />
