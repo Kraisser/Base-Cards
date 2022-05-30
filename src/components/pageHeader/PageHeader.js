@@ -16,7 +16,7 @@ export default function PageHeader({auth, close}) {
 		<header className='header'>
 			<Link to={close ? '' : '/'}>
 				<div className='mainHeader'>
-					<h1>Картотека</h1>
+					<h1>Base Cards</h1>
 				</div>
 			</Link>
 			<div className='rightHeaderWrapper'>

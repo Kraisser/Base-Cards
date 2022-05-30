@@ -14,7 +14,10 @@ body {
 	--text-description-color: #cdcdce;
 	--header-color: #dbffff;
 
-	/* border */
+	/* Content-height */
+	--content-height: calc(100vh - 80px);
+
+	/* Border */
 	--border-radius: 14px;
 	--border-mini-radius: 7px;
 

@@ -3,7 +3,7 @@
 @import '../formPage/formPage.css';
 
 .authWrapper {
-	height: calc(100vh - 10px - 70px);
+	height: var(--content-height);
 	display: flex;
 	flex-direction: column;
 	align-items: center;

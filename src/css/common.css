@@ -12,12 +12,12 @@
 	text-decoration: none;
 }
 .pageContentWrapper {
-	height: calc(100vh - 90px);
+	display: flex;
+	flex-direction: column;
+	height: var(--content-height);
 	padding: 30px 0;
 	max-width: 600px;
 	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
 	color: var(--header-color);
 }
 .pageContentWrapper h2 {

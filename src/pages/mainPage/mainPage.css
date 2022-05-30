@@ -1,7 +1,7 @@
 .mainWrapper {
 	display: grid;
 	grid-template-columns: 1030px 400px;
-	height: calc(100vh - 80px);
+	height: var(--content-height);
 	overflow: hidden;
 }
 .rightContent {

@@ -87,6 +87,7 @@
 	height: 40px;
 	justify-content: center;
 	font-weight: 600;
+	color: var(--header-color);
 }
 
 /* Media */
