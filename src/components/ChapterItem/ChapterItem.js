@@ -59,7 +59,7 @@ export default function ChapterItem({name, id, onClick, onDelete}) {
 			return;
 		}
 
-		updateChapterName(id, chapName);
+		updateChapterName(id, chapName.charAt(0).toUpperCase() + chapName.slice(1));
 	};
 
 	const openMenu = menu ? 'chapterMenuActive' : '';
