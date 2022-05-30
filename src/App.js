@@ -27,7 +27,6 @@ function App() {
 
 	onAuthStateChanged(auth, (user) => {
 		if (user) {
-			// console.log('user: ', user);
 			dispatch(
 				authSuccess({
 					uid: user.uid,
@@ -43,43 +42,37 @@ function App() {
 
 	if (!uid) {
 		return (
-			<div className='content'>
-				<Router>
-					<Routes>
-						<Route path='/' element={<AuthLoading />} />
-						<Route path='/auth' element={<Auth />} />
-						<Route path='*' element={<NoAuth />} />
-					</Routes>
-				</Router>
-			</div>
+			<Router>
+				<Routes>
+					<Route path='/' element={<AuthLoading close={true} />} />
+					<Route path='/auth' element={<Auth close={true} />} />
+					<Route path='*' element={<NoAuth close={true} />} />
+				</Routes>
+			</Router>
 		);
 	}
 
 	if (uid && !emailConfirmed) {
 		return (
-			<div className='content'>
-				<Router>
-					<Routes>
-						<Route path='*' element={<UserPage disMain={true} />} />
-					</Routes>
-				</Router>
-			</div>
+			<Router>
+				<Routes>
+					<Route path='*' element={<UserPage disMain={true} close={true} />} />
+				</Routes>
+			</Router>
 		);
 	}
 
 	return (
-		<div className='content'>
-			<Router>
-				<Routes>
-					<Route path='/' element={<MainPage />} />
-					<Route path='/auth' element={<Auth />} />
-					<Route path='/userPage' element={<UserPage />} />
-					<Route path='/editForm' element={<FormPage />} />
-					<Route path='/cardDescription/:activeChapter/:id' element={<CardDescription />} />
-					<Route path='*' element={<Page404 />} />
-				</Routes>
-			</Router>
-		</div>
+		<Router>
+			<Routes>
+				<Route path='/' element={<MainPage />} />
+				<Route path='/auth' element={<Auth />} />
+				<Route path='/userPage' element={<UserPage />} />
+				<Route path='/editForm' element={<FormPage />} />
+				<Route path='/cardDescription/:activeChapter/:id' element={<CardDescription />} />
+				<Route path='*' element={<Page404 />} />
+			</Routes>
+		</Router>
 	);
 }
 

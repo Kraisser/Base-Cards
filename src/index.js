@@ -11,7 +11,9 @@ import store from './store/index';
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<App />
+			<div className='content'>
+				<App />
+			</div>
 		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')

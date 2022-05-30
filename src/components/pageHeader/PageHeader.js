@@ -7,27 +7,27 @@ import Clock from '../Clock/Clock';
 
 import userIcon from '../../assets/icons/user-icon.png';
 
-export default function PageHeader({auth}) {
+export default function PageHeader({auth, close}) {
 	const navigate = useNavigate();
 
 	const {userName, userImage} = useSelector((state) => state.auth);
 
 	return (
 		<header className='header'>
-			<Link to='/'>
+			<Link to={close ? '' : '/'}>
 				<div className='mainHeader'>
 					<h1>Картотека</h1>
 				</div>
 			</Link>
-			<div className='clockWrapper'>
+			<div className='rightHeaderWrapper'>
 				<Clock />
+				{auth === false || close ? null : (
+					<div className='userAuthIconWrapper' onClick={() => navigate('/userPage')}>
+						<img src={userImage ? userImage : userIcon} alt='user' />
+						<div title={userName ? userName : null}>{userName}</div>
+					</div>
+				)}
 			</div>
-			{auth === false ? null : (
-				<div className='userAuthIconWrapper' onClick={() => navigate('/userPage')}>
-					<img src={userImage ? userImage : userIcon} alt='user' />
-					<div title={userName ? userName : null}>{userName}</div>
-				</div>
-			)}
 		</header>
 	);
 }

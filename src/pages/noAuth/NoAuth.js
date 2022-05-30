@@ -6,7 +6,7 @@ import {useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import React from 'react';
 
-export default function NoAuth() {
+export default function NoAuth({close}) {
 	const navigate = useNavigate();
 
 	const [redirectTimer, setRedirectTimer] = useState(5);
@@ -27,7 +27,7 @@ export default function NoAuth() {
 
 	return (
 		<>
-			<PageHeader />
+			<PageHeader close={close} />
 			<div className='pageContentWrapper'>
 				<div className='noAuthHeader'>
 					<h2>Ошибка авторизации</h2>

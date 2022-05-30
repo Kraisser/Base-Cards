@@ -7,7 +7,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import Spinner from '../../components/Spinner/Spinner';
 import {useEffect} from 'react';
 
-export default function AuthLoading() {
+export default function AuthLoading({close}) {
 	const navigate = useNavigate();
 
 	const uid = useSelector((state) => state.auth.uid);
@@ -20,7 +20,7 @@ export default function AuthLoading() {
 
 	return (
 		<>
-			<PageHeader auth={false} />
+			<PageHeader auth={false} close={close} />
 			<div className='authLoaderWrapper'>
 				<h2 className='authLoader'>Авторизация</h2>
 				<div className='spinnerAuthLoaderWrapper'>

@@ -20,13 +20,10 @@
 	padding: 10px;
 }
 .authInfo {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 .authError {
 	color: var(--red-color);
-}
-.authSuccess {
-	color: var(--header-color);
 }
 .authIconsWrapper {
 	display: flex;

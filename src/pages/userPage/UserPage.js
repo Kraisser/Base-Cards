@@ -10,7 +10,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import userIcon from '../../assets/icons/user-icon.png';
 import useAuth from '../../services/useAuth';
 
-export default function UserPage({disMain}) {
+export default function UserPage({close}) {
 	const {signOutAuth, verificateEmail} = useAuth();
 	const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ export default function UserPage({disMain}) {
 
 	return (
 		<>
-			<PageHeader />
+			<PageHeader close={close} />
 			<div className='pageContentWrapper'>
 				<div className='pageContentContainer userPageContainer'>
 					<h2>Личный кабинет</h2>
@@ -81,10 +81,10 @@ export default function UserPage({disMain}) {
 						</button>
 					</div>
 				</div>
-				{disMain ? null : (
+				{close ? null : (
 					<div className='onMainButWrapper'>
 						<button className='onMainBut but'>
-							<Link to='/auth'>На главную</Link>
+							<Link to='/'>На главную</Link>
 						</button>
 					</div>
 				)}

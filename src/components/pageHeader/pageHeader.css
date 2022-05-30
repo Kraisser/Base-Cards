@@ -23,14 +23,13 @@
 	margin: 0;
 	font-size: 40px;
 }
-.clockWrapper {
+.rightHeaderWrapper {
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
+	align-items: center;
 	padding: 0 10px;
 }
 .userAuthIconWrapper {
-	position: absolute;
-	right: 5px;
 	height: 70px;
 	/* width: 50px; */
 	padding: 5px;
@@ -49,7 +48,7 @@
 }
 /* Media */
 
-@media only all and (max-width: 1430px) {
+/* @media only all and (max-width: 1430px) {
 	.header {
 		grid-template-columns: 2fr 1fr;
 	}
@@ -74,4 +73,4 @@
 	.header {
 		padding: 5px;
 	}
-}
+} */

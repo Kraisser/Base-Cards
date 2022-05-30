@@ -7,7 +7,7 @@ import useUpload from '../../services/useUpload';
 import delIcon from '../../assets/icons/delete-icon.png';
 import slideIcon from '../../assets/icons/menu-slide.png';
 import editChapterIcon from '../../assets/icons/edit-30-icon.png';
-import addIcon from '../../assets/icons/add-icon.png';
+import confirmIcon from '../../assets/icons/confirm-icon.png';
 
 export default function ChapterItem({name, id, onClick, onDelete}) {
 	const {updateChapterName} = useUpload();
@@ -66,7 +66,7 @@ export default function ChapterItem({name, id, onClick, onDelete}) {
 	const content = edit ? (
 		<div className='editChapterInputWrapper'>
 			<input type='text' value={chapName} className='chapEditInput' onChange={onChangeName} />
-			<img src={addIcon} alt='enter edit' className='enterEditIcon' />
+			<img src={confirmIcon} alt='Подтвердить' className='enterEditIcon' />
 		</div>
 	) : (
 		<span>{name}</span>

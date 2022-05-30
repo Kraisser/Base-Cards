@@ -10,7 +10,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 
 import googleIcon from '../../assets/icons/google-icon.png';
 
-export default function Auth() {
+export default function Auth({close}) {
 	const {signInGoogle, signInEmail, registerEmail} = useAuth();
 
 	const navigate = useNavigate();
@@ -20,10 +20,9 @@ export default function Auth() {
 	const [emailError, setEmailError] = useState(null);
 	const [passError, setPassError] = useState(null);
 	const [errorAuth, setErrorAuth] = useState(null);
-	const [successAuth, setSuccessAuth] = useState(null);
 
-	const emailErrInpStyle = emailError === true || emailError === null ? null : 'errorInput';
-	const passErrInpStyle = passError === true || passError === null ? null : 'errorInput';
+	const emailErrInpStyle = emailError === null ? '' : 'errorInput';
+	const passErrInpStyle = passError === null ? '' : 'errorInput';
 
 	const validSchema = yup.object().shape({
 		email: yup
@@ -42,10 +41,9 @@ export default function Auth() {
 			.pick([id])
 			.validate({[id]: value})
 			.then(() => {
-				setErr(true);
+				setErr(null);
 			})
 			.catch((err) => {
-				console.log('setState');
 				setErr(err.message);
 			});
 	};
@@ -112,10 +110,6 @@ export default function Auth() {
 
 		signInEmail(email, pass)
 			.then(() => {
-				clearErrors();
-				clearFields();
-				setSuccessAuth('Авторизация прошла успешно. Перенаправление...');
-
 				redirectToMain();
 			})
 			.catch((error) => {
@@ -127,17 +121,13 @@ export default function Auth() {
 
 		validateAll();
 
-		if (emailError !== true || passError !== true) {
+		if (emailError || passError) {
 			return;
 		}
 
 		registerEmail(email, pass)
 			.then(() => {
-				clearFields();
-				setSuccessAuth('Аккаунт успешно создан. Вы уже авторизованы.');
-				clearErrors();
-
-				redirectToMain();
+				navigate('/userPage');
 			})
 			.catch((error) => {
 				errorCustom(error);
@@ -146,7 +136,7 @@ export default function Auth() {
 
 	return (
 		<>
-			<PageHeader />
+			<PageHeader close={close} />
 			<div className='authWrapper'>
 				<form action='' className='authForm'>
 					<h3 className='formHeader'>Войти с помощью Email</h3>
@@ -179,7 +169,6 @@ export default function Auth() {
 						/>
 					</div>
 					{errorAuth ? <div className='authInfo authError'>{errorAuth}</div> : null}
-					{successAuth ? <div className='authInfo authSuccess'>{successAuth}</div> : null}
 					<div className='formButWrapper authButsWrapper'>
 						<button type='button' className='formBut but' onClick={onSignIn}>
 							Войти
