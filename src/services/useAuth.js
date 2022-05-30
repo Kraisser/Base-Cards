@@ -5,11 +5,17 @@ import {
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	sendEmailVerification,
 } from 'firebase/auth';
 
 import useRequests from '../services/useRequests';
 
 export default function useAuth() {
+	const actionCodeSettings = {
+		url: window.location.hostname + '/userPage',
+		// dynamicLinkDomain: window.location.hostname,
+	};
+
 	const {setBaseDoc} = useRequests();
 
 	const providerGoogle = new GoogleAuthProvider();
@@ -33,12 +39,31 @@ export default function useAuth() {
 		return createUserWithEmailAndPassword(auth, email, pass).then((userCredential) => {
 			const uid = userCredential.user.uid;
 			setBaseDoc(uid);
+			verificateEmail();
 		});
+	};
+
+	const verificateEmail = (setState) => {
+		console.log('verificate');
+		sendEmailVerification(auth.currentUser, actionCodeSettings)
+			.then((res) => {
+				console.log(res);
+				if (setState) {
+					setState('Подтверждение отправлено');
+				}
+			})
+			.catch((e) => {
+				console.log(e);
+				console.log(window.location.hostname);
+				if (setState) {
+					setState('Произошла ошибка, попробуйте позже');
+				}
+			});
 	};
 
 	const signOutAuth = () => {
 		return signOut(auth);
 	};
 
-	return {signInGoogle, signInEmail, registerEmail, signOutAuth};
+	return {signInGoogle, signInEmail, registerEmail, signOutAuth, verificateEmail};
 }

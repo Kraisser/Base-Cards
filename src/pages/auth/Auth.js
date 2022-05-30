@@ -11,7 +11,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import googleIcon from '../../assets/icons/google-icon.png';
 
 export default function Auth() {
-	const {signInGoogle, signInEmail, registerEmail, signOutAuth} = useAuth();
+	const {signInGoogle, signInEmail, registerEmail} = useAuth();
 
 	const navigate = useNavigate();
 
@@ -81,6 +81,12 @@ export default function Auth() {
 			case 'auth/invalid-email':
 				setEmailError('Неправильный Email');
 				break;
+			case 'auth/wrong-password':
+				setErrorAuth('Неправильный Email или пароль');
+				break;
+			case 'auth/user-not-found':
+				setErrorAuth('Пользователь не найден');
+				break;
 
 			default:
 				setErrorAuth(`${code}: ${error.message}`);
@@ -137,19 +143,6 @@ export default function Auth() {
 				errorCustom(error);
 			});
 	};
-
-	// const onExit = (e) => {
-	// 	e.preventDefault();
-	// 	signOutAuth()
-	// 		.then(() => {
-	// 			clearFields();
-	// 			setSuccessAuth('Вы успешно вышли. Чтобы продолжить необходимо войти в аккаунт.');
-	// 			clearErrors();
-	// 		})
-	// 		.catch((error) => {
-	// 			errorCustom(error);
-	// 		});
-	// };
 
 	return (
 		<>

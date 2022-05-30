@@ -4,6 +4,7 @@ const initialState = {
 	uid: null,
 	userName: null,
 	userImage: null,
+	emailConfirmed: false,
 };
 
 const authSlice = createSlice({
@@ -14,11 +15,13 @@ const authSlice = createSlice({
 			state.uid = action.payload.uid;
 			state.userName = action.payload.userName;
 			state.userImage = action.payload.userImage;
+			state.emailConfirmed = action.payload.emailConfirmed;
 		},
 		authError: (state) => {
 			state.uid = false;
 			state.userName = false;
 			state.userImage = null;
+			state.emailConfirmed = false;
 		},
 	},
 });

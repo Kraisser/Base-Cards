@@ -11,7 +11,6 @@ export default function PageHeader({auth}) {
 	const navigate = useNavigate();
 
 	const {userName, userImage} = useSelector((state) => state.auth);
-	console.log('userName: ', userName);
 
 	return (
 		<header className='header'>
@@ -26,7 +25,7 @@ export default function PageHeader({auth}) {
 			{auth === false ? null : (
 				<div className='userAuthIconWrapper' onClick={() => navigate('/userPage')}>
 					<img src={userImage ? userImage : userIcon} alt='user' />
-					<div title={userName}>{userName}</div>
+					<div title={userName ? userName : null}>{userName}</div>
 				</div>
 			)}
 		</header>

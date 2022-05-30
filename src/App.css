@@ -12,28 +12,3 @@
 	background-color: var(--main-second-color);
 	max-width: 1430px;
 }
-.but {
-	border-radius: var(--border-mini-radius);
-	cursor: pointer;
-	transition: all 0.2s ease;
-	border: 0;
-}
-/* .greenBut {
-	background-color: #39e24d;
-}
-.greenBut:hover {
-	border-color: #008110;
-}
-
-.redBut {
-	background-color: #ff5757;
-}
-.redBut:hover {
-	border-color: #a60800;
-} */
-.but:hover {
-	box-shadow: inset 0 0 5px 2px var(--button-border-color);
-}
-.but:active {
-	transform: scale(0.95);
-}

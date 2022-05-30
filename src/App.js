@@ -23,6 +23,7 @@ function App() {
 	const auth = getAuth();
 
 	const uid = useSelector((state) => state.auth.uid);
+	const emailConfirmed = useSelector((state) => state.auth.emailConfirmed);
 
 	onAuthStateChanged(auth, (user) => {
 		if (user) {
@@ -32,6 +33,7 @@ function App() {
 					uid: user.uid,
 					userName: user.displayName ? user.displayName : user.email,
 					userImage: user.photoURL,
+					emailConfirmed: user.emailVerified,
 				})
 			);
 		} else {
@@ -47,6 +49,18 @@ function App() {
 						<Route path='/' element={<AuthLoading />} />
 						<Route path='/auth' element={<Auth />} />
 						<Route path='*' element={<NoAuth />} />
+					</Routes>
+				</Router>
+			</div>
+		);
+	}
+
+	if (uid && !emailConfirmed) {
+		return (
+			<div className='content'>
+				<Router>
+					<Routes>
+						<Route path='*' element={<UserPage disMain={true} />} />
 					</Routes>
 				</Router>
 			</div>

@@ -14,13 +14,6 @@ export default function Page404() {
 
 	const [redirectTimer, setRedirectTimer] = useState(5);
 
-	const messages = {
-		page: `Страница '${page}' не найдена.`,
-		data: `Карточка или раздел был удален или отсутствует.`,
-	};
-
-	const message = messages[page ? 'page' : 'data'];
-
 	useEffect(() => {
 		if (redirectTimer === 0) {
 			navigate('/');
@@ -34,6 +27,13 @@ export default function Page404() {
 		return () => clearTimeout(timerIdValue);
 		// eslint-disable-next-line
 	}, [redirectTimer]);
+
+	const messages = {
+		page: `Страница '${page}' не найдена.`,
+		data: `Карточка или раздел был удален или отсутствует.`,
+	};
+
+	const message = messages[page ? 'page' : 'data'];
 
 	return (
 		<>
