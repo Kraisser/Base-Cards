@@ -39,17 +39,13 @@ export default function useAuth() {
 	};
 
 	const verificateEmail = (setState) => {
-		console.log('verificate');
 		sendEmailVerification(auth.currentUser)
-			.then((res) => {
-				console.log(res);
+			.then(() => {
 				if (setState) {
 					setState('Подтверждение отправлено');
 				}
 			})
 			.catch((e) => {
-				console.log(e);
-				console.log(window.location.hostname);
 				if (setState) {
 					setState('Произошла ошибка, попробуйте позже');
 				}

@@ -32,8 +32,6 @@ export default function UserPage({disMain}) {
 		// eslint-disable-next-line
 	}, [confirmCooldown]);
 
-	console.log('emailConfirmed: ', emailConfirmed);
-
 	const onExit = () => {
 		signOutAuth().then(() => {
 			navigate('/auth');
