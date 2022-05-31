@@ -38,7 +38,12 @@
 	color: var(--header-color);
 }
 .chapSelectButActive {
-	border: solid 3px var(--button-border-color);
+	border: solid 4px var(--button-border-color);
+}
+.chapSelectButActive:hover,
+.chapSelectButActive:active {
+	box-shadow: none;
+	transform: none;
 }
 .fieldDescriptionWrapper {
 	margin-bottom: 20px;
@@ -79,9 +84,6 @@
 .errorForm {
 	color: var(--red-color);
 	margin-bottom: 3px;
-}
-.errorInput {
-	box-shadow: inset 0 0 2px 1px var(--red-color);
 }
 .exDescriptionInput {
 	width: 100%;

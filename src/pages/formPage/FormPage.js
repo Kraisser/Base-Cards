@@ -1,4 +1,5 @@
 import './formPage.css';
+import '../../css/common.css';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {useState, useEffect} from 'react';
@@ -38,7 +39,10 @@ export default function FormPage() {
 			.min(2, 'Минимум 2 символа')
 			.max(55, 'Максимум 55 символов')
 			.required('Обязательное поле*'),
-		chapter: yup.string('Выберите раздел*').required('Обязательное поле*'),
+		chapter: yup
+			.string('Выберите раздел*')
+			.min(2, 'Минимум 2 символа')
+			.required('Обязательное поле*'),
 		cardLink: yup.string('Укажите ссылку*').required('Обязательное поле*'),
 	});
 
@@ -49,9 +53,9 @@ export default function FormPage() {
 	const [cardLink, setCardLink] = useState(editCard ? editCard.link : '');
 	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
 
-	const [cardNameErr, setCardNameErr] = useState(editCard ? true : null);
+	const [cardNameErr, setCardNameErr] = useState(null);
 	const [chapterErr, setChapterErr] = useState(null);
-	const [cardLinkErr, setCardLinkErr] = useState(editCard ? true : null);
+	const [cardLinkErr, setCardLinkErr] = useState(null);
 
 	const nameErrInpStyle = cardNameErr ? 'errorInput' : null;
 	const linkErrInpStyle = cardLinkErr ? 'errorInput' : null;
@@ -114,7 +118,9 @@ export default function FormPage() {
 
 	const createNewChapter = async () => {
 		const id = uuid() + '+chapter';
-		await uploadNewChapter(id, chapter.charAt(0).toUpperCase() + chapter.slice(1));
+		const chapterName = (chapter.charAt(0).toUpperCase() + chapter.slice(1)).trim();
+
+		await uploadNewChapter(id, chapterName);
 
 		return id;
 	};
@@ -136,8 +142,6 @@ export default function FormPage() {
 			description: cardDescription,
 		};
 
-		clearFields();
-
 		if (id) {
 			dispatch(clearEdit());
 
@@ -149,6 +153,8 @@ export default function FormPage() {
 				onDeleteCard(id, activeChapter);
 			}
 		}
+
+		clearFields();
 
 		if (newChap) {
 			const newChapId = await createNewChapter();

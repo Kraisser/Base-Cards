@@ -1,4 +1,5 @@
 import './auth.css';
+import '../../css/common.css';
 
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
@@ -37,35 +38,28 @@ export default function Auth({close}) {
 	});
 
 	const validateField = (id, value, setErr) => {
-		validSchema
+		return validSchema
 			.pick([id])
 			.validate({[id]: value})
 			.then(() => {
 				setErr(null);
+				return true;
 			})
 			.catch((err) => {
 				setErr(err.message);
+				return false;
 			});
 	};
 
-	const validateAll = () => {
-		validateField('email', email, setEmailError);
-		validateField('pass', pass, setPassError);
+	const validateAll = async () => {
+		return [
+			await validateField('email', email, setEmailError),
+			await validateField('pass', pass, setPassError),
+		];
 	};
 
 	const onChange = (e, setState) => {
 		setState(e.target.value);
-	};
-
-	const clearFields = () => {
-		setEmail('');
-		setPass('');
-	};
-
-	const clearErrors = () => {
-		setEmailError(null);
-		setPassError(null);
-		setErrorAuth(null);
 	};
 
 	const errorCustom = (error) => {
@@ -99,7 +93,6 @@ export default function Auth({close}) {
 	const onGoogle = () => {
 		signInGoogle()
 			.then(() => {
-				clearErrors();
 				redirectToMain();
 			})
 			.catch((error) => errorCustom(error));
@@ -116,12 +109,12 @@ export default function Auth({close}) {
 				errorCustom(error);
 			});
 	};
-	const onRegister = (e) => {
+	const onRegister = async (e) => {
 		e.preventDefault();
 
-		validateAll();
+		const validArr = await validateAll();
 
-		if (emailError || passError) {
+		if (validArr.includes(false)) {
 			return;
 		}
 

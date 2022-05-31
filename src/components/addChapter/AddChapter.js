@@ -1,4 +1,5 @@
 import './addChapter.css';
+import '../../css/common.css';
 
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
@@ -6,11 +7,15 @@ import {useSelector} from 'react-redux';
 import {v4 as uuid} from 'uuid';
 
 import useUpload from '../../services/useUpload';
+import useString from '../../services/useString';
 
 import addIcon from '../../assets/icons/add-icon.png';
 
 export default function AddChapter() {
+	const chapterList = useSelector((state) => state.chapter.chapterList);
+
 	const {uploadNewChapter} = useUpload();
+	const {compareChapters} = useString();
 
 	const [newChapter, setNewChapter] = useState('');
 
@@ -20,7 +25,7 @@ export default function AddChapter() {
 		}
 
 		const id = `${uuid()}+chapter`;
-		const name = newChapter.charAt(0).toUpperCase() + newChapter.slice(1);
+		const name = (newChapter.charAt(0).toUpperCase() + newChapter.slice(1)).trim();
 
 		uploadNewChapter(id, name);
 		setNewChapter('');

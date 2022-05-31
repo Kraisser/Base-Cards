@@ -75,12 +75,12 @@
 	align-items: center;
 	overflow: hidden;
 	background-color: var(--inactive-color);
-	border-radius: 0 var(--border-mini-radius) var(--border-mini-radius) 0;
-	transition: width 0.3s ease-in;
+	border-radius: var(--border-mini-radius);
+	transition: width 0.4s ease-in;
 	z-index: 3;
 }
 .chapterSlideIcon {
-	transition: transform 0.2s ease-in-out;
+	transition: transform 0.4s ease-in-out;
 }
 .chapterItemMenu img {
 	width: 30px;
@@ -100,7 +100,7 @@
 	width: 105px;
 }
 .chapterItemMenu.chapterMenuActive .chapterSlideIcon {
-	transform: rotate(-180deg);
+	transform: rotate(179deg);
 }
 
 /* MenuIcons */

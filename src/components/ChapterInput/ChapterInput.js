@@ -1,9 +1,12 @@
 import {useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
+import useString from '../../services/useString';
 
 export default function ChapterInput({newChap, chapState, onChange, chapErrState}) {
 	const chapterList = useSelector((state) => state.chapter.chapterList);
+
+	const {compareChapters} = useString();
 
 	const {chapter, setChapter} = chapState;
 	const {chapterErr, setChapterErr} = chapErrState;
@@ -11,9 +14,11 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 	const chapErrStyle = chapterErr ? 'errorInput' : null;
 
 	const validateChapterName = (value) => {
-		const sameName = chapterList.find((item) => item.name.toLowerCase() === value.toLowerCase());
+		const valueString = value.toLowerCase().trim();
 
-		if (sameName) {
+		const compareResult = compareChapters(chapterList, valueString);
+
+		if (compareResult) {
 			return 'Такой раздел уже существует';
 		}
 
