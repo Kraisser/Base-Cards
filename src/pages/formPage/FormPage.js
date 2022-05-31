@@ -53,16 +53,20 @@ export default function FormPage() {
 	const [chapterErr, setChapterErr] = useState(null);
 	const [cardLinkErr, setCardLinkErr] = useState(editCard ? true : null);
 
-	const nameErrInpStyle = cardNameErr === true || cardNameErr === null ? null : 'errorInput';
-	const linkErrInpStyle = cardLinkErr === true || cardLinkErr === null ? null : 'errorInput';
+	const nameErrInpStyle = cardNameErr ? 'errorInput' : null;
+	const linkErrInpStyle = cardLinkErr ? 'errorInput' : null;
 
 	const validateField = (id, value, setErr) => {
-		validSchema
+		return validSchema
 			.pick([id])
 			.validate({[id]: value})
-			.then(() => setErr(true))
+			.then(() => {
+				setErr(null);
+				return true;
+			})
 			.catch((err) => {
 				setErr(err.message);
+				return false;
 			});
 	};
 
@@ -72,19 +76,26 @@ export default function FormPage() {
 		cardLink: (value = cardLink) => validateField(`cardLink`, value, setCardLinkErr),
 	};
 
-	const validateAll = () => {
+	const validateAll = async () => {
+		const resArr = [];
+
 		for (const id in validateFunc) {
-			if (chapterErr === 'Такой раздел уже существует') {
+			if (id === 'chapter' && chapterErr === 'Такой раздел уже существует') {
+				resArr.push(false);
 				continue;
 			}
 			if (Object.hasOwnProperty.call(validateFunc, id)) {
-				validateFunc[id]();
+				const res = await validateFunc[id]();
+				resArr.push(res);
 			}
 		}
+
+		return resArr;
 	};
 
 	const clearFields = () => {
 		setCardName('');
+		setChapter('');
 		setCardLink('');
 		setCardDescription('');
 	};
@@ -111,9 +122,9 @@ export default function FormPage() {
 	const onExSubmit = async (e, id) => {
 		e.preventDefault();
 
-		validateAll();
+		const validateArr = await validateAll();
 
-		if (cardNameErr !== true || chapterErr !== true || cardLinkErr !== true) {
+		if (validateArr.includes(false)) {
 			return;
 		}
 

@@ -8,7 +8,7 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 	const {chapter, setChapter} = chapState;
 	const {chapterErr, setChapterErr} = chapErrState;
 
-	const chapErrStyle = chapterErr === true || chapterErr === null ? null : 'errorInput';
+	const chapErrStyle = chapterErr ? 'errorInput' : null;
 
 	const validateChapterName = (value) => {
 		const sameName = chapterList.find((item) => item.name.toLowerCase() === value.toLowerCase());
