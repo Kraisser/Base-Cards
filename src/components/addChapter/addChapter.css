@@ -10,11 +10,12 @@
 	border: 0;
 	border-radius: var(--border-mini-radius);
 	padding: 5px 40px 5px 3px;
+	transition: box-shadow 0.3s ease;
 }
 .addChapterInput:focus-visible,
 .addChapterInput:focus-visible:hover {
 	outline: 0;
-	box-shadow: 0 0 8px var(--hover-color);
+	box-shadow: 0 0 10px var(--hover-color);
 }
 .addChapterInput:hover {
 	outline: 0;
@@ -29,4 +30,7 @@
 }
 .addChapterIcon:hover {
 	transform: scale(1.05);
+}
+.addChapterIcon:hover:active {
+	transform: scale(0.9);
 }

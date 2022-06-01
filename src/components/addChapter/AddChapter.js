@@ -18,9 +18,19 @@ export default function AddChapter() {
 	const {compareChapters} = useString();
 
 	const [newChapter, setNewChapter] = useState('');
+	const [errorClass, setErrorClass] = useState('');
 
 	const onChapterSubmit = () => {
 		if (newChapter.length < 2) {
+			return;
+		}
+
+		const valueString = newChapter.toLowerCase().trim();
+
+		const validRes = compareChapters(chapterList, valueString);
+
+		if (validRes) {
+			setErrorClass('errorInput');
 			return;
 		}
 
@@ -37,9 +47,12 @@ export default function AddChapter() {
 				<input
 					type='text'
 					id='addChapter'
-					className='addChapterInput'
+					className={`addChapterInput ${errorClass}`}
 					value={newChapter}
-					onChange={(e) => setNewChapter(e.target.value)}
+					onChange={(e) => {
+						setNewChapter(e.target.value);
+						setErrorClass('');
+					}}
 					placeholder='Новый раздел'
 				/>
 				<img src={addIcon} alt='add-icon' onClick={onChapterSubmit} className='addChapterIcon' />
