@@ -19,11 +19,13 @@
 	border-radius: var(--border-radius);
 	padding: 15px;
 }
-.cardDescriptionWrapper p {
+.cardDescription {
 	margin: 0;
+	overflow-wrap: break-word;
 }
-.cardDescriptionWrapper a {
+.cardDescriptionLink {
 	color: var(--header-color);
+	overflow-wrap: break-word;
 }
 .editIcon {
 	width: 50px;

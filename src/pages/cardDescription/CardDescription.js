@@ -95,7 +95,7 @@ function View({data}) {
 				<h1 className='cardDescriptionHeader'>{name}</h1>
 			</div>
 			<h3 className=''>Ссылка:</h3>
-			<a href={link} target='_blank' rel='noopener noreferrer'>
+			<a href={link} target='_blank' rel='noopener noreferrer' className='cardDescriptionLink'>
 				{link}
 			</a>
 			<h3>Описание:</h3>

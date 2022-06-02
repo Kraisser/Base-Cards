@@ -1,7 +1,7 @@
 @import '../../css/variables.css';
 
 .cardListWrapper {
-	padding: 10px 5px 10px 10px;
+	padding: 10px 5px 0;
 	display: grid;
 	grid-template-rows: 30px 1fr;
 	grid-row-gap: 10px;
@@ -22,13 +22,13 @@
 }
 .cardListContainer {
 	display: grid;
-	grid-template: 120px / 1fr 1fr 1fr;
+	grid-template: 110px / 1fr 1fr 1fr;
 	grid-gap: 10px 10px;
 	max-height: 100%;
 	min-width: 990px;
 	overflow-y: auto;
 	scrollbar-width: thin;
-	padding-right: 5px;
+	padding: 10px 5px;
 }
 .emptyCardList {
 	text-align: center;

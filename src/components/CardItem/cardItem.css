@@ -3,26 +3,50 @@
 .cardItemWrapper {
 	position: relative;
 	background-color: var(--main-third-color);
-	padding: 10px 50px 10px 10px;
-	min-height: 120px;
-	border-radius: var(--border-radius);
+	padding: 10px;
+	min-height: 110px;
+	border-radius: var(--border-mini-radius);
+	box-shadow: 0 0 4px var(--hover-color);
+	cursor: pointer;
+	transition: transform 0.2s ease-in;
+}
+.cardItemWrapper:hover {
+	box-shadow: 0 0 8px var(--hover-color);
+}
+.cardItemWrapper:active {
+	transform: scale(0.95);
+}
+.cardItemContainer {
+	overflow: hidden;
 }
 .cardItemHeader {
 	margin: 0;
 	overflow: hidden;
+	font-size: 20px;
+	font-weight: 600;
 }
 .cardItemDescriptionWrapper {
-	max-width: 260px;
 	display: grid;
-	grid-template: 45px 50px / 260px;
+	grid-template: 20px 20px 30px / 1fr;
 	grid-row-gap: 10px;
 }
-.cardItemDescriptionWrapper p {
-	position: relative;
-	margin: 0;
-	overflow: hidden;
+.cardItemLink {
+	font-size: 16px;
+	text-decoration: underline;
+	color: var(--main-color);
 }
-.cardItemDescriptionWrapper p::after {
+.cardItemLink:hover {
+	text-shadow: 0 0 1px var(--hover-color);
+}
+.cardItemDescription {
+	margin: 0;
+	height: 100%;
+	font-size: 14px;
+	line-height: 15px;
+	color: var(--text-description-color);
+	overflow-wrap: break-word;
+}
+/* .cardItemDescriptionWrapper p::after {
 	content: '';
 	height: 0.75em;
 	width: 100%;
@@ -30,7 +54,7 @@
 	bottom: 0px;
 	left: 0px;
 	background: linear-gradient(180deg, transparent, var(--main-third-color));
-}
+} */
 
 .delIcon-chapItem {
 	cursor: pointer;
