@@ -38,6 +38,9 @@
 .cardItemLink:hover {
 	text-shadow: 0 0 1px var(--hover-color);
 }
+.cardItemNoLink {
+	color: var(--text-description-color);
+}
 .cardItemDescription {
 	margin: 0;
 	height: 100%;

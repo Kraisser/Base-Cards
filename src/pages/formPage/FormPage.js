@@ -42,14 +42,13 @@ export default function FormPage() {
 	const validSchema = yup.object().shape({
 		cardName: yup
 			.string('Введите строку')
+			.required('Обязательное поле*')
 			.min(2, 'Минимум 2 символа')
-			.max(55, 'Максимум 55 символов')
-			.required('Обязательное поле*'),
+			.max(55, 'Максимум 55 символов'),
 		chapter: yup
 			.string('Выберите раздел*')
-			.min(2, 'Минимум 2 символа')
-			.required('Обязательное поле*'),
-		cardLink: yup.string('Укажите ссылку*').required('Обязательное поле*'),
+			.required('Обязательное поле*')
+			.min(2, 'Минимум 2 символа'),
 	});
 
 	const [newChap, setNewChap] = useState(false);
@@ -61,10 +60,8 @@ export default function FormPage() {
 
 	const [cardNameErr, setCardNameErr] = useState(null);
 	const [chapterErr, setChapterErr] = useState(null);
-	const [cardLinkErr, setCardLinkErr] = useState(null);
 
 	const nameErrInpStyle = cardNameErr ? 'errorInput' : null;
-	const linkErrInpStyle = cardLinkErr ? 'errorInput' : null;
 
 	const validateField = (id, value, setErr) => {
 		return validSchema
@@ -83,7 +80,6 @@ export default function FormPage() {
 	const validateFunc = {
 		cardName: (value = cardName) => validateField(`cardName`, value, setCardNameErr),
 		chapter: (value = chapter) => validateField(`chapter`, value, setChapterErr),
-		cardLink: (value = cardLink) => validateField(`cardLink`, value, setCardLinkErr),
 	};
 
 	const validateAll = async () => {
@@ -252,15 +248,14 @@ export default function FormPage() {
 
 						<div className='fieldWrapper'>
 							<label htmlFor='cardLink' className='formInputLabel'>
-								Укажите ссылку*
+								Укажите ссылку
 							</label>
-							<div className='errorForm'>{showError(cardLinkErr)}</div>
 							<input
 								type='text'
 								id='cardLink'
-								onChange={(e) => onChange(e, setCardLink)}
+								onChange={(e) => setCardLink(e.target.value)}
 								value={cardLink}
-								className={`formInput ${linkErrInpStyle}`}
+								className={'formInput'}
 							/>
 						</div>
 

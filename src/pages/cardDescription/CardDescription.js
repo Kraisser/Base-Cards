@@ -104,9 +104,13 @@ function View({data, onEditCard, onDeleteEx}) {
 			</div>
 			<div className='cardDescriptionContainer'>
 				<h3 className='cardDescriptionContainerHeader'>Ссылка:</h3>
-				<a href={link} target='_blank' rel='noopener noreferrer' className='cardDescriptionLink'>
-					{link}
-				</a>
+				{link ? (
+					<a href={link} target='_blank' rel='noopener noreferrer' className='cardDescriptionLink'>
+						{link}
+					</a>
+				) : (
+					'Ссылка отсутствует'
+				)}
 			</div>
 			<div className='cardDescriptionContainer'>
 				<h3 className='cardDescriptionContainerHeader'>Описание:</h3>

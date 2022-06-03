@@ -27,14 +27,18 @@ export default function CardItem({content}) {
 					<h3 className='cardItemHeader'>{name}</h3>
 				</div>
 				<div className='cardItemContainer'>
-					<a
-						href={link}
-						title={link}
-						target='_blank'
-						rel='noopener noreferrer'
-						className='cardItemLink'>
-						{link}
-					</a>
+					{link ? (
+						<a
+							href={link}
+							title={link}
+							target='_blank'
+							rel='noopener noreferrer'
+							className='cardItemLink'>
+							{link}
+						</a>
+					) : (
+						<span className='cardItemNoLink'>Ссылка отсутствует</span>
+					)}
 				</div>
 				<div className='cardItemContainer'>
 					<p className='cardItemDescription'>
