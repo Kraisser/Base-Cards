@@ -9,11 +9,12 @@ import setContent from '../../utils/setContent';
 import useUpdate from '../../services/useUpdate';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
+import DeleteModal from '../../components/DeleteModal/DeleteModal';
+
 import Page404 from '../404/404';
 
 import {setCard} from '../../store/editSlice';
-
-import editIcon from '../../assets/icons/edit-icon.png';
+import {delModalOpen} from '../../store/modalSlice';
 
 export default function CardDescription() {
 	const dispatch = useDispatch();
@@ -23,8 +24,11 @@ export default function CardDescription() {
 
 	const {id, activeChapter} = useParams();
 
+	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
 	const cardList = useSelector((state) => state.cardList.cardList);
 	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
+
+	const delModal = delModalStatus ? <DeleteModal /> : null;
 
 	useEffect(() => {
 		if (cardListStatus !== 'idle' && activeChapter && id) {
@@ -47,14 +51,17 @@ export default function CardDescription() {
 		navigate('/editForm');
 	};
 
+	const onDeleteEx = () => {
+		dispatch(delModalOpen(id));
+	};
+
 	return (
 		<>
 			<PageHeader />
 
-			<div className='cardDescriptionWrapper'>
-				<div className='cardDescrWrapper'>
-					<img src={editIcon} alt='Edit icon' className='editIcon' onClick={onEditCard} />
-					{setContent(cardListStatus, View, currentCard, {id})}
+			<div className='cardDescriptionWrapper pageContentWrapper '>
+				<div className='cardDescrWrapper pageContentContainer'>
+					{setContent(cardListStatus, View, currentCard, {onEditCard, onDeleteEx})}
 				</div>
 				<div className='cardDescButWrapper'>
 					<button className='onMainBut but'>
@@ -62,11 +69,12 @@ export default function CardDescription() {
 					</button>
 				</div>
 			</div>
+			{delModal}
 		</>
 	);
 }
 
-function View({data}) {
+function View({data, onEditCard, onDeleteEx}) {
 	const {name, link, timeStamp, description} = data;
 	const date = new Date(timeStamp);
 
@@ -92,14 +100,26 @@ function View({data}) {
 					<div className='descrTimeWrapper'>{time}</div>
 					<div className='descrDateWrapper'>{curDate}</div>
 				</div>
-				<h1 className='cardDescriptionHeader'>{name}</h1>
+				<h2 className='cardDescriptionHeader'>{name}</h2>
 			</div>
-			<h3 className=''>Ссылка:</h3>
-			<a href={link} target='_blank' rel='noopener noreferrer' className='cardDescriptionLink'>
-				{link}
-			</a>
-			<h3>Описание:</h3>
-			<p className='cardDescription'>{description ? description : 'Описание отсутствует'}</p>
+			<div className='cardDescriptionContainer'>
+				<h3 className='cardDescriptionContainerHeader'>Ссылка:</h3>
+				<a href={link} target='_blank' rel='noopener noreferrer' className='cardDescriptionLink'>
+					{link}
+				</a>
+			</div>
+			<div className='cardDescriptionContainer'>
+				<h3 className='cardDescriptionContainerHeader'>Описание:</h3>
+				<p className='cardDescription'>{description ? description : 'Описание отсутствует'}</p>
+			</div>
+			<div className='cardDescButWrapper'>
+				<button className='but cardDescBut' onClick={onEditCard}>
+					Редактировать
+				</button>
+				<button className='but cardDescBut' onClick={onDeleteEx}>
+					Удалить
+				</button>
+			</div>
 		</>
 	);
 }

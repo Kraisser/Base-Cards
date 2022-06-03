@@ -4,9 +4,12 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import {delModalClose} from '../../store/modalSlice';
 import useUpload from '../../services/useUpload';
+import {useNavigate} from 'react-router-dom';
 
 export default function DeleteModal() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const {onDeleteCard, deleteChapterFromList} = useUpload();
 
 	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
@@ -30,6 +33,7 @@ export default function DeleteModal() {
 	const onDeleteCardItem = () => {
 		onDeleteCard(delModalStatus, activeChapter);
 		dispatch(delModalClose());
+		navigate('/');
 	};
 
 	const onDeleteChapter = () => {

@@ -30,6 +30,12 @@ export default function FormPage() {
 		if (chapterListStatus !== 'idle') {
 			updateChapters();
 		}
+		if (editCard) {
+			window.addEventListener('unload', () => {
+				console.log('unload');
+			});
+		}
+
 		// eslint-disable-next-line
 	}, []);
 
@@ -102,6 +108,12 @@ export default function FormPage() {
 		setChapter('');
 		setCardLink('');
 		setCardDescription('');
+	};
+
+	const redirectClearEdit = () => {
+		if (editCard) {
+			dispatch(clearEdit());
+		}
 	};
 
 	const compareCards = (oldCard, newCard) => {
@@ -193,7 +205,7 @@ export default function FormPage() {
 
 	return (
 		<>
-			<PageHeader />
+			<PageHeader redirectClearEdit={editCard ? redirectClearEdit : null} />
 			<main>
 				<div className='formWrapper'>
 					<form className='cardForm' onSubmit={(e) => onExSubmit(e, editCard ? editCard.id : null)}>
@@ -270,9 +282,11 @@ export default function FormPage() {
 						</div>
 					</form>
 					<div>
-						<button className='onMainBut but'>
-							<Link to='/'>на главную</Link>
-						</button>
+						<Link to='/'>
+							<button className='onMainBut but' onClick={redirectClearEdit}>
+								на главную
+							</button>
+						</Link>
 					</div>
 				</div>
 			</main>

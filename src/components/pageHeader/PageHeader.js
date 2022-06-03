@@ -7,14 +7,14 @@ import Clock from '../Clock/Clock';
 
 import userIcon from '../../assets/icons/user-icon.png';
 
-export default function PageHeader({auth, close}) {
+export default function PageHeader({auth, close, redirectClearEdit}) {
 	const navigate = useNavigate();
 
 	const {userName, userImage} = useSelector((state) => state.auth);
 
 	return (
 		<header className='header'>
-			<Link to={close ? '' : '/'}>
+			<Link to={close ? '' : '/'} onClick={redirectClearEdit ? redirectClearEdit() : null}>
 				<div className='mainHeader'>
 					<h1>Base Cards</h1>
 				</div>

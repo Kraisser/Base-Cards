@@ -46,44 +46,7 @@
 	color: var(--text-description-color);
 	overflow-wrap: break-word;
 }
-/* .cardItemDescriptionWrapper p::after {
-	content: '';
-	height: 0.75em;
-	width: 100%;
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	background: linear-gradient(180deg, transparent, var(--main-third-color));
-} */
 
-.delIcon-chapItem {
-	cursor: pointer;
-	height: 30px;
-}
-.delIcon-chapItem:hover,
-.browserIcon:hover,
-.infoIcon:hover {
-	transform: scale(1.05);
-}
-
-.controlWrapper {
-	padding: 3px 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-around;
-	background-color: var(--inactive-color);
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 40px;
-	height: 100%;
-	border-radius: 0 var(--border-radius) var(--border-radius) 0;
-}
-.controlContainer {
-	width: 30px;
-	height: 30px;
-}
 /* Media */
 
 /* @media only all and (max-width: 1430px) {

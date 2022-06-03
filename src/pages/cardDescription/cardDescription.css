@@ -1,22 +1,10 @@
 @import '../../css/variables.css';
 
 .cardDescriptionWrapper {
-	width: 100%;
-	height: calc(100vh - 90px);
-	display: flex;
-	flex-direction: column;
 	align-items: center;
-	background-color: var(--main-second-color);
-	padding: 15px;
-	color: var(--header-color);
 }
-.cardDescrWrapper {
-	display: flex;
-	flex-direction: column;
+.cardDescriptionWrapper .cardDescrWrapper {
 	width: 600px;
-	min-height: 350px;
-	background-color: var(--main-color);
-	border-radius: var(--border-radius);
 	padding: 15px;
 }
 .cardDescription {
@@ -27,7 +15,50 @@
 	color: var(--header-color);
 	overflow-wrap: break-word;
 }
-.editIcon {
+.cardDescriptionHeaderWrapper {
+	position: relative;
+}
+.cardDescriptionHeaderWrapper h2.cardDescriptionHeader {
+	text-align: left;
+}
+.cardDescriptionContainerHeader {
+	font-size: 20px;
+	font-weight: 600;
+	margin: 0 0 10px;
+}
+.cardDescriptionContainer {
+	margin-bottom: 15px;
+}
+.cardDescButWrapper {
+	display: flex;
+	justify-content: space-around;
+}
+.cardDescBut {
+	padding: 10px 20px;
+	width: 40%;
+}
+
+/* created Date */
+.descriptionDateWrapper {
+	float: right;
+	margin: 0 0 10px 10px;
+	font-size: 16px;
+	font-weight: 500;
+	width: 110px;
+	height: 60px;
+	background-color: var(--main-third-color);
+	border-radius: var(--border-mini-radius);
+	color: var(--main-color);
+	padding: 5px;
+	cursor: default;
+	text-align: center;
+}
+.dateDescr {
+	font-size: 14px;
+	font-weight: 300;
+}
+
+/* .editIcon {
 	width: 50px;
 	position: absolute;
 	cursor: pointer;
@@ -39,36 +70,4 @@
 }
 .editIcon:active {
 	transform: scale(0.95);
-}
-.cardDescriptionHeaderWrapper {
-	position: relative;
-}
-.descriptionDateWrapper {
-	position: absolute;
-	right: 0;
-	top: 0;
-	font-size: 18px;
-	font-weight: 500;
-	background-color: var(--main-third-color);
-	border-radius: var(--border-mini-radius);
-	color: var(--main-color);
-	padding: 5px;
-	cursor: default;
-}
-.descrTimeWrapper,
-.descrDateWrapper {
-	text-align: center;
-}
-.dateDescr {
-	font-size: 14px;
-	font-weight: normal;
-}
-.cardDescriptionHeader {
-	text-align: center;
-}
-.cardHeader {
-	margin: 0;
-}
-.cardDescButWrapper {
-	padding: 15px 0;
-}
+} */
