@@ -12,9 +12,15 @@ export default function PageHeader({auth, close, redirectClearEdit}) {
 
 	const {userName, userImage} = useSelector((state) => state.auth);
 
+	const redirectCheck = () => {
+		if (redirectClearEdit) {
+			redirectClearEdit();
+		}
+	};
+
 	return (
 		<header className='header'>
-			<Link to={close ? '' : '/'} onClick={redirectClearEdit ? redirectClearEdit() : null}>
+			<Link to={close ? '' : '/'} onClick={redirectCheck}>
 				<div className='mainHeader'>
 					<h1>Base Cards</h1>
 				</div>
@@ -22,7 +28,12 @@ export default function PageHeader({auth, close, redirectClearEdit}) {
 			<div className='rightHeaderWrapper'>
 				<Clock />
 				{auth === false || close ? null : (
-					<div className='userAuthIconWrapper' onClick={() => navigate('/userPage')}>
+					<div
+						className='userAuthIconWrapper'
+						onClick={() => {
+							redirectCheck();
+							navigate('/userPage');
+						}}>
 						<img src={userImage ? userImage : userIcon} alt='user' />
 						<div title={userName ? userName : null}>{userName}</div>
 					</div>
