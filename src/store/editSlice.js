@@ -1,5 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
+import {resetStore} from './serviceSlice';
+
 const initialState = {
 	card: null,
 	cardChapter: null,
@@ -19,6 +21,9 @@ const editSlice = createSlice({
 			state.card = null;
 			state.cardChapter = null;
 		},
+	},
+	extraReducers: (builder) => {
+		builder.addCase(resetStore, () => initialState);
 	},
 });
 

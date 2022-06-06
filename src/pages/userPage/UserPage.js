@@ -2,15 +2,17 @@ import './userPage.css';
 import '../../css/common.css';
 
 import {useState, useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 
 import userIcon from '../../assets/icons/user-icon.png';
 import useAuth from '../../services/useAuth';
+import {resetStore} from '../../store/serviceSlice';
 
 export default function UserPage({close}) {
+	const dispatch = useDispatch();
 	const {signOutAuth, verificateEmail} = useAuth();
 	const navigate = useNavigate();
 
@@ -33,6 +35,7 @@ export default function UserPage({close}) {
 	}, [confirmCooldown]);
 
 	const onExit = () => {
+		dispatch(resetStore());
 		signOutAuth().then(() => {
 			navigate('/auth');
 		});

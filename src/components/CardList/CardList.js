@@ -31,7 +31,7 @@ export default function ChapList() {
 }
 
 function View({data}) {
-	const content = data.data.map((item) => <CardListItem content={item} key={uuid()} />);
+	const content = data.map((item) => <CardListItem content={item} key={uuid()} />);
 	const emptyContent = (
 		<div className='emptyCardList'>
 			<h3>В этом разделе пока пусто</h3>

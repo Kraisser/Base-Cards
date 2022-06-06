@@ -31,7 +31,7 @@ export default function SearchForm({searchList, searchTarget, placeholder}) {
 			item.name.toLowerCase().includes(filter.toLowerCase())
 		);
 
-		dispatch(setCardFilter({data: filteredCards, description: searchList.description}));
+		dispatch(setCardFilter(filteredCards));
 	};
 
 	return (

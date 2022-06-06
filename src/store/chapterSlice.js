@@ -1,5 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
+import {resetStore} from './serviceSlice';
+
 const initialState = {
 	activeChapter: '',
 	chapterList: [],
@@ -28,6 +30,9 @@ const chapterSlice = createSlice({
 			state.chapterFiltered = action.payload;
 			state.chapterList = action.payload;
 		},
+	},
+	extraReducers: (builder) => {
+		builder.addCase(resetStore, () => initialState);
 	},
 });
 

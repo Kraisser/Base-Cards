@@ -1,5 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
+import {resetStore} from './serviceSlice';
+
 const initialState = {
 	delModalStatus: false,
 };
@@ -14,6 +16,9 @@ const modalSlice = createSlice({
 		delModalClose: (state) => {
 			state.delModalStatus = false;
 		},
+	},
+	extraReducers: (builder) => {
+		builder.addCase(resetStore, () => initialState);
 	},
 });
 

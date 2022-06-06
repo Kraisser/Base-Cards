@@ -1,8 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 
+import {resetStore} from './serviceSlice';
+
 const initialState = {
 	cardList: {},
-	filteredCardList: {},
+	filteredCardList: [],
 	cardListStatus: 'loading',
 };
 
@@ -20,10 +22,14 @@ const cardSlice = createSlice({
 		cardListSuccess: (state, action) => {
 			state.cardListStatus = 'idle';
 			state.cardList = action.payload;
+			state.filteredCardList = action.payload.data;
 		},
 		setCardFilter: (state, action) => {
 			state.filteredCardList = action.payload;
 		},
+	},
+	extraReducers: (builder) => {
+		builder.addCase(resetStore, () => initialState);
 	},
 });
 
