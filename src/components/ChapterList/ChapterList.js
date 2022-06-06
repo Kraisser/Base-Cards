@@ -23,6 +23,7 @@ export default function ProgramList() {
 
 	const chapWrapperRef = useRef();
 
+	const chapterList = useSelector((state) => state.chapter.chapterList);
 	const filteredChapters = useSelector((state) => state.chapter.chapterFiltered);
 	const chapterStatus = useSelector((state) => state.chapter.chapterListStatus);
 
@@ -82,7 +83,11 @@ export default function ProgramList() {
 			</div>
 
 			<div className='searchChapterWrapper'>
-				<SearchForm />
+				<SearchForm
+					searchList={chapterList}
+					placeholder={'Поиск раздела'}
+					searchTarget={'chapter'}
+				/>
 			</div>
 			<div
 				className={'chapterListContent ' + scrollClass}

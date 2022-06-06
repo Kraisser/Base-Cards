@@ -1,5 +1,8 @@
 @import '../../css/variables.css';
 
+.searchWrapper {
+	position: relative;
+}
 .searchForm {
 	width: 100%;
 	height: 30px;

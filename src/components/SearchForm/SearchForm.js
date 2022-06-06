@@ -1,37 +1,55 @@
 import './searchForm.css';
 
 import {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import {setChapterFilter} from '../../store/chapterSlice';
+import {setCardFilter} from '../../store/cardSlice';
 
 import searchIcon from '../../assets/icons/search.png';
 
-export default function SearchForm() {
+export default function SearchForm({searchList, searchTarget, placeholder}) {
 	const dispatch = useDispatch();
 	const [searchValue, setSearchValue] = useState('');
 
-	const chapterList = useSelector((state) => state.chapter.chapterList);
+	// const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const onFilterChapter = (filter) => {
 		setSearchValue(filter);
 
-		const filtered = chapterList.filter((item) =>
+		const filteredChapters = searchList.filter((item) =>
 			item.name.toLowerCase().includes(filter.toLowerCase())
 		);
-		dispatch(setChapterFilter(filtered));
+
+		dispatch(setChapterFilter(filteredChapters));
+	};
+
+	const onFilterCard = (filter) => {
+		setSearchValue(filter);
+
+		const filteredCards = searchList.data.filter((item) =>
+			item.name.toLowerCase().includes(filter.toLowerCase())
+		);
+
+		dispatch(setCardFilter({data: filteredCards, description: searchList.description}));
 	};
 
 	return (
-		<>
+		<div className='searchWrapper'>
 			<img src={searchIcon} alt='search' className='searchIcon' />
 			<input
 				type='text'
 				className='searchForm'
-				placeholder='Нажмите для поиска'
+				placeholder={placeholder}
 				value={searchValue}
-				onChange={(e) => onFilterChapter(e.target.value)}
+				onChange={(e) => {
+					if (searchTarget === 'chapter') {
+						onFilterChapter(e.target.value);
+					} else if (searchTarget === 'card') {
+						onFilterCard(e.target.value);
+					}
+				}}
 			/>
-		</>
+		</div>
 	);
 }
