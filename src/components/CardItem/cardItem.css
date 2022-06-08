@@ -25,9 +25,14 @@
 	font-size: 20px;
 	font-weight: 600;
 }
-.cardItemDescriptionWrapper {
+.cardItemDescriptionLinkWrapper {
 	display: grid;
 	grid-template: 20px 20px 30px / 1fr;
+	grid-row-gap: 10px;
+}
+.cardItemDescriptionNoLinkWrapper {
+	display: grid;
+	grid-template: 20px 60px / 1fr;
 	grid-row-gap: 10px;
 }
 .cardItemLink {

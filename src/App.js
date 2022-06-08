@@ -68,7 +68,6 @@ function App() {
 		<Router>
 			<Routes>
 				<Route path='/' element={<MainPage />} />
-				<Route path='/auth' element={<Auth />} />
 				<Route path='/userPage' element={<UserPage />} />
 				<Route path='/editForm' element={<FormPage />} />
 				<Route path='/cardDescription/:activeChapter/:id' element={<CardDescription />} />

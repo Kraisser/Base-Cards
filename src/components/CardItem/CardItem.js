@@ -11,6 +11,10 @@ export default function CardItem({content}) {
 
 	const {name, description, link, id} = content;
 
+	const linkAvailableClass = link
+		? 'cardItemDescriptionLinkWrapper'
+		: 'cardItemDescriptionNoLinkWrapper';
+
 	const delegateLink = (e) => {
 		if (e.target.classList.contains('cardItemLink')) {
 			return;
@@ -22,12 +26,12 @@ export default function CardItem({content}) {
 
 	return (
 		<div className='cardItemWrapper' onClick={delegateLink}>
-			<div className='cardItemDescriptionWrapper'>
+			<div className={linkAvailableClass}>
 				<div className='cardItemContainer'>
 					<h3 className='cardItemHeader'>{name}</h3>
 				</div>
-				<div className='cardItemContainer'>
-					{link ? (
+				{link ? (
+					<div className='cardItemContainer'>
 						<a
 							href={link}
 							title={link}
@@ -36,10 +40,8 @@ export default function CardItem({content}) {
 							className='cardItemLink'>
 							{link}
 						</a>
-					) : (
-						<span className='cardItemNoLink'>Ссылка отсутствует</span>
-					)}
-				</div>
+					</div>
+				) : null}
 				<div className='cardItemContainer'>
 					<p className='cardItemDescription'>
 						{description ? description : 'Описание отсутствует'}
