@@ -12,8 +12,6 @@ export default function SearchForm({searchList, searchTarget, placeholder}) {
 	const dispatch = useDispatch();
 	const [searchValue, setSearchValue] = useState('');
 
-	// const chapterList = useSelector((state) => state.chapter.chapterList);
-
 	const onFilterChapter = (filter) => {
 		setSearchValue(filter);
 

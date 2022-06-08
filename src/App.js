@@ -16,6 +16,7 @@ import Auth from './pages/auth/Auth';
 import NoAuth from './pages/noAuth/NoAuth';
 import AuthLoading from './pages/authLoading/AuthLoading';
 import UserPage from './pages/userPage/UserPage';
+import ResetPass from './pages/resetPass/ResetPass';
 
 function App() {
 	const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
 				<Routes>
 					<Route path='/' element={<AuthLoading close={true} />} />
 					<Route path='/auth' element={<Auth close={true} />} />
+					<Route path='/resetPass' element={<ResetPass close={true} />} />
 					<Route path='*' element={<NoAuth close={true} />} />
 				</Routes>
 			</Router>

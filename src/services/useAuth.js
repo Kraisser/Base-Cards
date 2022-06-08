@@ -6,6 +6,7 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	sendEmailVerification,
+	sendPasswordResetEmail,
 } from 'firebase/auth';
 
 import useRequests from '../services/useRequests';
@@ -52,9 +53,15 @@ export default function useAuth() {
 			});
 	};
 
+	const resetPass = (email) => {
+		return sendPasswordResetEmail(auth, email).catch((e) => {
+			throw e;
+		});
+	};
+
 	const signOutAuth = () => {
 		return signOut(auth);
 	};
 
-	return {signInGoogle, signInEmail, registerEmail, signOutAuth, verificateEmail};
+	return {signInGoogle, signInEmail, registerEmail, signOutAuth, verificateEmail, resetPass};
 }

@@ -162,10 +162,15 @@ export default function Auth({close}) {
 						/>
 					</div>
 					{errorAuth ? <div className='authInfo authError'>{errorAuth}</div> : null}
-					<div className='formButWrapper authButsWrapper'>
+					<div className='fieldWrapper authButsWrapper'>
 						<button type='button' className='formBut but' onClick={onSignIn}>
 							Войти
 						</button>
+						<button type='button' className='formBut but' onClick={() => navigate('/resetPass')}>
+							Восстановить пароль
+						</button>
+					</div>
+					<div className='formButWrapper authButsWrapper'>
 						<button type='button' className='formBut but' onClick={onRegister}>
 							Зарегистрироваться
 						</button>
