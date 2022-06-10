@@ -10,34 +10,38 @@ import {
 	deleteField,
 } from 'firebase/firestore';
 import {useSelector} from 'react-redux';
+import {useCallback, useMemo} from 'react';
 
 export default function useRequests() {
 	const uid = useSelector((state) => state.auth.uid);
 
-	const chaptersRef = collection(db, uid + '/data/chaptersList');
+	const chaptersRef = useMemo(() => collection(db, uid + '/data/chaptersList'), [uid]);
 
-	const setBaseDoc = async (uid) => {
+	const setBaseDoc = useCallback(async (uid) => {
 		try {
 			await setDoc(doc(db, uid, 'data'), {}, {merge: true});
 		} catch (error) {
 			console.log(error);
 		}
-	};
+	}, []);
 
-	const getCardList = async (id) => {
-		const res = (await getDoc(doc(db, uid + '/data/cardList', id))).data();
+	const getCardList = useCallback(
+		async (id) => {
+			const res = (await getDoc(doc(db, uid + '/data/cardList', id))).data();
 
-		const keys = Object.keys(res).filter((item) => item !== 'name');
+			const keys = Object.keys(res).filter((item) => item !== 'name');
 
-		const data = keys
-			.map((item) => res[item])
-			.sort((prevItem, item) => item.timeStamp - prevItem.timeStamp);
+			const data = keys
+				.map((item) => res[item])
+				.sort((prevItem, item) => item.timeStamp - prevItem.timeStamp);
 
-		return {
-			description: res.name,
-			data,
-		};
-	};
+			return {
+				description: res.name,
+				data,
+			};
+		},
+		[uid]
+	);
 
 	const getChapters = async () => {
 		const chapSnap = await getDocs(chaptersRef);
@@ -46,43 +50,58 @@ export default function useRequests() {
 		return chapters;
 	};
 
-	const postChapter = async (id, name) => {
-		await setDoc(doc(db, uid + '/data/chaptersList', id), {
-			name,
-		});
+	const postChapter = useCallback(
+		async (id, name) => {
+			await setDoc(doc(db, uid + '/data/chaptersList', id), {
+				name,
+			});
 
-		await setDoc(doc(db, uid + '/data/cardList', id), {
-			name: name,
-		});
-	};
+			await setDoc(doc(db, uid + '/data/cardList', id), {
+				name: name,
+			});
+		},
+		[uid]
+	);
 
-	const postCard = async (newCard, chapterId) => {
-		await updateDoc(doc(db, uid + '/data/cardList', chapterId), {
-			[newCard.id]: newCard,
-		});
-	};
+	const postCard = useCallback(
+		async (newCard, chapterId) => {
+			await updateDoc(doc(db, uid + '/data/cardList', chapterId), {
+				[newCard.id]: newCard,
+			});
+		},
+		[uid]
+	);
 
-	const deleteCard = async (id, activeProgram) => {
-		const docRef = doc(db, uid + '/data/cardList', activeProgram);
+	const deleteCard = useCallback(
+		async (id, activeProgram) => {
+			const docRef = doc(db, uid + '/data/cardList', activeProgram);
 
-		await updateDoc(docRef, {
-			[id]: deleteField(),
-		});
-	};
+			await updateDoc(docRef, {
+				[id]: deleteField(),
+			});
+		},
+		[uid]
+	);
 
-	const deleteChapter = async (id) => {
-		await deleteDoc(doc(db, uid + '/data/cardList', id));
-		await deleteDoc(doc(db, uid + '/data/chaptersList', id));
-	};
+	const deleteChapter = useCallback(
+		async (id) => {
+			await deleteDoc(doc(db, uid + '/data/cardList', id));
+			await deleteDoc(doc(db, uid + '/data/chaptersList', id));
+		},
+		[uid]
+	);
 
-	const editChapter = async (id, name) => {
-		await updateDoc(doc(db, uid + '/data/chaptersList', id), {
-			name,
-		});
-		await updateDoc(doc(db, uid + '/data/cardList', id), {
-			name,
-		});
-	};
+	const editChapter = useCallback(
+		async (id, name) => {
+			await updateDoc(doc(db, uid + '/data/chaptersList', id), {
+				name,
+			});
+			await updateDoc(doc(db, uid + '/data/cardList', id), {
+				name,
+			});
+		},
+		[uid]
+	);
 
 	return {
 		getCardList,

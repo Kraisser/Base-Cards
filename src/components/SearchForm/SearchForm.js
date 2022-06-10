@@ -6,28 +6,37 @@ import {useDispatch} from 'react-redux';
 import {setChapterFilter} from '../../store/chapterSlice';
 import {setCardFilter} from '../../store/cardSlice';
 
+import useDebounce from '../../services/useDebounce';
+
 import searchIcon from '../../assets/icons/search.png';
 
 export default function SearchForm({searchList, searchTarget, placeholder}) {
 	const dispatch = useDispatch();
+
 	const [searchValue, setSearchValue] = useState('');
 
-	const onFilterChapter = (filter) => {
-		setSearchValue(filter);
+	const debounceSearch = useDebounce(
+		(filter) => (searchTarget === 'chapter' ? onFilterChapter(filter) : onFilterCard(filter)),
+		300
+	);
 
-		const filteredChapters = searchList.filter((item) =>
-			item.name.toLowerCase().includes(filter.toLowerCase())
-		);
+	const handleChange = (value) => {
+		setSearchValue(value);
+		debounceSearch(value);
+	};
+
+	const filterFunc = (filter) => {
+		return searchList.filter((item) => item.name.toLowerCase().includes(filter.toLowerCase()));
+	};
+
+	const onFilterChapter = (filter) => {
+		const filteredChapters = filterFunc(filter);
 
 		dispatch(setChapterFilter(filteredChapters));
 	};
 
 	const onFilterCard = (filter) => {
-		setSearchValue(filter);
-
-		const filteredCards = searchList.data.filter((item) =>
-			item.name.toLowerCase().includes(filter.toLowerCase())
-		);
+		const filteredCards = filterFunc(filter);
 
 		dispatch(setCardFilter(filteredCards));
 	};
@@ -40,13 +49,7 @@ export default function SearchForm({searchList, searchTarget, placeholder}) {
 				className='searchForm'
 				placeholder={placeholder}
 				value={searchValue}
-				onChange={(e) => {
-					if (searchTarget === 'chapter') {
-						onFilterChapter(e.target.value);
-					} else if (searchTarget === 'card') {
-						onFilterCard(e.target.value);
-					}
-				}}
+				onChange={(e) => handleChange(e.target.value)}
 			/>
 		</div>
 	);

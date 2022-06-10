@@ -2,7 +2,7 @@ import './chapterList.css';
 
 import useUpdate from '../../services/useUpdate';
 
-import {useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
@@ -12,22 +12,22 @@ import SearchForm from '../SearchForm/SearchForm';
 
 import {delModalOpen} from '../../store/modalSlice';
 
-import debounce from '../../services/debounce';
+import useDebounce from '../../services/useDebounce';
 
 import setContent from '../../utils/setContent';
 
-export default function ProgramList() {
+export default function ChapterList() {
 	const dispatch = useDispatch();
+	// const {debounce} = useDebounce();
 
 	const {updateChapters, updateCardList} = useUpdate();
-
-	const chapWrapperRef = useRef();
 
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 	const filteredChapters = useSelector((state) => state.chapter.chapterFiltered);
 	const chapterStatus = useSelector((state) => state.chapter.chapterListStatus);
+	// const activeChapter = useSelector((state) => state.chapter.activeChapter);
 
-	const [scrollClass, setScrollClass] = useState('');
+	const [scrollClass, setScrollClass] = useState('botOverflow');
 
 	useEffect(() => {
 		if (chapterStatus !== 'idle') {
@@ -36,45 +36,38 @@ export default function ProgramList() {
 		// eslint-disable-next-line
 	}, []);
 
-	const onScrollWrapper = debounce((e) => {
+	const onScrollWrapper = (e) => {
 		const scrollPos = e.target.scrollTop;
 		const scrollHeight = e.target.scrollHeight;
 		const curHeight = e.target.offsetHeight;
 
 		if (scrollPos > 0 && scrollPos < scrollHeight - curHeight) {
 			setScrollClass('topOverflow botOverflow');
-		} else if (curHeight < scrollHeight && scrollPos !== scrollHeight - curHeight) {
-			setScrollClass('botOverflow');
 		} else if (scrollPos > 0) {
 			setScrollClass('topOverflow');
 		} else {
-			setScrollClass('');
+			setScrollClass('botOverflow');
 		}
-	}, 50);
-
-	const onDeleteChapter = (id) => {
-		dispatch(delModalOpen(id));
 	};
 
-	const setChapList = () => {
+	const debounceScroll = useDebounce((e) => onScrollWrapper(e), 50);
+
+	const chapListContent = useMemo(() => {
 		if (filteredChapters.length > 0) {
 			const arr = [...filteredChapters]
 				.sort((prevItem, item) =>
 					prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})
 				)
-				.map((item) => (
-					<ProgramItem
-						name={item.name}
-						id={item.id}
-						onClick={() => updateCardList(item.id)}
-						onDelete={() => onDeleteChapter(item.id)}
-						key={uuid()}
-					/>
-				));
+				.map((item) => <ProgramItem name={item.name} id={item.id} key={uuid()} />);
 			return arr;
 		}
 		return null;
-	};
+	}, [filteredChapters]);
+
+	const content = useMemo(
+		() => setContent(chapterStatus, View, chapListContent),
+		[chapterStatus, chapListContent]
+	);
 
 	return (
 		<div className='chapterList'>
@@ -89,11 +82,8 @@ export default function ProgramList() {
 					searchTarget={'chapter'}
 				/>
 			</div>
-			<div
-				className={'chapterListContent ' + scrollClass}
-				ref={chapWrapperRef}
-				onScroll={onScrollWrapper}>
-				{setContent(chapterStatus, View, setChapList())}
+			<div className={'chapterListContent ' + scrollClass} onScroll={debounceScroll}>
+				{content}
 			</div>
 		</div>
 	);

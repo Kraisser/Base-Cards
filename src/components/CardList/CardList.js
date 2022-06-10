@@ -1,5 +1,6 @@
 import './cardList.css';
 
+import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {v4 as uuid} from 'uuid';
 
@@ -8,12 +9,17 @@ import CardListItem from '../CardItem/CardItem';
 import setContent from '../../utils/setContent';
 import SearchForm from '../SearchForm/SearchForm';
 
-export default function ChapList() {
+export default function CardList() {
 	const cardList = useSelector((state) => state.cardList.cardList);
 	const filteredCardList = useSelector((state) => state.cardList.filteredCardList);
 	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
 
 	const chapHeader = cardList.description ? cardList.description : 'Выберите раздел';
+
+	const content = useMemo(
+		() => setContent(cardListStatus, View, filteredCardList),
+		[filteredCardList, cardListStatus]
+	);
 
 	return (
 		<div className='cardListWrapper'>
@@ -25,7 +31,7 @@ export default function ChapList() {
 				{/* <div className='formLinkButWrapper'></div> */}
 			</div>
 
-			{setContent(cardListStatus, View, filteredCardList)}
+			{content}
 		</div>
 	);
 }

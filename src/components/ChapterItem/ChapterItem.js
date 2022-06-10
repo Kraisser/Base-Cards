@@ -1,26 +1,38 @@
 import './chapterItem.css';
 
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 
 import useUpload from '../../services/useUpload';
+import useUpdate from '../../services/useUpdate';
+
+import {delModalOpen} from '../../store/modalSlice';
 
 import delIcon from '../../assets/icons/delete-icon.png';
 import slideIcon from '../../assets/icons/menu-slide.png';
 import editChapterIcon from '../../assets/icons/edit-30-icon.png';
 import confirmIcon from '../../assets/icons/confirm-icon.png';
 
-export default function ChapterItem({name, id, onClick, onDelete}) {
+export default function ChapterItem({name, id}) {
+	const dispatch = useDispatch();
+
+	console.log('rerender chapItem');
 	const {updateChapterName} = useUpload();
+	const {updateCardList} = useUpdate();
 
 	const [menu, setMenu] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [chapName, setChapName] = useState(name);
 
+	useEffect(() => {
+		console.log('because name');
+	}, [id]);
+
 	const clickDelegation = (e) => {
 		const targetClassList = e.target.classList;
 
 		if (targetClassList.contains('chapterDelIcon')) {
-			onDelete();
+			dispatch(delModalOpen(id));
 		} else if (
 			targetClassList.contains('chapterItemMenu') ||
 			targetClassList.contains('chapterSlideIcon')
@@ -33,7 +45,7 @@ export default function ChapterItem({name, id, onClick, onDelete}) {
 		} else if (targetClassList.contains('enterEditIcon')) {
 			onEnterEdit();
 		} else {
-			onClick();
+			updateCardList(id);
 		}
 	};
 
@@ -86,12 +98,7 @@ export default function ChapterItem({name, id, onClick, onDelete}) {
 
 			<div className={`chapterItemMenu ${openMenu}`}>
 				<img src={slideIcon} alt='chapter menu' className='chapterSlideIcon' />
-				<img
-					src={editChapterIcon}
-					alt='edit chapter'
-					className='chapterEditIcon'
-					onClick={onToggleEdit}
-				/>
+				<img src={editChapterIcon} alt='edit chapter' className='chapterEditIcon' />
 				<img src={delIcon} alt='name' className='chapterDelIcon' />
 			</div>
 			{nameWrapper}

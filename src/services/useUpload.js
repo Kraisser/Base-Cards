@@ -1,4 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
+import {useCallback} from 'react';
 
 import useRequests from './useRequests';
 import useUpdate from './useUpdate';
@@ -14,16 +15,19 @@ export default function useUpload() {
 	const {postChapter, postCard, deleteChapter, deleteCard, editChapter} = useRequests();
 	const {updateChapters, updateCardList} = useUpdate();
 
-	const uploadNewChapter = async (id, name) => {
-		try {
-			const chapters = [...chapterList, {id, name}];
-			await postChapter(id, name);
+	const uploadNewChapter = useCallback(
+		async (id, name) => {
+			try {
+				const chapters = [...chapterList, {id, name}];
+				await postChapter(id, name);
 
-			dispatch(chapterListSuccess(chapters));
-		} catch (e) {
-			dispatch(chapterListError());
-		}
-	};
+				dispatch(chapterListSuccess(chapters));
+			} catch (e) {
+				dispatch(chapterListError());
+			}
+		},
+		[chapterList, postChapter, dispatch]
+	);
 
 	const uploadNewCard = (newCard, programId, activeChapter, id) => {
 		postCard(newCard, programId)
@@ -61,17 +65,20 @@ export default function useUpload() {
 		});
 	};
 
-	const updateChapterName = (id, name) => {
-		editChapter(id, name);
+	const updateChapterName = useCallback(
+		(id, name) => {
+			editChapter(id, name);
 
-		const newChapters = chapterList.map((item) => {
-			if (item.id === id) {
-				return {id, name: name};
-			}
-			return item;
-		});
-		dispatch(chapterListSuccess(newChapters));
-	};
+			const newChapters = chapterList.map((item) => {
+				if (item.id === id) {
+					return {id, name: name};
+				}
+				return item;
+			});
+			dispatch(chapterListSuccess(newChapters));
+		},
+		[chapterList]
+	);
 
 	return {
 		uploadNewChapter,
