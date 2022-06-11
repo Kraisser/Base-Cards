@@ -2,7 +2,7 @@ import './chapterList.css';
 
 import useUpdate from '../../services/useUpdate';
 
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
@@ -10,22 +10,16 @@ import {v4 as uuid} from 'uuid';
 import ProgramItem from '../ChapterItem/ChapterItem';
 import SearchForm from '../SearchForm/SearchForm';
 
-import {delModalOpen} from '../../store/modalSlice';
-
 import useDebounce from '../../services/useDebounce';
 
 import setContent from '../../utils/setContent';
 
 export default function ChapterList() {
-	const dispatch = useDispatch();
-	// const {debounce} = useDebounce();
-
-	const {updateChapters, updateCardList} = useUpdate();
+	const {updateChapters} = useUpdate();
 
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 	const filteredChapters = useSelector((state) => state.chapter.chapterFiltered);
 	const chapterStatus = useSelector((state) => state.chapter.chapterListStatus);
-	// const activeChapter = useSelector((state) => state.chapter.activeChapter);
 
 	const [scrollClass, setScrollClass] = useState('botOverflow');
 

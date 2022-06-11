@@ -52,7 +52,7 @@ export default function useUpload() {
 				}
 				dispatch(setActiveChapter(nextPath));
 			})
-			.then(() => updateCardList(nextPath))
+			// .then(() => updateCardList(nextPath))
 			.catch((e) => console.log(e));
 	};
 
@@ -65,20 +65,17 @@ export default function useUpload() {
 		});
 	};
 
-	const updateChapterName = useCallback(
-		(id, name) => {
-			editChapter(id, name);
+	const updateChapterName = (id, name) => {
+		editChapter(id, name);
 
-			const newChapters = chapterList.map((item) => {
-				if (item.id === id) {
-					return {id, name: name};
-				}
-				return item;
-			});
-			dispatch(chapterListSuccess(newChapters));
-		},
-		[chapterList]
-	);
+		const newChapters = chapterList.map((item) => {
+			if (item.id === id) {
+				return {id, name: name};
+			}
+			return item;
+		});
+		dispatch(chapterListSuccess(newChapters));
+	};
 
 	return {
 		uploadNewChapter,

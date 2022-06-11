@@ -1,12 +1,12 @@
 import './chapterItem.css';
 
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import useUpload from '../../services/useUpload';
-import useUpdate from '../../services/useUpdate';
 
 import {delModalOpen} from '../../store/modalSlice';
+import {setActiveChapter} from '../../store/chapterSlice';
 
 import delIcon from '../../assets/icons/delete-icon.png';
 import slideIcon from '../../assets/icons/menu-slide.png';
@@ -16,17 +16,15 @@ import confirmIcon from '../../assets/icons/confirm-icon.png';
 export default function ChapterItem({name, id}) {
 	const dispatch = useDispatch();
 
-	console.log('rerender chapItem');
 	const {updateChapterName} = useUpload();
-	const {updateCardList} = useUpdate();
+
+	const updateActiveChapter = () => {
+		dispatch(setActiveChapter(id));
+	};
 
 	const [menu, setMenu] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [chapName, setChapName] = useState(name);
-
-	useEffect(() => {
-		console.log('because name');
-	}, [id]);
 
 	const clickDelegation = (e) => {
 		const targetClassList = e.target.classList;
@@ -45,7 +43,7 @@ export default function ChapterItem({name, id}) {
 		} else if (targetClassList.contains('enterEditIcon')) {
 			onEnterEdit();
 		} else {
-			updateCardList(id);
+			updateActiveChapter(id);
 		}
 	};
 
