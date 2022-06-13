@@ -1,7 +1,7 @@
 import './chapterList.css';
 
-import {useEffect, useMemo, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useMemo} from 'react';
+import {useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
 
@@ -9,7 +9,6 @@ import ProgramItem from '../ChapterItem/ChapterItem';
 import SearchForm from '../SearchForm/SearchForm';
 
 import useChapter from '../../services/useChapter';
-import useDebounce from '../../services/useDebounce';
 
 import setContent from '../../utils/setContent';
 
@@ -20,30 +19,12 @@ export default function ChapterList() {
 	const filteredChapters = useSelector((state) => state.chapter.chapterFiltered);
 	const chapterStatus = useSelector((state) => state.chapter.chapterListStatus);
 
-	const [scrollClass, setScrollClass] = useState('botOverflow');
-
 	useEffect(() => {
 		if (chapterStatus !== 'idle') {
 			updateChapters();
 		}
 		// eslint-disable-next-line
 	}, []);
-
-	const onScrollWrapper = (e) => {
-		const scrollPos = e.target.scrollTop;
-		const scrollHeight = e.target.scrollHeight;
-		const curHeight = e.target.offsetHeight;
-
-		if (scrollPos > 0 && scrollPos < scrollHeight - curHeight) {
-			setScrollClass('topOverflow botOverflow');
-		} else if (scrollPos > 0) {
-			setScrollClass('topOverflow');
-		} else {
-			setScrollClass('botOverflow');
-		}
-	};
-
-	const debounceScroll = useDebounce((e) => onScrollWrapper(e), 50);
 
 	const chapListContent = useMemo(() => {
 		if (filteredChapters.length > 0) {
@@ -70,9 +51,7 @@ export default function ChapterList() {
 					searchTarget={'chapter'}
 				/>
 			</div>
-			<div className={'chapterListContent ' + scrollClass} onScroll={debounceScroll}>
-				{setContent(chapterStatus, View, chapListContent)}
-			</div>
+			<div className='chapterListContent'>{setContent(chapterStatus, View, chapListContent)}</div>
 		</div>
 	);
 }

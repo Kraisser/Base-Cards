@@ -10,6 +10,9 @@
 	font-weight: 500;
 	transition: all 0.2s ease;
 }
+.chapterItem:first-child {
+	margin-top: 7px;
+}
 .chapterItemContent {
 	background-color: var(--main-third-color);
 	border-radius: var(--border-mini-radius);
