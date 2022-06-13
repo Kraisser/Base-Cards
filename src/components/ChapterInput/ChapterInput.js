@@ -1,36 +1,39 @@
 import {useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
+import useDebounce from '../../services/useDebounce';
 import useString from '../../services/useString';
+import useValidate from '../../services/useValidate';
 
 export default function ChapterInput({newChap, chapState, onChange, chapErrState}) {
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const {compareChapters} = useString();
+	const {validateField} = useValidate();
 
 	const {chapter, setChapter} = chapState;
 	const {chapterErr, setChapterErr} = chapErrState;
 
 	const chapErrStyle = chapterErr ? 'errorInput' : null;
 
-	const validateChapterName = (value) => {
+	const validateChapterName = useDebounce((value) => {
 		const valueString = value.toLowerCase().trim();
 
 		const compareResult = compareChapters(chapterList, valueString);
 
-		if (compareResult) {
-			return 'Такой раздел уже существует';
+		if (!!compareResult) {
+			setChapterErr('Такой раздел уже существует');
+			return;
 		}
 
-		setChapterErr(null);
-		return false;
-	};
+		validateField(`chapter`, value, setChapterErr);
+	}, 300);
 
 	const setNewName = (e) => {
 		const value = e.target.value;
-		const err = validateChapterName(value);
+		validateChapterName(value);
 
-		onChange(e, setChapter, err);
+		onChange(e, setChapter, true);
 	};
 
 	const content = newChap ? (

@@ -6,7 +6,7 @@ import {useParams, Link, useNavigate} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 
 import setContent from '../../utils/setContent';
-import useUpdate from '../../services/useUpdate';
+import useCards from '../../services/useCards';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
@@ -20,7 +20,7 @@ export default function CardDescription() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const {updateCardList} = useUpdate();
+	const {updateCardList} = useCards();
 
 	const {id, activeChapter} = useParams();
 

@@ -2,18 +2,24 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useCallback} from 'react';
 
 import useRequests from './useRequests';
-import useUpdate from './useUpdate';
 
 import {cardListError, cardListSuccess, cardListLoading} from '../store/cardSlice.js';
 import {chapterListSuccess, chapterListError, setActiveChapter} from '../store/chapterSlice';
 
-export default function useUpload() {
-	const cardList = useSelector((state) => state.cardList.cardList);
+export default function useChapter() {
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const dispatch = useDispatch();
-	const {postChapter, postCard, deleteChapter, deleteCard, editChapter} = useRequests();
-	const {updateChapters, updateCardList} = useUpdate();
+	const {postChapter, getChapters, deleteChapter, editChapter} = useRequests();
+
+	const updateChapters = () => {
+		getChapters()
+			.then((res) => dispatch(chapterListSuccess(res)))
+			.catch((e) => {
+				console.log(e);
+				dispatch(chapterListError());
+			});
+	};
 
 	const uploadNewChapter = useCallback(
 		async (id, name) => {
@@ -29,20 +35,6 @@ export default function useUpload() {
 		[chapterList, postChapter, dispatch]
 	);
 
-	const uploadNewCard = (newCard, programId, activeChapter, id) => {
-		postCard(newCard, programId)
-			.then(() => {
-				if (programId === activeChapter) {
-					const prevData = cardList.data.filter((item) => item.id !== id);
-					const newCardListArr = [...prevData, newCard];
-					const newCardList = {description: cardList.description, data: newCardListArr};
-
-					dispatch(cardListSuccess(newCardList));
-				}
-			})
-			.catch((e) => console.log(e));
-	};
-
 	const deleteChapterFromList = (id, nextPath) => {
 		deleteChapter(id)
 			.then(() => updateChapters())
@@ -52,17 +44,7 @@ export default function useUpload() {
 				}
 				dispatch(setActiveChapter(nextPath));
 			})
-			// .then(() => updateCardList(nextPath))
 			.catch((e) => console.log(e));
-	};
-
-	const onDeleteCard = (cardId, activeChapter) => {
-		deleteCard(cardId, activeChapter).then(() => {
-			const newCardListArr = cardList.data.filter((item) => cardId !== item.id);
-			const newCardList = {description: cardList.description, data: newCardListArr};
-
-			dispatch(cardListSuccess(newCardList));
-		});
 	};
 
 	const updateChapterName = (id, name) => {
@@ -78,10 +60,9 @@ export default function useUpload() {
 	};
 
 	return {
+		updateChapters,
 		uploadNewChapter,
-		uploadNewCard,
 		deleteChapterFromList,
-		onDeleteCard,
 		updateChapterName,
 	};
 }

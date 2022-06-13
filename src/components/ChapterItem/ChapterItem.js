@@ -3,7 +3,7 @@ import './chapterItem.css';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 
-import useUpload from '../../services/useUpload';
+import useChapter from '../../services/useChapter';
 
 import {delModalOpen} from '../../store/modalSlice';
 import {setActiveChapter} from '../../store/chapterSlice';
@@ -15,12 +15,7 @@ import confirmIcon from '../../assets/icons/confirm-icon.png';
 
 export default function ChapterItem({name, id}) {
 	const dispatch = useDispatch();
-
-	const {updateChapterName} = useUpload();
-
-	const updateActiveChapter = () => {
-		dispatch(setActiveChapter(id));
-	};
+	const {updateChapterName} = useChapter();
 
 	const [menu, setMenu] = useState(false);
 	const [edit, setEdit] = useState(false);
@@ -43,7 +38,7 @@ export default function ChapterItem({name, id}) {
 		} else if (targetClassList.contains('enterEditIcon')) {
 			onEnterEdit();
 		} else {
-			updateActiveChapter(id);
+			dispatch(setActiveChapter(id));
 		}
 	};
 

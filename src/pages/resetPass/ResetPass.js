@@ -56,15 +56,17 @@ export default function ResetPass({close}) {
 	const onResetPass = async () => {
 		const valid = await validateField('email', email, setEmailError);
 
-		if (valid) {
-			resetPass(email)
-				.then(() => {
-					clearErrors();
-					setSuccessRequest('Запрос успешно отправлен. Перенаправление...');
-					setTimeout(redirectToMain, 3000);
-				})
-				.catch((err) => errorCustom(err));
+		if (!valid) {
+			return;
 		}
+
+		resetPass(email)
+			.then(() => {
+				clearErrors();
+				setSuccessRequest('Запрос успешно отправлен. Перенаправление...');
+				setTimeout(redirectToMain, 3000);
+			})
+			.catch((err) => errorCustom(err));
 	};
 
 	return (

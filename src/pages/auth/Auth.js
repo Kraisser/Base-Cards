@@ -2,10 +2,10 @@ import './auth.css';
 import '../../css/common.css';
 
 import {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import * as yup from 'yup';
+import {useNavigate} from 'react-router-dom';
 
 import useAuth from '../../services/useAuth';
+import useValidate from '../../services/useValidate';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 
@@ -13,6 +13,7 @@ import googleIcon from '../../assets/icons/google-icon.png';
 
 export default function Auth({close}) {
 	const {signInGoogle, signInEmail, registerEmail} = useAuth();
+	const {validateField} = useValidate();
 
 	const navigate = useNavigate();
 
@@ -25,37 +26,13 @@ export default function Auth({close}) {
 	const emailErrInpStyle = emailError === null ? '' : 'errorInput';
 	const passErrInpStyle = passError === null ? '' : 'errorInput';
 
-	const validSchema = yup.object().shape({
-		email: yup
-			.string('Введите строку')
-			.email('Введите правильный Email')
-			.required('Обязательное поле*'),
-		pass: yup
-			.string('Введите строку')
-			.min(6, 'Минимум 6 символов')
-			.matches(/(?=.*[0-9])(?=.*[a-zA-Z])/g, 'Пароль должен состоять из цифр и букв')
-			.required('Обязательное поле*'),
-	});
-
-	const validateField = (id, value, setErr) => {
-		return validSchema
-			.pick([id])
-			.validate({[id]: value})
-			.then(() => {
-				setErr(null);
-				return true;
-			})
-			.catch((err) => {
-				setErr(err.message);
-				return false;
-			});
-	};
-
 	const validateAll = async () => {
-		return [
+		const validRes = [
 			await validateField('email', email, setEmailError),
 			await validateField('pass', pass, setPassError),
 		];
+
+		return validRes.includes(false);
 	};
 
 	const onChange = (e, setState) => {
@@ -112,9 +89,9 @@ export default function Auth({close}) {
 	const onRegister = async (e) => {
 		e.preventDefault();
 
-		const validArr = await validateAll();
+		const validRes = await validateAll();
 
-		if (validArr.includes(false)) {
+		if (validRes) {
 			return;
 		}
 

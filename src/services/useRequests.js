@@ -36,6 +36,7 @@ export default function useRequests() {
 				.sort((prevItem, item) => item.timeStamp - prevItem.timeStamp);
 
 			return {
+				chapterId: id,
 				description: res.name,
 				data,
 			};

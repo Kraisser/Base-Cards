@@ -1,9 +1,9 @@
-import {useCallback} from 'react';
+// import {useCallback} from 'react';
 
 export default function useString() {
-	const compareChapters = useCallback((chapterList, valueString) => {
+	const compareChapters = (chapterList, valueString) => {
 		return chapterList.find((item) => item.name.toLowerCase() === valueString);
-	}, []);
+	};
 
 	return {compareChapters};
 }

@@ -1,7 +1,5 @@
 import './chapterList.css';
 
-import useUpdate from '../../services/useUpdate';
-
 import {useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -10,12 +8,13 @@ import {v4 as uuid} from 'uuid';
 import ProgramItem from '../ChapterItem/ChapterItem';
 import SearchForm from '../SearchForm/SearchForm';
 
+import useChapter from '../../services/useChapter';
 import useDebounce from '../../services/useDebounce';
 
 import setContent from '../../utils/setContent';
 
 export default function ChapterList() {
-	const {updateChapters} = useUpdate();
+	const {updateChapters} = useChapter();
 
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 	const filteredChapters = useSelector((state) => state.chapter.chapterFiltered);
@@ -58,11 +57,6 @@ export default function ChapterList() {
 		return null;
 	}, [filteredChapters]);
 
-	const content = useMemo(
-		() => setContent(chapterStatus, View, chapListContent),
-		[chapterStatus, chapListContent]
-	);
-
 	return (
 		<div className='chapterList'>
 			<div className='chapterHeader'>
@@ -77,7 +71,7 @@ export default function ChapterList() {
 				/>
 			</div>
 			<div className={'chapterListContent ' + scrollClass} onScroll={debounceScroll}>
-				{content}
+				{setContent(chapterStatus, View, chapListContent)}
 			</div>
 		</div>
 	);
