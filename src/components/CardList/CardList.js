@@ -32,13 +32,21 @@ export default function CardList() {
 		[filteredCardList, cardListStatus]
 	);
 
+	const searchAvailable = cardList.data && cardList.data.length !== 0;
+
 	return (
 		<div className='cardListWrapper'>
 			<div className='cardListHeader'>
 				<h2 title={chapHeader}>{chapHeader}</h2>
-				<div className='cardSearchWrapper'>
-					<SearchForm searchList={cardList} searchTarget={'card'} placeholder={'Поиск карточек'} />
-				</div>
+				{searchAvailable ? (
+					<div className='cardSearchWrapper'>
+						<SearchForm
+							searchList={cardList.data ? cardList.data : false}
+							searchTarget={'card'}
+							placeholder={'Поиск карточек'}
+						/>
+					</div>
+				) : null}
 			</div>
 
 			{content}

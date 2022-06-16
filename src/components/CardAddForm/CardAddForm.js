@@ -2,7 +2,7 @@ import '../../css/common.css';
 import './cardAddForm.css';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect} from 'react';
 
 import useChapter from '../../services/useChapter';
 import useCards from '../../services/useCards';

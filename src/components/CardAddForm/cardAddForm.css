@@ -28,7 +28,7 @@
 	background-color: var(--button-color);
 	color: var(--header-color);
 }
-.chapSelectButActive {
+.chapSelectBut.chapSelectButActive {
 	border: solid 4px var(--button-border-color);
 }
 .chapSelectButActive:hover,

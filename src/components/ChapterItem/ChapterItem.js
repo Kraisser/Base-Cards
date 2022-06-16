@@ -21,6 +21,9 @@ export default function ChapterItem({name, id}) {
 	const [edit, setEdit] = useState(false);
 	const [chapName, setChapName] = useState(name);
 
+	const nameOverflow = name.length > 30;
+	const nameSlice = nameOverflow ? name.substr(0, 30) + ' . . .' : name;
+
 	const clickDelegation = (e) => {
 		const targetClassList = e.target.classList;
 
@@ -74,27 +77,20 @@ export default function ChapterItem({name, id}) {
 			<img src={confirmIcon} alt='Подтвердить' className='enterEditIcon' />
 		</div>
 	) : (
-		<span>{name}</span>
+		<span title={nameOverflow ? name : null}>{nameSlice}</span>
 	);
-	const nameWrapper =
-		name.length > 30 ? (
-			<>
-				<div className='nameHoverWrapper'>
-					<div className='nameHoverContainer'>{name}</div>
-				</div>
-			</>
-		) : null;
 
 	return (
 		<div className='chapterItem' onClick={clickDelegation}>
-			<div className='chapterItemContent'>{content}</div>
+			<div className={`chapterItemContent ${nameOverflow ? 'chapterContentOverflow' : ''}`}>
+				{content}
+			</div>
 
 			<div className={`chapterItemMenu ${openMenu}`}>
 				<img src={slideIcon} alt='chapter menu' className='chapterSlideIcon' />
 				<img src={editChapterIcon} alt='edit chapter' className='chapterEditIcon' />
 				<img src={delIcon} alt='name' className='chapterDelIcon' />
 			</div>
-			{nameWrapper}
 		</div>
 	);
 }

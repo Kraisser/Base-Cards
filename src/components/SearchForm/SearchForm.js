@@ -1,6 +1,6 @@
 import './searchForm.css';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {setChapterFilter} from '../../store/chapterSlice';
@@ -10,24 +10,27 @@ import useDebounce from '../../services/useDebounce';
 
 import searchIcon from '../../assets/icons/search.png';
 
-export default function SearchForm({searchList, searchTarget, placeholder}) {
+export default function SearchForm({searchList = false, searchTarget, placeholder}) {
 	const dispatch = useDispatch();
 
 	const [searchValue, setSearchValue] = useState('');
+
+	const available = searchList && searchList.length !== 0;
 
 	const debounceSearch = useDebounce(
 		(filter) => (searchTarget === 'chapter' ? onFilterChapter(filter) : onFilterCard(filter)),
 		300
 	);
 
+	console.log('renderSearchList');
+
 	const handleChange = (value) => {
 		setSearchValue(value);
 		debounceSearch(value);
 	};
 
-	const filterFunc = (filter) => {
-		return searchList.filter((item) => item.name.toLowerCase().includes(filter.toLowerCase()));
-	};
+	const filterFunc = (filter) =>
+		searchList.filter((item) => item.name.toLowerCase().includes(filter.toLowerCase()));
 
 	const onFilterChapter = (filter) => {
 		const filteredChapters = filterFunc(filter);

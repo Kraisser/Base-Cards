@@ -9,9 +9,17 @@
 	cursor: pointer;
 	font-weight: 500;
 	transition: all 0.2s ease;
+	border-radius: var(--border-mini-radius);
+	box-shadow: 0 0 4px var(--hover-color);
 }
 .chapterItem:first-child {
 	margin-top: 7px;
+}
+.chapterItem:hover {
+	box-shadow: 0 0 8px var(--hover-color);
+}
+.chapterItem:active {
+	transform: scale(0.97);
 }
 .chapterItemContent {
 	background-color: var(--main-third-color);
@@ -22,7 +30,7 @@
 	width: 100%;
 	height: 100%;
 }
-.chapterItemContent::after {
+.chapterContentOverflow::after {
 	content: '';
 	position: absolute;
 	right: 40px;
@@ -33,7 +41,6 @@
 .chapterItemContent span {
 	width: 100%;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	max-height: 1em;
 }
 .chapterItemContent span#text {
@@ -59,10 +66,6 @@
 .chapEditInput:focus-visible {
 	outline: 0;
 	box-shadow: 0 0 8px var(--hover-color);
-}
-.chapterItemContent:active,
-.chapterItemContent:active + .chapterItemMenu {
-	transform: scale(0.97);
 }
 
 /* chapterMenu */
@@ -109,45 +112,4 @@
 /* MenuIcons */
 .chapterDelIcon {
 	transition: transform 0.2s ease;
-}
-
-/* nameHoverWrapper */
-.nameHoverWrapper {
-	position: absolute;
-	transition: opacity 0.5s ease;
-	opacity: 0;
-	word-wrap: break-word;
-	height: 0;
-	cursor: default;
-	z-index: 5;
-	width: 90%;
-	left: 3%;
-	bottom: 40px;
-	filter: drop-shadow(0 0 6px #000);
-	background-color: var(--inactive-color);
-	border-radius: var(--border-mini-radius);
-}
-.nameHoverContainer {
-	padding: 10px;
-}
-.nameHoverWrapper,
-.chapterItem:hover .nameHoverWrapper .nameHoverContainer:hover {
-	visibility: hidden;
-	height: 0;
-	padding: 0;
-}
-.chapterItem:hover .nameHoverWrapper {
-	visibility: visible;
-	height: auto;
-	opacity: 1;
-}
-.chapterItem:hover .nameHoverWrapper:after {
-	content: '';
-	border: solid transparent;
-	position: absolute;
-	top: 100%;
-	left: 15px;
-	border-top-color: var(--inactive-color);
-	border-width: 10px;
-	z-index: 4;
 }

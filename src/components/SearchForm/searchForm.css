@@ -21,6 +21,9 @@
 .searchForm::placeholder {
 	text-align: center;
 }
+.searchForm:disabled:hover {
+	box-shadow: none;
+}
 .searchIcon {
 	position: absolute;
 	top: 5px;
