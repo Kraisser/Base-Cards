@@ -1,0 +1,118 @@
+@import '../../css/variables.css';
+
+.burgerMenu {
+	position: absolute;
+	right: 5px;
+	top: 7px;
+	height: 36px;
+	width: 40px;
+	display: none;
+}
+.burgerItem {
+	position: absolute;
+	width: 40px;
+	height: 8px;
+	background-color: var(--button-color);
+	border-radius: var(--border-radius);
+	transition: transform 0.5s ease-in-out;
+	transition: opacity 0.5s ease-in-out;
+}
+.burgerItem:nth-child(1) {
+	top: 0;
+}
+.burgerItem:nth-child(2) {
+	top: 14px;
+}
+.burgerItem:nth-child(3) {
+	bottom: 0;
+}
+
+.burgerMenuActive .burgerItem:nth-child(1) {
+	animation: normal 0.5s ease-in-out burgerItem1Open forwards;
+}
+.burgerMenuActive .burgerItem:nth-child(2) {
+	animation: normal 0.5s ease-in-out burgerItem2Open forwards;
+}
+.burgerMenuActive .burgerItem:nth-child(3) {
+	animation: normal 0.5s ease-in-out burgerItem3Open forwards;
+}
+
+.burgerMenuClose .burgerItem:nth-child(1) {
+	animation: normal 0.5s ease-in-out burgerItem1Close forwards;
+}
+.burgerMenuClose .burgerItem:nth-child(2) {
+	animation: normal 0.5s ease-in-out burgerItem2Close forwards;
+}
+.burgerMenuClose .burgerItem:nth-child(3) {
+	animation: normal 0.5s ease-in-out burgerItem3Close forwards;
+}
+
+/* Media */
+@media only all and (max-width: 450px) {
+	.burgerMenu {
+		display: block;
+	}
+}
+
+/* Animation */
+@keyframes burgerItem1Open {
+	from {
+		transform: none;
+	}
+	50% {
+		transform: translateY(14px);
+	}
+	to {
+		transform: translateY(14px) rotate(45deg);
+	}
+}
+@keyframes burgerItem2Open {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+@keyframes burgerItem3Open {
+	from {
+		transform: none;
+	}
+	50% {
+		transform: translateY(-14px);
+	}
+	to {
+		transform: translateY(-14px) rotate(-45deg);
+	}
+}
+
+@keyframes burgerItem1Close {
+	from {
+		transform: translateY(14px) rotate(45deg);
+	}
+	50% {
+		transform: translateY(14px);
+	}
+	to {
+		transform: none;
+	}
+}
+@keyframes burgerItem2Close {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes burgerItem3Close {
+	from {
+		transform: translateY(-14px) rotate(-45deg);
+	}
+	50% {
+		transform: translateY(-14px);
+	}
+	to {
+		transform: none;
+	}
+}

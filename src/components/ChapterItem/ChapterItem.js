@@ -6,7 +6,7 @@ import {useDispatch} from 'react-redux';
 import useChapter from '../../services/useChapter';
 
 import {delModalOpen} from '../../store/modalSlice';
-import {setActiveChapter} from '../../store/chapterSlice';
+import {setActiveChapter, setMenuActive} from '../../store/chapterSlice';
 
 import delIcon from '../../assets/icons/delete-icon.png';
 import slideIcon from '../../assets/icons/menu-slide.png';
@@ -41,7 +41,15 @@ export default function ChapterItem({name, id}) {
 		} else if (targetClassList.contains('enterEditIcon')) {
 			onEnterEdit();
 		} else {
-			dispatch(setActiveChapter(id));
+			chapterSelect();
+		}
+	};
+
+	const chapterSelect = () => {
+		dispatch(setActiveChapter(id));
+
+		if (window.innerWidth < 750) {
+			dispatch(setMenuActive(true));
 		}
 	};
 

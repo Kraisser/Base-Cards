@@ -1,0 +1,76 @@
+@import '../../css/variables.css';
+
+.rightContent {
+	display: grid;
+	grid-template-rows: 160px calc(100% - 160px);
+	grid-template-columns: 400px;
+}
+.rightContentHidden {
+	transform: translateX(350px);
+}
+.rightMenuToggle {
+	display: none;
+}
+
+/* Media */
+@media only all and (max-width: 1450px) {
+	.rightContent {
+		grid-template-columns: minmax(350px, 1fr);
+	}
+}
+@media only all and (max-width: 750px) {
+	.rightContent {
+		position: absolute;
+		right: 0;
+		transition: transform 0.5s ease-in-out;
+	}
+	.rightMenuToggle {
+		display: block;
+		position: absolute;
+		top: 30%;
+		right: 0;
+		width: 30px;
+		height: 80px;
+		background-color: var(--main-color);
+		transition: transform 0.5s ease-in-out;
+		cursor: pointer;
+		border-radius: var(--border-mini-radius) 0 0 var(--border-mini-radius);
+	}
+	.rightMenuToggle:before {
+		content: '';
+		position: absolute;
+		right: 0;
+		width: 10px;
+		height: 10px;
+		top: -10px;
+		background: radial-gradient(
+			circle farthest-side at top left,
+			transparent 100%,
+			var(--main-color) 0%
+		);
+	}
+	.rightMenuToggle:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		width: 10px;
+		height: 10px;
+		bottom: -10px;
+		background: radial-gradient(
+			circle farthest-side at bottom left,
+			transparent 100%,
+			var(--main-color) 0%
+		);
+	}
+	.rightMenuToggleActive {
+		transform: translateX(-350px);
+	}
+}
+@media only all and (max-width: 450px) {
+	.rightMenuToggle {
+		display: none;
+	}
+	.rightContent {
+		grid-template-columns: 350px;
+	}
+}

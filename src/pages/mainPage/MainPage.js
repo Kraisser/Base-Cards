@@ -8,6 +8,7 @@ import ChapterList from '../../components/ChapterList/ChapterList';
 import EditBlock from '../../components/EditBlock/EditBlock';
 import CardList from '../../components/CardList/CardList';
 import PageHeader from '../../components/PageHeader/PageHeader';
+import RightContentWrapper from '../../components/RightContentWrapper/RightContentWrapper';
 
 export default function MainPage() {
 	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
@@ -21,10 +22,10 @@ export default function MainPage() {
 				<div className='leftContent'>
 					<CardList />
 				</div>
-				<div className='rightContent'>
+				<RightContentWrapper>
 					<EditBlock />
 					<ChapterList />
-				</div>
+				</RightContentWrapper>
 			</main>
 			{delModal}
 		</>

@@ -1,17 +1,12 @@
 import './pageHeader.css';
 
-import {Link, useNavigate} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import Clock from '../Clock/Clock';
-
-import userIcon from '../../assets/icons/user-icon.png';
+import UserWrapper from '../UserWrapper/UserWrapper';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 export default function PageHeader({auth, close, redirectClearEdit}) {
-	const navigate = useNavigate();
-
-	const {userName, userImage} = useSelector((state) => state.auth);
-
 	const redirectCheck = () => {
 		if (redirectClearEdit) {
 			redirectClearEdit();
@@ -25,20 +20,11 @@ export default function PageHeader({auth, close, redirectClearEdit}) {
 					<h1>Base Cards</h1>
 				</div>
 			</Link>
-			<div className='rightHeaderWrapper'>
+			<div className='headerClockWrapper'>
 				<Clock />
-				{auth === false || close ? null : (
-					<div
-						className='userAuthIconWrapper'
-						onClick={() => {
-							redirectCheck();
-							navigate('/userPage');
-						}}>
-						<img src={userImage ? userImage : userIcon} alt='user' />
-						<div title={userName ? userName : null}>{userName}</div>
-					</div>
-				)}
 			</div>
+			<BurgerMenu />
+			{auth === false || close ? null : <UserWrapper redirectCheck={redirectCheck} />}
 		</header>
 	);
 }

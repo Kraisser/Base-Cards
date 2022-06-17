@@ -87,8 +87,8 @@
 
 /* Media */
 
-/* @media only all and (max-width: 7500px) {
+@media only all and (max-width: 750px) {
 	.chapterList {
-		margin-bottom: 10px;
+		height: calc(100vh - 160px - 50px - 10px);
 	}
-} */
+}

@@ -22,7 +22,7 @@
 .cardItemHeader {
 	margin: 0;
 	overflow: hidden;
-	font-size: 20px;
+	font-size: var(--h3Size);
 	font-weight: 600;
 }
 .cardItemDescriptionLinkWrapper {
@@ -36,7 +36,7 @@
 	grid-row-gap: 10px;
 }
 .cardItemLink {
-	font-size: 16px;
+	font-size: var(--defaultSize);
 	text-decoration: underline;
 	color: var(--main-color);
 }
@@ -49,30 +49,8 @@
 .cardItemDescription {
 	margin: 0;
 	height: 100%;
-	font-size: 14px;
+	font-size: var(--minSize);
 	line-height: 15px;
 	color: var(--text-description-color);
 	overflow-wrap: break-word;
 }
-
-/* Media */
-
-/* @media only all and (max-width: 1430px) {
-	.cardItemWrapper {
-		padding: 10px;
-	}
-	.cardItemImgWrapper {
-		flex-basis: 150px;
-	}
-	.descriptionBut {
-		margin-right: 5px;
-	}
-}
-@media only all and (max-width: 1000px) {
-	.cardItemWrapper div {
-		flex-grow: 1;
-	}
-	.descriptionBut {
-		margin-right: 10px;
-	}
-} */

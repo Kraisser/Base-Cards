@@ -20,6 +20,7 @@
 }
 .searchForm::placeholder {
 	text-align: center;
+	font-size: var(--defaultSize);
 }
 .searchForm:disabled:hover {
 	box-shadow: none;

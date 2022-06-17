@@ -1,0 +1,33 @@
+.userWrapper {
+	height: 60px;
+	cursor: pointer;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.userWrapper img {
+	height: 40px;
+	margin: 0 auto;
+}
+.userWrapper div {
+	color: var(--header-color);
+	text-align: center;
+}
+
+/* Media */
+@media only all and (max-width: 750px) {
+	.userWrapper {
+		justify-self: right;
+		padding-right: 10px;
+		height: auto;
+	}
+	.userWrapper div {
+		display: none;
+	}
+}
+@media only all and (max-width: 450px) {
+	.userWrapper {
+		display: none;
+	}
+}

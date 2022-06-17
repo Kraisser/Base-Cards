@@ -4,11 +4,7 @@
 	height: var(--content-height);
 	overflow: hidden;
 }
-.rightContent {
-	display: grid;
-	grid-template-rows: 160px calc(100% - 160px);
-	grid-template-columns: 400px;
-}
+
 .leftContent {
 	height: calc(100vh - 80px);
 	display: flex;
@@ -17,20 +13,14 @@
 
 /* Media */
 
-@media only all and (max-width: 1430px) {
+@media only all and (max-width: 1450px) {
 	.mainWrapper {
 		grid-template-columns: 2fr 1fr;
 	}
 }
 @media only all and (max-width: 750px) {
 	.mainWrapper {
+		position: relative;
 		grid-template-columns: 1fr;
-		padding: 5px;
-	}
-	.leftContent {
-		order: 1;
-	}
-	.rightContent {
-		order: -1;
 	}
 }

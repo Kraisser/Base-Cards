@@ -27,4 +27,24 @@ body {
 
 	/* Scroll */
 	--scroll-width: 10px;
+
+	/* Fonts */
+	--descrSize: 14px;
+	--defaultSize: 16px;
+	--butSize: 20px;
+	--h1Size: 40px;
+	--h2Size: 24px;
+	--h3Size: 20px;
+}
+
+@media only all and (max-width: 750px) {
+	body {
+		--content-height: calc(100vh - 60px);
+
+		/* Fonts */
+		--butSize: 16px;
+		--h1Size: 30px;
+		--h2Size: 20px;
+		--h3Size: 16px;
+	}
 }
