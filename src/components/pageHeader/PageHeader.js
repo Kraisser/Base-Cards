@@ -6,12 +6,13 @@ import Clock from '../Clock/Clock';
 import UserWrapper from '../UserWrapper/UserWrapper';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-export default function PageHeader({auth, close, redirectClearEdit}) {
+export default function PageHeader({auth, burger, close, redirectClearEdit}) {
 	const redirectCheck = () => {
 		if (redirectClearEdit) {
 			redirectClearEdit();
 		}
 	};
+	console.log('auth, burger, close: ', auth, burger, close);
 
 	return (
 		<header className='header'>
@@ -23,9 +24,10 @@ export default function PageHeader({auth, close, redirectClearEdit}) {
 			<div className='headerClockWrapper'>
 				<Clock />
 			</div>
-			{auth === false || close ? null : (
+			{auth === false || close === false ? null : (
 				<>
-					<BurgerMenu />
+					{burger === false ? null : <BurgerMenu />}
+
 					<UserWrapper redirectCheck={redirectCheck} />
 				</>
 			)}

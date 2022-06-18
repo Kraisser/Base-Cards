@@ -22,7 +22,6 @@ export default function CardAddForm() {
 	const {updateChapters, uploadNewChapter} = useChapter();
 
 	const {uploadNewCard, onDeleteCard} = useCards();
-	// console.log('render formPage');
 
 	const chapterListStatus = useSelector((state) => state.chapter.chapterListStatus);
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
@@ -166,21 +165,15 @@ export default function CardAddForm() {
 		setChapter('');
 	};
 
-	const showError = (errState) => {
-		if (errState !== true) {
-			return errState;
-		}
-	};
-
 	return (
 		<>
 			<form className='cardForm' onSubmit={(e) => onExSubmit(e, editCard ? editCard.id : null)}>
-				<h3 className='formHeader'>{editCard ? `Изменение карточки` : `Добавление карточки`}</h3>
+				<h2 className='formHeader'>{editCard ? `Изменение карточки` : `Добавление карточки`}</h2>
 				<div className='fieldWrapper'>
 					<label htmlFor='cardName' className='formInputLabel'>
 						Название карточки*
 					</label>
-					<div className='errorForm'>{showError(cardNameErr)}</div>
+					{cardNameErr ? <div className='errorForm'>{cardNameErr}</div> : null}
 					<input
 						type='text'
 						id='cardName'

@@ -57,7 +57,7 @@ export default function CardDescription() {
 
 	return (
 		<>
-			<PageHeader />
+			<PageHeader burger={false} />
 
 			<div className='cardDescriptionWrapper pageContentWrapper '>
 				<div className='cardDescrWrapper pageContentContainer'>

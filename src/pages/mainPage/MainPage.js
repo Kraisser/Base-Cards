@@ -14,6 +14,7 @@ export default function MainPage() {
 	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
 
 	const delModal = delModalStatus ? <DeleteModal /> : null;
+	console.log('render MainPage');
 
 	return (
 		<>

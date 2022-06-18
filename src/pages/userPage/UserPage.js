@@ -43,14 +43,16 @@ export default function UserPage({close}) {
 
 	return (
 		<>
-			<PageHeader close={close} />
+			<PageHeader burger={false} />
 			<div className='pageContentWrapper'>
 				<div className='pageContentContainer userPageContainer'>
 					<h2>Личный кабинет</h2>
 					<div className='userPageElement'>
 						<img src={userImage ? userImage : userIcon} alt='userImage' />
 					</div>
-					<div className='userPageElement userPageName'>{userName}</div>
+					<div className='userPageElement userPageName'>
+						<h3>{userName}</h3>
+					</div>
 					<div className='userPageElement userPageName'>
 						{emailConfirmed === true
 							? 'Email подтверждён'

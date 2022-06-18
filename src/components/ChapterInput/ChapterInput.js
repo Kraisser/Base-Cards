@@ -14,7 +14,7 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 	const {chapter, setChapter} = chapState;
 	const {chapterErr, setChapterErr} = chapErrState;
 
-	const chapErrStyle = chapterErr ? 'errorInput' : null;
+	const chapErrStyle = chapterErr ? 'errorInput' : '';
 
 	const validateChapterName = useDebounce((value) => {
 		const valueString = value.toLowerCase().trim();
@@ -41,7 +41,7 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 			<label htmlFor='chapter' className='formInputLabel'>
 				Новый раздел*
 			</label>
-			<div className='errorForm'>{chapterErr ? chapterErr : null}</div>
+			{chapterErr ? <div className='errorForm'>{chapterErr}</div> : null}
 			<input
 				type='text'
 				name='chapter'
@@ -56,7 +56,7 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 			<label htmlFor='chapter' className='formInputLabel'>
 				Выберите раздел*
 			</label>
-			<div className='errorForm'>{chapterErr ? chapterErr : null}</div>
+			{chapterErr ? <div className='errorForm'>{chapterErr}</div> : null}
 			<select
 				name='chapter'
 				id='chapter'

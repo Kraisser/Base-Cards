@@ -10,6 +10,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 10;
 }
 .modalWrapper {
 	display: flex;
@@ -21,10 +22,11 @@
 	max-width: 350px;
 	background-color: var(--main-color);
 	border-radius: var(--border-radius);
+	z-index: 10;
 }
 .modalDescription {
 	color: var(--header-color);
-	font-size: 18px;
+	font-size: var(--defaultSize);
 }
 .modalDescription p:first-of-type {
 	margin-top: 0;
@@ -36,7 +38,7 @@
 	display: flex;
 }
 .modalBut {
-	font-size: 20px;
+	font-size: var(--butSize);
 	color: var(--header-color);
 	width: 100px;
 	height: 30px;

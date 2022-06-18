@@ -12,7 +12,7 @@
 }
 .cardItemWrapper:hover {
 	box-shadow: 0 0 8px var(--hover-color);
-	z-index: 5;
+	z-index: 6;
 }
 .cardItemWrapper:active {
 	transform: scale(0.95);

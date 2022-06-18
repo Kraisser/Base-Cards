@@ -1,16 +1,18 @@
+@import '../../css/variables.css';
+
 .cardForm {
 	padding: 10px;
 	background-color: var(--main-color);
 	display: flex;
 	flex-direction: column;
-	min-width: 600px;
+	width: 700px;
 	border-radius: var(--border-radius);
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 }
 .formHeader {
 	margin: 0 0 15px;
 	color: var(--header-color);
-	font-size: 30px;
+	font-size: var(--h2Size);
 	text-align: center;
 }
 .fieldWrapper {
@@ -24,9 +26,7 @@
 }
 .chapSelectBut {
 	height: 50px;
-	width: 250px;
-	background-color: var(--button-color);
-	color: var(--header-color);
+	width: 80%;
 }
 .chapSelectBut.chapSelectButActive {
 	border: solid 4px var(--button-border-color);
@@ -54,6 +54,9 @@
 	padding: 0 5px;
 	transition: box-shadow 0.1s ease-in;
 	border-radius: var(--border-mini-radius);
+}
+.exSelectInput {
+	width: 100%;
 }
 .formInput {
 	border-width: 0;
@@ -94,4 +97,16 @@
 .formButWrapper {
 	display: flex;
 	justify-content: center;
+}
+
+/* Media */
+@media only all and (max-width: 750px) {
+	.cardForm {
+		width: 100%;
+	}
+}
+@media only all and (max-width: 450px) {
+	.chapSelectBut {
+		width: 90%;
+	}
 }

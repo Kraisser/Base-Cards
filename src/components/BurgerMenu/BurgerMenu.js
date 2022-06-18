@@ -7,7 +7,9 @@ export default function BurgerMenu() {
 	const dispatch = useDispatch();
 	const menuActive = useSelector((state) => state.chapter.menuHidden);
 
+	console.log('window.innerWidth: ', window.innerWidth);
 	if (window.innerWidth > 450) {
+		console.log('burger width');
 		return null;
 	}
 
