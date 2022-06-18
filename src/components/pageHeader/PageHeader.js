@@ -23,8 +23,12 @@ export default function PageHeader({auth, close, redirectClearEdit}) {
 			<div className='headerClockWrapper'>
 				<Clock />
 			</div>
-			<BurgerMenu />
-			{auth === false || close ? null : <UserWrapper redirectCheck={redirectCheck} />}
+			{auth === false || close ? null : (
+				<>
+					<BurgerMenu />
+					<UserWrapper redirectCheck={redirectCheck} />
+				</>
+			)}
 		</header>
 	);
 }

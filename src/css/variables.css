@@ -39,7 +39,7 @@ body {
 
 @media only all and (max-width: 750px) {
 	body {
-		--content-height: calc(100vh - 60px);
+		--content-height: calc(100vh - 50px);
 
 		/* Fonts */
 		--butSize: 16px;

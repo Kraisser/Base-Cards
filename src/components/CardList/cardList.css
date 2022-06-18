@@ -13,7 +13,7 @@
 	grid-gap: 10px;
 	align-items: center;
 	overflow: hidden;
-	padding: 0 5px;
+	padding: 0 5px 5px;
 }
 .cardListHeader h2 {
 	text-align: center;

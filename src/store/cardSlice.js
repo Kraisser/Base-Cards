@@ -5,7 +5,7 @@ import {resetStore} from './serviceSlice';
 const initialState = {
 	cardList: {},
 	filteredCardList: [],
-	cardListStatus: 'loading',
+	cardListStatus: 'firstLoad',
 };
 
 const cardSlice = createSlice({

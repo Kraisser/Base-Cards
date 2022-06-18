@@ -25,7 +25,11 @@ export default function CardList() {
 		}
 	}, [activeChapter]);
 
-	const chapHeader = cardList.description ? cardList.description : 'Выберите раздел';
+	const chapHeader = cardList.description
+		? cardList.description
+		: cardListStatus === 'firstLoad'
+		? 'Выберите раздел'
+		: 'Пожалуйста подождите';
 
 	const content = useMemo(
 		() => setContent(cardListStatus, View, filteredCardList),
