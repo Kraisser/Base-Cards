@@ -24,6 +24,7 @@
 }
 .cardSearchWrapper {
 	width: 250px;
+	padding: 5px 0;
 }
 .cardListContainer {
 	display: grid;

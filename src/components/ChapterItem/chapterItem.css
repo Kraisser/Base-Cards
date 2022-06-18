@@ -41,7 +41,6 @@
 .chapterItemContent span {
 	width: 100%;
 	overflow: hidden;
-	max-height: 1em;
 }
 .chapterItemContent span#text {
 	max-height: 1em;

@@ -8,6 +8,7 @@ const initialState = {
 	chapterListStatus: 'loading',
 	chapterFiltered: [],
 	menuHidden: false,
+	clientWidth: 0,
 };
 
 const chapterSlice = createSlice({
@@ -34,6 +35,9 @@ const chapterSlice = createSlice({
 		setMenuActive: (state, action) => {
 			state.menuHidden = action.payload;
 		},
+		setClientWidth: (state, action) => {
+			state.clientWidth = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(resetStore, () => initialState);
@@ -50,4 +54,5 @@ export const {
 	chapterListError,
 	chapterListSuccess,
 	setMenuActive,
+	setClientWidth,
 } = actions;

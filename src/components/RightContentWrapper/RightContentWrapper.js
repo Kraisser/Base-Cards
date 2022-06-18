@@ -1,21 +1,22 @@
 import './rightContentWrapper.css';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 
 import useDebounce from '../../services/useDebounce';
-import {setMenuActive} from '../../store/chapterSlice';
+import {setClientWidth, setMenuActive} from '../../store/chapterSlice';
 
 export default function RightContentWrapper({children}) {
 	const dispatch = useDispatch();
+
 	const menuHidden = useSelector((state) => state.chapter.menuHidden);
-	const [clientWidth, setClientWidth] = useState(window.innerWidth);
+	const clientWidth = useSelector((state) => state.chapter.clientWidth);
 
 	const openMenu = useDebounce(() => {
 		const newWidth = window.innerWidth;
 
 		if (newWidth !== clientWidth) {
-			setClientWidth(newWidth);
+			dispatch(setClientWidth(newWidth));
 			dispatch(setMenuActive(false));
 		}
 	}, 1000);
@@ -37,7 +38,6 @@ export default function RightContentWrapper({children}) {
 	return (
 		<>
 			{rightMenuToggle}
-			{/* <UserWrapper /> */}
 			<div className={`rightContent ${menuHidden ? 'rightContentHidden' : ''}`}>{children}</div>
 		</>
 	);

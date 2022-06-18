@@ -6,10 +6,9 @@ import {setMenuActive} from '../../store/chapterSlice';
 export default function BurgerMenu() {
 	const dispatch = useDispatch();
 	const menuActive = useSelector((state) => state.chapter.menuHidden);
+	const clientWidth = useSelector((state) => state.chapter.clientWidth);
 
-	console.log('window.innerWidth: ', window.innerWidth);
-	if (window.innerWidth > 450) {
-		console.log('burger width');
+	if (clientWidth > 450) {
 		return null;
 	}
 
