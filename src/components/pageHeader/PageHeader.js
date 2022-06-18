@@ -12,15 +12,21 @@ export default function PageHeader({auth, burger, close, redirectClearEdit}) {
 			redirectClearEdit();
 		}
 	};
-	console.log('auth, burger, close: ', auth, burger, close);
 
 	return (
 		<header className='header'>
-			<Link to={close ? '' : '/'} onClick={redirectCheck}>
+			{close === false ? (
 				<div className='mainHeader'>
 					<h1>Base Cards</h1>
 				</div>
-			</Link>
+			) : (
+				<Link to='/' onClick={redirectCheck}>
+					<div className='mainHeader'>
+						<h1>Base Cards</h1>
+					</div>
+				</Link>
+			)}
+
 			<div className='headerClockWrapper'>
 				<Clock />
 			</div>

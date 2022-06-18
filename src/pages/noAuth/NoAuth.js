@@ -13,7 +13,7 @@ export default function NoAuth({close}) {
 
 	useEffect(() => {
 		if (redirectTimer === 0) {
-			navigate('/');
+			// navigate('/');
 			return;
 		}
 
@@ -27,7 +27,7 @@ export default function NoAuth({close}) {
 
 	return (
 		<>
-			<PageHeader close={close} />
+			<PageHeader auth={false} />
 			<div className='pageContentWrapper'>
 				<div className='noAuthHeader'>
 					<h2>Ошибка авторизации</h2>

@@ -29,8 +29,8 @@
 .chapterListContent::before {
 	content: '';
 	position: absolute;
-	left: 10px;
-	right: 20px;
+	left: 5px;
+	right: 15px;
 	height: 7px;
 	z-index: 5;
 	background: linear-gradient(var(--main-color), transparent);
@@ -39,8 +39,8 @@
 	content: '';
 	position: absolute;
 	bottom: 10px;
-	left: 10px;
-	right: 20px;
+	left: 5px;
+	right: 15px;
 	height: 7px;
 	z-index: 5;
 	background: linear-gradient(transparent, var(--main-color));
@@ -89,6 +89,6 @@
 
 @media only all and (max-width: 750px) {
 	.chapterList {
-		height: calc(100vh - 160px - 50px - 10px);
+		height: calc(100vh - 160px - 50px);
 	}
 }

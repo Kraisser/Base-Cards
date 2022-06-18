@@ -71,10 +71,10 @@ export default function ResetPass({close}) {
 
 	return (
 		<>
-			<PageHeader close={close} />
-			<div className='authWrapper'>
+			<PageHeader auth={false} />
+			<div className='pageContentWrapper'>
 				<form action='' className='authForm'>
-					<h3 className='formHeader'>Восстановление пароля Email</h3>
+					<h2 className='formHeader'>Восстановление пароля Email</h2>
 
 					<div className='fieldWrapper'>
 						<label htmlFor='login' className='formInputLabel'>

@@ -8,7 +8,6 @@
 	background-color: var(--main-color);
 }
 .header a {
-	color: var(--header-color);
 	text-decoration: none;
 }
 .mainHeader {
@@ -20,6 +19,7 @@
 }
 .mainHeader h1 {
 	margin: 0;
+	color: var(--header-color);
 	font-size: var(--h1Size);
 }
 .headerClockWrapper {

@@ -9,7 +9,7 @@ import CardAddForm from '../../components/CardAddForm/CardAddForm';
 export default function FormPage() {
 	return (
 		<>
-			<PageHeader />
+			<PageHeader burger={false} />
 			<main>
 				<div className='formWrapper'>
 					<CardAddForm />

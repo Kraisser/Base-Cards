@@ -11,7 +11,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 
 import googleIcon from '../../assets/icons/google-icon.png';
 
-export default function Auth({close}) {
+export default function Auth() {
 	const {signInGoogle, signInEmail, registerEmail} = useAuth();
 	const {validateField} = useValidate();
 
@@ -106,10 +106,10 @@ export default function Auth({close}) {
 
 	return (
 		<>
-			<PageHeader close={close} />
-			<div className='authWrapper'>
+			<PageHeader close={false} />
+			<div className='pageContentWrapper'>
 				<form action='' className='authForm'>
-					<h3 className='formHeader'>Войти с помощью Email</h3>
+					<h2 className='formHeader'>Войти с помощью Email</h2>
 
 					<div className='fieldWrapper'>
 						<label htmlFor='login' className='formInputLabel'>
@@ -140,15 +140,15 @@ export default function Auth({close}) {
 					</div>
 					{errorAuth ? <div className='authInfo authError'>{errorAuth}</div> : null}
 					<div className='fieldWrapper authButsWrapper'>
-						<button type='button' className='formBut but' onClick={onSignIn}>
+						<button type='button' className='but authBut' onClick={onSignIn}>
 							Войти
 						</button>
-						<button type='button' className='formBut but' onClick={() => navigate('/resetPass')}>
+						<button type='button' className='but authBut' onClick={() => navigate('/resetPass')}>
 							Восстановить пароль
 						</button>
 					</div>
 					<div className='formButWrapper authButsWrapper'>
-						<button type='button' className='formBut but' onClick={onRegister}>
+						<button type='button' className='but authBut' onClick={onRegister}>
 							Зарегистрироваться
 						</button>
 					</div>

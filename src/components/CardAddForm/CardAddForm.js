@@ -51,7 +51,7 @@ export default function CardAddForm() {
 	const [cardNameErr, setCardNameErr] = useState(null);
 	const [chapterErr, setChapterErr] = useState(null);
 
-	const nameErrInpStyle = cardNameErr ? 'errorInput' : null;
+	const nameErrInpStyle = cardNameErr ? 'errorInput' : '';
 
 	const validateFunc = {
 		cardName: (value = cardName) => validateField(`cardName`, value, setCardNameErr),
@@ -229,7 +229,7 @@ export default function CardAddForm() {
 						id='cardDescription'
 						onChange={(e) => setCardDescription(e.target.value)}
 						value={cardDescription}
-						className='exDescriptionInput'></textarea>
+						className='descriptionInput'></textarea>
 				</div>
 				<div className='formButWrapper'>
 					<button type='submit' className='formBut but'>

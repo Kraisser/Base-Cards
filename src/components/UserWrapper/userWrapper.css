@@ -28,6 +28,8 @@
 }
 @media only all and (max-width: 450px) {
 	.userWrapper {
-		display: none;
+		position: absolute;
+		left: 10px;
+		top: 5px;
 	}
 }
