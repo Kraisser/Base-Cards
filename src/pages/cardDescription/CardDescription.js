@@ -64,9 +64,9 @@ export default function CardDescription() {
 					{setContent(cardListStatus, View, currentCard, {onEditCard, onDeleteEx})}
 				</div>
 				<div className='cardDescButWrapper'>
-					<button className='onMainBut but'>
-						<Link to='/'>на главную</Link>
-					</button>
+					<Link to='/'>
+						<button className='onMainBut but'>на главную</button>
+					</Link>
 				</div>
 			</div>
 			{delModal}

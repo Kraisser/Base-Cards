@@ -32,13 +32,10 @@
 	display: flex;
 	justify-content: center;
 }
+.formLinkButWrapper a {
+	width: 100%;
+}
 .formLinkBut {
 	height: 40px;
 	width: 100%;
-	background-color: var(--button-color);
-}
-.formLinkBut a {
-	font-size: 20px;
-	color: var(--header-color);
-	text-decoration: none;
 }

@@ -88,9 +88,9 @@ export default function UserPage({close}) {
 				</div>
 				{close ? null : (
 					<div className='onMainButWrapper'>
-						<button className='onMainBut but'>
-							<Link to='/'>На главную</Link>
-						</button>
+						<Link to='/'>
+							<button className='onMainBut but'>На главную</button>
+						</Link>
 					</div>
 				)}
 			</div>
