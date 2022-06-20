@@ -3,16 +3,11 @@
 /* edit */
 .editWrapper {
 	padding: 10px;
-	background-color: var(--main-color);
 }
 .editContainer {
 	display: grid;
 	grid-template-rows: 40px 40px;
-	grid-gap: 20px;
-}
-.editContainer div {
-	display: flex;
-	align-items: center;
+	grid-gap: 10px;
 }
 .editHeader {
 	margin-bottom: 10px;
@@ -39,3 +34,10 @@
 	height: 40px;
 	width: 100%;
 }
+
+/* Media */
+/* @media only all and (max-width: 450px) {
+	.editContainer {
+		grid-gap: 10px;
+	}
+} */

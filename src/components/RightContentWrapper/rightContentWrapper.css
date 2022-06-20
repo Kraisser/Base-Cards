@@ -2,8 +2,9 @@
 
 .rightContent {
 	display: grid;
-	grid-template-rows: 160px calc(100% - 160px);
+	grid-template-rows: 150px calc(100% - 150px);
 	grid-template-columns: 400px;
+	background-color: var(--main-color);
 }
 .rightContentHidden {
 	transform: translateX(350px);
@@ -71,6 +72,6 @@
 		display: none;
 	}
 	.rightContent {
-		grid-template-columns: 350px;
+		grid-template: 150px calc(100%-150px) / 350px;
 	}
 }
