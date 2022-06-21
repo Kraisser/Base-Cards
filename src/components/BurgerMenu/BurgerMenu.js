@@ -12,8 +12,6 @@ export default function BurgerMenu() {
 		return null;
 	}
 
-	console.log('render burgerMenu');
-
 	return (
 		<div
 			className={`burgerMenu ${menuActive ? 'burgerMenuClose' : 'burgerMenuActive'}`}

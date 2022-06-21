@@ -15,14 +15,10 @@ export default function SearchForm({searchList = false, searchTarget, placeholde
 
 	const [searchValue, setSearchValue] = useState('');
 
-	const available = searchList && searchList.length !== 0;
-
 	const debounceSearch = useDebounce(
 		(filter) => (searchTarget === 'chapter' ? onFilterChapter(filter) : onFilterCard(filter)),
 		300
 	);
-
-	console.log('renderSearchList');
 
 	const handleChange = (value) => {
 		setSearchValue(value);

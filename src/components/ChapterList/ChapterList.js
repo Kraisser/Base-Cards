@@ -2,10 +2,9 @@ import './chapterList.css';
 
 import {useEffect, useMemo} from 'react';
 import {useSelector} from 'react-redux';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
-import {v4 as uuid} from 'uuid';
-
-import ProgramItem from '../ChapterItem/ChapterItem';
+import ChapterItem from '../ChapterItem/ChapterItem';
 import SearchForm from '../SearchForm/SearchForm';
 
 import useChapter from '../../services/useChapter';
@@ -28,15 +27,17 @@ export default function ChapterList() {
 
 	const chapListContent = useMemo(() => {
 		if (filteredChapters.length > 0) {
-			const arr = [...filteredChapters]
-				.sort((prevItem, item) =>
-					prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})
-				)
-				.map((item) => <ProgramItem name={item.name} id={item.id} key={uuid()} />);
+			const arr = filteredChapters.map((item) => (
+				<CSSTransition timeout={300} classNames='chap-item' key={item.id} appear={true}>
+					<ChapterItem name={item.name} id={item.id} />
+				</CSSTransition>
+			));
 			return arr;
 		}
 		return null;
 	}, [filteredChapters]);
+
+	const content = setContent(chapterStatus, View, chapListContent);
 
 	return (
 		<div className='chapterList'>
@@ -51,7 +52,7 @@ export default function ChapterList() {
 					searchTarget={'chapter'}
 				/>
 			</div>
-			<div className='chapterListContent'>{setContent(chapterStatus, View, chapListContent)}</div>
+			<div className='chapterListContent'>{content}</div>
 		</div>
 	);
 }
@@ -61,5 +62,5 @@ function View({data}) {
 		return <div className='chapterNotFound'>Разделы не найдены</div>;
 	}
 
-	return data;
+	return <TransitionGroup component={null}>{data}</TransitionGroup>;
 }

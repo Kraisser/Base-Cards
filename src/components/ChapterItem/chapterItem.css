@@ -41,9 +41,8 @@
 .chapterItemContent span {
 	width: 100%;
 	overflow: hidden;
-}
-.chapterItemContent span#text {
-	max-height: 1em;
+	height: 1.2em;
+	font-size: var(--defaultSize);
 }
 .editChapterInputWrapper {
 	position: relative;
@@ -111,4 +110,30 @@
 /* MenuIcons */
 .chapterDelIcon {
 	transition: transform 0.2s ease;
+}
+
+/* Animation */
+.chap-item-appear {
+	transform: scale(0.5);
+	opacity: 0;
+}
+.chap-item-appear-done {
+	transform: scale(1);
+	opacity: 1;
+}
+.chap-item-enter {
+	transform: scale(0.5);
+	opacity: 0;
+}
+.chap-item-enter-active {
+	transform: scale(1);
+	opacity: 1;
+}
+.chap-item-exit {
+	transform: scale(1);
+	opacity: 1;
+}
+.chap-item-exit-active {
+	transform: scale(0.5);
+	opacity: 0;
 }

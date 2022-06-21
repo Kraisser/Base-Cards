@@ -14,7 +14,12 @@ export default function useChapter() {
 
 	const updateChapters = () => {
 		getChapters()
-			.then((res) => dispatch(chapterListSuccess(res)))
+			.then((res) => {
+				const resArr = res.sort((prevItem, item) =>
+					prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})
+				);
+				dispatch(chapterListSuccess(resArr));
+			})
 			.catch((e) => {
 				console.log(e);
 				dispatch(chapterListError());
