@@ -3,7 +3,8 @@ import {createSlice} from '@reduxjs/toolkit';
 import {resetStore} from './serviceSlice';
 
 const initialState = {
-	delModalStatus: false,
+	delModalTarget: false,
+	delModalTargetId: {},
 };
 
 const modalSlice = createSlice({
@@ -11,11 +12,13 @@ const modalSlice = createSlice({
 	initialState,
 	reducers: {
 		delModalOpen: (state, action) => {
-			state.delModalStatus = action.payload;
+			state.delModalTarget = action.payload.target;
+			state.delModalTargetId = {
+				id: action.payload.id,
+				chapId: action.payload.chapId,
+			};
 		},
-		delModalClose: (state) => {
-			state.delModalStatus = false;
-		},
+		delModalClose: () => initialState,
 	},
 	extraReducers: (builder) => {
 		builder.addCase(resetStore, () => initialState);

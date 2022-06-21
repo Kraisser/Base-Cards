@@ -28,7 +28,7 @@ export default function ChapterItem({name, id}) {
 		const targetClassList = e.target.classList;
 
 		if (targetClassList.contains('chapterDelIcon')) {
-			dispatch(delModalOpen(id));
+			dispatch(delModalOpen({target: 'chapter', id}));
 		} else if (
 			targetClassList.contains('chapterItemMenu') ||
 			targetClassList.contains('chapterSlideIcon')

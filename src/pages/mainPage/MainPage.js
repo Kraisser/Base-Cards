@@ -11,9 +11,9 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import RightContentWrapper from '../../components/RightContentWrapper/RightContentWrapper';
 
 export default function MainPage() {
-	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
+	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
 
-	const delModal = delModalStatus ? <DeleteModal /> : null;
+	const delModal = delModalTarget ? <DeleteModal /> : null;
 
 	return (
 		<>

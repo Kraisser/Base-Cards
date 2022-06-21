@@ -14,11 +14,11 @@ export default function DeleteModal() {
 	const {onDeleteCard} = useCards();
 	const {deleteChapterFromList} = useChapter();
 
-	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
-	const activeChapter = useSelector((state) => state.chapter.activeChapter);
+	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
+	const delModalTargetId = useSelector((state) => state.modal.delModalTargetId);
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 
-	const targetChapter = delModalStatus.split('+')[1] === 'chapter';
+	const targetChapter = delModalTarget === 'chapter';
 
 	const descrText = targetChapter ? (
 		<>
@@ -33,13 +33,13 @@ export default function DeleteModal() {
 	);
 
 	const onDeleteCardItem = () => {
-		onDeleteCard(delModalStatus, activeChapter);
+		onDeleteCard(delModalTargetId.id, delModalTargetId.chapId);
 		dispatch(delModalClose());
 		navigate('/');
 	};
 
 	const onDeleteChapter = () => {
-		const chapIndex = chapterList.findIndex((item) => delModalStatus === item.id);
+		const chapIndex = chapterList.findIndex((item) => delModalTargetId === item.id);
 
 		const chapterOrder = {
 			prev: chapterList[chapIndex - 1],
@@ -52,7 +52,7 @@ export default function DeleteModal() {
 			? chapterOrder.next.id
 			: null;
 
-		deleteChapterFromList(delModalStatus, prevChapter);
+		deleteChapterFromList(delModalTargetId, prevChapter);
 		dispatch(delModalClose());
 	};
 

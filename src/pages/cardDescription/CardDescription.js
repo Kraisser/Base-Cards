@@ -24,11 +24,11 @@ export default function CardDescription() {
 
 	const {id, activeChapter} = useParams();
 
-	const delModalStatus = useSelector((state) => state.modal.delModalStatus);
+	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
 	const cardList = useSelector((state) => state.cardList.cardList);
 	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
 
-	const delModal = delModalStatus ? <DeleteModal /> : null;
+	const delModal = delModalTarget ? <DeleteModal /> : null;
 
 	useEffect(() => {
 		if (cardListStatus !== 'idle' && activeChapter && id) {
@@ -42,6 +42,7 @@ export default function CardDescription() {
 	}
 
 	const currentCard = cardList.data.find((item) => item.id === id);
+
 	if (!currentCard) {
 		return <Page404 />;
 	}
@@ -51,8 +52,14 @@ export default function CardDescription() {
 		navigate('/editForm');
 	};
 
-	const onDeleteEx = () => {
-		dispatch(delModalOpen(id));
+	const onDeleteCard = () => {
+		dispatch(
+			delModalOpen({
+				target: 'card',
+				id,
+				chapId: activeChapter,
+			})
+		);
 	};
 
 	return (
@@ -61,7 +68,7 @@ export default function CardDescription() {
 
 			<div className='cardDescriptionWrapper pageContentWrapper '>
 				<div className='cardDescrWrapper pageContentContainer'>
-					{setContent(cardListStatus, View, currentCard, {onEditCard, onDeleteEx})}
+					{setContent(cardListStatus, View, currentCard, {onEditCard, onDeleteCard})}
 				</div>
 				<div className='cardDescButWrapper'>
 					<Link to='/'>
@@ -74,7 +81,7 @@ export default function CardDescription() {
 	);
 }
 
-function View({data, onEditCard, onDeleteEx}) {
+function View({data, onEditCard, onDeleteCard}) {
 	const {name, link, timeStamp, description} = data;
 	const date = new Date(timeStamp);
 
@@ -119,7 +126,7 @@ function View({data, onEditCard, onDeleteEx}) {
 				<button className='but cardDescBut' onClick={onEditCard}>
 					Редактировать
 				</button>
-				<button className='but cardDescBut' onClick={onDeleteEx}>
+				<button className='but cardDescBut' onClick={onDeleteCard}>
 					Удалить
 				</button>
 			</div>
