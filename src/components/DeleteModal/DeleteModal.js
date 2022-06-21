@@ -19,6 +19,7 @@ export default function DeleteModal() {
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const targetChapter = delModalTarget === 'chapter';
+	const targetId = delModalTargetId.id;
 
 	const descrText = targetChapter ? (
 		<>
@@ -33,13 +34,13 @@ export default function DeleteModal() {
 	);
 
 	const onDeleteCardItem = () => {
-		onDeleteCard(delModalTargetId.id, delModalTargetId.chapId);
+		onDeleteCard(targetId, delModalTargetId.chapId);
 		dispatch(delModalClose());
 		navigate('/');
 	};
 
 	const onDeleteChapter = () => {
-		const chapIndex = chapterList.findIndex((item) => delModalTargetId === item.id);
+		const chapIndex = chapterList.findIndex((item) => targetId === item.id);
 
 		const chapterOrder = {
 			prev: chapterList[chapIndex - 1],
@@ -52,7 +53,7 @@ export default function DeleteModal() {
 			? chapterOrder.next.id
 			: null;
 
-		deleteChapterFromList(delModalTargetId, prevChapter);
+		deleteChapterFromList(targetId, prevChapter);
 		dispatch(delModalClose());
 	};
 

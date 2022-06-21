@@ -12,22 +12,22 @@ export default function RightContentWrapper({children}) {
 	const menuHidden = useSelector((state) => state.chapter.menuHidden);
 	const clientWidth = useSelector((state) => state.chapter.clientWidth);
 
-	const openMenu = useDebounce(() => {
-		const newWidth = window.innerWidth;
-
-		if (newWidth !== clientWidth) {
-			dispatch(setClientWidth(newWidth));
-			dispatch(setMenuActive(false));
-		}
-	}, 1000);
-
 	useEffect(() => {
 		window.addEventListener('resize', openMenu);
 
 		return () => {
 			window.removeEventListener('resize', openMenu);
 		};
-	}, []);
+	}, [clientWidth]);
+
+	const openMenu = useDebounce(() => {
+		if (clientWidth === window.innerWidth) {
+			return;
+		}
+
+		dispatch(setMenuActive(false));
+		dispatch(setClientWidth(window.innerWidth));
+	}, 1000);
 
 	const rightMenuToggle = (
 		<div

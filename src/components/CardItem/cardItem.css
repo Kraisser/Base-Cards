@@ -21,7 +21,7 @@
 	overflow: hidden;
 }
 .cardItemHeader {
-	line-height: 1em;
+	max-height: 1.2em;
 	margin: 0;
 	overflow: hidden;
 	font-size: var(--h3Size);
