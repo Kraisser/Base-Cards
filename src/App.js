@@ -45,10 +45,10 @@ function App() {
 		return (
 			<Router>
 				<Routes>
-					<Route path='/' element={<AuthLoading close={true} />} />
-					<Route path='/auth' element={<Auth close={true} />} />
-					<Route path='/resetPass' element={<ResetPass close={true} />} />
-					<Route path='*' element={<NoAuth close={true} />} />
+					<Route path='/' element={<AuthLoading />} />
+					<Route path='/auth' element={<Auth />} />
+					<Route path='/resetPass' element={<ResetPass />} />
+					<Route path='*' element={<NoAuth />} />
 				</Routes>
 			</Router>
 		);
@@ -58,7 +58,7 @@ function App() {
 		return (
 			<Router>
 				<Routes>
-					<Route path='*' element={<UserPage disMain={true} close={true} />} />
+					<Route path='*' element={<UserPage close={true} />} />
 				</Routes>
 			</Router>
 		);

@@ -1,3 +1,4 @@
+import '../../css/common.css';
 import './authLoading.css';
 
 import {Link, useNavigate} from 'react-router-dom';
@@ -7,7 +8,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import Spinner from '../../components/Spinner/Spinner';
 import {useEffect} from 'react';
 
-export default function AuthLoading({close}) {
+export default function AuthLoading() {
 	const navigate = useNavigate();
 
 	const uid = useSelector((state) => state.auth.uid);
@@ -20,15 +21,15 @@ export default function AuthLoading({close}) {
 
 	return (
 		<>
-			<PageHeader auth={false} close={close} />
-			<div className='authLoaderWrapper'>
-				<h2 className='authLoader'>Авторизация</h2>
+			<PageHeader close={false} />
+			<div className='pageContentWrapper'>
+				<h2>Вход в аккаунт</h2>
 				<div className='spinnerAuthLoaderWrapper'>
 					<Spinner />
 				</div>
-				<p>
-					Пожалуйста подождите. Происходит вход в аккаунт. Вы будете автоматически перенаправлены.
-					Если ничего не произошло перейдите по кнопке ниже.{' '}
+				<p className='authLoaderText'>
+					Пожалуйста подождите. Вы будете автоматически перенаправлены. Если ничего не произошло
+					нажмите кнопку ниже.
 				</p>
 				<div className='onMainButWrapper'>
 					<button className='onMainBut but'>

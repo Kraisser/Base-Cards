@@ -33,8 +33,9 @@ body {
 	--defaultSize: 16px;
 	--butSize: 20px;
 	--h1Size: 40px;
-	--h2Size: 24px;
-	--h3Size: 20px;
+	--h2Size: 30px;
+	--h3Size: 22px;
+	--h4Size: 18px;
 }
 
 @media only all and (max-width: 750px) {
@@ -44,7 +45,7 @@ body {
 		/* Fonts */
 		--butSize: 16px;
 		--h1Size: 30px;
-		--h2Size: 20px;
-		--h3Size: 16px;
+		--h2Size: 25px;
+		--h3Size: 20px;
 	}
 }

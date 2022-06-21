@@ -48,10 +48,10 @@ export default function Auth() {
 				setEmailError('Email уже используется');
 				break;
 			case 'auth/invalid-email':
-				setEmailError('Неправильный Email');
+				setEmailError('Неверный Email');
 				break;
 			case 'auth/wrong-password':
-				setErrorAuth('Неправильный Email или пароль');
+				setErrorAuth('Неверный Email или пароль');
 				break;
 			case 'auth/user-not-found':
 				setErrorAuth('Пользователь не найден');
@@ -75,8 +75,14 @@ export default function Auth() {
 			.catch((error) => errorCustom(error));
 	};
 
-	const onSignIn = (e) => {
+	const onSignIn = async (e) => {
 		e.preventDefault();
+
+		const validRes = await validateField('email', email, setEmailError);
+
+		if (!validRes) {
+			return;
+		}
 
 		signInEmail(email, pass)
 			.then(() => {

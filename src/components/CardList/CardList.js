@@ -41,7 +41,7 @@ export default function CardList() {
 	return (
 		<div className='cardListWrapper'>
 			<div className='cardListHeader'>
-				<h2 title={chapHeader}>{chapHeader}</h2>
+				<h3 title={chapHeader}>{chapHeader}</h3>
 				{searchAvailable ? (
 					<div className='cardSearchWrapper'>
 						<SearchForm

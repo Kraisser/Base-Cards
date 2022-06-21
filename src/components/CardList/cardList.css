@@ -15,12 +15,12 @@
 	overflow: hidden;
 	padding: 0 5px 5px;
 }
-.cardListHeader h2 {
+.cardListHeader h3 {
 	text-align: center;
 	margin: 0;
 	text-overflow: ellipsis;
 	color: var(--header-color);
-	font-size: var(--h2Size);
+	font-size: var(--h3Size);
 }
 .cardSearchWrapper {
 	width: 250px;

@@ -22,18 +22,18 @@
 	text-align: left;
 }
 .cardDescriptionContainerHeader {
-	font-size: var(--h3Size);
+	font-size: var(--h4Size);
 	font-weight: 600;
-	margin: 0 0 10px;
+	margin: 0 0 5px;
 }
 .cardDescriptionLink {
-	font-size: var(--descrSize);
+	font-size: var(--defaultSize);
 }
 .cardDescriptionContainer {
 	margin-bottom: 15px;
 }
 .cardDescription {
-	font-size: var(--descrSize);
+	font-size: var(--defaultSize);
 }
 .cardDescButWrapper {
 	display: flex;

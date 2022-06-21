@@ -1,9 +1,5 @@
 @import '../../css/variables.css';
 
-.onMainButWrapper {
-	display: flex;
-	justify-content: center;
-}
 .userPageContainer img {
 	width: 100px;
 	border-radius: var(--border-mini-radius);

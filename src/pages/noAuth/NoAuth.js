@@ -6,14 +6,14 @@ import {useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import React from 'react';
 
-export default function NoAuth({close}) {
+export default function NoAuth() {
 	const navigate = useNavigate();
 
 	const [redirectTimer, setRedirectTimer] = useState(5);
 
 	useEffect(() => {
 		if (redirectTimer === 0) {
-			// navigate('/');
+			navigate('/');
 			return;
 		}
 
@@ -30,11 +30,13 @@ export default function NoAuth({close}) {
 			<PageHeader auth={false} />
 			<div className='pageContentWrapper'>
 				<div className='noAuthHeader'>
-					<h2>Ошибка авторизации</h2>
+					<h2>Вход не выполнен</h2>
 				</div>
 				<div className='noAuthMessage'>
-					<p>Для возможности просмотра и редактирования контента необходимо авторизоваться.</p>
-					<p>Вы будете перенаправлены на форму входа автоматически через {redirectTimer} сек.</p>
+					<p>
+						Для использования <b>BaseCards</b> необходимо войти в аккаунт.
+					</p>
+					<p>Вы будете перенаправлены в личный кабинет автоматически через {redirectTimer} сек.</p>
 					<p>Если ничего не произошло нажмите на кпопку ниже.</p>
 				</div>
 				<div className='onMainButWrapper'>

@@ -2,9 +2,6 @@
 
 .noAuthMessage {
 	text-align: center;
+	font-size: var(--defaultSize);
 	margin-bottom: 30px;
-}
-.onMainButWrapper {
-	display: flex;
-	justify-content: center;
 }

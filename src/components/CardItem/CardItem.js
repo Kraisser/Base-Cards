@@ -28,7 +28,7 @@ export default function CardItem({content}) {
 		<div className='cardItemWrapper' onClick={delegateLink}>
 			<div className={linkAvailableClass}>
 				<div className='cardItemContainer'>
-					<h3 className='cardItemHeader'>{name}</h3>
+					<h4 className='cardItemHeader'>{name}</h4>
 				</div>
 				{link ? (
 					<div className='cardItemContainer'>

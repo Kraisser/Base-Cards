@@ -2,17 +2,6 @@
 @import '../../css/variables.css';
 @import '../formPage/formPage.css';
 
-/* .authWrapper {
-	height: var(--content-height);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding-top: 30px;
-} */
-/* .authWrapper h3 {
-	margin-bottom: 15px;
-	text-align: center;
-} */
 .authForm {
 	display: grid;
 	grid-template-rows: auto;
@@ -23,7 +12,7 @@
 	padding: 10px;
 }
 .authForm .formHeader {
-	margin: 0 0 15px;
+	margin: 0 0 5px;
 }
 .authInfo {
 	margin-bottom: 5px;
@@ -63,5 +52,6 @@
 @media only all and (max-width: 750px) {
 	.authForm {
 		width: 100%;
+		grid-gap: 10px;
 	}
 }

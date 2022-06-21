@@ -24,7 +24,7 @@
 	max-height: 1.2em;
 	margin: 0;
 	overflow: hidden;
-	font-size: var(--h3Size);
+	font-size: var(--h4Size);
 	font-weight: 600;
 }
 .cardItemDescriptionLinkWrapper {

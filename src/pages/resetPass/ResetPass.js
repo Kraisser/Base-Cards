@@ -10,7 +10,7 @@ import useValidate from '../../services/useValidate';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 
-export default function ResetPass({close}) {
+export default function ResetPass() {
 	const navigate = useNavigate();
 	const {validateField} = useValidate();
 	const {resetPass} = useAuth();
@@ -33,7 +33,6 @@ export default function ResetPass({close}) {
 		setSuccessRequest(null);
 
 		const code = error.code;
-		console.log('ErrorCode: ', code);
 
 		switch (code) {
 			case 'auth/invalid-email':
