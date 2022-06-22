@@ -3,6 +3,7 @@ import './cardList.css';
 import {useMemo, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {v4 as uuid} from 'uuid';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import useCards from '../../services/useCards';
 
@@ -59,13 +60,21 @@ export default function CardList() {
 }
 
 function View({data}) {
-	const content = data.map((item) => <CardListItem content={item} key={uuid()} />);
+	console.log(data);
+	const content = data.map((item, index) => (
+		<CSSTransition classNames='card-item' timeout={300 + index * 50} key={item.id} appear={true}>
+			<CardListItem content={item} />
+		</CSSTransition>
+	));
 	const emptyContent = (
 		<div className='emptyCardList'>
 			<h3>В этом разделе пока пусто</h3>
 		</div>
 	);
-	return (
-		<>{content.length === 0 ? emptyContent : <div className='cardListContainer'>{content}</div>}</>
+	return content.length === 0 ? (
+		emptyContent
+	) : (
+		<TransitionGroup className='cardListContainer'>{content}</TransitionGroup>
+		// <div className='cardListContainer'></div>
 	);
 }
