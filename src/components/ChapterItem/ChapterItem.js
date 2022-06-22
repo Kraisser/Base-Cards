@@ -95,9 +95,9 @@ export default function ChapterItem({name, id}) {
 			</div>
 
 			<div className={`chapterItemMenu ${openMenu}`}>
-				<img src={slideIcon} alt='chapter menu' className='chapterSlideIcon' />
-				<img src={editChapterIcon} alt='edit chapter' className='chapterEditIcon' />
-				<img src={delIcon} alt='name' className='chapterDelIcon' />
+				<img src={slideIcon} alt='Меню' className='chapterSlideIcon' />
+				<img src={editChapterIcon} alt='Изменить' className='chapterEditIcon' />
+				<img src={delIcon} alt='Удалить' className='chapterDelIcon' />
 			</div>
 		</div>
 	);

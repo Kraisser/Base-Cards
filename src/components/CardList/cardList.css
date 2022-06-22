@@ -9,18 +9,43 @@
 }
 .cardListHeader {
 	display: grid;
-	grid-template-columns: 1fr min-content;
+	grid-template-columns: [header-start addBut-start] 1fr [addBut-end search-start] 1fr [header-end search-end];
+	grid-template-rows: [header-start] 1fr [header-end addBut-start search-start] 30px [addBut-end search-end];
 	grid-gap: 10px;
 	align-items: center;
 	overflow: hidden;
 	padding: 0 5px 5px;
 }
+
+.cardListHeader > h3 {
+	grid-area: header;
+}
+.cardListFastAddButWrapper {
+	grid-area: addBut;
+}
+.cardSearchWrapper {
+	justify-self: flex-end;
+	grid-area: search;
+}
+
 .cardListHeader h3 {
 	text-align: center;
 	margin: 0;
 	text-overflow: ellipsis;
 	color: var(--header-color);
 	font-size: var(--h3Size);
+}
+.fastAddBut {
+	min-height: 30px;
+	width: 250px;
+}
+.fastAddIcon {
+	display: none;
+	height: 60px;
+	width: 60px;
+	position: absolute;
+	right: 5vh;
+	bottom: 5vh;
 }
 .cardSearchWrapper {
 	width: 250px;
@@ -73,12 +98,7 @@
 		grid-template: 110px / 1fr 1fr;
 	}
 	.cardListHeader {
-		grid-template: 1fr 30px / 1fr;
 		grid-gap: 5px;
-	}
-	.cardSearchWrapper {
-		width: 300px;
-		justify-self: flex-end;
 	}
 }
 @media only all and (max-width: 900px) {
@@ -88,17 +108,38 @@
 	.cardListContainer {
 		grid-template: auto / 1fr;
 	}
+	.fastAddBut {
+		width: 100%;
+		justify-self: stretch;
+	}
 	.cardSearchWrapper {
 		width: 100%;
 		justify-self: stretch;
 	}
 }
 @media only all and (max-width: 750px) {
+	.cardListHeader {
+		grid-template: [header-start] 1fr [header-end search-start] 30px [search-end] / [header-start search-start] 1fr [header-end search-end];
+	}
 	.cardListContainer {
 		grid-template: auto / 1fr 1fr;
 	}
+	.cardSearchWrapper {
+		width: 80%;
+		justify-self: center;
+	}
+	.cardListFastAddButWrapper {
+		display: none;
+	}
+	.fastAddIcon {
+		display: block;
+	}
 }
 @media only all and (max-width: 500px) {
+	.cardSearchWrapper {
+		width: 100%;
+		justify-self: stretch;
+	}
 	.cardListContainer {
 		grid-template: auto / 1fr;
 	}

@@ -15,7 +15,9 @@ import ChapterInput from '../../components/ChapterInput/ChapterInput';
 
 import {clearEdit} from '../../store/editSlice';
 
-export default function CardAddForm() {
+import delIcon from '../../assets/icons/delete-icon.png';
+
+export default function CardAddForm({modalClose}) {
 	const dispatch = useDispatch();
 	const {validateField} = useValidate();
 
@@ -34,7 +36,6 @@ export default function CardAddForm() {
 
 		return () => {
 			if (editCard) {
-				console.log('unmount clearEdit');
 				dispatch(clearEdit());
 			}
 		};
@@ -44,7 +45,7 @@ export default function CardAddForm() {
 	const [newChap, setNewChap] = useState(false);
 
 	const [cardName, setCardName] = useState(editCard ? editCard.name : '');
-	const [chapter, setChapter] = useState(editCard ? activeChapter : '');
+	const [chapter, setChapter] = useState(editCard || modalClose ? activeChapter : '');
 	const [cardLink, setCardLink] = useState(editCard ? editCard.link : '');
 	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
 
@@ -103,7 +104,7 @@ export default function CardAddForm() {
 		return id;
 	};
 
-	const onExSubmit = async (e, id) => {
+	const onCardSubmit = async (e, id) => {
 		e.preventDefault();
 
 		const validateRes = await validateAll();
@@ -133,6 +134,14 @@ export default function CardAddForm() {
 		}
 
 		clearFields();
+
+		if (modalClose) {
+			uploadNewCard(newCard, activeChapter, activeChapter, id);
+
+			modalClose(false);
+
+			return;
+		}
 
 		if (newChap) {
 			const newChapId = await createNewChapter();
@@ -166,77 +175,83 @@ export default function CardAddForm() {
 	};
 
 	return (
-		<>
-			<form className='cardForm' onSubmit={(e) => onExSubmit(e, editCard ? editCard.id : null)}>
-				<h2 className='formHeader'>{editCard ? `Изменение карточки` : `Добавление карточки`}</h2>
-				<div className='fieldWrapper'>
-					<label htmlFor='cardName' className='formInputLabel'>
-						Название карточки*
-					</label>
-					{cardNameErr ? <div className='errorForm'>{cardNameErr}</div> : null}
-					<input
-						type='text'
-						id='cardName'
-						onChange={(e) => onChange(e, setCardName)}
-						value={cardName}
-						className={`formInput ${nameErrInpStyle}`}
-					/>
-				</div>
+		<form
+			className={modalClose ? 'cardFormModal' : 'cardForm'}
+			onSubmit={(e) => onCardSubmit(e, editCard ? editCard.id : null)}>
+			<h2 className='formHeader'>
+				{editCard ? `Изменение карточки` : modalClose ? 'Быстрая заметка' : 'Добавление карточки'}
+			</h2>
+			{modalClose ? <img src={delIcon} alt='Закрыть окно' className='modalCloseIcon' /> : null}
+			<div className='fieldWrapper'>
+				<label htmlFor='cardName' className='formInputLabel'>
+					Название карточки*
+				</label>
+				{cardNameErr ? <div className='errorForm'>{cardNameErr}</div> : null}
+				<input
+					type='text'
+					id='cardName'
+					onChange={(e) => onChange(e, setCardName)}
+					value={cardName}
+					className={`formInput ${nameErrInpStyle}`}
+				/>
+			</div>
 
-				<div className='fieldWrapper chapSelectButWrapper'>
-					<button
-						type='button'
-						onClick={() => onChangeChapCondtition(false)}
-						className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
-						Существующий раздел
-					</button>
-					<button
-						type='button'
-						onClick={() => onChangeChapCondtition(true)}
-						className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
-						Новый раздел
-					</button>
-				</div>
+			{modalClose !== undefined ? null : (
+				<>
+					<div className='fieldWrapper chapSelectButWrapper'>
+						<button
+							type='button'
+							onClick={() => onChangeChapCondtition(false)}
+							className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
+							Существующий раздел
+						</button>
+						<button
+							type='button'
+							onClick={() => onChangeChapCondtition(true)}
+							className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
+							Новый раздел
+						</button>
+					</div>
+					<div className='fieldWrapper'>
+						<ChapterInput
+							newChap={newChap}
+							chapState={{chapter, setChapter}}
+							onChange={onChange}
+							chapErrState={{chapterErr, setChapterErr}}
+						/>
+					</div>
+				</>
+			)}
 
-				<div className='fieldWrapper'>
-					<ChapterInput
-						newChap={newChap}
-						chapState={{chapter, setChapter}}
-						onChange={onChange}
-						chapErrState={{chapterErr, setChapterErr}}
-					/>
-				</div>
+			<div className='fieldWrapper'>
+				<label htmlFor='cardLink' className='formInputLabel'>
+					Укажите ссылку
+				</label>
+				<input
+					type='text'
+					id='cardLink'
+					onChange={(e) => setCardLink(e.target.value)}
+					value={cardLink}
+					className={'formInput'}
+				/>
+			</div>
 
-				<div className='fieldWrapper'>
-					<label htmlFor='cardLink' className='formInputLabel'>
-						Укажите ссылку
-					</label>
-					<input
-						type='text'
-						id='cardLink'
-						onChange={(e) => setCardLink(e.target.value)}
-						value={cardLink}
-						className={'formInput'}
-					/>
-				</div>
-
-				<div className='fieldWrapper fieldDescriptionWrapper'>
-					<label htmlFor='cardDescription' className='formInputLabel'>
-						Дополнительное описание
-					</label>
-					<textarea
-						name='cardDescription'
-						id='cardDescription'
-						onChange={(e) => setCardDescription(e.target.value)}
-						value={cardDescription}
-						className='descriptionInput'></textarea>
-				</div>
-				<div className='formButWrapper'>
-					<button type='submit' className='formBut but'>
-						Отправить
-					</button>
-				</div>
-			</form>
-		</>
+			<div className='fieldWrapper fieldDescriptionWrapper'>
+				<label htmlFor='cardDescription' className='formInputLabel'>
+					Дополнительное описание
+				</label>
+				<textarea
+					name='cardDescription'
+					id='cardDescription'
+					onChange={(e) => setCardDescription(e.target.value)}
+					value={cardDescription}
+					className='descriptionInput'></textarea>
+			</div>
+			<div className='formButWrapper'>
+				<button type='submit' className='formBut but'>
+					Отправить
+				</button>
+			</div>
+		</form>
 	);
 }
