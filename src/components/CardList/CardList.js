@@ -82,7 +82,7 @@ export default function CardList() {
 
 			<CSSTransition classNames='add-modal' timeout={200} in={fastAdd} unmountOnExit mountOnEnter>
 				<div className='modalOverlay fastAddOverlay' onClick={closeFastAdd}>
-					<CardAddForm modalClose={setFastAdd} />
+					<CardAddForm modalClose={closeFastAdd} />
 				</div>
 			</CSSTransition>
 

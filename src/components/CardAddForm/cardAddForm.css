@@ -126,7 +126,7 @@
 		width: 100%;
 	}
 	.cardFormModal {
-		width: 80%;
+		width: 90%;
 	}
 }
 @media only all and (max-width: 450px) {
@@ -153,20 +153,35 @@
 
 /* Animation */
 .add-modal-enter {
-	transform: scale(0.7);
 	opacity: 0;
 }
 .add-modal-enter-active {
+	opacity: 1;
+	transition: opacity 200ms;
+}
+.add-modal-exit {
+	opacity: 1;
+}
+.add-modal-exit-active {
+	opacity: 0;
+	transition: opacity 200ms;
+}
+
+.add-modal-enter .cardFormModal {
+	transform: scale(0.7);
+	opacity: 0;
+}
+.add-modal-enter-active .cardFormModal {
 	transform: scale(1);
 	opacity: 1;
 	transition: opacity 200ms;
 	transition: transform 200ms;
 }
-.add-modal-exit {
+.add-modal-exit .cardFormModal {
 	transform: scale(1);
 	opacity: 1;
 }
-.add-modal-exit-active {
+.add-modal-exit-active .cardFormModal {
 	transform: scale(0.7);
 	opacity: 0;
 	transition: opacity 200ms;

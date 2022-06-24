@@ -138,7 +138,7 @@ export default function CardAddForm({modalClose}) {
 		if (modalClose) {
 			uploadNewCard(newCard, activeChapter, activeChapter, id);
 
-			modalClose(false);
+			modalClose();
 
 			return;
 		}
@@ -196,7 +196,7 @@ export default function CardAddForm({modalClose}) {
 				/>
 			</div>
 
-			{modalClose !== undefined ? null : (
+			{modalClose ? null : (
 				<>
 					<div className='fieldWrapper chapSelectButWrapper'>
 						<button
