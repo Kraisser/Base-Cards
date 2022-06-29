@@ -74,13 +74,11 @@
 	height: 30px;
 	padding: 0 5px;
 	transition: box-shadow 0.1s ease-in;
-	border-radius: var(--border-mini-radius);
+	border-radius: var(--border-input-radius);
+	border-width: 0;
 }
 .exSelectInput {
 	width: 100%;
-}
-.formInput {
-	border-width: 0;
 }
 .exSelectInput:hover,
 .descriptionInput:hover,

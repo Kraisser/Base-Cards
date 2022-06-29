@@ -3,6 +3,7 @@ import './cardAddForm.css';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {useState, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 import useChapter from '../../services/useChapter';
 import useCards from '../../services/useCards';
@@ -14,10 +15,13 @@ import {v4 as uuid} from 'uuid';
 import ChapterInput from '../../components/ChapterInput/ChapterInput';
 
 import {clearEdit} from '../../store/editSlice';
+import {setActiveChapter} from '../../store/chapterSlice';
 
 import delIcon from '../../assets/icons/delete-icon.png';
+import Spinner from '../Spinner/Spinner';
 
 export default function CardAddForm({modalClose}) {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const {validateField} = useValidate();
 
@@ -51,6 +55,8 @@ export default function CardAddForm({modalClose}) {
 
 	const [cardNameErr, setCardNameErr] = useState(null);
 	const [chapterErr, setChapterErr] = useState(null);
+
+	const [uploading, setUploading] = useState(false);
 
 	const nameErrInpStyle = cardNameErr ? 'errorInput' : '';
 
@@ -136,9 +142,11 @@ export default function CardAddForm({modalClose}) {
 		clearFields();
 
 		if (modalClose) {
-			uploadNewCard(newCard, activeChapter, activeChapter, id);
+			setUploading(true);
 
-			modalClose();
+			await uploadNewCard(newCard, activeChapter, activeChapter, id);
+
+			modalClose(null, true);
 
 			return;
 		}
@@ -146,11 +154,27 @@ export default function CardAddForm({modalClose}) {
 		if (newChap) {
 			const newChapId = await createNewChapter();
 
-			uploadNewCard(newCard, newChapId, activeChapter, id);
+			dispatch(setActiveChapter(newChapId));
+
+			setUploading(true);
+
+			await uploadNewCard(newCard, newChapId, activeChapter, id);
+
+			navigate('/');
+
 			return;
 		}
 
-		uploadNewCard(newCard, chapter, activeChapter, id);
+		setUploading(true);
+
+		await uploadNewCard(newCard, chapter, activeChapter, id);
+
+		navigate('/');
+
+		if (chapter === activeChapter) {
+			return;
+		}
+		dispatch(setActiveChapter(chapter));
 	};
 
 	const debounceValidate = useDebounce((id, value) => validateFunc[id](value), 300);
@@ -173,6 +197,18 @@ export default function CardAddForm({modalClose}) {
 		setChapterErr(null);
 		setChapter('');
 	};
+
+	if (uploading && modalClose) {
+		return <Spinner />;
+	}
+
+	if (uploading) {
+		return (
+			<div className='cardForm'>
+				<Spinner />
+			</div>
+		);
+	}
 
 	return (
 		<form

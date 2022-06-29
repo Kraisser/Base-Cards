@@ -7,6 +7,10 @@
 	grid-row-gap: 10px;
 	max-height: 100%;
 }
+.firstLoadWrapper {
+	color: var(--header-color);
+	text-align: center;
+}
 .cardListHeader {
 	display: grid;
 	grid-template-columns: [header-start addBut-start] 1fr [addBut-end search-start] 1fr [header-end search-end];
@@ -38,6 +42,9 @@
 .fastAddBut {
 	min-height: 30px;
 	width: 250px;
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
 }
 .fastAddIcon {
 	display: none;
@@ -63,6 +70,9 @@
 .emptyCardList {
 	text-align: center;
 	color: var(--header-color);
+}
+.emptyCardList h4 {
+	font-size: var(--h4Size);
 }
 .cardListContainer::-webkit-scrollbar {
 	width: 10px;

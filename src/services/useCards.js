@@ -28,7 +28,7 @@ export default function useCards() {
 	}, []);
 
 	const uploadNewCard = (newCard, programId, activeChapter, id) => {
-		postCard(newCard, programId)
+		return postCard(newCard, programId)
 			.then(() => {
 				if (programId === activeChapter) {
 					const prevData = cardList.data.filter((item) => item.id !== id);

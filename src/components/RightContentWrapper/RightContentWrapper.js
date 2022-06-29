@@ -32,7 +32,9 @@ export default function RightContentWrapper({children}) {
 	const rightMenuToggle = (
 		<div
 			className={`rightMenuToggle ${menuHidden ? '' : 'rightMenuToggleActive'}`}
-			onClick={() => dispatch(setMenuActive(!menuHidden))}></div>
+			onClick={() => dispatch(setMenuActive(!menuHidden))}>
+			{'<'}
+		</div>
 	);
 
 	return (

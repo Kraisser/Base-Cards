@@ -1,3 +1,5 @@
+@import '../../css/variables.css';
+
 .userWrapper {
 	height: 60px;
 	cursor: pointer;
@@ -7,6 +9,7 @@
 	justify-content: center;
 }
 .userWrapper img {
+	border-radius: var(--border-mini-radius);
 	height: 40px;
 	margin: 0 auto;
 }

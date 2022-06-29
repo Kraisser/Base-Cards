@@ -12,6 +12,8 @@ import setContent from '../../utils/setContent';
 import SearchForm from '../SearchForm/SearchForm';
 import CardAddForm from '../CardAddForm/CardAddForm';
 
+import fastAddIcon from '../../assets/icons/fast-add-icon.png';
+
 export default function CardList() {
 	const {updateCardList} = useCards();
 
@@ -31,7 +33,7 @@ export default function CardList() {
 	const chapHeader = cardList.description
 		? cardList.description
 		: cardListStatus === 'firstLoad'
-		? 'Выберите раздел'
+		? 'Раздел не выбран'
 		: 'Пожалуйста подождите';
 
 	const content = useMemo(
@@ -42,7 +44,12 @@ export default function CardList() {
 	const openFastAdd = () => {
 		setFastAdd(true);
 	};
-	const closeFastAdd = (e) => {
+	const closeFastAdd = (e, forceClose) => {
+		if (forceClose) {
+			setFastAdd(false);
+			return;
+		}
+
 		if (
 			e.target.classList.contains('modalOverlay') ||
 			e.target.classList.contains('modalCloseIcon')
@@ -77,7 +84,13 @@ export default function CardList() {
 					) : null}
 				</div>
 
-				{content}
+				{cardListStatus === 'firstLoad' ? (
+					<p className='firstLoadWrapper'>
+						Для начала работы выберите раздел или нажмите 'Добавить карточку'
+					</p>
+				) : (
+					content
+				)}
 			</div>
 
 			<CSSTransition classNames='add-modal' timeout={200} in={fastAdd} unmountOnExit mountOnEnter>
@@ -104,7 +117,11 @@ function View({data}) {
 
 	const emptyContent = (
 		<div className='emptyCardList'>
-			<h3>В этом разделе пока пусто</h3>
+			<h4>В этом разделе пока пусто</h4>
+			<p>
+				Чтобы добавить карточку в этот раздел нажмите
+				{window.innerWidth > 750 ? ' "Быстрая заметка"' : ' на иконку + в правом нижнем углу'}
+			</p>
 		</div>
 	);
 
