@@ -103,11 +103,11 @@ export default function CardAddForm({modalClose}) {
 
 	const createNewChapter = async () => {
 		const id = uuid() + '+chapter';
-		const chapterName = (chapter.charAt(0).toUpperCase() + chapter.slice(1)).trim();
+		const name = (chapter.charAt(0).toUpperCase() + chapter.slice(1)).trim();
 
-		await uploadNewChapter(id, chapterName);
+		await uploadNewChapter(id, name);
 
-		return id;
+		return {id, name};
 	};
 
 	const onCardSubmit = async (e, id) => {
@@ -152,13 +152,13 @@ export default function CardAddForm({modalClose}) {
 		}
 
 		if (newChap) {
-			const newChapId = await createNewChapter();
+			const newChapData = await createNewChapter();
 
-			dispatch(setActiveChapter(newChapId));
+			dispatch(setActiveChapter({id: newChapData.id, name: newChapData.name}));
 
 			setUploading(true);
 
-			await uploadNewCard(newCard, newChapId, activeChapter, id);
+			await uploadNewCard(newCard, newChapData.id, activeChapter, id);
 
 			navigate('/');
 
@@ -171,10 +171,10 @@ export default function CardAddForm({modalClose}) {
 
 		navigate('/');
 
-		if (chapter === activeChapter) {
-			return;
-		}
-		dispatch(setActiveChapter(chapter));
+		// if (chapter === activeChapter) { //Auto setting active chapter removed because no chap Name
+		// 	return;
+		// }
+		// dispatch(setActiveChapter({id:chapter, name:}));
 	};
 
 	const debounceValidate = useDebounce((id, value) => validateFunc[id](value), 300);
