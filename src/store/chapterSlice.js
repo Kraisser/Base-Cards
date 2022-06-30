@@ -4,6 +4,7 @@ import {resetStore} from './serviceSlice';
 
 const initialState = {
 	activeChapter: '',
+	activeChapterName: '',
 	chapterList: [],
 	chapterListStatus: 'loading',
 	chapterFiltered: [],
@@ -16,7 +17,12 @@ const chapterSlice = createSlice({
 	initialState,
 	reducers: {
 		setActiveChapter: (state, action) => {
-			state.activeChapter = action.payload;
+			state.activeChapter = action.payload.id;
+			state.activeChapterName = action.payload.name;
+		},
+		resetActiveChapter: (state) => {
+			state.activeChapter = initialState.activeChapter;
+			state.activeChapterName = initialState.activeChapterName;
 		},
 		setChapterFilter: (state, action) => {
 			state.chapterFiltered = action.payload;
@@ -49,6 +55,7 @@ const {actions, reducer} = chapterSlice;
 export default reducer;
 export const {
 	setActiveChapter,
+	resetActiveChapter,
 	setChapterFilter,
 	chapterListLoading,
 	chapterListError,

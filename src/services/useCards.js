@@ -3,7 +3,12 @@ import {useCallback} from 'react';
 
 import useRequests from './useRequests';
 
-import {cardListError, cardListSuccess, cardListLoading} from '../store/cardSlice.js';
+import {
+	cardListError,
+	cardListSuccess,
+	cardListLoading,
+	cardListSetChapter,
+} from '../store/cardSlice.js';
 
 export default function useCards() {
 	const cardList = useSelector((state) => state.cardList.cardList);
@@ -19,7 +24,10 @@ export default function useCards() {
 
 		getCardList(id)
 			.then((res) => {
-				dispatch(cardListSuccess(res));
+				const {data, chapterId} = res;
+
+				dispatch(cardListSuccess(data));
+				dispatch(cardListSetChapter(chapterId));
 			})
 			.catch((e) => {
 				console.log(e);
@@ -27,13 +35,12 @@ export default function useCards() {
 			});
 	}, []);
 
-	const uploadNewCard = (newCard, programId, activeChapter, id) => {
-		return postCard(newCard, programId)
+	const uploadNewCard = (newCard, chapterId, activeChapter, id) => {
+		return postCard(newCard, chapterId)
 			.then(() => {
-				if (programId === activeChapter) {
-					const prevData = cardList.data.filter((item) => item.id !== id);
-					const newCardListArr = [...prevData, newCard];
-					const newCardList = {description: cardList.description, data: newCardListArr};
+				if (chapterId === activeChapter) {
+					const prevData = cardList.filter((item) => item.id !== id);
+					const newCardList = [...prevData, newCard];
 
 					dispatch(cardListSuccess(newCardList));
 				}
@@ -43,8 +50,7 @@ export default function useCards() {
 
 	const onDeleteCard = (cardId, activeChapter) => {
 		deleteCard(cardId, activeChapter).then(() => {
-			const newCardListArr = cardList.data.filter((item) => cardId !== item.id);
-			const newCardList = {description: cardList.description, data: newCardListArr};
+			const newCardList = cardList.filter((item) => cardId !== item.id);
 
 			dispatch(cardListSuccess(newCardList));
 		});

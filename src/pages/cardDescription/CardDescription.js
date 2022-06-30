@@ -17,6 +17,7 @@ import {setCard} from '../../store/editSlice';
 import {delModalOpen} from '../../store/modalSlice';
 
 export default function CardDescription() {
+	console.log('cardDescrRender');
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -24,11 +25,8 @@ export default function CardDescription() {
 
 	const {id, activeChapter} = useParams();
 
-	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
 	const cardList = useSelector((state) => state.cardList.cardList);
 	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
-
-	const delModal = delModalTarget ? <DeleteModal /> : null;
 
 	useEffect(() => {
 		if (cardListStatus !== 'idle' && activeChapter && id) {
@@ -37,11 +35,11 @@ export default function CardDescription() {
 		// eslint-disable-next-line
 	}, []);
 
-	if (!cardList.data) {
+	if (!cardList) {
 		return <></>;
 	}
 
-	const currentCard = cardList.data.find((item) => item.id === id);
+	const currentCard = cardList.find((item) => item.id === id);
 
 	if (!currentCard) {
 		return <Page404 />;
@@ -76,7 +74,7 @@ export default function CardDescription() {
 					</Link>
 				</div>
 			</div>
-			{delModal}
+			<DeleteModal />
 		</>
 	);
 }

@@ -3,8 +3,13 @@ import {useCallback} from 'react';
 
 import useRequests from './useRequests';
 
-import {cardListError, cardListSuccess, cardListLoading} from '../store/cardSlice.js';
-import {chapterListSuccess, chapterListError, setActiveChapter} from '../store/chapterSlice';
+import {clearCards} from '../store/cardSlice.js';
+import {
+	chapterListSuccess,
+	chapterListError,
+	setActiveChapter,
+	resetActiveChapter,
+} from '../store/chapterSlice';
 
 export default function useChapter() {
 	const chapterList = useSelector((state) => state.chapter.chapterList);
@@ -26,12 +31,18 @@ export default function useChapter() {
 			});
 	};
 
+	const updateChapterList = (popId) => {
+		const newChapList = chapterList.filter((item) => item.id !== popId);
+
+		dispatch(chapterListSuccess(newChapList));
+	};
+
 	const uploadNewChapter = useCallback(
 		async (id, name) => {
 			try {
-				const chapters = [...chapterList, {id, name}];
 				await postChapter(id, name);
 
+				const chapters = [...chapterList, {id, name}];
 				dispatch(chapterListSuccess(chapters));
 			} catch (e) {
 				dispatch(chapterListError());
@@ -40,14 +51,19 @@ export default function useChapter() {
 		[chapterList, postChapter, dispatch]
 	);
 
-	const deleteChapterFromList = (id, nextPath) => {
+	const deleteChapterFromList = (id) => {
 		deleteChapter(id)
-			.then(() => updateChapters())
+			.then(() => updateChapterList(id))
 			.then(() => {
-				if (nextPath === null) {
-					dispatch(cardListLoading());
+				const chapIndex = chapterList.findIndex((item) => id === item.id);
+				const nextChapter = chapterList[chapIndex - 1] || chapterList[chapIndex + 1];
+
+				if (nextChapter) {
+					dispatch(setActiveChapter({id: nextChapter.id, name: nextChapter.name}));
+					return;
 				}
-				dispatch(setActiveChapter(nextPath));
+				dispatch(resetActiveChapter());
+				dispatch(clearCards());
 			})
 			.catch((e) => console.log(e));
 	};
@@ -62,6 +78,7 @@ export default function useChapter() {
 			return item;
 		});
 		dispatch(chapterListSuccess(newChapters));
+		dispatch(setActiveChapter({id, name}));
 	};
 
 	return {

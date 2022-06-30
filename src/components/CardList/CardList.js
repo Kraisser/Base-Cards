@@ -20,18 +20,20 @@ export default function CardList() {
 	const [fastAdd, setFastAdd] = useState(false);
 
 	const cardList = useSelector((state) => state.cardList.cardList);
+	const cardListChapterId = useSelector((state) => state.cardList.cardListChapterId);
 	const filteredCardList = useSelector((state) => state.cardList.filteredCardList);
 	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
+	const activeChapterName = useSelector((state) => state.chapter.activeChapterName);
 
 	useEffect(() => {
-		if (cardList.chapterId !== activeChapter) {
+		if (cardListChapterId !== activeChapter) {
 			updateCardList(activeChapter);
 		}
 	}, [activeChapter]);
 
-	const chapHeader = cardList.description
-		? cardList.description
+	const chapHeader = activeChapterName
+		? activeChapterName
 		: cardListStatus === 'firstLoad'
 		? 'Раздел не выбран'
 		: 'Пожалуйста подождите';
@@ -58,7 +60,7 @@ export default function CardList() {
 		}
 	};
 
-	const searchAvailable = cardList.data && cardList.data.length !== 0;
+	const searchAvailable = cardList && cardList.length !== 0;
 
 	return (
 		<>
@@ -76,7 +78,7 @@ export default function CardList() {
 					{searchAvailable ? (
 						<div className='cardSearchWrapper'>
 							<SearchForm
-								searchList={cardList.data ? cardList.data : false}
+								searchList={cardList ? cardList : false}
 								searchTarget={'card'}
 								placeholder={'Поиск карточек'}
 							/>

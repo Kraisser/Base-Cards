@@ -46,7 +46,7 @@ export default function ChapterItem({name, id}) {
 	};
 
 	const chapterSelect = () => {
-		dispatch(setActiveChapter(id));
+		dispatch(setActiveChapter({id, name}));
 
 		if (window.innerWidth < 750) {
 			dispatch(setMenuActive(true));

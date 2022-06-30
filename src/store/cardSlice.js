@@ -3,9 +3,10 @@ import {createSlice} from '@reduxjs/toolkit';
 import {resetStore} from './serviceSlice';
 
 const initialState = {
-	cardList: {},
+	cardList: [],
 	filteredCardList: [],
 	cardListStatus: 'firstLoad',
+	cardListChapter: '',
 };
 
 const cardSlice = createSlice({
@@ -14,7 +15,7 @@ const cardSlice = createSlice({
 	reducers: {
 		cardListLoading: (state) => {
 			state.cardListStatus = 'loading';
-			state.cardList = {};
+			state.cardList = initialState.cardList;
 		},
 		cardListError: (state) => {
 			state.cardListStatus = 'error';
@@ -22,11 +23,15 @@ const cardSlice = createSlice({
 		cardListSuccess: (state, action) => {
 			state.cardListStatus = 'idle';
 			state.cardList = action.payload;
-			state.filteredCardList = action.payload.data;
+			state.filteredCardList = action.payload;
 		},
 		setCardFilter: (state, action) => {
 			state.filteredCardList = action.payload;
 		},
+		cardListSetChapter: (state, action) => {
+			state.cardListChapter = action.payload;
+		},
+		clearCards: () => initialState,
 	},
 	extraReducers: (builder) => {
 		builder.addCase(resetStore, () => initialState);
@@ -36,4 +41,11 @@ const cardSlice = createSlice({
 const {actions, reducer} = cardSlice;
 
 export default reducer;
-export const {cardListLoading, cardListError, cardListSuccess, setCardFilter} = actions;
+export const {
+	cardListLoading,
+	cardListError,
+	cardListSuccess,
+	setCardFilter,
+	cardListSetChapter,
+	clearCards,
+} = actions;

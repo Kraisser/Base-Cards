@@ -16,7 +16,10 @@ export default function DeleteModal() {
 
 	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
 	const delModalTargetId = useSelector((state) => state.modal.delModalTargetId);
-	const chapterList = useSelector((state) => state.chapter.chapterList);
+
+	if (!delModalTarget) {
+		return null;
+	}
 
 	const targetChapter = delModalTarget === 'chapter';
 	const targetId = delModalTargetId.id;
@@ -40,21 +43,9 @@ export default function DeleteModal() {
 	};
 
 	const onDeleteChapter = () => {
-		const chapIndex = chapterList.findIndex((item) => targetId === item.id);
-
-		const chapterOrder = {
-			prev: chapterList[chapIndex - 1],
-			next: chapterList[chapIndex + 1],
-		};
-
-		const prevChapter = chapterOrder.prev
-			? chapterOrder.prev.id
-			: chapterOrder.next
-			? chapterOrder.next.id
-			: null;
-
-		deleteChapterFromList(targetId, prevChapter);
 		dispatch(delModalClose());
+
+		deleteChapterFromList(targetId);
 	};
 
 	return (

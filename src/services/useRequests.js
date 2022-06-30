@@ -17,13 +17,13 @@ export default function useRequests() {
 
 	const chaptersRef = useMemo(() => collection(db, uid + '/data/chaptersList'), [uid]);
 
-	const setBaseDoc = useCallback(async (uid) => {
+	const setBaseDoc = async (uid) => {
 		try {
 			await setDoc(doc(db, uid, 'data'), {}, {merge: true});
 		} catch (error) {
 			console.log(error);
 		}
-	}, []);
+	};
 
 	const getCardList = useCallback(
 		async (id) => {
@@ -37,7 +37,6 @@ export default function useRequests() {
 
 			return {
 				chapterId: id,
-				description: res.name,
 				data,
 			};
 		},
