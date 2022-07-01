@@ -27,8 +27,12 @@ export default function ChapterList() {
 
 	const chapListContent = useMemo(() => {
 		if (filteredChapters.length > 0) {
-			const arr = filteredChapters.map((item) => (
-				<CSSTransition timeout={300} classNames='chap-item' key={item.id} appear={true}>
+			const arr = filteredChapters.map((item, index) => (
+				<CSSTransition
+					timeout={300 + index * 10}
+					classNames='chap-item'
+					key={item.id}
+					appear={true}>
 					<ChapterItem name={item.name} id={item.id} />
 				</CSSTransition>
 			));

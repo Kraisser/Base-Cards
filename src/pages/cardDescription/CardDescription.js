@@ -7,6 +7,8 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import setContent from '../../utils/setContent';
 import useCards from '../../services/useCards';
+import useChapter from '../../services/useChapter';
+import useClock from '../../services/useClock';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
@@ -15,25 +17,42 @@ import Page404 from '../404/404';
 
 import {setCard} from '../../store/editSlice';
 import {delModalOpen} from '../../store/modalSlice';
+import {setActiveChapter} from '../../store/chapterSlice';
 
 export default function CardDescription() {
-	console.log('cardDescrRender');
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	const {updateChapters} = useChapter();
 	const {updateCardList} = useCards();
+	const {getFullDate} = useClock();
 
 	const {id, activeChapter} = useParams();
 
 	const cardList = useSelector((state) => state.cardList.cardList);
 	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
+	const activeChapterState = useSelector((state) => state.chapter.activeChapter);
+	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	useEffect(() => {
 		if (cardListStatus !== 'idle' && activeChapter && id) {
 			updateCardList(activeChapter);
 		}
+		if (chapterList.length === 0) {
+			updateChapters();
+		}
 		// eslint-disable-next-line
 	}, []);
+
+	useEffect(() => {
+		if (!activeChapterState && chapterList.length > 0) {
+			const item = chapterList.find((item) => item.id === activeChapter);
+
+			if (item) {
+				dispatch(setActiveChapter({id: item.id, name: item.name}));
+			}
+		}
+	}, [chapterList]);
 
 	if (!cardList) {
 		return <></>;
@@ -60,13 +79,15 @@ export default function CardDescription() {
 		);
 	};
 
+	const timeData = getFullDate(currentCard.timeStamp);
+
 	return (
 		<>
 			<PageHeader burger={false} />
 
 			<div className='cardDescriptionWrapper pageContentWrapper '>
 				<div className='cardDescrWrapper pageContentContainer'>
-					{setContent(cardListStatus, View, currentCard, {onEditCard, onDeleteCard})}
+					{setContent(cardListStatus, View, currentCard, {onEditCard, onDeleteCard, timeData})}
 				</div>
 				<div className='cardDescButWrapper'>
 					<Link to='/'>
@@ -79,23 +100,12 @@ export default function CardDescription() {
 	);
 }
 
-function View({data, onEditCard, onDeleteCard}) {
-	const {name, link, timeStamp, description} = data;
-	const date = new Date(timeStamp);
+function View({data, onEditCard, onDeleteCard, timeData}) {
+	const {name, link, description} = data;
+	const {hour, min, dayInMonth, month, year} = timeData;
 
-	const hour = date.getHours();
-	const minute = date.getMinutes();
-	const day = date.getDate();
-	const month = date.getMonth() + 1;
-
-	const curHour = hour < 10 ? `0${hour}` : hour;
-	const curMinute = minute < 10 ? `0${minute}` : minute;
-	const curDay = day < 10 ? `0${day}` : day;
-	const curMonth = month < 10 ? `0${month}` : month;
-	const curYear = date.getFullYear();
-
-	const time = `${curHour}:${curMinute}`;
-	const curDate = `${curDay}.${curMonth}.${curYear}`;
+	const time = `${hour}:${min}`;
+	const curDate = `${dayInMonth}.${month}.${year}`;
 
 	return (
 		<>

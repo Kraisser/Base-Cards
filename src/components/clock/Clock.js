@@ -1,27 +1,32 @@
 import './clock.css';
 
 import {useState, useEffect} from 'react';
+import useClock from '../../services/useClock';
 
 export default function Clock() {
-	const newDate = new Date();
-	const [time, setTime] = useState(newDate.toLocaleString('ru').split(', ')[1]);
+	const {getFullDate} = useClock();
 
-	const daysArr = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-	const day = newDate.getDay();
+	const [time, setTime] = useState(null);
 
 	useEffect(() => {
 		const timer = setInterval(() => {
-			setTime(new Date().toLocaleString('ru').split(', ')[1]);
+			const date = getFullDate();
+			setTime(date);
 		}, 500);
 		return () => clearInterval(timer);
-	}, [time]);
+	}, [time, getFullDate]);
+
+	if (!time) {
+		return <></>;
+	}
+	const {hour, min, sec, dayInMonth, month, year, dayName} = time;
 
 	return (
 		<div className='dateWrapper'>
-			<div className='timeWrapper'>{time}</div>
+			<div className='timeWrapper'>{`${hour}:${min}:${sec}`}</div>
 			<div className='date'>
-				<div>{newDate.toLocaleString('ru').split(', ')[0]}</div>
-				<div>{daysArr[day]}</div>
+				<div>{`${dayInMonth}.${month}.${year}`}</div>
+				<div>{dayName}</div>
 			</div>
 		</div>
 	);

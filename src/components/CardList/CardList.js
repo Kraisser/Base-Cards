@@ -12,7 +12,7 @@ import setContent from '../../utils/setContent';
 import SearchForm from '../SearchForm/SearchForm';
 import CardAddForm from '../CardAddForm/CardAddForm';
 
-import fastAddIcon from '../../assets/icons/fast-add-icon.png';
+// import fastAddIcon from '../../assets/icons/fast-add-icon.png';
 
 export default function CardList() {
 	const {updateCardList} = useCards();
@@ -20,7 +20,7 @@ export default function CardList() {
 	const [fastAdd, setFastAdd] = useState(false);
 
 	const cardList = useSelector((state) => state.cardList.cardList);
-	const cardListChapterId = useSelector((state) => state.cardList.cardListChapterId);
+	const cardListChapterId = useSelector((state) => state.cardList.cardListChapter);
 	const filteredCardList = useSelector((state) => state.cardList.filteredCardList);
 	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
@@ -36,6 +36,8 @@ export default function CardList() {
 		? activeChapterName
 		: cardListStatus === 'firstLoad'
 		? 'Раздел не выбран'
+		: cardListStatus === 'error'
+		? 'Раздел не найден'
 		: 'Пожалуйста подождите';
 
 	const content = useMemo(

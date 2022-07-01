@@ -31,6 +31,13 @@ export default function useChapter() {
 			});
 	};
 
+	const getChapterName = (chapterId) => {
+		console.log('chapterList: ', chapterList);
+		const name = chapterList.find((item) => (chapterId === item.id ? item.name : false));
+
+		console.log(name);
+	};
+
 	const updateChapterList = (popId) => {
 		const newChapList = chapterList.filter((item) => item.id !== popId);
 
@@ -83,6 +90,7 @@ export default function useChapter() {
 
 	return {
 		updateChapters,
+		getChapterName,
 		uploadNewChapter,
 		deleteChapterFromList,
 		updateChapterName,
