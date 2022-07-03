@@ -70,6 +70,7 @@ export default function ChapterItem({name, id}) {
 
 	const onEnterEdit = () => {
 		setEdit(false);
+		setMenu(false);
 
 		if (name === chapName) {
 			return;

@@ -46,13 +46,14 @@
 	align-items: baseline;
 	justify-content: center;
 }
-.fastAddIcon {
+.fastAddIcon.but {
 	display: none;
 	height: 60px;
 	width: 60px;
 	position: absolute;
 	right: 5vh;
-	bottom: 5vh;
+	bottom: 10vh;
+	font-size: 60px;
 }
 .cardSearchWrapper {
 	width: 250px;
@@ -141,8 +142,10 @@
 	.cardListFastAddButWrapper {
 		display: none;
 	}
-	.fastAddIcon {
-		display: block;
+	.fastAddIcon.but {
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
 	}
 }
 @media only all and (max-width: 500px) {

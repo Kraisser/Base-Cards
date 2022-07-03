@@ -26,16 +26,24 @@
 		transition: transform 0.5s ease-in-out;
 	}
 	.rightMenuToggle {
-		display: block;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		position: absolute;
 		top: 30%;
 		right: 0;
-		width: 30px;
-		height: 80px;
+		width: 35px;
+		height: 60px;
+		font-size: 40px;
+		color: var(--hover-color);
 		background-color: var(--main-color);
 		transition: transform 0.5s ease-in-out;
 		cursor: pointer;
 		border-radius: var(--border-mini-radius) 0 0 var(--border-mini-radius);
+	}
+	.rightMenuToggle img {
+		width: 30px;
+		transition: transform 0.5s ease-in-out;
 	}
 	.rightMenuToggle:before {
 		content: '';
@@ -65,6 +73,9 @@
 	}
 	.rightMenuToggleActive {
 		transform: translateX(-350px);
+	}
+	.rightMenuToggleActive img {
+		transform: rotate(180deg);
 	}
 }
 @media only all and (max-width: 450px) {

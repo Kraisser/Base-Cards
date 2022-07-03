@@ -6,6 +6,8 @@ import {useEffect} from 'react';
 import useDebounce from '../../services/useDebounce';
 import {setClientWidth, setMenuActive} from '../../store/chapterSlice';
 
+import rightMenuIcon from '../../assets/icons/right-menu-slide.png';
+
 export default function RightContentWrapper({children}) {
 	const dispatch = useDispatch();
 
@@ -33,7 +35,7 @@ export default function RightContentWrapper({children}) {
 		<div
 			className={`rightMenuToggle ${menuHidden ? '' : 'rightMenuToggleActive'}`}
 			onClick={() => dispatch(setMenuActive(!menuHidden))}>
-			{'<'}
+			<img src={rightMenuIcon} alt='Боковое меню' />
 		</div>
 	);
 
