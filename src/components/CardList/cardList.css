@@ -48,12 +48,11 @@
 }
 .fastAddIcon.but {
 	display: none;
-	height: 60px;
-	width: 60px;
+	height: 50px;
+	width: 50px;
 	position: absolute;
 	right: 5vh;
 	bottom: 10vh;
-	font-size: 60px;
 }
 .cardSearchWrapper {
 	width: 250px;
@@ -145,7 +144,7 @@
 	.fastAddIcon.but {
 		display: flex;
 		justify-content: center;
-		align-items: flex-end;
+		align-items: center;
 	}
 }
 @media only all and (max-width: 500px) {

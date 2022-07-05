@@ -12,7 +12,7 @@ import setContent from '../../utils/setContent';
 import SearchForm from '../SearchForm/SearchForm';
 import CardAddForm from '../CardAddForm/CardAddForm';
 
-// import fastAddIcon from '../../assets/icons/fast-add-icon.png';
+import fastAddIcon from '../../assets/icons/fast-add.png';
 
 export default function CardList() {
 	const {updateCardList} = useCards();
@@ -105,7 +105,7 @@ export default function CardList() {
 
 			{activeChapter ? (
 				<button className='fastAddIcon but' onClick={openFastAdd}>
-					+
+					<img src={fastAddIcon} alt='Добавить в раздел' />
 				</button>
 			) : null}
 		</>
