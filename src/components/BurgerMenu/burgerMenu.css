@@ -3,28 +3,29 @@
 .burgerMenu {
 	position: absolute;
 	right: 5px;
-	top: 7px;
-	height: 36px;
+	top: 5px;
+	height: 40px;
 	width: 40px;
 	display: none;
+	cursor: pointer;
 }
 .burgerItem {
 	position: absolute;
-	width: 40px;
-	height: 8px;
+	width: 38px;
+	height: 6px;
 	background-color: var(--button-color);
-	border-radius: var(--border-radius);
+	border-radius: var(--border-mini-radius);
 	transition: transform 0.5s ease-in-out;
 	transition: opacity 0.5s ease-in-out;
 }
 .burgerItem:nth-child(1) {
-	top: 0;
+	top: 5px;
 }
 .burgerItem:nth-child(2) {
-	top: 14px;
+	top: 17px;
 }
 .burgerItem:nth-child(3) {
-	bottom: 0;
+	bottom: 5px;
 }
 
 .burgerMenuActive .burgerItem:nth-child(1) {
@@ -50,7 +51,8 @@
 /* Media */
 @media only all and (max-width: 450px) {
 	.burgerMenu {
-		display: block;
+		display: flex;
+		justify-content: center;
 	}
 }
 
@@ -60,10 +62,10 @@
 		transform: none;
 	}
 	50% {
-		transform: translateY(14px);
+		transform: translateY(13px);
 	}
 	to {
-		transform: translateY(14px) rotate(45deg);
+		transform: translateY(13px) rotate(45deg);
 	}
 }
 @keyframes burgerItem2Open {
@@ -79,19 +81,19 @@
 		transform: none;
 	}
 	50% {
-		transform: translateY(-14px);
+		transform: translateY(-11px);
 	}
 	to {
-		transform: translateY(-14px) rotate(-45deg);
+		transform: translateY(-11px) rotate(-45deg);
 	}
 }
 
 @keyframes burgerItem1Close {
 	from {
-		transform: translateY(14px) rotate(45deg);
+		transform: translateY(13px) rotate(45deg);
 	}
 	50% {
-		transform: translateY(14px);
+		transform: translateY(13px);
 	}
 	to {
 		transform: none;
@@ -107,10 +109,10 @@
 }
 @keyframes burgerItem3Close {
 	from {
-		transform: translateY(-14px) rotate(-45deg);
+		transform: translateY(-11px) rotate(-45deg);
 	}
 	50% {
-		transform: translateY(-14px);
+		transform: translateY(-11px);
 	}
 	to {
 		transform: none;

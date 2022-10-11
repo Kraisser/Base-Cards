@@ -2,10 +2,6 @@
 
 .searchWrapper {
 	position: relative;
-	transition: transform 0.2s ease-in;
-}
-.searchWrapper:active {
-	transform: scale(0.95);
 }
 .searchForm {
 	width: 100%;
