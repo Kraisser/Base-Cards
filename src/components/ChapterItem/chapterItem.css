@@ -96,10 +96,10 @@
 }
 .chapterSlideIcon:hover,
 .chapterEditIcon:hover {
-	filter: drop-shadow(0 0 2px var(--button-color));
+	filter: drop-shadow(0 0 1px var(--button-color));
 }
 .chapterDelIcon:hover {
-	filter: drop-shadow(0 0 6px #ff4940);
+	filter: drop-shadow(0 0 1px #ff4940);
 }
 .chapterItemMenu img:active {
 	transform: scale(0.95);
