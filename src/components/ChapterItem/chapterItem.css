@@ -9,14 +9,11 @@
 	cursor: pointer;
 	font-weight: 500;
 	border-radius: var(--border-mini-radius);
-	transition: all 0.2s ease;
 }
 .chapterItem:first-child {
 	margin-top: 7px;
 }
-.chapterItem:active {
-	transform: scale(0.97);
-}
+
 .chapterItemContent {
 	box-shadow: 0 0 4px var(--hover-color);
 	background-color: var(--main-third-color);
@@ -26,6 +23,13 @@
 	align-items: center;
 	width: 100%;
 	height: 100%;
+	transition: all 0.2s ease;
+}
+.chapterItemContent:active {
+	transform: scale(0.97);
+}
+.chapterItemContent:active + .chapterItemMenu {
+	transform: scale(0.96) translateX(-14%);
 }
 .chapterItemContent:hover {
 	box-shadow: 0 0 8px var(--hover-color);
@@ -80,7 +84,7 @@
 	overflow: hidden;
 	background-color: var(--inactive-color);
 	border-radius: var(--border-mini-radius);
-	transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out, transform 0.2s ease;
 	z-index: 3;
 }
 .chapterSlideIcon {
