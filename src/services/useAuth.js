@@ -24,7 +24,15 @@ export default function useAuth() {
 		});
 	};
 
-	const signInEmail = (email, pass) => {
+	const signInEmail = (email, pass, test) => {
+		if (test) {
+			return signInWithEmailAndPassword(auth, 'preview-app-user@mail.ru', '137234QWErty').then(
+				(userCredential) => {
+					const uid = userCredential.user.uid;
+					setBaseDoc(uid);
+				}
+			);
+		}
 		return signInWithEmailAndPassword(auth, email, pass).then((userCredential) => {
 			const uid = userCredential.user.uid;
 			setBaseDoc(uid);

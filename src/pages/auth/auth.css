@@ -20,6 +20,16 @@
 .authError {
 	color: var(--red-color);
 }
+.authOtherSign {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 30px;
+}
+.authTestSignWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .authIconsWrapper {
 	display: flex;
 	justify-content: center;

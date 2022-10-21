@@ -63,7 +63,11 @@ export default function ChapterList() {
 
 function View({data}) {
 	if (!data || data.length === 0) {
-		return <div className='chapterNotFound'>Разделы не найдены. Добавьте раздел в поле выше.</div>;
+		return (
+			<div className='chapterNotFound'>
+				<div>Разделы не найдены</div> Добавьте раздел в поле 'Новый раздел'
+			</div>
+		);
 	}
 
 	return <TransitionGroup component={null}>{data}</TransitionGroup>;

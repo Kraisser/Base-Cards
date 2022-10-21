@@ -75,16 +75,18 @@ export default function Auth() {
 			.catch((error) => errorCustom(error));
 	};
 
-	const onSignIn = async (e) => {
+	const onSignIn = async (e, test) => {
 		e.preventDefault();
 
-		const validRes = await validateField('email', email, setEmailError);
+		if (!test) {
+			const validRes = await validateField('email', email, setEmailError);
 
-		if (!validRes) {
-			return;
+			if (!validRes) {
+				return;
+			}
 		}
 
-		signInEmail(email, pass)
+		signInEmail(email, pass, test)
 			.then(() => {
 				redirectToMain();
 			})
@@ -125,6 +127,7 @@ export default function Auth() {
 						<input
 							type='text'
 							id='login'
+							name='login'
 							value={email}
 							onChange={(e) => onChange(e, setEmail)}
 							className={`formInput ${emailErrInpStyle}`}
@@ -139,6 +142,7 @@ export default function Auth() {
 							type='password'
 							autoComplete='current-password'
 							id='pass'
+							name='pass'
 							value={pass}
 							onChange={(e) => onChange(e, setPass)}
 							className={`formInput ${passErrInpStyle}`}
@@ -146,21 +150,28 @@ export default function Auth() {
 					</div>
 					{errorAuth ? <div className='authInfo authError'>{errorAuth}</div> : null}
 					<div className='fieldWrapper authButsWrapper'>
-						<button type='button' className='but authBut' onClick={onSignIn}>
-							Войти
+						<button type='button' className='but authBut' onClick={onRegister}>
+							Регистрация
 						</button>
 						<button type='button' className='but authBut' onClick={() => navigate('/resetPass')}>
 							Восстановить пароль
 						</button>
 					</div>
 					<div className='formButWrapper authButsWrapper'>
-						<button type='button' className='but authBut' onClick={onRegister}>
-							Зарегистрироваться
+						<button type='button' className='but authBut' onClick={onSignIn}>
+							Войти
 						</button>
 					</div>
-					<div className='authIconsWrapper'>
-						<div className='authIconsContainer' onClick={onGoogle}>
-							<img src={googleIcon} alt='Зайти с помощью Google' />
+					<div className='authOtherSign'>
+						<div className='authTestSignWrapper'>
+							<button className='but authBut' onClick={(e) => onSignIn(e, true)}>
+								Тестовый аккаунт
+							</button>
+						</div>
+						<div className='authIconsWrapper'>
+							<div className='authIconsContainer' onClick={onGoogle}>
+								<img src={googleIcon} alt='Зайти с помощью Google' />
+							</div>
 						</div>
 					</div>
 				</form>
