@@ -56,6 +56,9 @@ export default function Auth() {
 			case 'auth/user-not-found':
 				setErrorAuth('Пользователь не найден');
 				break;
+			case 'auth/popup-closed-by-user':
+				setErrorAuth('Окно авторизации закрыто пользователем');
+				break;
 
 			default:
 				setErrorAuth(`${code}: ${error.message}`);
