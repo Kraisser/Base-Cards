@@ -73,6 +73,9 @@
 .errorInput {
 	box-shadow: inset 0 0 2px 1px var(--red-color);
 }
+.errorInput:hover {
+	box-shadow: inset 0 0 0, 0 0 4px var(--hover-color);
+}
 
 /* Media */
 @media only all and (max-width: 750px) {

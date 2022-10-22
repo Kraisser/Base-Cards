@@ -157,7 +157,7 @@ export default function Auth() {
 							Регистрация
 						</button>
 						<button type='button' className='but authBut' onClick={() => navigate('/resetPass')}>
-							Восстановить пароль
+							Забыли пароль
 						</button>
 					</div>
 					<div className='formButWrapper authButsWrapper'>

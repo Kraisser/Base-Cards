@@ -65,6 +65,7 @@
 	font-size: var(--defaultSize);
 	margin-bottom: 5px;
 	color: var(--header-color);
+	cursor: pointer;
 }
 .formInputLabel option {
 	color: #000;
