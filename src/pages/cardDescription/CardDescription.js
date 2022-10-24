@@ -4,6 +4,7 @@ import '../../css/common.css';
 import {useEffect} from 'react';
 import {useParams, Link, useNavigate} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
+import {CSSTransition} from 'react-transition-group';
 
 import setContent from '../../utils/setContent';
 import useCards from '../../services/useCards';
@@ -33,6 +34,7 @@ export default function CardDescription() {
 	const cardListStatus = useSelector((state) => state.cardList.cardListStatus);
 	const activeChapterState = useSelector((state) => state.chapter.activeChapter);
 	const chapterList = useSelector((state) => state.chapter.chapterList);
+	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
 
 	useEffect(() => {
 		if (cardListStatus !== 'idle' && activeChapter && id) {
@@ -95,7 +97,13 @@ export default function CardDescription() {
 					</Link>
 				</div>
 			</div>
-			<DeleteModal />
+			<CSSTransition
+				classNames='add-modal'
+				timeout={200}
+				in={!!delModalTarget}
+				unmountOnExit				mountOnEnter>
+				<DeleteModal />
+			</CSSTransition>
 		</>
 	);
 }

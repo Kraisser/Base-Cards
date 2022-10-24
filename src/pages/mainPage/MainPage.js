@@ -1,5 +1,8 @@
 import './mainPage.css';
 
+import {useSelector} from 'react-redux';
+import {CSSTransition} from 'react-transition-group';
+
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
 import ChapterList from '../../components/ChapterList/ChapterList';
 import EditBlock from '../../components/EditBlock/EditBlock';
@@ -8,6 +11,8 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import RightContentWrapper from '../../components/RightContentWrapper/RightContentWrapper';
 
 export default function MainPage() {
+	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
+
 	return (
 		<>
 			<PageHeader />
@@ -20,7 +25,14 @@ export default function MainPage() {
 					<ChapterList />
 				</RightContentWrapper>
 			</main>
-			<DeleteModal />
+			<CSSTransition
+				classNames='add-modal'
+				timeout={200}
+				in={!!delModalTarget}
+				unmountOnExit
+				mountOnEnter>
+				<DeleteModal />
+			</CSSTransition>
 		</>
 	);
 }

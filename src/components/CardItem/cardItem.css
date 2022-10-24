@@ -54,7 +54,7 @@
 .cardItemDescription {
 	margin: 0;
 	height: 100%;
-	font-size: var(--minSize);
+	font-size: var(--descrSize);
 	line-height: 15px;
 	color: var(--text-description-color);
 	overflow-wrap: break-word;
@@ -85,6 +85,5 @@
 .card-item-exit-active {
 	transform: scale(0.8);
 	opacity: 0;
-	transition: transform 300ms;
-	transition: opacity 150ms;
+	transition: transform 300ms, opacity 150ms;
 }

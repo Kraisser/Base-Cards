@@ -10,7 +10,7 @@ import {setActiveChapter, setMenuActive} from '../../store/chapterSlice';
 
 import delIcon from '../../assets/icons/delete-icon.png';
 import slideIcon from '../../assets/icons/menu-slide.png';
-import editChapterIcon from '../../assets/icons/edit-30-icon.png';
+import editChapterIcon from '../../assets/icons/edit-2-30-icon.png';
 import confirmIcon from '../../assets/icons/confirm-icon.png';
 
 export default function ChapterItem({name, id}) {

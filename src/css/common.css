@@ -77,6 +77,44 @@
 	box-shadow: inset 0 0 0, 0 0 4px var(--hover-color);
 }
 
+/* Animation Modal  */
+.add-modal-enter {
+	opacity: 0;
+}
+.add-modal-enter-active {
+	opacity: 1;
+	transition: opacity 200ms;
+}
+.add-modal-exit {
+	opacity: 1;
+}
+.add-modal-exit-active {
+	opacity: 0;
+	transition: opacity 200ms;
+}
+.add-modal-enter .cardFormModal,
+.add-modal-enter .modalWrapper {
+	transform: scale(0.7);
+	opacity: 0;
+}
+.add-modal-enter-active .cardFormModal,
+.add-modal-enter-active .modalWrapper {
+	transition: opacity 200ms, transform 200ms;
+	transform: scale(1);
+	opacity: 1;
+}
+.add-modal-exit .cardFormModal,
+.add-modal-exit .modalWrapper {
+	transform: scale(1);
+	opacity: 1;
+}
+.add-modal-exit-active .cardFormModal,
+.add-modal-exit-active .modalWrapper {
+	transition: opacity 200ms, transform 200ms;
+	transform: scale(0.7);
+	opacity: 0;
+}
+
 /* Media */
 @media only all and (max-width: 750px) {
 	.pageContentWrapper {

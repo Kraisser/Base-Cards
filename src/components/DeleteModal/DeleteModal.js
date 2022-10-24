@@ -18,7 +18,11 @@ export default function DeleteModal() {
 	const delModalTargetId = useSelector((state) => state.modal.delModalTargetId);
 
 	if (!delModalTarget) {
-		return null;
+		return (
+			<div className='modalOverlay'>
+				<div className='modalWrapper'></div>
+			</div>
+		);
 	}
 
 	const targetChapter = delModalTarget === 'chapter';
@@ -28,8 +32,8 @@ export default function DeleteModal() {
 		<>
 			<p>Вы действительно хотите удалить этот раздел?</p>
 			<p>
-				Это действие необратимо. Удаление раздела также приведет к потере всей информации
-				находящейся внутри него.
+				Это действие необратимо. Удаление раздела также приведет к потере всей информации связанной
+				с ним.
 			</p>
 		</>
 	) : (
