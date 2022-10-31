@@ -11,6 +11,7 @@ export default function useValidate() {
 			.min(6, 'Минимум 6 символов')
 			.matches(/(?=.*[0-9])(?=.*[a-zA-Z])/g, 'Пароль должен содержать минимум 1 цифру и букву')
 			.required('Обязательное поле*'),
+		passRequired: yup.string('Введите пароль').required('Обязательное поле*'),
 		cardName: yup
 			.string('Введите строку')
 			.required('Обязательное поле*')

@@ -20,6 +20,21 @@
 .authError {
 	color: var(--red-color);
 }
+.formInputPass {
+	width: 100%;
+	padding-right: 30px;
+}
+.passWrapper {
+	position: relative;
+}
+.showPassWrapper {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	cursor: pointer;
+}
 .authOtherSign {
 	display: grid;
 	grid-template-columns: 1fr 1fr;

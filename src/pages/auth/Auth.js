@@ -8,6 +8,7 @@ import useAuth from '../../services/useAuth';
 import useValidate from '../../services/useValidate';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
+import ShowPassIcon from '../../components/ShowPassIcon/ShowPassIcon';
 
 import googleIcon from '../../assets/icons/google-icon.png';
 
@@ -19,6 +20,7 @@ export default function Auth() {
 
 	const [email, setEmail] = useState('');
 	const [pass, setPass] = useState('');
+	const [passShow, setPassShow] = useState(false);
 	const [emailError, setEmailError] = useState(null);
 	const [passError, setPassError] = useState(null);
 	const [errorAuth, setErrorAuth] = useState(null);
@@ -59,6 +61,9 @@ export default function Auth() {
 			case 'auth/popup-closed-by-user':
 				setErrorAuth('Окно авторизации закрыто пользователем');
 				break;
+			case 'auth/internal-error':
+				setErrorAuth('Внутренняя ошибка');
+				break;
 
 			default:
 				setErrorAuth(`${code}: ${error.message}`);
@@ -83,8 +88,9 @@ export default function Auth() {
 
 		if (!test) {
 			const validRes = await validateField('email', email, setEmailError);
+			const passReq = await validateField('passRequired', pass, setPassError);
 
-			if (!validRes) {
+			if (!validRes || !passReq) {
 				return;
 			}
 		}
@@ -141,15 +147,26 @@ export default function Auth() {
 							Введите пароль*
 						</label>
 						{passError ? <div className='authInfo authError'>{passError}</div> : null}
-						<input
-							type='password'
-							autoComplete='current-password'
-							id='pass'
-							name='pass'
-							value={pass}
-							onChange={(e) => onChange(e, setPass)}
-							className={`formInput ${passErrInpStyle}`}
-						/>
+						<div className='passWrapper'>
+							<input
+								type={passShow ? 'text' : 'password'}
+								autoComplete='current-password'
+								id='pass'
+								name='pass'
+								value={pass}
+								onChange={(e) => onChange(e, setPass)}
+								className={`formInput formInputPass ${passErrInpStyle}`}
+							/>
+							<div className='showPassWrapper'>
+								<ShowPassIcon
+									id='passEye'
+									width='30px'
+									height='30px'
+									animDuration={400}
+									onClick={() => setPassShow(!passShow)}
+								/>
+							</div>
+						</div>
 					</div>
 					{errorAuth ? <div className='authInfo authError'>{errorAuth}</div> : null}
 					<div className='fieldWrapper authButsWrapper'>
