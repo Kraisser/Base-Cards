@@ -2,7 +2,7 @@ import './auth.css';
 import '../../css/common.css';
 
 import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 import useAuth from '../../services/useAuth';
 import useValidate from '../../services/useValidate';
@@ -126,7 +126,7 @@ export default function Auth() {
 			<PageHeader close={false} />
 			<div className='pageContentWrapper'>
 				<form action='' className='authForm'>
-					<h2 className='formHeader'>Войти с помощью Email</h2>
+					<h2 className='formHeader'>Добро пожаловать</h2>
 
 					<div className='fieldWrapper'>
 						<label htmlFor='login' className='formInputLabel'>
@@ -167,30 +167,33 @@ export default function Auth() {
 								/>
 							</div>
 						</div>
+						<div className='passRestoreWrapper'>
+							<Link to='/resetPass' className='resetPassLink'>
+								Забыли пароль?
+							</Link>
+						</div>
 					</div>
 					{errorAuth ? <div className='authInfo authError'>{errorAuth}</div> : null}
-					<div className='fieldWrapper authButsWrapper'>
-						<button type='button' className='but authBut' onClick={onRegister}>
-							Регистрация
-						</button>
-						<button type='button' className='but authBut' onClick={() => navigate('/resetPass')}>
-							Забыли пароль
-						</button>
-					</div>
-					<div className='formButWrapper authButsWrapper'>
+					<div className='authButsWrapper'>
 						<button type='button' className='but authBut' onClick={onSignIn}>
 							Войти
+						</button>
+						<button type='button' className='but authBut' onClick={onRegister}>
+							Регистрация
 						</button>
 					</div>
 					<div className='authOtherSign'>
 						<div className='authTestSignWrapper'>
-							<button className='but authBut' onClick={(e) => onSignIn(e, true)}>
+							<button className='but authTestBut' onClick={(e) => onSignIn(e, true)}>
 								Тестовый аккаунт
 							</button>
 						</div>
-						<div className='authIconsWrapper'>
-							<div className='authIconsContainer' onClick={onGoogle}>
-								<img src={googleIcon} alt='Зайти с помощью Google' />
+						<div className='alternateSignWrapper'>
+							<div className='alternateSignDescription'>Войти с помощью:</div>
+							<div className='authIconsWrapper'>
+								<div className='authIconsContainer' onClick={onGoogle}>
+									<img src={googleIcon} alt='Зайти с помощью Google' />
+								</div>
 							</div>
 						</div>
 					</div>

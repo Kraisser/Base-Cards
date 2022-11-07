@@ -51,7 +51,8 @@
 	background-color: var(--button-color);
 	color: var(--header-color);
 	font-size: var(--butSize);
-	font-weight: 600;
+	font-weight: 500;
+	line-height: 20px;
 }
 .but:disabled {
 	background-color: var(--button-border-color);

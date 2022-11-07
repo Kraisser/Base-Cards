@@ -15,7 +15,7 @@
 	margin: 0 0 5px;
 }
 .authInfo {
-	margin-bottom: 5px;
+	line-height: 1.2em;
 }
 .authError {
 	color: var(--red-color);
@@ -37,7 +37,7 @@
 }
 .authOtherSign {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr max-content;
 	grid-gap: 30px;
 }
 .authTestSignWrapper {
@@ -45,22 +45,48 @@
 	justify-content: center;
 	align-items: center;
 }
+.alternateSignWrapper {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	grid-gap: 15px;
+	justify-content: flex-end;
+}
+.alternateSignDescription {
+	display: flex;
+	align-items: flex-end;
+}
 .authIconsWrapper {
 	display: flex;
-	justify-content: center;
 }
 .authButsWrapper {
-	grid-template-columns: 1fr 1fr;
+	margin-bottom: 10px;
+	display: grid;
+	grid-template-rows: repeat(auto-fit, 40px);
+	grid-gap: 10px;
 }
 .authBut {
 	justify-self: center;
-	width: 80%;
-	height: 50px;
+	min-width: 300px;
+	padding: 0 calc(var(--butSize) * 2);
+	height: 40px;
+}
+.authTestBut {
+	justify-content: center;
+	width: 250px;
+	padding: 0 calc(var(--butSize) * 2);
+	height: 40px;
+}
+.passRestoreWrapper {
+	display: flex;
+	justify-content: flex-end;
+}
+.resetPassLink {
+	color: var(--header-color);
 }
 .authIconsContainer {
 	background-color: var(--main-third-color);
-	width: 50px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 	padding: 5px;
 	border-radius: var(--border-mini-radius);
 	cursor: pointer;
@@ -78,5 +104,14 @@
 	.authForm {
 		width: 100%;
 		grid-gap: 10px;
+	}
+}
+@media only all and (max-width: 550px) {
+	.authOtherSign {
+		grid-template-columns: 1fr;
+		grid-gap: 10px;
+	}
+	.alternateSignWrapper {
+		justify-self: flex-end;
 	}
 }
