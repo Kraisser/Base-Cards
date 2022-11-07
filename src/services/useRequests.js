@@ -25,10 +25,15 @@ export default function useRequests() {
 		}
 	};
 
+	const getAllCards = useCallback(async () => {
+		const allDocs = await getDocs(collection(db, uid + '/data/cardList'));
+		allDocs.forEach((doc) => console.log(doc.data()));
+	},[uid])
+
 	const getCardList = useCallback(
 		async (id) => {
 			const res = (await getDoc(doc(db, uid + '/data/cardList', id))).data();
-
+			
 			const keys = Object.keys(res).filter((item) => item !== 'name');
 
 			const data = keys
