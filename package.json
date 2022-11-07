@@ -14,14 +14,14 @@
 		"react-dom": "^17.0.2",
 		"react-redux": "^7.2.6",
 		"react-router-dom": "^6.2.1",
-		"react-scripts": "5.0.0",
+		"react-scripts": "^5.0.0",
 		"react-transition-group": "^4.4.2",
 		"uuid": "^8.3.2",
 		"yup": "^0.32.11"
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "concurrently -m \"1\" \"react-scripts build\" \"firebase deploy\"",
+		"build": "react-scripts build && firebase deploy",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
@@ -39,8 +39,5 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	},
-	"devDependencies": {
-		"concurrently": "^7.1.0"
 	}
 }
