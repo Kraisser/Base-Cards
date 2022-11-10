@@ -62,7 +62,10 @@ export default function Auth() {
 				setErrorAuth('Окно авторизации закрыто пользователем');
 				break;
 			case 'auth/internal-error':
-				setErrorAuth('Внутренняя ошибка');
+				setErrorAuth('Внутренняя ошибка, попробуйте еще раз');
+				break;
+			case 'auth/popup-blocked':
+				setErrorAuth('Окно заблокировано, попробуйте еще раз');
 				break;
 
 			default:

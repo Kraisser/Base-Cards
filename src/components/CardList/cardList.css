@@ -42,9 +42,6 @@
 .fastAddBut {
 	min-height: 30px;
 	width: 250px;
-	display: flex;
-	align-items: baseline;
-	justify-content: center;
 }
 .fastAddIcon.but {
 	display: none;
