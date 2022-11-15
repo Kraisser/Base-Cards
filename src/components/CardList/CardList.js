@@ -49,6 +49,7 @@ export default function CardList() {
 		setFastAdd(true);
 	};
 	const closeFastAdd = (e, forceClose) => {
+		console.log('forceClose: ', forceClose);
 		if (forceClose) {
 			setFastAdd(false);
 			return;
@@ -62,7 +63,7 @@ export default function CardList() {
 		}
 	};
 
-	const searchAvailable = cardList && cardList.length !== 0;
+	const searchAvailable = cardList && cardList.length > 0;
 
 	return (
 		<>

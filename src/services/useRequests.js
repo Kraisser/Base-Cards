@@ -20,7 +20,6 @@ export default function useRequests() {
 	const setBaseDoc = async (uid) => {
 		try {
 			await setDoc(doc(db, uid, 'data'), {}, {merge: true});
-			initFavourite();
 		} catch (error) {
 			console.log(error);
 		}

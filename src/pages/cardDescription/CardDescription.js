@@ -54,6 +54,7 @@ export default function CardDescription() {
 				dispatch(setActiveChapter({id: item.id, name: item.name}));
 			}
 		}
+		// eslint-disable-next-line
 	}, [chapterList]);
 
 	if (!cardList) {
@@ -77,6 +78,8 @@ export default function CardDescription() {
 				target: 'card',
 				id,
 				chapId: activeChapter,
+				fromChapterId: currentCard.fromChapterId,
+				favourite: currentCard.favourite,
 			})
 		);
 	};
@@ -101,7 +104,8 @@ export default function CardDescription() {
 				classNames='add-modal'
 				timeout={200}
 				in={!!delModalTarget}
-				unmountOnExit				mountOnEnter>
+				unmountOnExit
+				mountOnEnter>
 				<DeleteModal />
 			</CSSTransition>
 		</>

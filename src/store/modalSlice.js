@@ -16,6 +16,8 @@ const modalSlice = createSlice({
 			state.delModalTargetId = {
 				id: action.payload.id,
 				chapId: action.payload.chapId,
+				favourite: action.payload.favourite,
+				fromChapterId: action.payload.fromChapterId,
 			};
 		},
 		delModalClose: () => initialState,
