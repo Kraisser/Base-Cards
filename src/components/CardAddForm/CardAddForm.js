@@ -170,11 +170,6 @@ export default function CardAddForm({modalClose}) {
 		await uploadNewCard(newCard, chapter, activeChapter, id);
 
 		navigate('/');
-
-		// if (chapter === activeChapter) { //Auto setting active chapter removed because no chap Name
-		// 	return;
-		// }
-		// dispatch(setActiveChapter({id:chapter, name:}));
 	};
 
 	const debounceValidate = useDebounce((id, value) => validateFunc[id](value), 300);
