@@ -48,6 +48,10 @@ export default function useCards() {
 			.catch((e) => console.log(e));
 	};
 
+	const addCardToFavourite = async (card) => {
+		await uploadNewCard(card, 'favourite+chapter', 'favourite+chapter', card.id);
+	};
+
 	const onDeleteCard = (cardId, activeChapter) => {
 		deleteCard(cardId, activeChapter).then(() => {
 			const newCardList = cardList.filter((item) => cardId !== item.id);
@@ -57,6 +61,7 @@ export default function useCards() {
 	};
 
 	return {
+		addCardToFavourite,
 		uploadNewCard,
 		onDeleteCard,
 		updateCardList,

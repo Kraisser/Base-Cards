@@ -20,28 +20,31 @@ export default function useRequests() {
 	const setBaseDoc = async (uid) => {
 		try {
 			await setDoc(doc(db, uid, 'data'), {}, {merge: true});
+			initFavourite();
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
+	const initFavourite = async () => {
+		await postChapter('favourite+chapter', 'Избранное');
+	};
+
 	const getAllCards = useCallback(async () => {
 		const allDocs = await getDocs(collection(db, uid + '/data/cardList'));
 		allDocs.forEach((doc) => console.log(doc.data()));
-	},[uid])
+	}, [uid]);
 
 	const getCardList = useCallback(
-		async (id) => {
-			const res = (await getDoc(doc(db, uid + '/data/cardList', id))).data();
-			
+		async (chapterId) => {
+			const res = (await getDoc(doc(db, uid + '/data/cardList', chapterId))).data();
+
 			const keys = Object.keys(res).filter((item) => item !== 'name');
 
-			const data = keys
-				.map((item) => res[item])
-				.sort((prevItem, item) => item.timeStamp - prevItem.timeStamp);
+			const data = keys.map((item) => res[item]);
 
 			return {
-				chapterId: id,
+				chapterId,
 				data,
 			};
 		},
@@ -78,8 +81,8 @@ export default function useRequests() {
 	);
 
 	const deleteCard = useCallback(
-		async (id, activeProgram) => {
-			const docRef = doc(db, uid + '/data/cardList', activeProgram);
+		async (id, chapterId) => {
+			const docRef = doc(db, uid + '/data/cardList', chapterId);
 
 			await updateDoc(docRef, {
 				[id]: deleteField(),
@@ -109,6 +112,7 @@ export default function useRequests() {
 	);
 
 	return {
+		getAllCards,
 		getCardList,
 		getChapters,
 		postChapter,
@@ -117,5 +121,6 @@ export default function useRequests() {
 		deleteChapter,
 		editChapter,
 		setBaseDoc,
+		initFavourite,
 	};
 }

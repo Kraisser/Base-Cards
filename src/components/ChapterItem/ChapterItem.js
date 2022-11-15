@@ -21,6 +21,8 @@ export default function ChapterItem({name, id}) {
 	const [edit, setEdit] = useState(false);
 	const [chapName, setChapName] = useState(name);
 
+	const isFavourite = id === 'favourite+chapter';
+
 	const nameOverflow = name.length > 30;
 	const nameSlice = nameOverflow ? name.substr(0, 30) + ' . . .' : name;
 
@@ -79,8 +81,12 @@ export default function ChapterItem({name, id}) {
 		updateChapterName(id, chapName.charAt(0).toUpperCase() + chapName.slice(1));
 	};
 
+	if (isFavourite) {
+		return <ViewFavourite onClick={clickDelegation} name={name} />;
+	}
+
 	const openMenu = menu ? 'chapterMenuActive' : '';
-	const content = edit ? (
+	const editContent = edit ? (
 		<div className='editChapterInputWrapper'>
 			<input type='text' value={chapName} className='chapEditInput' onChange={onChangeName} />
 			<img src={confirmIcon} alt='Подтвердить' className='enterEditIcon' />
@@ -92,13 +98,23 @@ export default function ChapterItem({name, id}) {
 	return (
 		<div className='chapterItem' onClick={clickDelegation}>
 			<div className={`chapterItemContent ${nameOverflow ? 'chapterContentOverflow' : ''}`}>
-				{content}
+				{editContent}
 			</div>
 
 			<div className={`chapterItemMenu ${openMenu}`}>
 				<img src={slideIcon} alt='Меню' className='chapterSlideIcon' />
 				<img src={editChapterIcon} alt='Изменить' className='chapterEditIcon' />
 				<img src={delIcon} alt='Удалить' className='chapterDelIcon' />
+			</div>
+		</div>
+	);
+}
+
+function ViewFavourite({onClick, name}) {
+	return (
+		<div className='chapterItem' onClick={onClick}>
+			<div className='chapterItemContent chapterItemContentFavourite'>
+				<span>{name}</span>
 			</div>
 		</div>
 	);

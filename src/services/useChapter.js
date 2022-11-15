@@ -15,14 +15,24 @@ export default function useChapter() {
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const dispatch = useDispatch();
-	const {postChapter, getChapters, deleteChapter, editChapter} = useRequests();
+	const {postChapter, getChapters, deleteChapter, editChapter, initFavourite} = useRequests();
 
 	const updateChapters = () => {
 		getChapters()
 			.then((res) => {
-				const resArr = res.sort((prevItem, item) =>
-					prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})
+				const favouriteChapterIn = res.find((item) => item.id === 'favourite+chapter');
+				const chapArr = [...res];
+				if (!favouriteChapterIn) {
+					initFavourite();
+					chapArr.push({id: 'favourite+chapter', name: 'Избранное'});
+				}
+
+				const resArr = chapArr.sort((prevItem, item) =>
+					prevItem.id === 'favourite+chapter'
+						? -1
+						: prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})
 				);
+
 				dispatch(chapterListSuccess(resArr));
 			})
 			.catch((e) => {

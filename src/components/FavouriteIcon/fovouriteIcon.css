@@ -1,0 +1,15 @@
+.favouriteIconCardItem {
+	float: right;
+}
+.favouriteStar {
+	fill: rgba(216, 216, 216, 0);
+	stroke: rgb(37, 37, 37);
+	stroke-opacity: 0.3;
+	paint-order: stroke;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	transform-origin: center center;
+}
+.favouriteStarActive {
+	fill: #ff9501;
+}

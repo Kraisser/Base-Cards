@@ -113,7 +113,8 @@ export default function CardList() {
 }
 
 function View({data}) {
-	const content = data.map((item, index) => (
+	const sorted = [...data].sort((prevItem, item) => item.timeStamp - prevItem.timeStamp);
+	const content = sorted.map((item, index) => (
 		<CSSTransition classNames='card-item' timeout={300 + index * 50} key={item.id} appear={true}>
 			<CardListItem content={item} />
 		</CSSTransition>

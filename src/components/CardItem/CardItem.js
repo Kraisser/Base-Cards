@@ -4,12 +4,17 @@ import './cardItem.css';
 import {useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
+import useFavourites from '../../services/useFavourites';
+
+import FavouriteIcon from '../FavouriteIcon/FavouriteIcon';
+
 export default function CardItem({content}) {
 	const navigate = useNavigate();
+	const {addFavourite, deleteFromFavourite} = useFavourites();
 
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
 
-	const {name, description, link, id} = content;
+	const {name, description, link, id, favourite} = content;
 
 	const linkAvailableClass = link
 		? 'cardItemDescriptionLinkWrapper'
@@ -17,6 +22,9 @@ export default function CardItem({content}) {
 
 	const delegateLink = (e) => {
 		if (e.target.classList.contains('cardItemLink')) {
+			return;
+		}
+		if (e.target.classList.contains('favouriteStar')) {
 			return;
 		}
 		setTimeout(() => {
@@ -43,6 +51,11 @@ export default function CardItem({content}) {
 					</div>
 				) : null}
 				<div className='cardItemContainer'>
+					<FavouriteIcon
+						favourite={favourite}
+						onAdd={() => addFavourite(content, activeChapter)}
+						onDelete={() => deleteFromFavourite(content, activeChapter)}
+					/>
 					<p className='cardItemDescription'>
 						{description ? description : 'Описание отсутствует'}
 					</p>

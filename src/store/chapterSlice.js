@@ -3,8 +3,8 @@ import {createSlice} from '@reduxjs/toolkit';
 import {resetStore} from './serviceSlice';
 
 const initialState = {
-	activeChapter: '',
-	activeChapterName: '',
+	activeChapter: 'favourite+chapter',
+	activeChapterName: 'Избранное',
 	chapterList: [],
 	chapterListStatus: 'loading',
 	chapterFiltered: [],
