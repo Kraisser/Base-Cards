@@ -25,8 +25,8 @@ export default function useRequests() {
 		}
 	};
 
-	const initFavourite = async () => {
-		await postChapter('favourite+chapter', 'Избранное');
+	const initFavorite = async () => {
+		await postChapter('favorite+chapter', 'Избранное');
 	};
 
 	const getAllCards = useCallback(async () => {
@@ -120,6 +120,6 @@ export default function useRequests() {
 		deleteChapter,
 		editChapter,
 		setBaseDoc,
-		initFavourite,
+		initFavorite,
 	};
 }

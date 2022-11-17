@@ -33,6 +33,7 @@ export default function useCards() {
 				console.log(e);
 				dispatch(cardListError());
 			});
+		// eslint-disable-next-line
 	}, []);
 
 	const uploadNewCard = (newCard, chapterId, activeChapter, id) => {

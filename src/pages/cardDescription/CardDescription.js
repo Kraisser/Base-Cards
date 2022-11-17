@@ -79,7 +79,7 @@ export default function CardDescription() {
 				id,
 				chapId: activeChapter,
 				fromChapterId: currentCard.fromChapterId,
-				favourite: currentCard.favourite,
+				favorite: currentCard.favorite,
 			})
 		);
 	};

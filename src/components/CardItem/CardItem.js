@@ -4,17 +4,17 @@ import './cardItem.css';
 import {useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
-import useFavourites from '../../services/useFavourites';
+import useFavorites from '../../services/useFavorites';
 
-import FavouriteIcon from '../FavouriteIcon/FavouriteIcon';
+import FavoriteIcon from '../FavouriteIcon/FavoriteIcon';
 
 export default function CardItem({content}) {
 	const navigate = useNavigate();
-	const {addFavourite, deleteFromFavourite} = useFavourites();
+	const {addFavourite, deleteFromFavourite} = useFavorites();
 
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
 
-	const {name, description, link, id, favourite} = content;
+	const {name, description, link, id, favorite} = content;
 
 	const linkAvailableClass = link
 		? 'cardItemDescriptionLinkWrapper'
@@ -24,11 +24,11 @@ export default function CardItem({content}) {
 		if (e.target.classList.contains('cardItemLink')) {
 			return;
 		}
-		if (e.target.classList.contains('favouriteStar')) {
+		if (e.target.classList.contains('favoriteStar')) {
 			return;
 		}
 		setTimeout(() => {
-			navigate(`/cardDescription/${activeChapter}/${id}`);
+			navigate(`/cardDescription/${content.fromChapterId || activeChapter}/${id}`);
 		}, 100);
 	};
 
@@ -51,8 +51,8 @@ export default function CardItem({content}) {
 					</div>
 				) : null}
 				<div className='cardItemContainer'>
-					<FavouriteIcon
-						favourite={favourite}
+					<FavoriteIcon
+						favorite={favorite}
 						onAdd={() => addFavourite(content, activeChapter)}
 						onDelete={() => deleteFromFavourite(content, activeChapter)}
 					/>

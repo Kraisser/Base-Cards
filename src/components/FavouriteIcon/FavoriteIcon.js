@@ -1,13 +1,13 @@
-import './fovouriteIcon.css';
+import './favoriteIcon.css';
 
 import {useRef, useState} from 'react';
 import anime from 'animejs/lib/anime.es.js';
 
-export default function FavouriteIcon({favourite, onAdd, onDelete}) {
-	const [selected, setSelected] = useState(favourite || false);
+export default function FavouriteIcon({favorite, onAdd, onDelete}) {
+	const [selected, setSelected] = useState(favorite || false);
 	const svg = useRef(null);
 
-	const favouriteOn = () => {
+	const favoriteOn = () => {
 		anime({
 			targets: svg.current,
 			points: [
@@ -30,7 +30,7 @@ export default function FavouriteIcon({favourite, onAdd, onDelete}) {
 		});
 	};
 
-	const favouriteOff = () => {
+	const favoriteOff = () => {
 		anime({
 			targets: svg.current,
 			points: [
@@ -56,10 +56,10 @@ export default function FavouriteIcon({favourite, onAdd, onDelete}) {
 	const onStarClick = (e) => {
 		e.stopPropagation();
 		if (selected) {
-			favouriteOff();
+			favoriteOff();
 			onDelete();
 		} else {
-			favouriteOn();
+			favoriteOn();
 			onAdd();
 		}
 		setSelected(!selected);
@@ -71,9 +71,9 @@ export default function FavouriteIcon({favourite, onAdd, onDelete}) {
 			height='30'
 			xmlns='http://www.w3.org/2000/svg'
 			onClick={onStarClick}
-			className='favouriteIconCardItem'>
+			className='favoriteIconCardItem'>
 			<polygon
-				className={`favouriteStar ${favourite ? 'favouriteStarActive' : ''}`}
+				className={`favoriteStar ${favorite ? 'favoriteStarActive' : ''}`}
 				ref={svg}
 				points='15 1, 19.845 9.465, 29 11.694, 22.84 19.154, 23.652 28.996, 15 25.143, 6.348 28.996, 7.16 19.154, 1 11.694, 10.155 9.465, 15 1'></polygon>
 		</svg>

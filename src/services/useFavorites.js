@@ -1,13 +1,13 @@
 import useRequests from './useRequests';
 import useCards from './useCards';
 
-export default function useFavourites() {
+export default function useFavorites() {
 	const {postCard, deleteCard} = useRequests();
 	const {addCardToFavourite, uploadNewCard} = useCards();
 
-	const addFavourite = async (card, chapterId) => {
-		const fromChapterId = chapterId === 'favourite+chapter' ? card.fromChapterId : chapterId;
-		const additCard = {...card, fromChapterId, favourite: true};
+	const addFavorite = async (card, chapterId) => {
+		const fromChapterId = chapterId === 'favorite+chapter' ? card.fromChapterId : chapterId;
+		const additCard = {...card, fromChapterId, favorite: true};
 
 		try {
 			await addCardToFavourite(additCard);
@@ -17,16 +17,16 @@ export default function useFavourites() {
 		}
 	};
 
-	const deleteFromFavourite = async (card, activeChapter) => {
+	const deleteFromFavorite = async (card, activeChapter) => {
 		try {
-			const additCard = {...card, favourite: false};
+			const additCard = {...card, favorite: false};
 
-			await deleteCard(card.id, 'favourite+chapter');
+			await deleteCard(card.id, 'favorite+chapter');
 			await uploadNewCard(additCard, card.fromChapterId, activeChapter, card.id);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	return {addFavourite, deleteFromFavourite};
+	return {addFavorite, deleteFromFavorite};
 }

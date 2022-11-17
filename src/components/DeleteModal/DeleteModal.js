@@ -45,16 +45,13 @@ export default function DeleteModal() {
 	};
 
 	const onDeleteCardItem = () => {
-		if (delModalTargetId.favourite) {
-			const anotherChapterId =
-				delModalTargetId.chapId === 'favourite+chapter'
-					? delModalTargetId.fromChapterId
-					: 'favourite+chapter';
+		if (delModalTargetId.favorite) {
 			onDeleteCard(targetId, delModalTargetId.chapId);
-			deleteCard(targetId, anotherChapterId);
+			deleteCard(targetId, 'favorite+chapter');
 		} else {
 			onDeleteCard(targetId, delModalTargetId.chapId);
 		}
+
 		dispatch(delModalClose());
 		navigate('/');
 	};

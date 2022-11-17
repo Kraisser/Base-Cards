@@ -1,7 +1,7 @@
-.favouriteIconCardItem {
+.favoriteIconCardItem {
 	float: right;
 }
-.favouriteStar {
+.favoriteStar {
 	fill: rgba(216, 216, 216, 0);
 	stroke: rgb(37, 37, 37);
 	stroke-opacity: 0.3;
@@ -10,6 +10,6 @@
 	stroke-linecap: round;
 	transform-origin: center center;
 }
-.favouriteStarActive {
+.favoriteStarActive {
 	fill: #ff9501;
 }

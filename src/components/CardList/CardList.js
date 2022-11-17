@@ -30,6 +30,7 @@ export default function CardList() {
 		if (cardListChapterId !== activeChapter) {
 			updateCardList(activeChapter);
 		}
+		// eslint-disable-next-line
 	}, [activeChapter]);
 
 	const chapHeader = activeChapterName

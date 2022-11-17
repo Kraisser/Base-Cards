@@ -67,7 +67,7 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 					Из списка
 				</option>
 				{chapterList
-					.filter((item) => item.id !== 'favourite+chapter')
+					.filter((item) => item.id !== 'favorite+chapter')
 					.map((item) => (
 						<option value={item.id} key={uuid()}>
 							{item.name}
