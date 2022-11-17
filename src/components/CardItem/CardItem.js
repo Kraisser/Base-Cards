@@ -10,7 +10,7 @@ import FavoriteIcon from '../FavouriteIcon/FavoriteIcon';
 
 export default function CardItem({content}) {
 	const navigate = useNavigate();
-	const {addFavourite, deleteFromFavourite} = useFavorites();
+	const {addFavorite, deleteFromFavorite} = useFavorites();
 
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
 
@@ -53,8 +53,8 @@ export default function CardItem({content}) {
 				<div className='cardItemContainer'>
 					<FavoriteIcon
 						favorite={favorite}
-						onAdd={() => addFavourite(content, activeChapter)}
-						onDelete={() => deleteFromFavourite(content, activeChapter)}
+						onAdd={() => addFavorite(content, activeChapter)}
+						onDelete={() => deleteFromFavorite(content, activeChapter)}
 					/>
 					<p className='cardItemDescription'>
 						{description ? description : 'Описание отсутствует'}

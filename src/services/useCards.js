@@ -50,7 +50,7 @@ export default function useCards() {
 	};
 
 	const addCardToFavourite = async (card) => {
-		await uploadNewCard(card, 'favourite+chapter', 'favourite+chapter', card.id);
+		await uploadNewCard(card, 'favorite+chapter', 'favorite+chapter', card.id);
 	};
 
 	const onDeleteCard = (cardId, activeChapter) => {

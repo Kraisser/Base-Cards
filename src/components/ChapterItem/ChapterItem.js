@@ -21,7 +21,7 @@ export default function ChapterItem({name, id}) {
 	const [edit, setEdit] = useState(false);
 	const [chapName, setChapName] = useState(name);
 
-	const isFavourite = id === 'favourite+chapter';
+	const isFavorite = id === 'favorite+chapter';
 
 	const nameOverflow = name.length > 30;
 	const nameSlice = nameOverflow ? name.substr(0, 30) + ' . . .' : name;
@@ -81,8 +81,8 @@ export default function ChapterItem({name, id}) {
 		updateChapterName(id, chapName.charAt(0).toUpperCase() + chapName.slice(1));
 	};
 
-	if (isFavourite) {
-		return <ViewFavourite onClick={clickDelegation} name={name} />;
+	if (isFavorite) {
+		return <ViewFavorite onClick={clickDelegation} name={name} />;
 	}
 
 	const openMenu = menu ? 'chapterMenuActive' : '';
@@ -110,7 +110,7 @@ export default function ChapterItem({name, id}) {
 	);
 }
 
-function ViewFavourite({onClick, name}) {
+function ViewFavorite({onClick, name}) {
 	return (
 		<div className='chapterItem' onClick={onClick}>
 			<div className='chapterItemContent chapterItemContentFavourite'>
