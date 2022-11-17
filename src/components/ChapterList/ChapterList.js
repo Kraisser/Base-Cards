@@ -8,11 +8,13 @@ import ChapterItem from '../ChapterItem/ChapterItem';
 import SearchForm from '../SearchForm/SearchForm';
 
 import useChapter from '../../services/useChapter';
+import useSort from '../../services/useSort';
 
 import setContent from '../../utils/setContent';
 
 export default function ChapterList() {
 	const {updateChapters} = useChapter();
+	const {sortChaptersByName} = useSort();
 
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 	const filteredChapters = useSelector((state) => state.chapter.chapterFiltered);
@@ -25,23 +27,12 @@ export default function ChapterList() {
 		// eslint-disable-next-line
 	}, []);
 
-	const chapListContent = useMemo(() => {
-		if (filteredChapters.length > 0) {
-			const arr = filteredChapters.map((item, index) => (
-				<CSSTransition
-					timeout={300 + index * 10}
-					classNames='chap-item'
-					key={item.id}
-					appear={true}>
-					<ChapterItem name={item.name} id={item.id} />
-				</CSSTransition>
-			));
-			return arr;
-		}
-		return null;
-	}, [filteredChapters]);
+	const content = useMemo(() => {
+		const sorted = sortChaptersByName(filteredChapters);
 
-	const content = setContent(chapterStatus, View, chapListContent);
+		return setContent(chapterStatus, View, sorted);
+		// eslint-disable-next-line
+	}, [filteredChapters, chapterStatus]);
 
 	return (
 		<div className='chapterList'>
@@ -70,5 +61,11 @@ function View({data}) {
 		);
 	}
 
-	return <TransitionGroup component={null}>{data}</TransitionGroup>;
+	const content = data.map((item, index) => (
+		<CSSTransition timeout={300 + index * 10} classNames='chap-item' key={item.id} appear={true}>
+			<ChapterItem name={item.name} id={item.id} />
+		</CSSTransition>
+	));
+
+	return <TransitionGroup component={null}>{content}</TransitionGroup>;
 }

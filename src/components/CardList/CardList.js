@@ -5,8 +5,9 @@ import {useSelector} from 'react-redux';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import useCards from '../../services/useCards';
+import useSort from '../../services/useSort';
 
-import CardListItem from '../CardItem/CardItem';
+import CardItem from '../CardItem/CardItem';
 
 import setContent from '../../utils/setContent';
 import SearchForm from '../SearchForm/SearchForm';
@@ -16,6 +17,7 @@ import fastAddIcon from '../../assets/icons/fast-add.png';
 
 export default function CardList() {
 	const {updateCardList} = useCards();
+	const {sortCardsByTime} = useSort();
 
 	const [fastAdd, setFastAdd] = useState(false);
 
@@ -41,10 +43,12 @@ export default function CardList() {
 		? 'Раздел не найден'
 		: 'Пожалуйста подождите';
 
-	const content = useMemo(
-		() => setContent(cardListStatus, View, filteredCardList),
-		[filteredCardList, cardListStatus]
-	);
+	const content = useMemo(() => {
+		const data = sortCardsByTime(filteredCardList);
+
+		return setContent(cardListStatus, View, data);
+		// eslint-disable-next-line
+	}, [filteredCardList, cardListStatus]);
 
 	const openFastAdd = () => {
 		setFastAdd(true);
@@ -123,10 +127,9 @@ export default function CardList() {
 }
 
 function View({data}) {
-	const sorted = [...data].sort((prevItem, item) => item.timeStamp - prevItem.timeStamp);
-	const content = sorted.map((item, index) => (
+	const content = data.map((item, index) => (
 		<CSSTransition classNames='card-item' timeout={300 + index * 50} key={item.id} appear={true}>
-			<CardListItem content={item} />
+			<CardItem content={item} />
 		</CSSTransition>
 	));
 

@@ -37,7 +37,6 @@ export default function useCards() {
 	}, []);
 
 	const uploadNewCard = (newCard, chapterId, activeChapter, id) => {
-		console.log('chapterId, activeChapter: ', chapterId, activeChapter);
 		return postCard(newCard, chapterId)
 			.then(() => {
 				if (chapterId === activeChapter) {

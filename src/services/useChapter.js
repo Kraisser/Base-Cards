@@ -27,13 +27,7 @@ export default function useChapter() {
 					chapArr.push({id: 'favorite+chapter', name: 'Избранное'});
 				}
 
-				const resArr = chapArr.sort((prevItem, item) =>
-					prevItem.id === 'favorite+chapter'
-						? -1
-						: prevItem.name.localeCompare(item.name, 'ru', {ignorePunctuation: true})
-				);
-
-				dispatch(chapterListSuccess(resArr));
+				dispatch(chapterListSuccess(chapArr));
 			})
 			.catch((e) => {
 				console.log(e);
