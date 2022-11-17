@@ -50,7 +50,6 @@ export default function CardList() {
 		setFastAdd(true);
 	};
 	const closeFastAdd = (e, forceClose) => {
-		console.log('forceClose: ', forceClose);
 		if (forceClose) {
 			setFastAdd(false);
 			return;
@@ -71,7 +70,7 @@ export default function CardList() {
 			<div className='cardListWrapper'>
 				<div className='cardListHeader'>
 					<h3 title={chapHeader}>{chapHeader}</h3>
-					{activeChapter ? (
+					{activeChapter && activeChapter !== 'favorite+chapter' ? (
 						<div className='cardListFastAddButWrapper'>
 							<button className='but fastAddBut' onClick={openFastAdd}>
 								Быстрая заметка
@@ -94,6 +93,14 @@ export default function CardList() {
 					<p className='firstLoadWrapper'>
 						Для начала работы выберите раздел или нажмите 'Добавить карточку'
 					</p>
+				) : activeChapter === 'favorite+chapter' ? (
+					<div className='emptyCardList'>
+						<h4>Вы еще ничего не добавили</h4>
+						<p>
+							Чтобы добавить карточку в этот раздел перейдите в любой раздел и нажмите на иконку
+							добавить в избранное
+						</p>
+					</div>
 				) : (
 					content
 				)}
@@ -105,7 +112,7 @@ export default function CardList() {
 				</div>
 			</CSSTransition>
 
-			{activeChapter ? (
+			{activeChapter && activeChapter !== 'favorite+chapter' ? (
 				<button className='fastAddIcon but' onClick={openFastAdd}>
 					<img src={fastAddIcon} alt='Добавить в раздел' />
 				</button>
