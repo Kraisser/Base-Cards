@@ -93,7 +93,10 @@ export default function CardList() {
 					<p className='firstLoadWrapper'>
 						Для начала работы выберите раздел или нажмите 'Добавить карточку'
 					</p>
-				) : activeChapter === 'favorite+chapter' ? (
+				) : (
+					content
+				)}
+				{/* activeChapter === 'favorite+chapter' && cardList.length < 1 ? (
 					<div className='emptyCardList'>
 						<h4>Вы еще ничего не добавили</h4>
 						<p>
@@ -101,9 +104,7 @@ export default function CardList() {
 							добавить в избранное
 						</p>
 					</div>
-				) : (
-					content
-				)}
+				) need to add instead of default empty state*/}
 			</div>
 
 			<CSSTransition classNames='add-modal' timeout={200} in={fastAdd} unmountOnExit mountOnEnter>
