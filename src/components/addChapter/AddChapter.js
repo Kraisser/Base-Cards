@@ -9,7 +9,6 @@ import {v4 as uuid} from 'uuid';
 import useChapter from '../../services/useChapter';
 import useString from '../../services/useString';
 
-import addIcon from '../../assets/icons/add-icon.png';
 import AddIcon from '../AddIcon/AddIcon';
 
 export default function AddChapter() {
