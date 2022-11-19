@@ -35,9 +35,32 @@ export default function SearchForm({searchList = false, searchTarget, placeholde
 	};
 
 	const onFilterCard = (filter) => {
-		const filteredCards = filterFunc(filter);
+		const filteredCards = filterCardsByName(filter);
 
 		dispatch(setCardFilter(filteredCards));
+	};
+
+	const filterCardsByName = (searchWords) => {
+		const wordsReg = searchWords
+			.toLowerCase()
+			.trim()
+			.split(' ')
+			.map((item) => `(${item})`);
+
+		const targetLength = wordsReg.length;
+
+		const filterRegExp = new RegExp(wordsReg.join('|'), 'gm');
+
+		const filteredCards = searchList.filter((item) => {
+			const name = item.name.toLowerCase();
+			const matched = name.match(filterRegExp);
+
+			if (!matched) {
+				return false;
+			}
+			return matched.length >= targetLength ? true : false;
+		});
+		return filteredCards;
 	};
 
 	return (

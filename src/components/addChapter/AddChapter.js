@@ -10,6 +10,7 @@ import useChapter from '../../services/useChapter';
 import useString from '../../services/useString';
 
 import addIcon from '../../assets/icons/add-icon.png';
+import AddIcon from '../AddIcon/AddIcon';
 
 export default function AddChapter() {
 	const chapterList = useSelector((state) => state.chapter.chapterList);
@@ -39,6 +40,8 @@ export default function AddChapter() {
 
 		uploadNewChapter(id, name);
 		setNewChapter('');
+
+		return true;
 	};
 
 	return (
@@ -55,7 +58,7 @@ export default function AddChapter() {
 					}}
 					placeholder='Новый раздел'
 				/>
-				<img src={addIcon} alt='add-icon' onClick={onChapterSubmit} className='addChapterIcon' />
+				<AddIcon onClick={onChapterSubmit} classNames='addChapterIcon' />
 			</div>
 		</>
 	);
