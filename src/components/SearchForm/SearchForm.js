@@ -50,7 +50,6 @@ export default function SearchForm({searchList = false, searchTarget, placeholde
 		const targetLength = wordsReg.length;
 
 		const filterRegExp = new RegExp(wordsReg.join('|'), 'gm');
-		console.log('filterRegExp: ', filterRegExp);
 
 		const filteredCards = searchList.filter((item) => {
 			const name = item.name.toLowerCase();
