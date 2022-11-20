@@ -9,7 +9,7 @@ import {v4 as uuid} from 'uuid';
 import useChapter from '../../services/useChapter';
 import useString from '../../services/useString';
 
-import AddIcon from '../AddIcon/AddIcon';
+import AddIcon from '../iconsComponents/AddIcon/AddIcon';
 
 export default function AddChapter() {
 	const chapterList = useSelector((state) => state.chapter.chapterList);

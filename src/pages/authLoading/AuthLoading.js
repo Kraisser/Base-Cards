@@ -5,7 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
-import Spinner from '../../components/Spinner/Spinner';
+import Spinner from '../../components/iconsComponents/Spinner/Spinner';
 import {useEffect} from 'react';
 
 export default function AuthLoading() {

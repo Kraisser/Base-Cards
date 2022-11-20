@@ -18,7 +18,7 @@ import {clearEdit} from '../../store/editSlice';
 import {setActiveChapter} from '../../store/chapterSlice';
 
 import delIcon from '../../assets/icons/delete-icon.png';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../iconsComponents/Spinner/Spinner';
 
 export default function CardAddForm({modalClose}) {
 	const navigate = useNavigate();

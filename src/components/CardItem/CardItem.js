@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 
 import useFavorites from '../../services/useFavorites';
 
-import FavoriteIcon from '../FavouriteIcon/FavoriteIcon';
+import FavoriteIcon from '../iconsComponents/FavouriteIcon/FavoriteIcon';
 
 export default function CardItem({content}) {
 	const navigate = useNavigate();

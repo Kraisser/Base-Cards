@@ -1,4 +1,4 @@
-import Spinner from '../components/Spinner/Spinner';
+import Spinner from '../components/iconsComponents/Spinner/Spinner';
 import Error from '../components/Error/Error';
 
 export default function setContent(process, Component, data, additData) {

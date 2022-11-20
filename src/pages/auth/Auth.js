@@ -8,7 +8,7 @@ import useAuth from '../../services/useAuth';
 import useValidate from '../../services/useValidate';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
-import ShowPassIcon from '../../components/ShowPassIcon/ShowPassIcon';
+import ShowPassIcon from '../../components/iconsComponents/ShowPassIcon/ShowPassIcon';
 
 import googleIcon from '../../assets/icons/google-icon.png';
 
