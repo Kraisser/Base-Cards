@@ -36,16 +36,20 @@ export default function useRequests() {
 
 	const getCardList = useCallback(
 		async (chapterId) => {
-			const res = (await getDoc(doc(db, uid + '/data/cardList', chapterId))).data();
+			try {
+				const res = (await getDoc(doc(db, uid + '/data/cardList', chapterId))).data();
 
-			const keys = Object.keys(res).filter((item) => item !== 'name');
+				const keys = Object.keys(res).filter((item) => item !== 'name');
 
-			const data = keys.map((item) => res[item]);
+				const data = keys.map((item) => res[item]);
 
-			return {
-				chapterId,
-				data,
-			};
+				return {
+					chapterId,
+					data,
+				};
+			} catch (error) {
+				return [];
+			}
 		},
 		[uid]
 	);

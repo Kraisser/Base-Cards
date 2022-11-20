@@ -4,12 +4,14 @@ import {v4 as uuid} from 'uuid';
 import useDebounce from '../../services/useDebounce';
 import useString from '../../services/useString';
 import useValidate from '../../services/useValidate';
+import useSort from '../../services/useSort';
 
 export default function ChapterInput({newChap, chapState, onChange, chapErrState}) {
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 
 	const {compareChapters} = useString();
 	const {validateField} = useValidate();
+	const {sortChaptersByName} = useSort();
 
 	const {chapter, setChapter} = chapState;
 	const {chapterErr, setChapterErr} = chapErrState;
@@ -66,7 +68,7 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 				<option value='' disabled>
 					Из списка
 				</option>
-				{chapterList
+				{sortChaptersByName(chapterList)
 					.filter((item) => item.id !== 'favorite+chapter')
 					.map((item) => (
 						<option value={item.id} key={uuid()}>
