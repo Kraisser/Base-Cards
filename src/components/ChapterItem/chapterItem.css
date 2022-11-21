@@ -87,11 +87,11 @@
 	overflow: hidden;
 	background-color: var(--inactive-color);
 	border-radius: var(--border-mini-radius);
-	transition: width 0.4s ease-in-out, transform 0.2s ease;
+	transition: width 0.4s cubic-bezier(0.31, -0.62, 0.56, 1.43), transform 0.2s ease;
 	z-index: 3;
 }
 .chapterSlideIcon {
-	transition: transform 0.25s ease-in;
+	transition: transform 0.3s ease-in;
 }
 .chapterItemMenu img {
 	width: 30px;
