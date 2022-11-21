@@ -46,7 +46,7 @@ export default function CardList() {
 	const content = useMemo(() => {
 		const data = sortCardsByTime(filteredCardList);
 
-		return setContent(cardListStatus, View, data);
+		return setContent(cardListStatus, View, data, {activeChapter});
 		// eslint-disable-next-line
 	}, [filteredCardList, cardListStatus]);
 
@@ -127,10 +127,11 @@ export default function CardList() {
 	);
 }
 
-function View({data}) {
+function View({data, activeChapter}) {
+	console.log('activeChapter: ', activeChapter);
 	const content = data.map((item, index) => (
 		<CSSTransition classNames='card-item' timeout={300 + index * 50} key={item.id} appear={true}>
-			<CardItem content={item} />
+			<CardItem content={item} activeChapter={activeChapter} />
 		</CSSTransition>
 	));
 

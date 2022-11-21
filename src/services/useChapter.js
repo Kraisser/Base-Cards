@@ -54,6 +54,7 @@ export default function useChapter() {
 
 				const chapters = [...chapterList, {id, name}];
 				dispatch(chapterListSuccess(chapters));
+				return {id, name};
 			} catch (e) {
 				dispatch(chapterListError());
 			}

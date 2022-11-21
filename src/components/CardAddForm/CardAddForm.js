@@ -49,12 +49,20 @@ export default function CardAddForm({modalClose}) {
 	const [newChap, setNewChap] = useState(false);
 
 	const [cardName, setCardName] = useState(editCard ? editCard.name : '');
-	const [chapter, setChapter] = useState(editCard || modalClose ? activeChapter : '');
+	const [chapter, setChapter] = useState(
+		editCard || modalClose
+			? activeChapter === 'favorite+chapter'
+				? editCard.fromChapterId
+				: activeChapter
+			: ''
+	);
 	const [cardLink, setCardLink] = useState(editCard ? editCard.link : '');
 	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
 
 	const [cardNameErr, setCardNameErr] = useState(null);
 	const [chapterErr, setChapterErr] = useState(null);
+
+	const [errorEdit, setErrorEdit] = useState(false);
 
 	const [uploading, setUploading] = useState(false);
 
@@ -105,9 +113,7 @@ export default function CardAddForm({modalClose}) {
 		const id = uuid() + '+chapter';
 		const name = (chapter.charAt(0).toUpperCase() + chapter.slice(1)).trim();
 
-		await uploadNewChapter(id, name);
-
-		return {id, name};
+		return await uploadNewChapter(id, name);
 	};
 
 	const onCardSubmit = async (e, id) => {
@@ -120,27 +126,30 @@ export default function CardAddForm({modalClose}) {
 		}
 
 		const newCard = {
-			id: id ? id : uuid(),
+			id: id || uuid(),
 			name: cardName,
 			link: cardLink,
 			timeStamp: Date.now(),
 			description: cardDescription,
+			favorite: editCard.favorite || false,
+			fromChapterId: editCard.fromChapterId || activeChapter,
 		};
 
 		if (id) {
-			dispatch(clearEdit());
-
 			if (compareCards(editCard, newCard) && chapter === activeChapter) {
+				setErrorEdit('Редактирование не выполнено. Изменения отсутствуют.');
 				return;
 			}
+			dispatch(clearEdit());
 
 			if (chapter !== activeChapter) {
 				onDeleteCard(id, activeChapter);
 			}
 		}
 
-		clearFields();
+		setErrorEdit(false);
 
+		clearFields();
 		if (modalClose) {
 			setUploading(true);
 
@@ -158,7 +167,12 @@ export default function CardAddForm({modalClose}) {
 
 			setUploading(true);
 
-			await uploadNewCard(newCard, newChapData.id, activeChapter, id);
+			await uploadNewCard(
+				{...newCard, fromChapterId: newChapData.id},
+				newChapData.id,
+				activeChapter,
+				id
+			);
 
 			navigate('/');
 
@@ -277,6 +291,7 @@ export default function CardAddForm({modalClose}) {
 					onChange={(e) => setCardDescription(e.target.value)}
 					value={cardDescription}
 					className='descriptionInput'></textarea>
+				{errorEdit ? <div className='errorForm'>{errorEdit}</div> : null}
 			</div>
 			<div className='formButWrapper'>
 				<button type='submit' className='formBut but'>

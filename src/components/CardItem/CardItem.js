@@ -2,19 +2,16 @@ import '../../index.css';
 import './cardItem.css';
 
 import {useNavigate} from 'react-router-dom';
-import {useSelector} from 'react-redux';
 
 import useFavorites from '../../services/useFavorites';
 
 import FavoriteIcon from '../iconsComponents/FavouriteIcon/FavoriteIcon';
 
-export default function CardItem({content}) {
+export default function CardItem({content, activeChapter}) {
 	const navigate = useNavigate();
 	const {addFavorite, deleteFromFavorite} = useFavorites();
 
-	const activeChapter = useSelector((state) => state.chapter.activeChapter);
-
-	const {name, description, link, id, favorite} = content;
+	const {name, description, link, id, favorite, fromChapterId} = content;
 
 	const linkAvailableClass = link
 		? 'cardItemDescriptionLinkWrapper'
@@ -28,7 +25,7 @@ export default function CardItem({content}) {
 			return;
 		}
 		setTimeout(() => {
-			navigate(`/cardDescription/${content.fromChapterId || activeChapter}/${id}`);
+			navigate(`/cardDescription/${fromChapterId || activeChapter}/${id}`);
 		}, 100);
 	};
 
