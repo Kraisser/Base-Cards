@@ -1,0 +1,38 @@
+.cardFormModal {
+	display: grid;
+	grid-template-rows: auto;
+	grid-gap: 15px;
+	padding: 10px;
+	background-color: var(--main-color);
+	border-radius: var(--border-radius);
+	width: 600px;
+	position: relative;
+	min-height: 460px;
+}
+.modalCloseIcon {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	height: 30px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+.modalCloseIcon:hover {
+	filter: drop-shadow(0 0 4px #ff4940);
+}
+.modalCloseIcon:active {
+	transform: scale(0.9);
+}
+
+/* Media */
+@media only all and (max-width: 750px) {
+	.cardFormModal {
+		width: 90%;
+	}
+}
+@media only all and (max-width: 450px) {
+	.cardFormModal {
+		width: calc(100vw - 20px);
+		grid-gap: 10px;
+	}
+}

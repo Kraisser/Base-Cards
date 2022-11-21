@@ -17,10 +17,9 @@ import ChapterInput from '../../components/ChapterInput/ChapterInput';
 import {clearEdit} from '../../store/editSlice';
 import {setActiveChapter} from '../../store/chapterSlice';
 
-import delIcon from '../../assets/icons/delete-icon.png';
 import Spinner from '../iconsComponents/Spinner/Spinner';
 
-export default function CardAddForm({modalClose}) {
+export default function CardAddForm() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const {validateField} = useValidate();
@@ -50,7 +49,7 @@ export default function CardAddForm({modalClose}) {
 
 	const [cardName, setCardName] = useState(editCard ? editCard.name : '');
 	const [chapter, setChapter] = useState(
-		editCard || modalClose
+		editCard
 			? activeChapter === 'favorite+chapter'
 				? editCard.fromChapterId
 				: activeChapter
@@ -150,22 +149,13 @@ export default function CardAddForm({modalClose}) {
 		setErrorEdit(false);
 
 		clearFields();
-		if (modalClose) {
-			setUploading(true);
-
-			await uploadNewCard(newCard, activeChapter, activeChapter, id);
-
-			modalClose(null, true);
-
-			return;
-		}
 
 		if (newChap) {
+			setUploading(true);
+
 			const newChapData = await createNewChapter();
 
 			dispatch(setActiveChapter({id: newChapData.id, name: newChapData.name}));
-
-			setUploading(true);
 
 			await uploadNewCard(
 				{...newCard, fromChapterId: newChapData.id},
@@ -207,10 +197,6 @@ export default function CardAddForm({modalClose}) {
 		setChapter('');
 	};
 
-	if (uploading && modalClose) {
-		return <Spinner />;
-	}
-
 	if (uploading) {
 		return (
 			<div className='cardForm'>
@@ -221,12 +207,11 @@ export default function CardAddForm({modalClose}) {
 
 	return (
 		<form
-			className={modalClose ? 'cardFormModal' : 'cardForm'}
+			className='cardForm'
 			onSubmit={(e) => onCardSubmit(e, editCard ? editCard.id : null)}>
 			<h2 className='formHeader'>
-				{editCard ? `Изменение карточки` : modalClose ? 'Быстрая заметка' : 'Добавление карточки'}
+				{editCard ? `Изменение карточки` : 'Добавление карточки'}
 			</h2>
-			{modalClose ? <img src={delIcon} alt='Закрыть окно' className='modalCloseIcon' /> : null}
 			<div className='fieldWrapper'>
 				<label htmlFor='cardName' className='formInputLabel'>
 					Название карточки*
@@ -241,7 +226,6 @@ export default function CardAddForm({modalClose}) {
 				/>
 			</div>
 
-			{modalClose ? null : (
 				<>
 					<div className='fieldWrapper chapSelectButWrapper'>
 						<button
@@ -266,7 +250,6 @@ export default function CardAddForm({modalClose}) {
 						/>
 					</div>
 				</>
-			)}
 
 			<div className='fieldWrapper'>
 				<label htmlFor='cardLink' className='formInputLabel'>

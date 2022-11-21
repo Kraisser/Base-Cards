@@ -1,41 +1,20 @@
 @import '../../css/variables.css';
 
-.cardForm,
-.cardFormModal {
+.cardForm {
 	display: grid;
 	grid-template-rows: auto;
 	grid-gap: 15px;
 	padding: 10px;
 	background-color: var(--main-color);
 	border-radius: var(--border-radius);
-}
-.cardForm {
 	width: 700px;
 	margin-bottom: 30px;
-}
-.cardFormModal {
-	width: 600px;
-	position: relative;
 }
 .formHeader {
 	margin: 0 0 5px;
 	color: var(--header-color);
 	font-size: var(--h2Size);
 	text-align: center;
-}
-.modalCloseIcon {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	height: 30px;
-	cursor: pointer;
-	transition: all 0.2s ease-in-out;
-}
-.modalCloseIcon:hover {
-	filter: drop-shadow(0 0 4px #ff4940);
-}
-.modalCloseIcon:active {
-	transform: scale(0.9);
 }
 .fieldWrapper {
 	display: grid;
@@ -124,16 +103,9 @@
 	.cardForm {
 		width: 100%;
 	}
-	.cardFormModal {
-		width: 90%;
-	}
 }
 @media only all and (max-width: 450px) {
 	.cardForm {
-		grid-gap: 10px;
-	}
-	.cardFormModal {
-		width: calc(100vw - 20px);
 		grid-gap: 10px;
 	}
 	.chapSelectBut {

@@ -11,7 +11,8 @@ import CardItem from '../CardItem/CardItem';
 
 import setContent from '../../utils/setContent';
 import SearchForm from '../SearchForm/SearchForm';
-import CardAddForm from '../CardAddForm/CardAddForm';
+// import CardAddForm from '../CardAddForm/CardAddForm';
+import FastCardAddForm from '../FastCardAddForm/FastCardAddForm';
 
 import fastAddIcon from '../../assets/icons/fast-add.png';
 
@@ -53,16 +54,8 @@ export default function CardList() {
 	const openFastAdd = () => {
 		setFastAdd(true);
 	};
-	const closeFastAdd = (e, forceClose) => {
-		if (forceClose) {
-			setFastAdd(false);
-			return;
-		}
-
-		if (
-			e.target.classList.contains('modalOverlay') ||
-			e.target.classList.contains('modalCloseIcon')
-		) {
+	const closeFastAdd = (e) => {
+		if (e.target.classList.contains('modalOverlay')) {
 			setFastAdd(false);
 		}
 	};
@@ -114,7 +107,7 @@ export default function CardList() {
 
 			<CSSTransition classNames='add-modal' timeout={200} in={fastAdd} unmountOnExit mountOnEnter>
 				<div className='modalOverlay fastAddOverlay' onClick={closeFastAdd}>
-					<CardAddForm modalClose={closeFastAdd} />
+					<FastCardAddForm onClose={() => setFastAdd(false)} />
 				</div>
 			</CSSTransition>
 
@@ -128,7 +121,6 @@ export default function CardList() {
 }
 
 function View({data, activeChapter}) {
-	console.log('activeChapter: ', activeChapter);
 	const content = data.map((item, index) => (
 		<CSSTransition classNames='card-item' timeout={300 + index * 50} key={item.id} appear={true}>
 			<CardItem content={item} activeChapter={activeChapter} />
