@@ -49,11 +49,7 @@ export default function CardAddForm() {
 
 	const [cardName, setCardName] = useState(editCard ? editCard.name : '');
 	const [chapter, setChapter] = useState(
-		editCard
-			? activeChapter === 'favorite+chapter'
-				? editCard.fromChapterId
-				: activeChapter
-			: ''
+		editCard ? (activeChapter === 'favorite+chapter' ? editCard.fromChapterId : activeChapter) : ''
 	);
 	const [cardLink, setCardLink] = useState(editCard ? editCard.link : '');
 	const [cardDescription, setCardDescription] = useState(editCard ? editCard.description : '');
@@ -61,7 +57,7 @@ export default function CardAddForm() {
 	const [cardNameErr, setCardNameErr] = useState(null);
 	const [chapterErr, setChapterErr] = useState(null);
 
-	const [errorEdit, setErrorEdit] = useState(false);
+	const [errorEdit, setErrorEdit] = useState(null);
 
 	const [uploading, setUploading] = useState(false);
 
@@ -115,7 +111,7 @@ export default function CardAddForm() {
 		return await uploadNewChapter(id, name);
 	};
 
-	const onCardSubmit = async (e, id) => {
+	const onCardSubmit = async (e) => {
 		e.preventDefault();
 
 		const validateRes = await validateAll();
@@ -125,55 +121,112 @@ export default function CardAddForm() {
 		}
 
 		const newCard = {
-			id: id || uuid(),
+			id: editCard ? editCard.id : uuid(),
 			name: cardName,
 			link: cardLink,
-			timeStamp: Date.now(),
+			timeStamp: editCard ? editCard.timeStamp : Date.now(),
 			description: cardDescription,
-			favorite: editCard.favorite || false,
-			fromChapterId: editCard.fromChapterId || activeChapter,
+			favorite: editCard ? editCard.favorite : false,
+			fromChapterId: editCard ? editCard.fromChapterId : chapter,
 		};
-
-		if (id) {
-			if (compareCards(editCard, newCard) && chapter === activeChapter) {
-				setErrorEdit('Редактирование не выполнено. Изменения отсутствуют.');
-				return;
-			}
-			dispatch(clearEdit());
-
-			if (chapter !== activeChapter) {
-				onDeleteCard(id, activeChapter);
-			}
-		}
-
-		setErrorEdit(false);
-
-		clearFields();
-
-		if (newChap) {
-			setUploading(true);
-
-			const newChapData = await createNewChapter();
-
-			dispatch(setActiveChapter({id: newChapData.id, name: newChapData.name}));
-
-			await uploadNewCard(
-				{...newCard, fromChapterId: newChapData.id},
-				newChapData.id,
-				activeChapter,
-				id
-			);
-
-			navigate('/');
-
-			return;
-		}
 
 		setUploading(true);
 
-		await uploadNewCard(newCard, chapter, activeChapter, id);
+		const newChapObj = newChap ? await createNewChapter() : false;
 
-		navigate('/');
+		if (editCard) {
+			if (compareCards(editCard, newCard) && chapter === editCard.fromChapterId) {
+				setErrorEdit('Редактирование не выполнено. Изменения отсутствуют.');
+				return;
+			}
+
+			setErrorEdit(null);
+			dispatch(clearEdit());
+
+			if (activeChapter === 'favorite+chapter') {
+				//from favorite chap
+				if (newChap) {
+					const newChapCard = {...newCard, fromChapterId: newChapObj.id};
+					await onDeleteCard(editCard.id, editCard.fromChapterId); //delete from old chap
+					await uploadNewCard(newChapCard, 'favorite+chapter', 'favorite+chapter', newCard.id); //upload to favorite
+					await uploadNewCard(newChapCard, newChapObj.id, 'favorite+chapter', newCard.id); //upload to newChap
+				} else {
+					if (chapter !== editCard.fromChapterId) {
+						await onDeleteCard(newCard.id, editCard.fromChapterId); //delete from old chap
+					}
+
+					const anotherChapCard = {...newCard, fromChapterId: chapter};
+					await uploadNewCard(anotherChapCard, activeChapter, activeChapter, anotherChapCard.id); //upload to favorite
+					await uploadNewCard(anotherChapCard, chapter, activeChapter, editCard.id); //upload to parent chap
+				}
+
+				navigate('/');
+				return;
+			}
+
+			if (newCard.favorite && newChap) {
+				//from parent chap favoriteIn to new
+
+				await onDeleteCard(editCard.id, editCard.fromChapterId); //delete from old chap
+
+				const newChapCard = {...newCard, fromChapterId: newChapObj.id};
+				await uploadNewCard(newChapCard, 'favorite+chapter', activeChapter, newCard.id); //upload to favorite
+				await uploadNewCard(newChapCard, newChapObj.id, activeChapter, newCard.id); //upload to newChap
+
+				dispatch(setActiveChapter(newChapObj));
+
+				navigate('/');
+				return;
+			}
+
+			if (newCard.favorite && !newChap) {
+				// from parent chap favoriteIn to old
+				await uploadNewCard(
+					{...newCard, fromChapterId: chapter},
+					'favorite+chapter',
+					activeChapter,
+					newCard.id
+				); //upload to favorite
+			} //+
+
+			if (newChap) {
+				await onDeleteCard(newCard.id, newCard.fromChapterId); //delete from old chap
+
+				const newChapCard = {...newCard, fromChapterId: newChapObj.id};
+				await uploadNewCard(newChapCard, newChapObj.id, activeChapter, newCard.id); //upload to newChap
+
+				dispatch(setActiveChapter(newChapObj));
+				navigate('/');
+				return;
+			} //+
+
+			if (chapter !== editCard.fromChapterId) {
+				await onDeleteCard(newCard.id, newCard.fromChapterId); //delete from old chap
+			}
+
+			await uploadNewCard(
+				{...newCard, fromChapterId: chapter},
+				chapter,
+				activeChapter,
+				editCard.id
+			);
+
+			navigate('/');
+			return;
+		} // endEditCard ++
+
+		if (newChap) {
+			const newChapCard = {...newCard, fromChapterId: newChapObj.id};
+			await uploadNewCard(newChapCard, newChapObj.id, activeChapter, newChapCard.id);
+
+			dispatch(setActiveChapter(newChapObj));
+		} else {
+			await uploadNewCard(newCard, chapter, activeChapter, newCard.id);
+		}
+
+		clearFields();
+		setUploading(false);
+		return;
 	};
 
 	const debounceValidate = useDebounce((id, value) => validateFunc[id](value), 300);
@@ -206,12 +259,8 @@ export default function CardAddForm() {
 	}
 
 	return (
-		<form
-			className='cardForm'
-			onSubmit={(e) => onCardSubmit(e, editCard ? editCard.id : null)}>
-			<h2 className='formHeader'>
-				{editCard ? `Изменение карточки` : 'Добавление карточки'}
-			</h2>
+		<form className='cardForm' onSubmit={onCardSubmit}>
+			<h2 className='formHeader'>{editCard ? `Изменение карточки` : 'Добавление карточки'}</h2>
 			<div className='fieldWrapper'>
 				<label htmlFor='cardName' className='formInputLabel'>
 					Название карточки*
@@ -226,30 +275,30 @@ export default function CardAddForm() {
 				/>
 			</div>
 
-				<>
-					<div className='fieldWrapper chapSelectButWrapper'>
-						<button
-							type='button'
-							onClick={() => onChangeChapCondtition(false)}
-							className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
-							Существующий раздел
-						</button>
-						<button
-							type='button'
-							onClick={() => onChangeChapCondtition(true)}
-							className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
-							Новый раздел
-						</button>
-					</div>
-					<div className='fieldWrapper'>
-						<ChapterInput
-							newChap={newChap}
-							chapState={{chapter, setChapter}}
-							onChange={onChange}
-							chapErrState={{chapterErr, setChapterErr}}
-						/>
-					</div>
-				</>
+			<>
+				<div className='fieldWrapper chapSelectButWrapper'>
+					<button
+						type='button'
+						onClick={() => onChangeChapCondtition(false)}
+						className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
+						Существующий раздел
+					</button>
+					<button
+						type='button'
+						onClick={() => onChangeChapCondtition(true)}
+						className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
+						Новый раздел
+					</button>
+				</div>
+				<div className='fieldWrapper'>
+					<ChapterInput
+						newChap={newChap}
+						chapState={{chapter, setChapter}}
+						onChange={onChange}
+						chapErrState={{chapterErr, setChapterErr}}
+					/>
+				</div>
+			</>
 
 			<div className='fieldWrapper'>
 				<label htmlFor='cardLink' className='formInputLabel'>

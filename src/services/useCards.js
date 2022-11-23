@@ -54,11 +54,13 @@ export default function useCards() {
 	};
 
 	const onDeleteCard = (cardId, activeChapter) => {
-		deleteCard(cardId, activeChapter).then(() => {
-			const newCardList = cardList.filter((item) => cardId !== item.id);
+		return deleteCard(cardId, activeChapter)
+			.then(() => {
+				const newCardList = cardList.filter((item) => cardId !== item.id);
 
-			dispatch(cardListSuccess(newCardList));
-		});
+				dispatch(cardListSuccess(newCardList));
+			})
+			.catch((e) => console.log(e));
 	};
 
 	return {
