@@ -4,13 +4,16 @@
 	display: flex;
 	align-items: center;
 	position: relative;
-	margin-bottom: 5px;
 	height: 40px;
 	cursor: pointer;
 	font-weight: 500;
 	border-radius: var(--border-mini-radius);
+	transition: all 0.3s ease;
 }
-.chapterItem:first-child {
+.chapterItem.chap-item-enter-done {
+	margin-bottom: 5px;
+}
+.chapterItem.chap-item-enter-done:first-child {
 	margin-top: 7px;
 }
 
@@ -121,26 +124,31 @@
 
 /* Animation */
 .chap-item-appear {
-	transform: scale(0.5);
 	opacity: 0;
 }
 .chap-item-appear-done {
-	transform: scale(1);
 	opacity: 1;
 }
 .chap-item-enter {
-	transform: scale(0.5);
+	height: 0;
+	transform: rotateX(90deg);
+	perspective: 500px;
 	opacity: 0;
 }
-.chap-item-enter-active {
-	transform: scale(1);
+/* .chap-item-enter-active {
+	/* margin-top: 0;
+} */
+.chap-item-enter-done {
+	transform: none;
+	perspective: none;
 	opacity: 1;
 }
 .chap-item-exit {
-	transform: scale(1);
-	opacity: 1;
+	height: 0;
+	overflow: hidden;
+	perspective: 100px;
 }
 .chap-item-exit-active {
-	transform: scale(0.5);
+	transform: rotateX(90deg);
 	opacity: 0;
 }
