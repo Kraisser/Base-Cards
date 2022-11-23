@@ -36,11 +36,11 @@ export default function useCards() {
 		// eslint-disable-next-line
 	}, []);
 
-	const uploadNewCard = (newCard, chapterId, activeChapter, id) => {
+	const uploadNewCard = (newCard, chapterId, activeChapter) => {
 		return postCard(newCard, chapterId)
 			.then(() => {
 				if (chapterId === activeChapter) {
-					const prevData = cardList.filter((item) => item.id !== id);
+					const prevData = cardList.filter((item) => item.id !== newCard.id);
 					const newCardList = [...prevData, newCard];
 
 					dispatch(cardListSuccess(newCardList));

@@ -50,7 +50,7 @@ export default function FastCardAddForm({onClose}) {
 			fromChapterId: activeChapter,
 		};
 
-		await uploadNewCard(newCard, activeChapter, activeChapter, newCard.id);
+		await uploadNewCard(newCard, activeChapter, activeChapter);
 
 		onClose();
 	};

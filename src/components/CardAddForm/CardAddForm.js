@@ -148,16 +148,16 @@ export default function CardAddForm() {
 				if (newChap) {
 					const newChapCard = {...newCard, fromChapterId: newChapObj.id};
 					await onDeleteCard(editCard.id, editCard.fromChapterId); //delete from old chap
-					await uploadNewCard(newChapCard, 'favorite+chapter', 'favorite+chapter', newCard.id); //upload to favorite
-					await uploadNewCard(newChapCard, newChapObj.id, 'favorite+chapter', newCard.id); //upload to newChap
+					await uploadNewCard(newChapCard, 'favorite+chapter', 'favorite+chapter'); //upload to favorite
+					await uploadNewCard(newChapCard, newChapObj.id, 'favorite+chapter'); //upload to newChap
 				} else {
 					if (chapter !== editCard.fromChapterId) {
 						await onDeleteCard(newCard.id, editCard.fromChapterId); //delete from old chap
 					}
 
 					const anotherChapCard = {...newCard, fromChapterId: chapter};
-					await uploadNewCard(anotherChapCard, activeChapter, activeChapter, anotherChapCard.id); //upload to favorite
-					await uploadNewCard(anotherChapCard, chapter, activeChapter, editCard.id); //upload to parent chap
+					await uploadNewCard(anotherChapCard, activeChapter, activeChapter); //upload to favorite
+					await uploadNewCard(anotherChapCard, chapter, activeChapter); //upload to parent chap
 				}
 
 				navigate('/');
@@ -170,8 +170,8 @@ export default function CardAddForm() {
 				await onDeleteCard(editCard.id, editCard.fromChapterId); //delete from old chap
 
 				const newChapCard = {...newCard, fromChapterId: newChapObj.id};
-				await uploadNewCard(newChapCard, 'favorite+chapter', activeChapter, newCard.id); //upload to favorite
-				await uploadNewCard(newChapCard, newChapObj.id, activeChapter, newCard.id); //upload to newChap
+				await uploadNewCard(newChapCard, 'favorite+chapter', activeChapter); //upload to favorite
+				await uploadNewCard(newChapCard, newChapObj.id, activeChapter); //upload to newChap
 
 				dispatch(setActiveChapter(newChapObj));
 
@@ -184,8 +184,7 @@ export default function CardAddForm() {
 				await uploadNewCard(
 					{...newCard, fromChapterId: chapter},
 					'favorite+chapter',
-					activeChapter,
-					newCard.id
+					activeChapter
 				); //upload to favorite
 			} //+
 
@@ -193,7 +192,7 @@ export default function CardAddForm() {
 				await onDeleteCard(newCard.id, newCard.fromChapterId); //delete from old chap
 
 				const newChapCard = {...newCard, fromChapterId: newChapObj.id};
-				await uploadNewCard(newChapCard, newChapObj.id, activeChapter, newCard.id); //upload to newChap
+				await uploadNewCard(newChapCard, newChapObj.id, activeChapter); //upload to newChap
 
 				dispatch(setActiveChapter(newChapObj));
 				navigate('/');
@@ -204,12 +203,7 @@ export default function CardAddForm() {
 				await onDeleteCard(newCard.id, newCard.fromChapterId); //delete from old chap
 			}
 
-			await uploadNewCard(
-				{...newCard, fromChapterId: chapter},
-				chapter,
-				activeChapter,
-				editCard.id
-			);
+			await uploadNewCard({...newCard, fromChapterId: chapter}, chapter, activeChapter);
 
 			navigate('/');
 			return;
@@ -217,11 +211,11 @@ export default function CardAddForm() {
 
 		if (newChap) {
 			const newChapCard = {...newCard, fromChapterId: newChapObj.id};
-			await uploadNewCard(newChapCard, newChapObj.id, activeChapter, newChapCard.id);
+			await uploadNewCard(newChapCard, newChapObj.id, activeChapter);
 
 			dispatch(setActiveChapter(newChapObj));
 		} else {
-			await uploadNewCard(newCard, chapter, activeChapter, newCard.id);
+			await uploadNewCard(newCard, chapter, activeChapter);
 		}
 
 		clearFields();
