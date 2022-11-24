@@ -63,6 +63,7 @@
 	overflow-y: auto;
 	scrollbar-width: thin;
 	padding: 10px 5px;
+	perspective: 100px;
 }
 .emptyCardList {
 	text-align: center;
