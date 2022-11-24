@@ -123,30 +123,20 @@
 }
 
 /* Animation */
-.chap-item-appear {
-	opacity: 0;
-}
-.chap-item-appear-done {
-	opacity: 1;
-}
+.chap-item-appear,
 .chap-item-enter {
 	height: 0;
 	transform: rotateX(90deg);
-	perspective: 500px;
 	opacity: 0;
 }
-/* .chap-item-enter-active {
-	/* margin-top: 0;
-} */
+.chap-item-appear-done,
 .chap-item-enter-done {
 	transform: none;
-	perspective: none;
 	opacity: 1;
 }
 .chap-item-exit {
 	height: 0;
 	overflow: hidden;
-	perspective: 100px;
 }
 .chap-item-exit-active {
 	transform: rotateX(90deg);
