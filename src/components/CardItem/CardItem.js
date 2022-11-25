@@ -48,15 +48,15 @@ export default function CardItem({content, activeChapter}) {
 					</div>
 				) : null}
 				<div className='cardItemContainer'>
-					<FavoriteIcon
-						favorite={favorite}
-						onAdd={() => addFavorite(content, activeChapter)}
-						onDelete={() => deleteFromFavorite(content, activeChapter)}
-					/>
 					<p className='cardItemDescription'>
 						{description ? description : 'Описание отсутствует'}
 					</p>
 				</div>
+				<FavoriteIcon
+					favorite={favorite}
+					onAdd={() => addFavorite(content, activeChapter)}
+					onDelete={() => deleteFromFavorite(content, activeChapter)}
+				/>
 			</div>
 		</div>
 	);
