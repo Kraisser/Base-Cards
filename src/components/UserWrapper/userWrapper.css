@@ -11,6 +11,7 @@
 .userWrapper img {
 	border-radius: var(--border-mini-radius);
 	height: 40px;
+	max-width: 60px;
 	margin: 0 auto;
 }
 .userWrapper div {
