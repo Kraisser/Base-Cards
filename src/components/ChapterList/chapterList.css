@@ -24,12 +24,14 @@
 	overflow-y: auto;
 	overflow-x: hidden;
 	padding: 0 5px;
+	scrollbar-width: thin;
+	scrollbar-color: var(--scroll-color) transparent;
 }
 .chapterListContent::before {
 	content: '';
 	position: absolute;
 	left: 5px;
-	right: 10px;
+	right: 15px;
 	height: 7px;
 	z-index: 5;
 	background: linear-gradient(var(--main-color), transparent);
