@@ -1,46 +1,16 @@
 {
 	"name": "Base Cards",
-	"short_name": "Base",
+	"short_name": "Base Cards",
 	"display": "standalone",
 	"orientation": "portrait",
 	"background_color": "#2787d6",
 	"theme_color": "#2787d6",
-	"icons": [
-		{
-			"src": "./public/app_logo/app_logo_36.png",
-			"sizes": "36x36",
-			"type": "image/png",
-			"density": "0.75"
-		},
-		{
-			"src": "./public/app_logo/app_logo_48.png",
-			"sizes": "48x48",
-			"type": "image/png",
-			"density": "1.0"
-		},
-		{
-			"src": "./public/app_logo/app_logo_72.png",
-			"sizes": "72x72",
-			"type": "image/png",
-			"density": "1.5"
-		},
-		{
-			"src": "./public/app_logo/app_logo_96.png",
-			"sizes": "96x96",
-			"type": "image/png",
-			"density": "2.0"
-		},
-		{
-			"src": "./public/app_logo/app_logo_144.png",
-			"sizes": "144x144",
-			"type": "image/png",
-			"density": "3.0"
-		},
-		{
-			"src": "./public/app_logo/app_logo_192.png",
-			"sizes": "192x192",
-			"type": "image/png",
-			"density": "4.0"
-		}
-	]
+	"icons": {
+		"36": "./public/app_logo/app_logo_36.png",
+		"48": "./public/app_logo/app_logo_48.png",
+		"72": "./public/app_logo/app_logo_72.png",
+		"96": "./public/app_logo/app_logo_96.png",
+		"144": "./public/app_logo/app_logo_144.png",
+		"192": "./public/app_logo/app_logo_192.png"
+	}
 }
