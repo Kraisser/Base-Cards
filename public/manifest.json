@@ -1,16 +1,41 @@
 {
 	"name": "Base Cards",
 	"short_name": "Base Cards",
+	"start_url": "./",
 	"display": "standalone",
 	"orientation": "portrait",
 	"background_color": "#2787d6",
 	"theme_color": "#2787d6",
-	"icons": {
-		"36": "./public/app_logo/app_logo_36.png",
-		"48": "./public/app_logo/app_logo_48.png",
-		"72": "./public/app_logo/app_logo_72.png",
-		"96": "./public/app_logo/app_logo_96.png",
-		"144": "./public/app_logo/app_logo_144.png",
-		"192": "./public/app_logo/app_logo_192.png"
-	}
+	"icons": [
+		{
+			"src": "/appLogo/app_logo_192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "/appLogo/app_logo_144.png",
+			"type": "image/png",
+			"sizes": "144x144"
+		},
+		{
+			"src": "/appLogo/app_logo_96.png",
+			"type": "image/png",
+			"sizes": "96x96"
+		},
+		{
+			"src": "/appLogo/app_logo_72.png",
+			"type": "image/png",
+			"sizes": "72x72"
+		},
+		{
+			"src": "/appLogo/app_logo_48.png",
+			"type": "image/png",
+			"sizes": "48x48"
+		},
+		{
+			"src": "/appLogo/app_logo_36.png",
+			"type": "image/png",
+			"sizes": "36x36"
+		}
+	]
 }

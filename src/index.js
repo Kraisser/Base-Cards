@@ -1,6 +1,8 @@
 import 'normalize.css';
 import './index.css';
 
+// import appIcon from '../public/appLogo/appLogo192.png';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
