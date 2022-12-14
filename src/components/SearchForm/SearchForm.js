@@ -65,7 +65,6 @@ export default function SearchForm({searchList = false, searchTarget, placeholde
 
 	return (
 		<div className='searchWrapper'>
-			<img src={searchIcon} alt='search' className='searchIcon' />
 			<input
 				type='text'
 				className='searchForm'
@@ -73,6 +72,7 @@ export default function SearchForm({searchList = false, searchTarget, placeholde
 				value={searchValue}
 				onChange={(e) => handleChange(e.target.value)}
 			/>
+			{searchValue ? null : <img src={searchIcon} alt='search' className='searchIcon' />}
 		</div>
 	);
 }
