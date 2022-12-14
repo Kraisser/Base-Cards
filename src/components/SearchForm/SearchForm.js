@@ -35,21 +35,23 @@ export default function SearchForm({searchList = false, searchTarget, placeholde
 	};
 
 	const onFilterCard = (filter) => {
-		const filteredCards = filterCardsByName(filter);
+		if (filter) {
+			const filteredCards = filterCardsByName(filter);
 
-		dispatch(setCardFilter(filteredCards));
+			dispatch(setCardFilter(filteredCards));
+			return;
+		}
+
+		dispatch(setCardFilter(searchList));
 	};
 
 	const filterCardsByName = (searchWords) => {
-		const wordsReg = searchWords
-			.toLowerCase()
-			.trim()
-			.split(' ')
-			.map((item) => `(\\b${item})`);
+		const wordsReg = searchWords.toLowerCase().trim().split(' ');
 
 		const targetLength = wordsReg.length;
 
-		const filterRegExp = new RegExp(wordsReg.join('|'), 'gm');
+		const regTemplate = `(?:^|[^a-zA-Zа-яА-ЯёЁ])(?:${wordsReg.join('|')})`;
+		const filterRegExp = new RegExp(regTemplate, 'gm');
 
 		const filteredCards = searchList.filter((item) => {
 			const name = item.name.toLowerCase();
