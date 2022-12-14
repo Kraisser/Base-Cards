@@ -8,6 +8,11 @@
 	"theme_color": "#2787d6",
 	"icons": [
 		{
+			"src": "/appLogo/app_logo_512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		},
+		{
 			"src": "/appLogo/app_logo_192.png",
 			"type": "image/png",
 			"sizes": "192x192"
