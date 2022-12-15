@@ -17,6 +17,7 @@ export default function AuthLoading() {
 		if (uid === false) {
 			navigate('/auth');
 		}
+		// eslint-disable-next-line
 	}, [uid]);
 
 	return (

@@ -19,6 +19,7 @@ export default function ShowPassIcon({id, width, height, animDuration, onClick})
 
 	useEffect(() => {
 		drawEye(op.topMin, op.bottomMin, op.arcMin);
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -42,6 +43,7 @@ export default function ShowPassIcon({id, width, height, animDuration, onClick})
 		setTimeout(() => {
 			stepEye(top, bottom, arc, animStep);
 		}, 16);
+		// eslint-disable-next-line
 	}, [eyeOpen]);
 
 	const drawEye = (topVal, bottomVal, arcVal) => {

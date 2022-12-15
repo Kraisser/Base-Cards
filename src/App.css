@@ -12,11 +12,40 @@
 	background-color: var(--main-second-color);
 	max-width: 1430px;
 	min-height: calc(100vh - 10px);
-	overflow: auto;
+	overflow: hidden;
+}
+.pageFadeIn {
+	animation: 0.5s fadeIn forwards;
+}
+.pageFadeOut {
+	animation: 0.5s fadeOut forwards;
 }
 
 @media only all and (max-width: 750px) {
 	.content {
 		min-height: 100vh;
+	}
+}
+
+/* KeyFrames */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(20px);
+		opacity: 0;
 	}
 }

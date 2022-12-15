@@ -20,6 +20,7 @@ export default function RightContentWrapper({children}) {
 		return () => {
 			window.removeEventListener('resize', openMenu);
 		};
+		// eslint-disable-next-line
 	}, [clientWidth]);
 
 	const openMenu = useDebounce(() => {
