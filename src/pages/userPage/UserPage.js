@@ -11,7 +11,6 @@ import userIcon from '../../assets/icons/user-icon.png';
 import useAuth from '../../services/useAuth';
 
 import {resetStore} from '../../store/serviceSlice';
-import Spinner from '../../components/iconsComponents/Spinner/Spinner';
 
 export default function UserPage({close}) {
 	const dispatch = useDispatch();
@@ -45,16 +44,10 @@ export default function UserPage({close}) {
 	}, [exitActive]);
 
 	const onExit = () => {
-		navigate('/auth', {
-			state: 'loading',
-		});
+		navigate('/auth');
 		dispatch(resetStore());
 		signOutAuth();
 	};
-
-	// if (exitActive) {
-	// 	return <Spinner />;
-	// }
 
 	return (
 		<>

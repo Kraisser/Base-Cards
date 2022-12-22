@@ -4,14 +4,14 @@
 	box-sizing: border-box;
 }
 #root {
-	background-color: #dcdcdc;
+	background-color: var(--main-second-color);
 	min-height: 100vh;
 }
 .content {
 	margin: 0 auto;
 	background-color: var(--main-second-color);
 	max-width: 1430px;
-	height: calc(100vh - 10px);
+	height: 100vh;
 	overflow: hidden;
 }
 .pageFadeIn {
@@ -19,12 +19,6 @@
 }
 .pageFadeOut {
 	animation: 0.3s fadeOut forwards;
-}
-.pageFadeInLoadingAnim {
-	animation: 0.3s fadeIn forwards;
-}
-.pageFadeOutLoadingAnim {
-	animation: 0.3s fadeOut ease-in-out forwards;
 }
 
 @media only all and (max-width: 750px) {

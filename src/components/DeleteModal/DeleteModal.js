@@ -54,7 +54,7 @@ export default function DeleteModal() {
 
 		dispatch(delModalDeletedCardId(targetId));
 		dispatch(delModalClose());
-		navigate('/', {state: 'loading'});
+		navigate('/');
 	};
 
 	const onDeleteChapter = () => {

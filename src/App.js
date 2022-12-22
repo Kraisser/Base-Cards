@@ -57,15 +57,8 @@ function App() {
 		}
 	};
 
-	const transitionClass =
-		location.state === 'loading' || currLocation.state === 'loading'
-			? transitionState + 'LoadingAnim'
-			: transitionState;
-
-	console.log(transitionClass);
-
 	return (
-		<div className={`page${transitionClass}`} onAnimationEnd={handleAnimation}>
+		<div className={`page${transitionState}`} onAnimationEnd={handleAnimation}>
 			<Routes location={currLocation}>
 				{!uid ? (
 					<>
