@@ -11,19 +11,25 @@
 	margin: 0 auto;
 	background-color: var(--main-second-color);
 	max-width: 1430px;
-	min-height: calc(100vh - 10px);
+	height: calc(100vh - 10px);
 	overflow: hidden;
 }
 .pageFadeIn {
-	animation: 0.5s fadeIn forwards;
+	animation: 0.3s fadeIn forwards;
 }
 .pageFadeOut {
-	animation: 0.5s fadeOut forwards;
+	animation: 0.3s fadeOut forwards;
+}
+.pageFadeInLoadingAnim {
+	animation: 0.3s fadeIn forwards;
+}
+.pageFadeOutLoadingAnim {
+	animation: 0.3s fadeOut ease-in-out forwards;
 }
 
 @media only all and (max-width: 750px) {
 	.content {
-		min-height: 100vh;
+		height: 100vh;
 	}
 }
 

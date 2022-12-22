@@ -19,6 +19,7 @@ import Page404 from '../404/404';
 import {setCard} from '../../store/editSlice';
 import {delModalOpen} from '../../store/modalSlice';
 import {setActiveChapter} from '../../store/chapterSlice';
+import LoadingPage from '../loadingPage/LoadingPage';
 
 export default function CardDescription() {
 	const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export default function CardDescription() {
 	const activeChapterState = useSelector((state) => state.chapter.activeChapter);
 	const chapterList = useSelector((state) => state.chapter.chapterList);
 	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
+	const deletedId = useSelector((state) => state.modal.deletedId);
 
 	useEffect(() => {
 		if (cardListStatus !== 'idle' && activeChapter && id) {
@@ -63,7 +65,9 @@ export default function CardDescription() {
 
 	const currentCard = cardList.find((item) => item.id === id);
 
-	if (!currentCard) {
+	if (!currentCard && deletedId === id) {
+		return <LoadingPage />;
+	} else if (!currentCard) {
 		return <Page404 />;
 	}
 

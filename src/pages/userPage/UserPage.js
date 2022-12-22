@@ -9,7 +9,9 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 
 import userIcon from '../../assets/icons/user-icon.png';
 import useAuth from '../../services/useAuth';
+
 import {resetStore} from '../../store/serviceSlice';
+import Spinner from '../../components/iconsComponents/Spinner/Spinner';
 
 export default function UserPage({close}) {
 	const dispatch = useDispatch();
@@ -20,6 +22,8 @@ export default function UserPage({close}) {
 
 	const [confirmCooldown, setConfirmCooldown] = useState(60);
 	const [verificateAnswer, setVerificateAnswer] = useState(null);
+
+	const [exitActive, setExitActive] = useState(false);
 
 	useEffect(() => {
 		if (emailConfirmed || confirmCooldown < 0) {
@@ -34,12 +38,23 @@ export default function UserPage({close}) {
 		// eslint-disable-next-line
 	}, [confirmCooldown]);
 
+	useEffect(() => {
+		if (exitActive) {
+			onExit();
+		}
+	}, [exitActive]);
+
 	const onExit = () => {
-		dispatch(resetStore());
-		signOutAuth().then(() => {
-			navigate('/auth');
+		navigate('/auth', {
+			state: 'loading',
 		});
+		dispatch(resetStore());
+		signOutAuth();
 	};
+
+	// if (exitActive) {
+	// 	return <Spinner />;
+	// }
 
 	return (
 		<>
@@ -81,7 +96,7 @@ export default function UserPage({close}) {
 					)}
 
 					<div className='userPageElement'>
-						<button type='button' className='formBut but' onClick={onExit}>
+						<button type='button' className='formBut but' onClick={() => setExitActive(true)}>
 							Выйти из учетной записи
 						</button>
 					</div>

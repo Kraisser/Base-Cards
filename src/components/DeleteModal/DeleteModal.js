@@ -2,7 +2,7 @@ import './deleteModal.css';
 
 import {useSelector, useDispatch} from 'react-redux';
 
-import {delModalClose} from '../../store/modalSlice';
+import {delModalClose, delModalDeletedCardId} from '../../store/modalSlice';
 import {useNavigate} from 'react-router-dom';
 
 import useCards from '../../services/useCards';
@@ -52,8 +52,9 @@ export default function DeleteModal() {
 			onDeleteCard(targetId, delModalTargetId.chapId);
 		}
 
+		dispatch(delModalDeletedCardId(targetId));
 		dispatch(delModalClose());
-		navigate('/');
+		navigate('/', {state: 'loading'});
 	};
 
 	const onDeleteChapter = () => {

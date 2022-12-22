@@ -11,6 +11,7 @@ import MainPage from './pages/mainPage/MainPage';
 import CardDescription from './pages/cardDescription/CardDescription';
 import FormPage from './pages/formPage/FormPage';
 import Page404 from './pages/404/404';
+import LoadingPage from './pages/loadingPage/LoadingPage';
 
 import Auth from './pages/auth/Auth';
 import NoAuth from './pages/noAuth/NoAuth';
@@ -29,8 +30,6 @@ function App() {
 
 	const uid = useSelector((state) => state.auth.uid);
 	const emailConfirmed = useSelector((state) => state.auth.emailConfirmed);
-
-	// const routerState = !uid ? 'noAuth' : uid && !emailConfirmed ? 'noEmail' : 'default';
 
 	useEffect(() => {
 		if (location !== currLocation) setTransitionState('FadeOut');
@@ -51,21 +50,29 @@ function App() {
 		}
 	});
 
+	const handleAnimation = () => {
+		if (transitionState === 'FadeOut') {
+			setTransitionState('FadeIn');
+			setCurrLocation(location);
+		}
+	};
+
+	const transitionClass =
+		location.state === 'loading' || currLocation.state === 'loading'
+			? transitionState + 'LoadingAnim'
+			: transitionState;
+
+	console.log(transitionClass);
+
 	return (
-		<div
-			className={`page${transitionState}`}
-			onAnimationEnd={() => {
-				if (transitionState === 'FadeOut') {
-					setTransitionState('FadeIn');
-					setCurrLocation(location);
-				}
-			}}>
+		<div className={`page${transitionClass}`} onAnimationEnd={handleAnimation}>
 			<Routes location={currLocation}>
 				{!uid ? (
 					<>
 						<Route path='/' element={<AuthLoading />} />
 						<Route path='/auth' element={<Auth />} />
 						<Route path='/resetPass' element={<ResetPass />} />
+						<Route path='/userPage' element={<LoadingPage />} />
 						<Route path='*' element={<NoAuth />} />
 					</>
 				) : uid && !emailConfirmed ? (
@@ -73,6 +80,7 @@ function App() {
 				) : (
 					<>
 						<Route path='/' element={<MainPage />} />
+						<Route path='/auth' element={<LoadingPage />} />
 						<Route path='/userPage' element={<UserPage />} />
 						<Route path='/editForm' element={<FormPage />} />
 						<Route path='/cardDescription/:activeChapter/:id' element={<CardDescription />} />

@@ -1,0 +1,22 @@
+/* .loadingPageWrapper {
+	opacity: 0;
+	animation: enterLoading 1s ease-in-out forwards;
+}
+
+@keyframes enterLoading {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes exitLoading {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+} */
