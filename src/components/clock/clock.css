@@ -11,6 +11,8 @@
 	color: var(--main-color);
 	border-radius: var(--border-mini-radius);
 	font-size: 24px;
+	opacity: 0;
+	animation: clockFadeIn 0.2s ease-in-out forwards;
 }
 .date {
 	display: flex;
@@ -30,5 +32,16 @@
 	}
 	.date {
 		font-size: 16px;
+	}
+}
+
+@keyframes clockFadeIn {
+	from {
+		transform: scale(0.95);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
 	}
 }
