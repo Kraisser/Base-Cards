@@ -6,6 +6,7 @@
 	grid-template-columns: 1030px 200px 200px;
 	padding: 5px 0;
 	background-color: var(--main-color);
+	height: 70px;
 }
 .header a {
 	text-decoration: none;
@@ -36,6 +37,7 @@
 @media only all and (max-width: 750px) {
 	.header {
 		grid-template-columns: 120px 1fr 120px;
+		height: 50px;
 	}
 	.headerClockWrapper {
 		order: -1;

@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 #root {
-	background-color: var(--main-second-color);
+	background-color: var(--inactive-color);
 	min-height: 100vh;
 }
 .content {

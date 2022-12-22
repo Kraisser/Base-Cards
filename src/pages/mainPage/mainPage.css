@@ -1,3 +1,5 @@
+@import '../../css/variables.css';
+
 .mainWrapper {
 	display: grid;
 	grid-template-columns: 1030px 400px;
@@ -6,13 +8,12 @@
 }
 
 .leftContent {
-	height: calc(100vh - 80px);
+	height: var(--content-height);
 	display: flex;
 	flex-direction: column;
 }
 
 /* Media */
-
 @media only all and (max-width: 1450px) {
 	.mainWrapper {
 		grid-template-columns: 2fr 1fr;
