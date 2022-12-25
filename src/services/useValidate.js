@@ -1,6 +1,10 @@
 import * as yup from 'yup';
 
+import useDebounce from '../services/useDebounce';
+
 export default function useValidate() {
+	const {debounce} = useDebounce();
+
 	const validSchema = yup.object().shape({
 		email: yup
 			.string('Введите строку')
@@ -37,7 +41,29 @@ export default function useValidate() {
 			});
 	};
 
+	const debounceValidate = (validateFunc, id, value) =>
+		debounce(() => validateFunc[id](value), 300);
+
+	const validateAll = async (validateFunc, chapterErr) => {
+		const resArr = [];
+
+		for (const id in validateFunc) {
+			if (id === 'chapter' && chapterErr) {
+				resArr.push(false);
+				continue;
+			}
+			if (Object.hasOwnProperty.call(validateFunc, id)) {
+				const res = await validateFunc[id]();
+				resArr.push(res);
+			}
+		}
+
+		return resArr.includes(false);
+	};
+
 	return {
+		debounceValidate,
+		validateAll,
 		validateField,
 	};
 }

@@ -1,4 +1,4 @@
-@import '../../css/variables.css';
+@import './variables.css';
 
 .formWrapper {
 	display: flex;

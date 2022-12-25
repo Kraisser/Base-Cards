@@ -9,9 +9,10 @@ import {authSuccess, authError} from './store/authSlice';
 
 import MainPage from './pages/mainPage/MainPage';
 import CardDescription from './pages/cardDescription/CardDescription';
-import FormPage from './pages/formPage/FormPage';
 import Page404 from './pages/404/404';
 import LoadingPage from './pages/loadingPage/LoadingPage';
+import AddCardPage from './pages/addCardPage/AddCardPage';
+import EditCardPage from './pages/editCardPage/EditCardPage';
 
 import Auth from './pages/auth/Auth';
 import NoAuth from './pages/noAuth/NoAuth';
@@ -75,7 +76,9 @@ function App() {
 						<Route path='/' element={<MainPage />} />
 						<Route path='/auth' element={<LoadingPage />} />
 						<Route path='/userPage' element={<UserPage />} />
-						<Route path='/editForm' element={<FormPage />} />
+						<Route path='/addCard' element={<AddCardPage />} />
+						<Route path='/editCard' element={<EditCardPage />} />
+						{/* <Route path='/editCard' element={<FormPage />} /> */}
 						<Route path='/cardDescription/:activeChapter/:id' element={<CardDescription />} />
 						<Route path='*' element={<Page404 />} />
 					</>

@@ -73,7 +73,7 @@ export default function CardDescription() {
 
 	const onEditCard = () => {
 		dispatch(setCard({activeChapter, currentCard}));
-		navigate('/editForm');
+		navigate('/editCard');
 	};
 
 	const onDeleteCard = () => {

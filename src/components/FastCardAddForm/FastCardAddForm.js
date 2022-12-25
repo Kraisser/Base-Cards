@@ -1,4 +1,4 @@
-import '../CardAddForm/cardAddForm.css';
+import '../../css/cardForm.css';
 import './fastCardAddForm.css';
 
 import {useState} from 'react';

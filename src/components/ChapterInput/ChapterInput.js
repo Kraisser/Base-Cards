@@ -1,3 +1,5 @@
+import '../../css/cardForm.css';
+
 import {useSelector} from 'react-redux';
 
 import {v4 as uuid} from 'uuid';
@@ -12,13 +14,14 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 	const {compareChapters} = useString();
 	const {validateField} = useValidate();
 	const {sortChaptersByName} = useSort();
+	const {debounce} = useDebounce();
 
 	const {chapter, setChapter} = chapState;
 	const {chapterErr, setChapterErr} = chapErrState;
 
 	const chapErrStyle = chapterErr ? 'errorInput' : '';
 
-	const validateChapterName = useDebounce((value) => {
+	const validateChapterName = (value) => {
 		const valueString = value.toLowerCase().trim();
 
 		const compareResult = compareChapters(chapterList, valueString);
@@ -29,13 +32,13 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 		}
 
 		validateField(`chapter`, value, setChapterErr);
-	}, 300);
+	};
 
 	const setNewName = (e) => {
 		const value = e.target.value;
-		validateChapterName(value);
+		debounce(() => validateChapterName(value), 300);
 
-		onChange(e, setChapter, true);
+		onChange(e, setChapter, setChapterErr);
 	};
 
 	const content = newChap ? (
@@ -64,7 +67,7 @@ export default function ChapterInput({newChap, chapState, onChange, chapErrState
 				id='chapter'
 				value={chapter}
 				className={`exSelectInput ${chapErrStyle}`}
-				onChange={(e) => onChange(e, setChapter)}>
+				onChange={(e) => onChange(e, setChapter, setChapterErr)}>
 				<option value='' disabled>
 					Из списка
 				</option>
