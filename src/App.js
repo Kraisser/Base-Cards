@@ -78,7 +78,6 @@ function App() {
 						<Route path='/userPage' element={<UserPage />} />
 						<Route path='/addCard' element={<AddCardPage />} />
 						<Route path='/editCard' element={<EditCardPage />} />
-						{/* <Route path='/editCard' element={<FormPage />} /> */}
 						<Route path='/cardDescription/:activeChapter/:id' element={<CardDescription />} />
 						<Route path='*' element={<Page404 />} />
 					</>

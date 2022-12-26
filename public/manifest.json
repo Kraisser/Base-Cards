@@ -1,7 +1,8 @@
 {
 	"name": "Base Cards",
 	"short_name": "Base Cards",
-	"start_url": "./",
+	"start_url": "/",
+	"scope": "/",
 	"display": "standalone",
 	"orientation": "portrait",
 	"background_color": "#2787d6",
@@ -44,8 +45,7 @@
 		}
 	],
 	"share_target": {
-		"action": "/shared-content-receiver/",
-		"method": "GET",
+		"action": "index.html/addCard",
 		"params": {
 			"title": "name",
 			"text": "description",
