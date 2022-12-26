@@ -45,7 +45,7 @@
 		}
 	],
 	"share_target": {
-		"action": "index.html/addCard",
+		"action": "index.html",
 		"params": {
 			"title": "name",
 			"text": "description",

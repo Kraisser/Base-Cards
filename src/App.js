@@ -33,7 +33,7 @@ function App() {
 	const emailConfirmed = useSelector((state) => state.auth.emailConfirmed);
 
 	useEffect(() => {
-		if (location !== currLocation) setTransitionState('FadeOut');
+		if (location.pathname !== currLocation.pathname) setTransitionState('FadeOut');
 	}, [location, currLocation]);
 
 	onAuthStateChanged(auth, (user) => {
