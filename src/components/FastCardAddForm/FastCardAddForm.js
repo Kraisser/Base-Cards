@@ -8,7 +8,6 @@ import {v4 as uuid} from 'uuid';
 
 import useCards from '../../services/useCards';
 import useValidate from '../../services/useValidate';
-import useDebounce from '../../services/useDebounce';
 
 import Spinner from '../iconsComponents/Spinner/Spinner';
 
@@ -16,7 +15,7 @@ import delIcon from '../../assets/icons/delete-icon.png';
 
 export default function FastCardAddForm({onClose}) {
 	const {uploadNewCard} = useCards();
-	const {validateField} = useValidate();
+	const {validateField, debounceValidateField} = useValidate();
 
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
 
@@ -55,18 +54,14 @@ export default function FastCardAddForm({onClose}) {
 		onClose();
 	};
 
-	const validateCardNameDebounce = useDebounce(
-		(value) => validateField(`cardName`, value, setCardNameErr),
-		300
-	);
-
 	const onChange = (e, setState) => {
 		const value = e.target.value;
+		const id = e.target.id;
 
 		setState(value);
 
-		if (e.target.id === 'cardName') {
-			validateCardNameDebounce(value);
+		if (id === 'cardName') {
+			debounceValidateField(id, value, setCardNameErr);
 		}
 	};
 

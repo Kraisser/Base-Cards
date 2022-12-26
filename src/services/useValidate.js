@@ -41,8 +41,10 @@ export default function useValidate() {
 			});
 	};
 
-	const debounceValidate = (validateFunc, id, value) =>
-		debounce(() => validateFunc[id](value), 300);
+	const debounceValidate = (validateFunc, id, value) => debounce(validateFunc[id], 300, value);
+
+	const debounceValidateField = (id, value, setErr) =>
+		debounce(validateField, 300, id, value, setErr);
 
 	const validateAll = async (validateFunc, chapterErr) => {
 		const resArr = [];
@@ -63,6 +65,7 @@ export default function useValidate() {
 
 	return {
 		debounceValidate,
+		debounceValidateField,
 		validateAll,
 		validateField,
 	};
