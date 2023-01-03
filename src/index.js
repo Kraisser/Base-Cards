@@ -10,8 +10,8 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import store from './store/index';
 
 if ('serviceWorker' in navigator) {
-	console.log('👍', 'navigator.serviceWorker is supported');
 	navigator.serviceWorker.register('/service-worker.js');
+	navigator.serviceWorker.addEventListener('controllerchange', () => window.location.reload());
 }
 
 ReactDOM.render(

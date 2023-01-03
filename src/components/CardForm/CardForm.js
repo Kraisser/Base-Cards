@@ -97,31 +97,29 @@ export default function CardForm({onCardSubmit, baseVal, errorEdit}) {
 					className={`formInput ${nameErrInpStyle}`}
 				/>
 			</div>
-
-			<>
-				<div className='fieldWrapper chapSelectButWrapper'>
-					<button
-						type='button'
-						onClick={() => onChangeChapCondtition(false)}
-						className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
-						Существующий раздел
-					</button>
-					<button
-						type='button'
-						onClick={() => onChangeChapCondtition(true)}
-						className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
-						Новый раздел
-					</button>
-				</div>
-				<div className='fieldWrapper'>
-					<ChapterInput
-						newChap={newChap}
-						chapState={{chapter, setChapter}}
-						onChange={onChange}
-						chapErrState={{chapterErr, setChapterErr}}
-					/>
-				</div>
-			</>
+			<div className='fieldWrapper'></div>
+			<div className='fieldWrapper chapSelectButWrapper'>
+				<button
+					type='button'
+					onClick={() => onChangeChapCondtition(false)}
+					className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
+					Существующий раздел
+				</button>
+				<button
+					type='button'
+					onClick={() => onChangeChapCondtition(true)}
+					className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
+					Новый раздел
+				</button>
+			</div>
+			<div className='fieldWrapper'>
+				<ChapterInput
+					newChap={newChap}
+					chapState={{chapter, setChapter}}
+					onChange={onChange}
+					chapErrState={{chapterErr, setChapterErr}}
+				/>
+			</div>
 
 			<div className='fieldWrapper'>
 				<label htmlFor='cardLink' className='formInputLabel'>

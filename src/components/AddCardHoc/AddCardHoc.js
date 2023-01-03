@@ -24,6 +24,8 @@ export default function AddCardHoc() {
 
 	const chapterListStatus = useSelector((state) => state.chapter.chapterListStatus);
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
+	
+	const editCard = useSelector((state) => state.editSlice.card);
 
 	useEffect(() => {
 		if (chapterListStatus !== 'idle') {
@@ -68,5 +70,5 @@ export default function AddCardHoc() {
 		);
 	}
 
-	return <CardForm onCardSubmit={onCardSubmit} />;
+	return <CardForm onCardSubmit={onCardSubmit} baseVal={editCard} />;
 }
