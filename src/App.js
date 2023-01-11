@@ -25,6 +25,7 @@ function App() {
 	const location = useLocation();
 	const dispatch = useDispatch();
 
+	const [firstLoad, setFirstLoad] = useState(true);
 	const [currLocation, setCurrLocation] = useState(location);
 	const [transitionState, setTransitionState] = useState('FadeIn');
 
@@ -34,7 +35,6 @@ function App() {
 	const emailConfirmed = useSelector((state) => state.auth.emailConfirmed);
 
 	const loadHandler = (message) => {
-		console.log(message.data, 'from app');
 		dispatch(setSharedData(message.data));
 	};
 
@@ -47,7 +47,12 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		if (location.pathname !== currLocation.pathname) setTransitionState('FadeOut');
+		if (location.pathname !== currLocation.pathname) {
+			if (firstLoad) {
+				setFirstLoad(false);
+			}
+			setTransitionState('FadeOut');
+		}
 	}, [location, currLocation]);
 
 	onAuthStateChanged(auth, (user) => {
@@ -81,7 +86,11 @@ function App() {
 						<Route path='/auth' element={<Auth />} />
 						<Route path='/resetPass' element={<ResetPass />} />
 						<Route path='/userPage' element={<LoadingPage />} />
-						<Route path='*' element={<NoAuth />} />
+						{firstLoad ? (
+							<Route path='*' element={<AuthLoading />} />
+						) : (
+							<Route path='*' element={<NoAuth />} />
+						)}
 					</>
 				) : uid && !emailConfirmed ? (
 					<Route path='*' element={<UserPage close={true} />} />

@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 self.addEventListener('install', (event) => {
-	console.log('👷', 'install', event);
+	console.log('service worker installed successfully');
 	self.skipWaiting();
 });
 
@@ -22,16 +22,13 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-	console.log('fetch');
 	const url = new URL(event.request.url);
 	if (event.request.method === 'POST' && url.pathname === '/addCard') {
 		event.waitUntil(
 			(async () => {
 				try {
 					const formData = await event.request.formData();
-					console.log('event.request: ', event.request);
 
-					console.log('formData: ', formData);
 					const title = formData.get('title') || '';
 					const text = formData.get('text') || '';
 					const link = formData.get('url') || '';
@@ -64,7 +61,6 @@ self.addEventListener('fetch', (event) => {
 			})()
 		);
 		event.respondWith(Response.redirect('/addCard'));
-		console.log('ok');
 		return true;
 	}
 });
