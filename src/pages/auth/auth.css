@@ -70,10 +70,33 @@
 	height: 40px;
 }
 .authTestBut {
+	position: relative;
 	justify-content: center;
 	width: 250px;
 	padding: 0 calc(var(--butSize) * 2);
 	height: 40px;
+}
+.authTestBut:after {
+	display: block;
+	visibility: hidden;
+	content: 'Тут можно протестировать основные возможности приложения';
+	transition: all 0.3s ease-in;
+	transform: scale(0.9);
+	opacity: 0;
+	position: absolute;
+	top: 120%;
+	left: 0;
+	right: 0;
+}
+.authTestBut:hover:after {
+	visibility: visible;
+	content: 'Тут можно протестировать основные возможности приложения';
+	background-color: var(--main-second-color);
+	padding: 5px;
+	border-radius: var(--border-mini-radius);
+	box-shadow: 0 0 5px #1f1f1f;
+	opacity: 1;
+	transform: scale(1);
 }
 .passRestoreWrapper {
 	display: flex;
