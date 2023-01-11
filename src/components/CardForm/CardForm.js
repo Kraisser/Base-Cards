@@ -13,7 +13,8 @@ export default function CardForm({onCardSubmit, baseVal, errorEdit}) {
 	const {uploadNewChapter} = useChapter();
 	const {validateAll, validateField, debounceValidate} = useValidate();
 
-	const {name, link, description, fromChapterId} = baseVal ? baseVal : {};
+	const {name, link, description, fromChapterId} = baseVal;
+	console.log('baseVal: ', baseVal);
 
 	const [newChap, setNewChap] = useState(false);
 
@@ -82,75 +83,95 @@ export default function CardForm({onCardSubmit, baseVal, errorEdit}) {
 	};
 
 	return (
-		<form className='cardForm' onSubmit={cardSubmit}>
-			<h2 className='formHeader'>Добавление карточки</h2>
-			<div className='fieldWrapper'>
-				<label htmlFor='cardName' className='formInputLabel'>
-					Название карточки*
-				</label>
-				{cardNameErr ? <div className='errorForm'>{cardNameErr}</div> : null}
-				<input
-					type='text'
-					id='cardName'
-					onChange={(e) => onChange(e, setCardName, setCardNameErr)}
-					value={cardName}
-					className={`formInput ${nameErrInpStyle}`}
-				/>
-			</div>
-			<div className='fieldWrapper'></div>
-			<div className='fieldWrapper chapSelectButWrapper'>
-				<button
-					type='button'
-					onClick={() => onChangeChapCondtition(false)}
-					className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
-					Существующий раздел
-				</button>
-				<button
-					type='button'
-					onClick={() => onChangeChapCondtition(true)}
-					className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
-					Новый раздел
-				</button>
-			</div>
-			<div className='fieldWrapper'>
-				<ChapterInput
-					newChap={newChap}
-					chapState={{chapter, setChapter}}
-					onChange={onChange}
-					chapErrState={{chapterErr, setChapterErr}}
-				/>
-			</div>
+		<>
+			<form className='cardForm' onSubmit={cardSubmit}>
+				<h2 className='formHeader'>Добавление карточки</h2>
+				<div className='fieldWrapper'>
+					<label htmlFor='cardName' className='formInputLabel'>
+						Название карточки*
+					</label>
+					{cardNameErr ? <div className='errorForm'>{cardNameErr}</div> : null}
+					<input
+						type='text'
+						id='cardName'
+						onChange={(e) => onChange(e, setCardName, setCardNameErr)}
+						value={cardName}
+						className={`formInput ${nameErrInpStyle}`}
+					/>
+				</div>
+				<div className='fieldWrapper'></div>
+				<div className='fieldWrapper chapSelectButWrapper'>
+					<button
+						type='button'
+						onClick={() => onChangeChapCondtition(false)}
+						className={`but chapSelectBut ${!newChap ? 'chapSelectButActive' : ''}`}>
+						Существующий раздел
+					</button>
+					<button
+						type='button'
+						onClick={() => onChangeChapCondtition(true)}
+						className={`but chapSelectBut ${newChap ? 'chapSelectButActive' : ''}`}>
+						Новый раздел
+					</button>
+				</div>
+				<div className='fieldWrapper'>
+					<ChapterInput
+						newChap={newChap}
+						chapState={{chapter, setChapter}}
+						onChange={onChange}
+						chapErrState={{chapterErr, setChapterErr}}
+					/>
+				</div>
 
-			<div className='fieldWrapper'>
-				<label htmlFor='cardLink' className='formInputLabel'>
-					Укажите ссылку
-				</label>
-				<input
-					type='text'
-					id='cardLink'
-					onChange={(e) => setCardLink(e.target.value)}
-					value={cardLink}
-					className={'formInput'}
-				/>
-			</div>
+				<div className='fieldWrapper'>
+					<label htmlFor='cardLink' className='formInputLabel'>
+						Укажите ссылку
+					</label>
+					<input
+						type='text'
+						id='cardLink'
+						onChange={(e) => setCardLink(e.target.value)}
+						value={cardLink}
+						className={'formInput'}
+					/>
+				</div>
 
-			<div className='fieldWrapper fieldDescriptionWrapper'>
-				<label htmlFor='cardDescription' className='formInputLabel'>
-					Дополнительное описание
-				</label>
-				<textarea
-					name='cardDescription'
-					id='cardDescription'
-					onChange={(e) => setCardDescription(e.target.value)}
-					value={cardDescription}
-					className='descriptionInput'></textarea>
-				{errorEdit ? <div className='errorForm'>{errorEdit}</div> : null}
-			</div>
-			<div className='formButWrapper'>
-				<button type='submit' className='formBut but'>
-					Отправить
-				</button>
-			</div>
-		</form>
+				<div className='fieldWrapper fieldDescriptionWrapper'>
+					<label htmlFor='cardDescription' className='formInputLabel'>
+						Дополнительное описание
+					</label>
+					<textarea
+						name='cardDescription'
+						id='cardDescription'
+						onChange={(e) => setCardDescription(e.target.value)}
+						value={cardDescription}
+						className='descriptionInput'></textarea>
+					{errorEdit ? <div className='errorForm'>{errorEdit}</div> : null}
+				</div>
+				<div className='formButWrapper'>
+					<button type='submit' className='formBut but'>
+						Отправить
+					</button>
+				</div>
+			</form>
+			{/* <form
+				onSubmit={async (e) => {
+					e.preventDefault();
+					try {
+						const response = await fetch('https://base-app-d40ed.web.app/addCard', {
+							method: 'POST',
+							body: new FormData(e.target),
+						});
+						console.log(e, response);
+					} catch (err) {
+						console.log(err);
+					}
+				}}>
+				<input type='text' name='title' value='title Value' />
+				<input type='text' name='text' value='text Value' />
+				<input type='text' name='url' value='link Value' />
+				<button>submit</button>
+			</form> */}
+		</>
 	);
 }

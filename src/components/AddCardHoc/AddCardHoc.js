@@ -12,6 +12,7 @@ import {v4 as uuid} from 'uuid';
 import CardForm from '../CardForm/CardForm';
 
 import {setActiveChapter} from '../../store/chapterSlice';
+import {clearSharedData} from '../../store/shareTargetSlice';
 
 import Spinner from '../iconsComponents/Spinner/Spinner';
 
@@ -24,8 +25,15 @@ export default function AddCardHoc() {
 
 	const chapterListStatus = useSelector((state) => state.chapter.chapterListStatus);
 	const activeChapter = useSelector((state) => state.chapter.activeChapter);
-	
-	const editCard = useSelector((state) => state.editSlice.card);
+
+	const sharedLink = useSelector((state) => state.shared.link);
+
+	useEffect(() => {
+		return () => {
+			dispatch(clearSharedData());
+		};
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		if (chapterListStatus !== 'idle') {
@@ -70,5 +78,5 @@ export default function AddCardHoc() {
 		);
 	}
 
-	return <CardForm onCardSubmit={onCardSubmit} baseVal={editCard} />;
+	return <CardForm onCardSubmit={onCardSubmit} baseVal={{link: sharedLink}} />;
 }

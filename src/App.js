@@ -6,6 +6,7 @@ import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import {Routes, Route, useLocation} from 'react-router-dom';
 
 import {authSuccess, authError} from './store/authSlice';
+import {setSharedData} from './store/shareTargetSlice';
 
 import MainPage from './pages/mainPage/MainPage';
 import CardDescription from './pages/cardDescription/CardDescription';
@@ -31,6 +32,19 @@ function App() {
 
 	const uid = useSelector((state) => state.auth.uid);
 	const emailConfirmed = useSelector((state) => state.auth.emailConfirmed);
+
+	const loadHandler = (message) => {
+		console.log(message.data, 'from app');
+		dispatch(setSharedData(message.data));
+	};
+
+	useEffect(() => {
+		navigator.serviceWorker.addEventListener('message', loadHandler);
+
+		return () => {
+			navigator.serviceWorker.removeEventListener('message', loadHandler);
+		};
+	}, []);
 
 	useEffect(() => {
 		if (location.pathname !== currLocation.pathname) setTransitionState('FadeOut');
