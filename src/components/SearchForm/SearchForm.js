@@ -12,13 +12,15 @@ import searchIcon from '../../assets/icons/search.png';
 
 export default function SearchForm({searchList = false, searchTarget, placeholder}) {
 	const dispatch = useDispatch();
+	const {debounce} = useDebounce();
 
 	const [searchValue, setSearchValue] = useState('');
 
-	const debounceSearch = useDebounce(
-		(filter) => (searchTarget === 'chapter' ? onFilterChapter(filter) : onFilterCard(filter)),
-		300
-	);
+	const debounceSearch = (filter) =>
+		debounce(
+			() => (searchTarget === 'chapter' ? onFilterChapter(filter) : onFilterCard(filter)),
+			300
+		);
 
 	const handleChange = (value) => {
 		setSearchValue(value);
