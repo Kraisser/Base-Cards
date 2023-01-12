@@ -82,6 +82,10 @@
 	content: 'Тут можно протестировать основные возможности приложения';
 	transition: all 0.3s ease-in;
 	transform: scale(0.9);
+	border-radius: var(--border-mini-radius);
+	background-color: var(--main-second-color);
+	box-shadow: 0 0 5px #1f1f1f;
+	padding: 5px;
 	opacity: 0;
 	position: absolute;
 	top: 120%;
@@ -90,11 +94,6 @@
 }
 .authTestBut:hover:after {
 	visibility: visible;
-	content: 'Тут можно протестировать основные возможности приложения';
-	background-color: var(--main-second-color);
-	padding: 5px;
-	border-radius: var(--border-mini-radius);
-	box-shadow: 0 0 5px #1f1f1f;
 	opacity: 1;
 	transform: scale(1);
 }
