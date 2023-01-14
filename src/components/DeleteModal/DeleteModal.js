@@ -19,6 +19,7 @@ export default function DeleteModal() {
 
 	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
 	const delModalTargetId = useSelector((state) => state.modal.delModalTargetId);
+	console.log('delModalTargetId: ', delModalTargetId);
 
 	if (!delModalTarget) {
 		return (
@@ -30,6 +31,12 @@ export default function DeleteModal() {
 
 	const targetIsChapter = delModalTarget === 'chapter';
 	const targetId = delModalTargetId.id;
+	const currentTargetText =
+		delModalTarget !== 'chapter'
+			? delModalTarget === 'card' && delModalTargetId.favorite
+				? 'favoriteCard'
+				: 'card'
+			: 'chapter';
 
 	const descriptionTexts = {
 		chapter: (
@@ -41,7 +48,9 @@ export default function DeleteModal() {
 				</p>
 			</>
 		),
-		card: `Вы действительно хотите удалить эту карточку? Это действие необратимо.`,
+		card: `Вы действительно хотите удалить эту карточку? Это действие необратимо`,
+		favoriteCard:
+			'Карточка находится в Избранном. Вы действительно хотите удалить эту карточку из всех разделов? Это действие необратимо',
 	};
 
 	const onDeleteCardItem = () => {
@@ -67,7 +76,7 @@ export default function DeleteModal() {
 		<>
 			<div className='modalOverlay'>
 				<div className='modalWrapper'>
-					<div className='modalDescription'>{descriptionTexts[delModalTarget]}</div>
+					<div className='modalDescription'>{descriptionTexts[currentTargetText]}</div>
 					<div className='modalButWrapper'>
 						<button
 							className='modalBut modalGreenBut greenBut but'
