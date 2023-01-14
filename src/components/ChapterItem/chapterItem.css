@@ -29,7 +29,6 @@
 	transition: all 0.2s ease;
 }
 .chapterItemContentFavourite {
-	/* background-color: #ffbe61; */
 	background: linear-gradient(0deg, var(--button-color) 0%, var(--second-button-color) 100%);
 	padding: 5px;
 	text-align: center;
@@ -39,7 +38,7 @@
 	transform: scale(0.97);
 }
 .chapterItemContent:active + .chapterItemMenu {
-	transform: scale(0.96) translateX(-14%);
+	transform: scale(0.96) translateX(-11%);
 }
 .chapterItemContent:hover {
 	box-shadow: 0 0 8px var(--hover-color);
