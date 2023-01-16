@@ -41,6 +41,7 @@ export default function UserPage({close}) {
 		if (exitActive) {
 			onExit();
 		}
+		// eslint-disable-next-line
 	}, [exitActive]);
 
 	const onExit = () => {

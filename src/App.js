@@ -14,6 +14,7 @@ import Page404 from './pages/404/404';
 import LoadingPage from './pages/loadingPage/LoadingPage';
 import AddCardPage from './pages/addCardPage/AddCardPage';
 import EditCardPage from './pages/editCardPage/EditCardPage';
+import HelpPage from './pages/helpPage/HelpPage';
 
 import Auth from './pages/auth/Auth';
 import NoAuth from './pages/noAuth/NoAuth';
@@ -44,6 +45,7 @@ function App() {
 		return () => {
 			navigator.serviceWorker.removeEventListener('message', loadHandler);
 		};
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -53,6 +55,7 @@ function App() {
 			}
 			setTransitionState('FadeOut');
 		}
+		// eslint-disable-next-line
 	}, [location, currLocation]);
 
 	onAuthStateChanged(auth, (user) => {
@@ -105,6 +108,7 @@ function App() {
 						<Route path='*' element={<Page404 />} />
 					</>
 				)}
+				<Route path='/help' element={<HelpPage />} />
 			</Routes>
 		</div>
 	);

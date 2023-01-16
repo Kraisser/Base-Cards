@@ -27,23 +27,20 @@
 	scrollbar-width: thin;
 	scrollbar-color: var(--scroll-color) transparent;
 }
-.chapterListContent::before {
-	content: '';
-	position: absolute;
-	left: 5px;
-	right: 15px;
-	height: 7px;
-	z-index: 5;
-	background: linear-gradient(var(--main-color), transparent);
-}
+.chapterListContent::before,
 .chapterListContent::after {
 	content: '';
 	position: absolute;
-	bottom: 10px;
 	left: 5px;
 	right: 15px;
 	height: 7px;
 	z-index: 5;
+}
+.chapterListContent::before {
+	background: linear-gradient(var(--main-color), transparent);
+}
+.chapterListContent::after {
+	bottom: 9px;
 	background: linear-gradient(transparent, var(--main-color));
 }
 .chapterListContent::-webkit-scrollbar {
