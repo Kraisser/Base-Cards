@@ -10,6 +10,8 @@ import CardList from '../../components/CardList/CardList';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import RightContentWrapper from '../../components/RightContentWrapper/RightContentWrapper';
 
+// import IntroSteps from '../../components/IntroSteps/IntroSteps';
+
 export default function MainPage() {
 	const delModalTarget = useSelector((state) => state.modal.delModalTarget);
 
@@ -24,6 +26,7 @@ export default function MainPage() {
 					<EditBlock />
 					<ChapterList />
 				</RightContentWrapper>
+				{/* <IntroSteps /> */}
 			</main>
 			<CSSTransition
 				classNames='add-modal'

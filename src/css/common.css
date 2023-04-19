@@ -58,6 +58,8 @@
 	background-color: var(--button-border-color);
 }
 .but:disabled:hover,
+.but:disabled:focus-visible,
+.but:disabled:focus,
 .but:disabled:active {
 	box-shadow: none;
 	transform: none;
@@ -70,6 +72,11 @@
 	transform: scale(0.98);
 	background: linear-gradient(180deg, var(--button-color) 50%, var(--second-button-color) 100%);
 	box-shadow: inset 0px 1px 4px #747474;
+}
+.but:focus-visible,
+.but:focus {
+	background-color: var(--second-button-color);
+	outline: none;
 }
 .but.chapSelectBut {
 	box-shadow: none;

@@ -1,10 +1,10 @@
 .pageContentWrapper.help {
 	max-height: 100vh;
 }
-.helpPageContainer {
+.pageContentContainer.helpPageContainer {
 	overflow-y: auto;
-	height: 100%;
 	display: grid;
+	width: 100%;
 	grid-gap: 20px;
 }
 .helpContent {
@@ -28,7 +28,7 @@
 	background-color: transparent;
 	cursor: pointer;
 }
-.helpPageContainer::-webkit-scrollbar-button:vertical:start:decrement {
+/* .helpPageContainer::-webkit-scrollbar-button:vertical:start:decrement {
 	background: linear-gradient(120deg, var(--main-color) 30%, transparent 35%),
 		linear-gradient(240deg, var(--main-color) 30%, transparent 35%),
 		linear-gradient(0deg, var(--main-color) 10%, transparent 20%);
@@ -42,9 +42,9 @@
 		linear-gradient(180deg, var(--main-color) 10%, transparent 20%);
 	background-color: var(--scroll-color);
 	cursor: pointer;
-}
+} */
 .helpPageContainer::-webkit-scrollbar-thumb {
 	background-color: var(--scroll-color);
-	border-radius: var(--border-mini-radius);
+	border-radius: var(--border-radius);
 	cursor: pointer;
 }

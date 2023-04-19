@@ -6,10 +6,7 @@
 	grid-template-columns: 400px;
 	background-color: var(--main-color);
 }
-.rightContent.rightContentHidden {
-	transform: translateX(350px);
-	box-shadow: none;
-}
+
 .rightMenuToggle {
 	display: none;
 }
@@ -26,6 +23,10 @@
 		right: 0;
 		transition: transform 0.5s ease-in-out, box-shadow 0.3s ease;
 		box-shadow: 2px 0px 8px #1f1f1f;
+	}
+	.rightContent.rightContentHidden {
+		transform: translateX(350px);
+		box-shadow: none;
 	}
 	.rightMenuToggle {
 		display: flex;

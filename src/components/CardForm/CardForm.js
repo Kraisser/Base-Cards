@@ -9,7 +9,7 @@ import useValidate from '../../services/useValidate';
 
 import ChapterInput from '../../components/ChapterInput/ChapterInput';
 
-export default function CardForm({onCardSubmit, baseVal, errorEdit}) {
+export default function CardForm({onCardSubmit, baseVal = {}, errorEdit}) {
 	const {uploadNewChapter} = useChapter();
 	const {validateAll, validateField, debounceValidate} = useValidate();
 

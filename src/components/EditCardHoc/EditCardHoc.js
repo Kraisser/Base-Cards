@@ -69,11 +69,13 @@ export default function CardAddForm() {
 			setErrorEdit('Редактирование не выполнено. Изменения отсутствуют.');
 			return false;
 		}
+		console.log('cardSubmit');
 
 		setErrorEdit(null);
-		dispatch(clearEdit());
+		// dispatch(clearEdit());
 
 		if (activeChapter === 'favorite+chapter') {
+			console.log('from favorite chap');
 			//from favorite chap
 			if (newChapData) {
 				const newChapCard = {...newCard, fromChapterId: newChapData.id};
@@ -96,6 +98,7 @@ export default function CardAddForm() {
 
 		if (newCard.favorite && newChapData) {
 			//from parent chap favoriteIn to new
+			console.log('from parent chap favoriteIn to new');
 
 			await onDeleteCard(editCard.id, editCard.fromChapterId); //delete from old chap
 
@@ -111,10 +114,12 @@ export default function CardAddForm() {
 
 		if (newCard.favorite && !newChapData) {
 			// from parent chap favoriteIn to old
+			console.log('from parent chap favoriteIn to old: ');
 			await uploadNewCard({...newCard, fromChapterId: chapter}, 'favorite+chapter', activeChapter); //upload to favorite
 		} //+
 
 		if (newChapData) {
+			console.log('newChapData');
 			await onDeleteCard(newCard.id, newCard.fromChapterId); //delete from old chap
 
 			const newChapCard = {...newCard, fromChapterId: newChapData.id};
@@ -126,6 +131,7 @@ export default function CardAddForm() {
 		} //+
 
 		if (chapter !== editCard.fromChapterId) {
+			console.log('chapter !== editCard.fromChapterId: ', chapter !== editCard.fromChapterId);
 			await onDeleteCard(newCard.id, newCard.fromChapterId); //delete from old chap
 		}
 
